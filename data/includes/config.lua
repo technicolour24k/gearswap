@@ -1,6 +1,6 @@
 -- Config files
 
--- Server details
+-- Server details - Used by default.lua to find proper server LUAs
 server = "NocSouls"
 
 -- Display info in chat settings

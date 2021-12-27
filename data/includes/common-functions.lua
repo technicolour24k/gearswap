@@ -19,11 +19,11 @@ function weathercheck(spell_element,set)
 end
 
 
-function equipGearByState()
-	if player.status == 'Idle' then
-		equip(sets.aftercast.Idle)
-	elseif sets.aftercast[player.status][TPStyle[TPStyleIndex]] then
-		equip(sets.aftercast[player.status][TPStyle[TPStyleIndex]],sets.aftercast)
+function equipGearByState(sets, isIdle)
+	if (isIdle) then
+		equip(sets)
+	elseif (sets) then
+		equip(sets.aftercast, sets)
 	else
 		equip(sets.aftercast.Idle,sets.aftercast)
 	end

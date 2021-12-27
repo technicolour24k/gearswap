@@ -1,24 +1,21 @@
 include('organizer-lib')
 
 showInfo = true
-TPStyle = {"default", "turtle"}
-TPStyleIndex = 1
-hasteLevel = 4
-accuracyLevel = 0
+TPStyle = "Sword"
+Shield = "Aegis"
 
 function get_sets()
-    sets.TH = {
-
-	}
-    
+	include('private servers/'..server..'/common-gearsets')
+	local mjob = player.main_job
+	init_gear_sets(mjob)    
     sets.precast = {} 
     sets.precast.FastCast = {}
     sets.precast.FastCast.Default =    {
 		
 	}
-    sets.precast.FastCast['Elemental Magic'] = set_combine(sets.precast.FastCast.Default,{   })
+    sets.precast.FastCast['Elemental Magic'] = set_combine(sets.precast.FastCast.Default,{})
     sets.precast.FastCast['Enhancing Magic'] = set_combine(sets.precast.FastCast.Default,{})
-    sets.precast.Cure = set_combine(sets.precast.FastCast.Default,{ left_ear="Oneiros Earring" }  )
+    sets.precast.Cure = set_combine(sets.precast.FastCast.Default,{left_ear="Oneiros Earring"})
     sets.precast.Stoneskin = set_combine(sets.precast.FastCast['Enhancing Magic'],{ legs={"Haven Hose"}  })
 	
 	sets.Enmity= {}
@@ -34,26 +31,16 @@ function get_sets()
 	
 	sets.precast.WeaponSkills = {}
 	sets.precast.WeaponSkills.default = {}
-	sets.precast.WeaponSkills['Requiescat'] = {}
+	sets.precast.WeaponSkills['Requiescat'] = set_combine(sets.WeaponSkills['Fotia'], {})
 	sets.precast.WeaponSkills['Chant du Cygne'] = {}
-	sets.precast.WeaponSkills['Sanguine Blade'] = {}
-	sets.precast.WeaponSkills['Uriel Blade'] = {
-		right_ear = "Moldavite Earring"
-	}
+	sets.precast.WeaponSkills['Sanguine Blade'] = set_combine(sets.misc.AllJobsMAB, {})
+	sets.precast.WeaponSkills['Uriel Blade'] = set_combine(sets.misc.AllJobsMAB, {})
 	sets.precast.WeaponSkills['Atonement'] = {}
 	sets.precast.WeaponSkills['Knights of Round']	= {}
 	
-
-	
-    sets.midcast = {}
-    sets.midcast.magic_base = {	}
-	
+    sets.midcast.magic_base = set_combine(sets.misc.AllJobsMAB, {})
 	sets.midcast['Healing Magic'] = { }
-    
-    
-    sets.midcast.Cure = {	
-
-	}
+    sets.midcast.Cure = {}
     sets.midcast.EnhancingDuration = {    }
     sets.midcast.Stoneskin = set_combine(sets.midcast.EnhancingDuration,{ })
     sets.midcast.Aquaveil = set_combine(sets.midcast.EnhancingDuration,{ })
@@ -64,8 +51,7 @@ function get_sets()
         
     sets.aftercast.Resting = { }
     sets.aftercast.Engaged = { }
-	sets.aftercast.Engaged.SwordShield = {main="Blurred Sword", sub="Steadfast Shield"}
-	sets.aftercast.Engaged.default = set_combine(sets.aftercast.Engaged.SwordShield, {
+	sets.aftercast.Engaged.default = set_combine(sets.Weapons[mjob][TPStyle], {
 		ranged="Killer Shortbow",
 		head="Rev. Coronet +2",
 		body="Rev. Surcoat +2",
@@ -78,28 +64,7 @@ function get_sets()
 		waist="Dynamic Belt +1",
 		back="Metallon Mantle"
 	})
-	
-	--No Accuracy enhancement needed
-	sets.aftercast.Engaged.default[0] = set_combine(sets.aftercast.Engaged.default, {}) 
-	
-	--Light accuracy enhancement needed
-	sets.aftercast.Engaged.default[1] = set_combine(sets.aftercast.Engaged.default[0], {
-		neck="Ziel Charm",
-		left_ear="Tati Earring",
-		right_ear="Tati Earring"
-	})
-	
-	--Major accuracy enhancement needed
-	sets.aftercast.Engaged.default[2] = set_combine(sets.aftercast.Engaged.default[1], {})
-	
-	--How did I hit before this?
-	sets.aftercast.Engaged.default[3] = set_combine(sets.aftercast.Engaged.default[2], {}) 
-	
-	sets.aftercast.Engaged.turtle[0] = set_combine(sets.aftercast.Engaged.default[0], {})
-	sets.aftercast.Engaged.turtle[1] = set_combine(sets.aftercast.Engaged.turtle[0], {})
-	sets.aftercast.Engaged.turtle[2] = set_combine(sets.aftercast.Engaged.turtle[0], {})
-	sets.aftercast.Engaged.turtle[3] = set_combine(sets.aftercast.Engaged.turtle[0], {})
-    
+	 
 	sets.aftercast.Idle = set_combine(sets.aftercast.Engaged.Default, {neck="Twilight Torque"})
 	
     sets.Obis = {}
@@ -117,6 +82,11 @@ end
 
 
 function precast(spell)
+
+	if ((config.showSpellInfo == true) or (showInfo == true)) then
+		add_to_chat(12, "Action: "..spell.english.." | Action Type: "..spell.action_type.." | MP Cost: "..spell.mp_cost.." | TP Cost: "..spell.tp_cost)
+	end
+
 	if sets.precast.JobAbility[spell.english] then
 		equip(sets.precast.JobAbility[spell.english])
 	end
@@ -147,99 +117,44 @@ function midcast(spell)
 end
 
 function aftercast(spell)
-    if player.status == 'Idle' then
-        equip_idle_set()
-    elseif sets.aftercast[player.status][TPStyle[TPStyleIndex]]accuracyLevel then
-        equip(sets.aftercast[player.status][TPStyle[TPStyleIndex]]accuracyLevel,sets.aftercast)
-    else
-        equip(sets.aftercast.Idle,sets.aftercast)
-    end
-	
-	
-	
-	if player.hpp < 25 then
-		equip(sets.aftercast.Engaged.turtle)
+	if (player.status == "Idle") then 
+		equipGearByState("sets.aftercast[player.status]", true)
+	else
+		equipGearByState("sets.aftercast[player.status][TPStyle]", false)
 	end
-	
 end
 
 function status_change(new,old)
     if new == 'Resting' then
         equip(sets.aftercast.Resting)
-    elseif new == 'Engaged' then
-        if not midaction() then
-            equip(sets.aftercast.Engaged.Default,sets.aftercast)
-        end
     else
-		equip_idle_set()
-    end
+		if (player.status == "Idle") then 
+			equipGearByState("sets.aftercast[player.status]", true)
+		else
+			equipGearByState("sets.aftercast[player.status][TPStyle]", false)
+		end
+	end
     
 end
 
-function buff_change(name,gol,tab)
-	if name=="Doom" then
-		--send_command('gs c doomspam')
-		while (buffactive['Doom']) do
-			send_command('gs c holyWaterSpam')
-		end
-	end
-end
-
 function self_command(command)
-
-	if command:lower() == "attack" then
-		TPStyleIndex = 1
-		add_to_chat(8, 'TP Style is now: '.. TPStyle[TPStyleIndex] .. '!')
-		equip(sets.aftercast.Engaged[TPStyle[TPStyleIndex]])
-	elseif command:lower() == "turtle" then
-		TPStyleIndex = 2
-		add_to_chat(8, 'TP Style is now: '.. TPStyle[TPStyleIndex] .. '!')
-		equip(sets.aftercast.Engaged[TPStyle[TPStyleIndex]])
+	if command:lower() == "weapon-toggle" then
+		if (TPStyle == "Sword") then
+			TPStyle = "Great Sword"
+		else
+			TPStyle = "Sword"
+		end
+		add_to_chat(8,"TP Style is now: " ..TPStyle)
+		if (player.status == "Idle") then 
+			equipGearByState("sets.aftercast[player.status]", true)
+		else
+			equipGearByState("sets.aftercast[player.status][TPStyle]", false)
+		end
 	end
 	
 	if player.status == "Engaged" then
 		equip(sets.aftercast[player.status][TPStyle[TPStyleIndex]])
 	else
 		equip(sets.aftercast[player.status],sets.aftercast)
-	end
-	
-
-	
-end
-
--- This function is user defined, but never called by GearSwap itself. It's just a user function that's only called from user functions. I wanted to check the weather and equip a weather-based set for some spells, so it made sense to make a function for it instead of replicating the conditional in multiple places.
-
-function weathercheck(spell_element,set)
-    if not set then return end
-    if spell_element == world.weather_element or spell_element == world.day_element then
-		send_command('@input /echo >> Weather or Day element matches spell element <<')
-        equip(set,sets.Obis[spell_element])
-    else
-        equip(set)
-    end
-    if set[spell_element] then equip(set[spell_element]) end
-end
-
-
-function equip_idle_set()
-        equip(sets.aftercast.Idle)
-end
-
-function checkForMules()
-	i = 1
-	ptc = party.count
-	zoku_in_party = "no"
-	bringer_in_party = "no"
-	lohkie_in_party = "no"
-	
-	while i < ptc+1 do
-		if party[i].mob.name == "Zoku" then
-			zoku_in_party = "yes"
-		elseif party[i].mob.name == "Bringer" then
-			bringer_in_party = "yes"
-		elseif party[i].mob.name == "Lohkie" then
-			lohkie_in_party = "yes"
-		end
-		i = i+1
 	end
 end

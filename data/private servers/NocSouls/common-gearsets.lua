@@ -33,7 +33,7 @@ function init_gear_sets(job)
 	sets.weapons.THF['Daggers'] = {main="Twashtar",sub="Mandau"}
 	
 	sets.weapons.PLD = {}
-	sets.weapons.PLD['Sword'] = {main="Fettering Blade", sub="Beatific Shield"}
+	sets.weapons.PLD['Sword'] = {main="Burtgang", sub="Aegis"}
 	sets.weapons.PLD['Great Sword'] = {main="Ragnarok", sub="Uther's Grip"}
 	
 	sets.weapons.DRK = {}
@@ -162,14 +162,14 @@ function init_gear_sets(job)
 
 	
 	sets.Obis = {}
-    sets.Obis.Fire = {waist="Karin Obi"}
-    sets.Obis.Earth = {waist = "Dorin Obi"}
-    sets.Obis.Water = {waist="Suirin Obi"}
-    sets.Obis.Wind = {waist="Furin Obi"}
-    sets.Obis.Ice = {waist="Hyorin Obi"}
-    sets.Obis.Lightning = {waist="Rairin Obi"}
-    sets.Obis.Light = {waist="Korin Obi"}
-    sets.Obis.Dark = {waist="Anrin Obi"}
+    sets.Obis.Fire = set_combine(sets.Obis.AIO, {waist="Karin Obi"})
+    sets.Obis.Earth = set_combine(sets.Obis.AIO, {waist = "Dorin Obi"})
+    sets.Obis.Water = set_combine(sets.Obis.AIO, {waist="Suirin Obi"})
+    sets.Obis.Wind = set_combine(sets.Obis.AIO, {waist="Furin Obi"})
+    sets.Obis.Ice = set_combine(sets.Obis.AIO, {waist="Hyorin Obi"})
+    sets.Obis.Lightning = set_combine(sets.Obis.AIO, {waist="Rairin Obi"})
+    sets.Obis.Light = set_combine(sets.Obis.AIO, {waist="Korin Obi"})
+    sets.Obis.Dark = set_combine(sets.Obis.AIO, {waist="Anrin Obi"})
 	sets.Obis.AIO = {waist = "Hachirin-no-Obi"}
 
 	sets.JobAbility = {}

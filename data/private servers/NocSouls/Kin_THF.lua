@@ -11,7 +11,6 @@ local FastCast = 80
 TPStyle = "Default"
 
 function get_sets()
-	--include('/common-gearsets')
 	include('private servers/'..server..'/common-gearsets')
 	local mjob = player.main_job
 	init_gear_sets(mjob)
