@@ -6,6 +6,8 @@ showInfo = true
 TPStyle = "Sword"
 Shield = "Aegis"
 local mjob = player.main_job
+wsList = S{"Sword", "Great Sword"}
+
 
 function get_sets()
 	include('private servers/'..server..'/common-gearsets')
@@ -30,7 +32,6 @@ function get_sets()
 	sets.precast.JobAbility.Cover = {head="Gallant Coronet"}
 	sets.precast.JobAbility.Provoke = set_combine(sets.Enmity,{})
 	sets.precast.JobAbility.Rampart = { head="Valor Coronet"}
-	sets.precast.JobAbility.Reward = {ammo="Pet Food Zeta"}
 	
 	sets.precast.WeaponSkills = {}
 	sets.precast.WeaponSkills.default = {}
@@ -40,6 +41,9 @@ function get_sets()
 	sets.precast.WeaponSkills['Uriel Blade'] = set_combine(sets.misc.AllJobsMAB, {})
 	sets.precast.WeaponSkills['Atonement'] = {}
 	sets.precast.WeaponSkills['Knights of Round'] = {}
+	sets.precast.WeaponSkills['Resolution'] = set_combine(sets.WeaponSkills['Fotia'], {})
+	sets.precast.WeaponSkills['Torcleaver'] = set_combine(sets.WeaponSkills['Fotia'], {})
+	sets.precast.WeaponSkills['Herculean Slash'] = set_combine(sets.misc.AllJobsMAB, {})
 	
     sets.midcast.magic_base = set_combine(sets.misc.AllJobsMAB, {})
 	sets.midcast['Healing Magic'] = {}
@@ -76,7 +80,6 @@ function get_sets()
     switchMacroSet(7,1)
 	send_command('gs equip sets.aftercast['..player.status..']')
 	send_command('input /echo [F9] to toggle weapon types;bind F9 gs c weapon-toggle')
-
 end
 
 
@@ -91,8 +94,12 @@ function precast(spell)
 
 	if sets.precast.WeaponSkills[spell.english] then
 		equip(sets.precast.WeaponSkills[spell.english])
+		add_to_chat(2, "Dedicated WS Set found")
 	else
-		equip(sets.precast.WeaponSkills.default)
+		if ((spell.action_type == "Ability" ) and (wsList:contains(spell.skill))) then
+			equip(sets.precast.WeaponSkills.default)
+			add_to_chat(2, "Can't find a dedicated WS set - dropping back to default")
+		end
 	end
 
 	if sets.precast[spell.english] then
@@ -102,8 +109,8 @@ function precast(spell)
 	if (string.find(spell.english,'Cur') and spell.english ~='Cursna') then
 		equip(sets.precast.Cure)
 	end
-	
 end
+
 function midcast(spell)
 	if sets.midcast[spell.english] then
 		equip(sets.midcast[spell.english])
