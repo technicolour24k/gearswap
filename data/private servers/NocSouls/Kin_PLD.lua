@@ -49,6 +49,9 @@ function get_sets()
     sets.midcast.Aquaveil = set_combine(sets.midcast.EnhancingDuration,{ })
     sets.midcast.Refresh = set_combine(sets.midcast.EnhancingDuration,{ })
     sets.midcast.Phalanx = set_combine(sets.midcast.EnhancingDuration,{ })
+	sets.midcast.Reprisal = set_combine(sets.midcast.EnhancingDuration,{
+		sub = "Adamas"
+	})
      
     sets.aftercast.Resting = { }
 	sets.aftercast.Engaged = {
@@ -70,14 +73,10 @@ function get_sets()
 		neck="Loricate Torque +1"
 	})
     
-    send_command('input /macro book 7;wait .1;input /macro set 1')
-	send_command('gs enable all')
+    switchMacroSet(7,1)
 	send_command('gs equip sets.aftercast['..player.status..']')
-	add_to_chat(15, 'equipping sets.aftercast['..player.status..']')
 	send_command('input /echo [F9] to toggle weapon types;bind F9 gs c weapon-toggle')
 
-	
-	disable('main','sub')
 end
 
 
@@ -114,13 +113,11 @@ function midcast(spell)
 end
 
 function aftercast(spell)
-	equip(sets.aftercast[player.status])
-	add_to_chat(1, "Status: " ..player.status)
+	equip(set_combine(sets.aftercast[player.status], sets.weapons[mjob][TPStyle]))
 end
 
 function status_change(new,old)
-	equip(sets.aftercast[player.status])
-	add_to_chat(1, "Status: " ..player.status)
+	equip(set_combine(sets.aftercast[player.status], sets.weapons[mjob][TPStyle]))
 end
 
 function self_command(command)
@@ -130,8 +127,7 @@ function self_command(command)
 		else
 			TPStyle = "Sword"
 		end
-		add_to_chat(8,"TP Style is now: " ..TPStyle)
-		
+		add_to_chat(28,"TP Style is now: " ..TPStyle)
 		equip(set_combine(sets.aftercast[player.status], sets.weapons[mjob][TPStyle]))
 	end
 end
