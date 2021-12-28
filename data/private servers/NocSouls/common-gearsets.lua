@@ -159,7 +159,6 @@ function init_gear_sets(job)
 	})
 	
 	sets.aftercast = {}
-
 	
 	sets.Obis = {}
     sets.Obis.Fire = set_combine(sets.Obis.AIO, {waist="Karin Obi"})
