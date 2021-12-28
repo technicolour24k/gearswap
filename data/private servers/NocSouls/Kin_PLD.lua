@@ -16,11 +16,11 @@ function get_sets()
 	
 	sets.precast.JobAbility = {}
 	sets.precast.JobAbility.Invincible = {}
-	sets.precast.JobAbility.Sentinel = { feet="Valor Leggings" }
-	sets.precast.JobAbility['Shield Bash'] = { hands = {name="Valor Gauntlets +1" } }
-	sets.precast.JobAbility.Cover = {head="Gallant Coronet"}
+	sets.precast.JobAbility.Sentinel = { feet="Cab. Leggings +1" }
+	sets.precast.JobAbility['Shield Bash'] = { hands = "Cab. Gauntlets +1" }
+	sets.precast.JobAbility.Cover = {head="Rev. Coronet +3"}
 	sets.precast.JobAbility.Provoke = set_combine(sets.Enmity,{})
-	sets.precast.JobAbility.Rampart = { head="Valor Coronet"}
+	sets.precast.JobAbility.Rampart = { head="Cab. Coronet +1"}
 	
 	sets.precast.WeaponSkills = {}
 	sets.precast.WeaponSkills.default = {}
@@ -36,7 +36,12 @@ function get_sets()
 	
     sets.midcast.magic_base = set_combine(sets.misc.AllJobsMAB, {})
 	sets.midcast['Healing Magic'] = {}
-    sets.midcast.Cure = set_combine(sets.midcast['Healing Magic'], {left_ear="Oneiros Earring"})
+    sets.midcast.Cure = set_combine(sets.midcast['Healing Magic'], {
+		left_ear="Oneiros Earring",
+		right_ear="Hospitaler Earring",
+		back = "Fierabras's Mantle",
+		left_ring = "Asklepian Ring"
+	})
     sets.midcast.EnhancingDuration = {}
     sets.midcast.Stoneskin = set_combine(sets.midcast.EnhancingDuration,{ })
     sets.midcast.Aquaveil = set_combine(sets.midcast.EnhancingDuration,{ })
@@ -55,15 +60,22 @@ function get_sets()
 		legs="Rev. Breeches +3",
 		feet="Chev. Sabatons",
 		neck="Loricate Torque +1",
-		left_ear="Tati Earring",
-		right_ear="Tati Earring",
+		left_ear="Telos Earring",
+		right_ear="Mache Earring +1",
+		left_ring = "Defending Ring",
+		right_ring = "Regal Ring",
 		waist="Windbuffet Belt +1",
 		back="Laic Mantle"
 	}
 	 
 	sets.aftercast.Idle = set_combine(sets.aftercast.Engaged, {
-		body="Kingdom Aketon",
-		neck="Loricate Torque +1"
+		body = "Cab. Surcoat +1",
+		neck="Loricate Torque +1",
+		left_ring = "Defending Ring",
+		right_ring = "Stikini Ring +1",
+		left_ear = "Moonshade Earring",
+		waist = "Nierenschutz",
+		back = "Weard Mantle"
 	})
     
     switchMacroSet(7,1)
@@ -83,11 +95,9 @@ function precast(spell)
 
 	if sets.precast.WeaponSkills[spell.english] then
 		equip(sets.precast.WeaponSkills[spell.english])
-		add_to_chat(2, "Dedicated WS Set found")
 	else
 		if ((spell.action_type == "Ability" ) and (wsList:contains(spell.skill))) then
 			equip(sets.precast.WeaponSkills.default)
-			add_to_chat(2, "Can't find a dedicated WS set - dropping back to default")
 		end
 	end
 
@@ -103,8 +113,9 @@ end
 function midcast(spell)
 	if sets.midcast[spell.english] then
 		equip(sets.midcast[spell.english])
-	elseif string.find(spell.english,'Cur') and spell.english ~='Cursna' then 
+	elseif string.find(spell.english,'Cure') or string.find(spell.english,'Cura') then 
         equip(sets.midcast.Cure)
+		add_to_chat(1, "Looks like a cure!")
 	end
 end
 

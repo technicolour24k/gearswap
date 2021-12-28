@@ -9,7 +9,6 @@ Default.lua:
     - After setting up the bindings and aliases again, it will proceed to load your Gearswap file in the standard format: CHAR_JOB.lua<br />
         - This will be based on the "server" parameter in includes/config.lua<br />
             - If you want to play on retail servers, the server should be "retail" - Otherwise, it will assume private server<br />
-
 <br /><br />
 includes/config.lua:<br />
     - Allows you to specify a server - to search for official FFXI server LUAs, use "retail".<br />
@@ -27,5 +26,4 @@ includes/common-functions.lua:<br />
         - switchMacroSet (book, page)<br />
             - Fairly self explanatory, changes macros around<br />
 <br /><br />
-
 Each server file should have a common-gearsets LUA also, to make use of any particular "all jobs" style gear. Many private servers have custom augment systems, which allow generic fast cast pieces - this would make a good candidate for that sort of system.

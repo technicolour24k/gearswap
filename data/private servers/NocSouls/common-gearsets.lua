@@ -140,7 +140,7 @@ function init_gear_sets(job)
 	sets.midcast['Geomancy'] = {}
 	sets.midcast['Handbell'] = {}   
     sets.midcast.EnhancingDuration = {}
-    sets.midcast.Stoneskin = set_combine(sets.midcast.EnhancingDuration,{legs="Haven Hose"})
+    sets.midcast.Stoneskin = set_combine(sets.midcast.EnhancingDuration,{legs="Haven Hose", waist="Seigel Sash"})
     sets.midcast.Aquaveil = set_combine(sets.midcast.EnhancingDuration,{})
     sets.midcast.Refresh = set_combine(sets.midcast.EnhancingDuration,{})
     sets.midcast.Phalanx = set_combine(sets.midcast.EnhancingDuration,{})
