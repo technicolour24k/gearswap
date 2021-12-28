@@ -4,7 +4,6 @@ include("includes/config")
 
 showInfo = true
 TPStyle = "Sword"
-Shield = "Aegis"
 local mjob = player.main_job
 wsList = S{"Sword", "Great Sword"}
 
@@ -13,16 +12,6 @@ function get_sets()
 	include('private servers/'..server..'/common-gearsets')
 	init_gear_sets(mjob)
 
-    sets.precast = {} 
-    sets.precast.FastCast = {}
-    sets.precast.FastCast.Default =    {
-		
-	}
-    sets.precast.FastCast['Elemental Magic'] = set_combine(sets.precast.FastCast.Default,{})
-    sets.precast.FastCast['Enhancing Magic'] = set_combine(sets.precast.FastCast.Default,{})
-    sets.precast.Cure = set_combine(sets.precast.FastCast.Default,{left_ear="Oneiros Earring"})
-    sets.precast.Stoneskin = set_combine(sets.precast.FastCast['Enhancing Magic'],{ legs={"Haven Hose"}  })
-	
 	sets.Enmity= {}
 	
 	sets.precast.JobAbility = {}
@@ -47,7 +36,7 @@ function get_sets()
 	
     sets.midcast.magic_base = set_combine(sets.misc.AllJobsMAB, {})
 	sets.midcast['Healing Magic'] = {}
-    sets.midcast.Cure = set_combine(sets.midcast['Healing Magic'], {})
+    sets.midcast.Cure = set_combine(sets.midcast['Healing Magic'], {left_ear="Oneiros Earring"})
     sets.midcast.EnhancingDuration = {}
     sets.midcast.Stoneskin = set_combine(sets.midcast.EnhancingDuration,{ })
     sets.midcast.Aquaveil = set_combine(sets.midcast.EnhancingDuration,{ })
@@ -106,8 +95,8 @@ function precast(spell)
 		equip(sets.precast[spell.english])
 	end
 		
-	if (string.find(spell.english,'Cur') and spell.english ~='Cursna') then
-		equip(sets.precast.Cure)
+	if spell.action_type == "Magic" then
+		equip(sets.precast.FastCast.Default)
 	end
 end
 
