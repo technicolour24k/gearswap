@@ -1,7 +1,7 @@
 -- Config files
 
 -- Server details - Used by default.lua to find proper server LUAs
-server = "NocSouls"
+server = "retail"
 
 -- Display info in chat settings
 config = {}
