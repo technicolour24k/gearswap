@@ -1,42 +1,19 @@
-include('organizer-lib')
-include('includes/common-functions')
-include('includes/config')
+include("organizer-lib")
+include("includes/common-functions")
+include("includes/config")
 
---initialise local variables to inherit from master config
-local showFCInfo = config.showFastCastInfo
-local showSpellInfo = config.showSpellInfo
-local showCancelInfo = config.showCancelInfo
-local FastCast = 80
-
-TPStyle = {"Default", "Accuracy", "DT"}
-TPStyleIndex = 1
-
-WeaponStyle = "Great Katana"
+showInfo = true
+TPStyle = "Great Katana"
+local mjob = player.main_job
+wsList = S{"Great Katana"}
 
 
 function get_sets()
-	local mjob = player.main_job
-	init_gear_sets(mjob)
 	include('private servers/'..server..'/common-gearsets')
-	sets.aftercast.Engaged = set_combine(sets.weapons[mjob][WeaponStyle], {
-		head="Wakido Kabuto +2",
-		body="Wakido Domaru +2",
-		hands="Wakido Kote +2",
-		legs="Wakido Haidate +2",
-		feet="Wakido Sune. +2",
-		neck="Tlamiztli Collar",
-		waist="Dynamic Belt +1",
-		left_ear="Tati Earring",
-		right_ear="Tati Earring",
-		left_ring="Varar Ring",
-		right_ring="Varar Ring",
-		back="Laic Mantle"
-	})
-	
-	sets.aftercast.Idle = set_combine(sets.weapons[mjob][WeaponStyle], sets.aftercast.Engaged, {
-		head = "Wakido Kabuto +2",
-	})
+	init_gear_sets(mjob)
 
+	sets.Enmity= {}
+	
 	sets.JobAbilities = {}
 	sets.JobAbilities['Meditate'] = {
 		head = "Wakido Kabuto +2",
@@ -56,107 +33,113 @@ function get_sets()
 	sets.JobAbilities['Third Eye'] = {
 		head = "Sakonji Haidate +1",
 	}
-
-	sets.WeaponSkills = {}
-	sets.WeaponSkills.default = {
-		neck = "Snow Gorget",
-		left_ear = "Mache Earring +1",
-		right_ear = "Mache Earring +1",
-		left_ring = "Mars's Ring",
-		right_ring = "Ulthalam's Ring",
-		feet = "Sakonji Sune-Ate +1"
-	}
-
-
-	switchMacroSet(4,1)
-	send_command('gs enable all') 
-	send_command('gs equip sets.aftercast.Idle')
-	send_command('input /echo [F9] Bound to Default TP Gear;bind F9 gs c default')
-	send_command('input /echo [F10] Bound to Set Accuracy heavy TP Gear;bind F10 gs c accuracy')
-	send_command('input /echo [F11] Bound to Set Damage Taken- TP Gear;bind F11 gs c DT')
-	send_command('input /echo [F12] Bound to toggle weapons;bind F12 gs c weapontoggle')
-
-	disable('main','sub')	
 	
+	sets.precast.WeaponSkills = {}
+	sets.precast.WeaponSkills.default = {
+		head="Yaoyotl Helm",
+		
+	}
+	sets.precast.WeaponSkills['Tachi: Fudo'] = set_combine(sets.WeaponSkills.default, {})
+	sets.precast.WeaponSkills['Tachi: Shoha'] = set_combine(sets.WeaponSkills.default, {})
+	sets.precast.WeaponSkills['Tachi: Kaiten'] = set_combine(sets.WeaponSkills.default, {})
+	sets.precast.WeaponSkills['Tachi: Ageha'] = set_combine(sets.WeaponSkills.default, {})
+	sets.precast.WeaponSkills['Apex Arrow'] = set_combine(sets.WeaponSkills.default, {})	
+    sets.midcast.magic_base = set_combine(sets.misc.AllJobsMAB, {})
+	sets.midcast['Healing Magic'] = {}
+    sets.midcast.Cure = set_combine(sets.midcast['Healing Magic'], {})
+    sets.midcast.EnhancingDuration = {}
+    sets.midcast.Stoneskin = set_combine(sets.midcast.EnhancingDuration,{ })
+    sets.midcast.Aquaveil = set_combine(sets.midcast.EnhancingDuration,{ })
+    sets.midcast.Refresh = set_combine(sets.midcast.EnhancingDuration,{ })
+    sets.midcast.Phalanx = set_combine(sets.midcast.EnhancingDuration,{ })
+     
+    sets.aftercast.Resting = { }
+	sets.aftercast.Engaged = {
+		head="Wakido Kabuto +2",
+		body="Wakido Domaru +2",
+		hands="Wakido Kote +2",
+		legs="Wakido Haidate +2",
+		feet="Wakido Sune. +2",
+		neck="Tlamiztli Collar",
+		left_ear="Telos Earring",
+		right_ear="Mache Earring +1",
+		left_ring = "Defending Ring",
+		right_ring = "Regal Ring",
+		waist="Windbuffet Belt +1",
+		back="Laic Mantle"
+	}
+	 
+	sets.aftercast.Idle = set_combine(sets.aftercast.Engaged, {
+		neck="Loricate Torque +1",
+		left_ring = "Defending Ring",
+		right_ring = "Patricius Ring",
+		left_ear = "Moonshade Earring"
+	})
+    
+    switchMacroSet(7,1)
+	send_command('gs equip sets.aftercast['..player.status..']')
+	send_command('input /echo [F9] to toggle weapon types;bind F9 gs c weapon-toggle')
 end
+
 
 function precast(spell)
-	if (sets.JobAbilities[spell.english]) then
-		equip (sets.JobAbilities[spell.english])
+	if ((config.showSpellInfo == true) or (showInfo == true)) then
+		add_to_chat(12, "Action: "..spell.english.." | Action Type: "..spell.action_type.."/"..spell.skill.." | MP Cost: "..spell.mp_cost.." | TP Cost: "..spell.tp_cost)
+	end
+
+	if sets.precast.JobAbility[spell.english] then
+		equip(sets.precast.JobAbility[spell.english])
+	end
+
+	if sets.precast.WeaponSkills[spell.english] then
+		equip(sets.precast.WeaponSkills[spell.english])
+	else
+		if ((spell.action_type == "Ability" ) and (wsList:contains(spell.skill))) then
+			equip(sets.precast.WeaponSkills.default)
+		end
+	end
+
+	if sets.precast[spell.english] then
+		equip(sets.precast[spell.english])
 	end
 	
-	if (sets.WeaponSkills[spell.english]) then
-		equip(sets.WeaponSkills[spell.english])
-	end
-	
-	if ((spell.english == "Seigan") or (spell.english == "Hasso")) then	
+	if ((spell.english == "Seigan") or (spell.english == "Hasso")) or ((buffactive['Seigan']=='1') or (buffactive['Hasso']=='1')) then	
 		FastCast = 50
+	elseif (not (spell.english == "Seigan") or (spell.english == "Hasso")) and (not (buffactive['Seigan']=='1') or (buffactive['Hasso']=='1')) then	
+		FastCast = 80
 	end
-	
-	if spell.action_type == 'Magic' then
-        equip(sets.precast.FastCast.Default)
-    end
+
+	if spell.action_type == "Magic" then
+		equip(sets.precast.FastCast.Default)
+	end
 end
 
-function midcast(spell)  
-    cancelBuff(spell.english, spell.cast_time, FastCast)
-	
+function midcast(spell)
 	if sets.midcast[spell.english] then
 		equip(sets.midcast[spell.english])
-	elseif string.find(spell.english,'Cur') and spell.english ~='Cursna' then 
+	elseif string.find(spell.english,'Cure') or string.find(spell.english,'Cura') then 
         equip(sets.midcast.Cure)
-	end
-
-	if sets.midcast[spell.skill] then
-		equip(sets.midcast[spell.skill])
-	end
-	if (enspell_list:contains(spell.english)) then
-		equip(sets.midcast.Enspell)
 	end
 end
 
 function aftercast(spell)
-	equipGearByState()
+	equip(set_combine(sets.aftercast[player.status], sets.weapons[mjob][TPStyle]))
 end
 
 function status_change(new,old)
-    equipGearByState()
-end
-
-function buff_change(name,gol,tab)
-
+	equip(set_combine(sets.aftercast[player.status], sets.weapons[mjob][TPStyle]))
 end
 
 function self_command(command)
-	if command:lower() == "default" then
-		TPStyleIndex = 1
-		add_to_chat(8, 'TP Style is now: '.. TPStyle[TPStyleIndex] .. '!')
-		equip(sets.aftercast.Engaged[TPStyle[TPStyleIndex]])
-	elseif command:lower() == "accuracy" then
-		TPStyleIndex = 2		
-		add_to_chat(8, 'TP Style is now: '.. TPStyle[TPStyleIndex] .. '!')
-		equip(sets.aftercast.Engaged[TPStyle[TPStyleIndex]])
-	elseif command:lower() == "DT" then
-		TPStyleIndex = 3
-		add_to_chat(8, 'TP Style is now: '.. TPStyle[TPStyleIndex] .. '!')
-		equip(sets.aftercast.Engaged[TPStyle[TPStyleIndex]])
-	end
-	
-	if command:lower() == "weapontoggle" then
-		if (WeaponStyle == "Great Katana") then
-			WeaponStyle = "Archery"
-		elseif (WeaponStyle == "Archery") then
-			WeaponStyle = "Polearm"
+	if command:lower() == "weapon-toggle" then
+		if (TPStyle == "Great Katana") then
+			TPStyle = "Polearm"
+		elseif (TPStyle == "Polearm") then
+			TPStyle = "Archery"
 		else
-			WeaponStyle = "Great Katana"
+			TPStyle = "Great Katana"
 		end
-		add_to_chat(8, 'TP Style is now: ' ..WeaponStyle..'!')
-		equip(sets.weapons[mjob][WeaponStyle])
-	end
-			
-	if player.status == "Engaged" then
-		equip(sets.aftercast[player.status][TPStyle[TPStyleIndex]])
-	else
-		equip(sets.aftercast[player.status])
+		add_to_chat(28,"TP Style is now: " ..TPStyle)
+		equip(set_combine(sets.aftercast[player.status], sets.weapons[mjob][TPStyle]))
 	end
 end

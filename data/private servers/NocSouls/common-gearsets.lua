@@ -55,7 +55,7 @@ function init_gear_sets(job)
 	sets.weapons.RNG['Gun'] = {ranged=""}
 	
 	sets.weapons.SAM = {}
-	sets.weapons.SAM['Great Katana'] = {main = "Amanomurakumo", sub="Utu Grip", range="Hangaku-no-Yumi"}
+	sets.weapons.SAM['Great Katana'] = {main = "Amanomurakumo", sub="Utu Grip", ranged="Hangaku-no-Yumi"}
 	sets.weapons.SAM['Archery'] = {}
 	sets.weapons.SAM['Polearm'] = {}
 	
