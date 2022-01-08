@@ -3,7 +3,7 @@ include("includes/common-functions")
 include("includes/config")
 
 showInfo = true
-TPStyle = "Great Katana"
+TPStyle = "Great Katana" -- Amanomurakumo: 481TP/swing as base 99 SAM
 local mjob = player.main_job
 wsList = S{"Great Katana"}
 
@@ -12,8 +12,6 @@ function get_sets()
 	include('private servers/'..server..'/common-gearsets')
 	init_gear_sets(mjob)
 
-	sets.Enmity= {}
-	
 	sets.JobAbilities = {}
 	sets.JobAbilities['Meditate'] = {
 		head = "Wakido Kabuto +2",
@@ -35,10 +33,10 @@ function get_sets()
 	}
 	
 	sets.precast.WeaponSkills = {}
-	sets.precast.WeaponSkills.default = {
-		head="Yaoyotl Helm",
-		
-	}
+	sets.precast.WeaponSkills.default = set_combine(sets.aftercast.Engaged,{
+		feet="Sakonji Sune-Ate +1",
+		left_ring="Ifrit Ring"
+	})
 	sets.precast.WeaponSkills['Tachi: Fudo'] = set_combine(sets.WeaponSkills.default, {})
 	sets.precast.WeaponSkills['Tachi: Shoha'] = set_combine(sets.WeaponSkills.default, {})
 	sets.precast.WeaponSkills['Tachi: Kaiten'] = set_combine(sets.WeaponSkills.default, {})
@@ -63,7 +61,7 @@ function get_sets()
 		neck="Tlamiztli Collar",
 		left_ear="Telos Earring",
 		right_ear="Mache Earring +1",
-		left_ring = "Defending Ring",
+		left_ring = "Rajas Ring",
 		right_ring = "Regal Ring",
 		waist="Windbuffet Belt +1",
 		back="Laic Mantle"
