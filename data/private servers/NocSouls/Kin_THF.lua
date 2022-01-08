@@ -52,7 +52,7 @@ function get_sets()
 		body = "Pillager's Vest +3",
 		hands = "Pill. Armlets +3",
 		legs = "Skulk. Culottes +1",
-		feet = "Skulker's Poulaine's +1",
+		feet = "Skulk. Poulaines +1",
 		neck = "Tlamiztli collar",
 		back = "Laic Mantle",
 		waist = "Windbuffet belt +1",
@@ -128,12 +128,20 @@ function aftercast(spell)
 		add_to_chat(8, "<<Trick Attack>>")
 		equip(sets.precast["Trick Attack"])
 	else
-		equipGearByState()
+		if player.status == "Engaged" then
+			equip(sets.aftercast[player.status][TPStyle])
+		else
+			equip(sets.aftercast[player.status])
+		end
 	end
 end
 
 function status_change(new, old)
-	equipGearByState()
+	if player.status == "Engaged" then
+		equip(sets.aftercast[player.status][TPStyle])
+	else
+		equip(sets.aftercast[player.status])
+	end
 end
 
 function buff_change(name, gain)
