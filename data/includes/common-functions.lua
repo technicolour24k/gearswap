@@ -18,18 +18,6 @@ function weathercheck(spell_element,set)
     if set[spell_element] then equip(set[spell_element]) end
 end
 
-
-function equipGearByState(sets, isIdle)
-	if (isIdle) then
-		equip(sets)
-	elseif (sets) then
-		equip(sets.aftercast, sets)
-	else
-		equip(sets.aftercast.Idle,sets.aftercast)
-	end
-	checkForTown()
-end
-
 function checkForTown()
 	if(string.find(world.area,"San d'Oria")) then
 		equip(sets.misc.Sandy)
