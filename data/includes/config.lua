@@ -48,3 +48,8 @@ conserveMP_list =
     "Refresh",
     "Refresh II"
 }
+
+remedy_list = S{"Blind","Paralyze","Silence","Poison"}
+remedyOintment_list = S{"Blind","Paralyze","Silence","Poison", "Diseas", "Plague"}
+panacea_list = S{"Bind", "Bio", "Burn", "Choke", "Dia", "Flash", "Frost", "Gravity", "Rasp", "Slow", "Stun", "Weight"}
+holyWater_list = S{"Curse","Doom"}

@@ -121,11 +121,14 @@ function midcast(spell)
 end
 
 function aftercast(spell)
-	if spell.english == "Sneak Attack" then
-		add_to_chat(8, "<<Sneak Attack>>")
+	if (buffactive['Sneak Attack'] == 1) and (buffactive['Trick Attack'] == 1)  then
+		add_to_chat(8, "<< SATA Active >>")
+		equip(set_combine(sets.precast["Sneak Attack"], sets.precast['Trick Attack']))
+	elseif (buffactive['Sneak Attack'] == 1) then
+		add_to_chat(8, "<< Sneak Attack Active >>")
 		equip(sets.precast["Sneak Attack"])
-	elseif spell.english == "Trick Attack" then
-		add_to_chat(8, "<<Trick Attack>>")
+	elseif (buffactive['Trick Attack'] == 1) then
+		add_to_chat(8, "<< Trick Attack Active >>")
 		equip(sets.precast["Trick Attack"])
 	else
 		if player.status == "Engaged" then

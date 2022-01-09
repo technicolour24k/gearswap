@@ -101,9 +101,9 @@ function precast(spell)
 		equip(sets.precast[spell.english])
 	end
 	
-	if ((spell.english == "Seigan") or (spell.english == "Hasso")) or ((buffactive['Seigan']=='1') or (buffactive['Hasso']=='1')) then	
+	if ((spell.english == "Seigan") or (spell.english == "Hasso")) or ((buffactive['Seigan']==1) or (buffactive['Hasso']==1)) then	
 		FastCast = 50
-	elseif (not (spell.english == "Seigan") or (spell.english == "Hasso")) and (not (buffactive['Seigan']=='1') or (buffactive['Hasso']=='1')) then	
+	elseif (not (spell.english == "Seigan") or (spell.english == "Hasso")) and ((buffactive['Seigan']==nil) and (buffactive['Hasso']==nil)) then	
 		FastCast = 80
 	end
 
