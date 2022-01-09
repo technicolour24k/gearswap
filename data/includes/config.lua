@@ -10,8 +10,8 @@ config.showFastCastInfo = true --Display Fast Cast info
 config.showCancelInfo = true --Display info when cancelling buffs
 config.oneClickRemedies = true --Activate remedies with a single command - defined in individual LUAs
 
-enspell_list = S{"Enstone", "Enwater", "Enaero", "Enfire", "Enblizzard", "Enthunder", "Enlight","Endark"}
-conserveMP_list =
+enspell_list = S{"Enstone", "Enwater", "Enaero", "Enfire", "Enblizzard", "Enthunder", "Enlight","Endark"} --Store enspells for easily cancelling
+conserveMP_list = --Store spells that get no benefit from Potency or anything outside ConserveMP
     S {
     "Protect",
     "Protect II",
@@ -50,6 +50,7 @@ conserveMP_list =
     "Refresh II"
 }
 
+--Below 4 lists are used by oneClickRemedies to know which statuses get assigned to which medicine
 remedy_list = {"Blind","Paralyze","Silence","Poison"}
 remedyOintment_list = {"Blind","Paralyze","Silence","Poison", "Disease", "Plague"}
 panacea_list = {"Bind", "Bio", "Burn", "Choke", "Dia", "Flash", "Frost", "Gravity", "Rasp", "Slow", "Stun", "Weight"}

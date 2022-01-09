@@ -137,8 +137,8 @@ function clearStatuses()
 		end
 		
 		for i=1, remedyOintmentListLength do
-			if (buffactive[remedy_list[i]]) then
-				add_to_chat(38, remedy_list[i].." found in buffactive")
+			if (buffactive[remedyOintment_list[i]]) then
+				add_to_chat(38, remedyOintment_list[i].." found in buffactive")
 				send_command('input /item "Remedy Ointment" <me>')
 				add_to_chat(10, "Remedy Ointment remaining: " ..remedyOintmentCount)
 				break
@@ -146,8 +146,8 @@ function clearStatuses()
 		end
 		
 		for i=1, panaceaListLength do
-			if (buffactive[remedy_list[i]]) then
-				add_to_chat(38, remedy_list[i].." found in buffactive")
+			if (buffactive[panacea_list[i]]) then
+				add_to_chat(38, panacea_list[i].." found in buffactive")
 				send_command('input /item "Panacea" <me>')
 				add_to_chat(10, "Panacea remaining: " ..panaceaCount)
 				break
