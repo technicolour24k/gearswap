@@ -81,6 +81,7 @@ function get_sets()
     switchMacroSet(7,1)
 	send_command('gs equip sets.aftercast['..player.status..']')
 	send_command('input /echo [F9] to toggle weapon types;bind F9 gs c weapon-toggle')
+	send_command("input /echo [F12] Bound to status removal;bind F12 gs c status-check")
 end
 
 
@@ -136,5 +137,11 @@ function self_command(command)
 		end
 		add_to_chat(28,"TP Style is now: " ..TPStyle)
 		equip(set_combine(sets.aftercast[player.status], sets.weapons[mjob][TPStyle]))
+	end
+
+	if command:lower() == "status-check" then
+		if (config.oneClickRemedies) then
+			clearStatuses()
+		end
 	end
 end
