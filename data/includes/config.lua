@@ -5,10 +5,10 @@ server = "NocSouls"
 
 -- Display info in chat settings
 config = {}
-config.showSpellInfo = false
-config.showFastCastInfo = true
-config.showCancelInfo = true
-config.oneClickRemedies = true
+config.showSpellInfo = false --Show various facets of spell info - can be overwritten in individual LUAs
+config.showFastCastInfo = true --Display Fast Cast info
+config.showCancelInfo = true --Display info when cancelling buffs
+config.oneClickRemedies = true --Activate remedies with a single command - defined in individual LUAs
 
 enspell_list = S{"Enstone", "Enwater", "Enaero", "Enfire", "Enblizzard", "Enthunder", "Enlight","Endark"}
 conserveMP_list =
@@ -51,6 +51,6 @@ conserveMP_list =
 }
 
 remedy_list = {"Blind","Paralyze","Silence","Poison"}
-remedyOintment_list = S{"Blind","Paralyze","Silence","Poison", "Disease", "Plague"}
-panacea_list = S{"Bind", "Bio", "Burn", "Choke", "Dia", "Flash", "Frost", "Gravity", "Rasp", "Slow", "Stun", "Weight"}
-holyWater_list = S{"Curse","Doom"}
+remedyOintment_list = {"Blind","Paralyze","Silence","Poison", "Disease", "Plague"}
+panacea_list = {"Bind", "Bio", "Burn", "Choke", "Dia", "Flash", "Frost", "Gravity", "Rasp", "Slow", "Stun", "Weight"}
+holyWater_list = {"Curse","Doom"}
