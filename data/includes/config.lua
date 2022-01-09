@@ -8,6 +8,7 @@ config = {}
 config.showSpellInfo = false
 config.showFastCastInfo = true
 config.showCancelInfo = true
+config.oneClickRemedies = true
 
 enspell_list = S{"Enstone", "Enwater", "Enaero", "Enfire", "Enblizzard", "Enthunder", "Enlight","Endark"}
 conserveMP_list =
@@ -30,7 +31,7 @@ conserveMP_list =
     "Shellra",
     "Shellra II",
     "Shellra III",
-    "Shellrq IV",
+    "Shellra IV",
     "Shellra V",
     "Haste",
     "Haste II",
@@ -49,7 +50,7 @@ conserveMP_list =
     "Refresh II"
 }
 
-remedy_list = S{"Blind","Paralyze","Silence","Poison"}
-remedyOintment_list = S{"Blind","Paralyze","Silence","Poison", "Diseas", "Plague"}
+remedy_list = {"Blind","Paralyze","Silence","Poison"}
+remedyOintment_list = S{"Blind","Paralyze","Silence","Poison", "Disease", "Plague"}
 panacea_list = S{"Bind", "Bio", "Burn", "Choke", "Dia", "Flash", "Frost", "Gravity", "Rasp", "Slow", "Stun", "Weight"}
 holyWater_list = S{"Curse","Doom"}

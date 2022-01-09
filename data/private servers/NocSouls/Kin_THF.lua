@@ -78,6 +78,7 @@ function get_sets()
 	send_command("gs enable all")
 	send_command("gs equip sets.aftercast.Idle")
 	send_command("input /echo [F9] Bound to Toggle TP Gear;bind F9 gs c togglegear")
+	send_command("input /echo [F12] Bound to status removal;bind F12 gs c status-check")
 	--send_command('input /echo >> Need to finish SA/TA buff rules!! <<)
 
 	disable("main", "sub")
@@ -182,9 +183,16 @@ function self_command(command)
 		equip(sets.aftercast.Engaged[TPStyle])
 	end
 
+	if command:lower() == "status-check" then
+		if (config.oneClickRemedies) then
+			clearStatuses()
+		end
+	end
+
 	if player.status == "Engaged" then
 		equip(sets.aftercast[player.status][TPStyle])
 	else
 		equip(sets.aftercast[player.status])
 	end
+
 end

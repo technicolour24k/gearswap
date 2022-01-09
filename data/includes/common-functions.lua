@@ -77,6 +77,46 @@ function switchMacroSet(book, page)
     send_command('input /macro book '..book..';wait .1;input /macro set '..page)
 end
 
-function clearStatuses()
-	local 
+function clearStatuses()	
+	local remedyListLength = table.getn(remedy_list)
+	local remedyOintmentListLength = table.getn(remedyOintment_list)
+	local panaceaListLength = table.getn(panacea_list)
+	local holyWaterListLength = table.getn(holyWater_list)
+
+	-- Fail safe in case this accidentally triggers. Should be checked by the calling LUA. 
+	if (config.oneClickRemedies) then		
+		for i=1, holyWaterListLength do
+			if (buffactive[holyWater_list[i]]) then
+				add_to_chat(38, holyWater_list[i].." found in buffactive")
+				send_command('input /item "Hallowed Water" <me>')
+				send_command('input /item "Holy Water" <me>')
+				break
+			end
+		end
+		
+		for i=1, remedyListLength do
+			if (buffactive[remedy_list[i]]) then
+				add_to_chat(38, remedy_list[i].." found in buffactive")
+				send_command('input /item "Remedy" <me>')
+				send_command('input /item "Remedy Ointment" <me>')
+				break
+			end
+		end
+		
+		for i=1, remedyOintmentListLength do
+			if (buffactive[remedy_list[i]]) then
+				add_to_chat(38, remedy_list[i].." found in buffactive")
+				send_command('input /item "Remedy Ointment" <me>')
+				break
+			end
+		end
+		
+		for i=1, panaceaListLength do
+			if (buffactive[remedy_list[i]]) then
+				add_to_chat(38, remedy_list[i].." found in buffactive")
+				send_command('input /item "Panacea" <me>')
+				break
+			end
+		end
+	end
 end
