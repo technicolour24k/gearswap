@@ -2,7 +2,7 @@ include("organizer-lib")
 include("includes/common-functions")
 include("includes/config")
 
-showInfo = true
+showInfo = false
 TPStyle = "Sword"
 local mjob = player.main_job
 wsList = S{"Sword", "Great Sword"}
