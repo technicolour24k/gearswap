@@ -88,6 +88,7 @@ function get_sets()
 	 
 	sets.aftercast.Idle = set_combine(sets.aftercast.Engaged, {
 		body = "Cab. Surcoat +1",
+		legs = "Crimson Cuisses",
 		neck="Loricate Torque +1",
 		left_ring = "Defending Ring",
 		right_ring = "Stikini Ring +1",
