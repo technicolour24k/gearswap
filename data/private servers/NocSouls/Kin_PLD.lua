@@ -6,7 +6,10 @@ showInfo = false
 TPStyle = "Sword"
 local mjob = player.main_job
 wsList = S{"Sword", "Great Sword"}
-
+local showFCInfo = config.showFastCastInfo
+local showSpellInfo = config.showSpellInfo
+local showCancelInfo = config.showCancelInfo
+local FastCast = 80
 
 function get_sets()
 	include('private servers/'..server..'/common-gearsets')
@@ -75,7 +78,7 @@ function get_sets()
 		head="Rev. Coronet +3",
 		body="Rev. Surcoat +3",
 		hands="Rev. Gauntlets +3",
-		legs="Rev. Breeches +3",
+		legs="Ogier's Breeches",
 		feet="Chev. Sabatons",
 		neck="Loricate Torque +1",
 		left_ear="Telos Earring",
@@ -103,11 +106,21 @@ function get_sets()
 	send_command("input /echo [F12] Bound to status removal;bind F12 gs c status-check")
 end
 
+function pretarget(spell)
+	if string.find(spell.english,'Cure') or string.find(spell.english,'Cura') then
+		if not ((spell.target.type == "SELF") or (spell.target.type == "PLAYER")) then
+			add_to_chat(12, "Target is not self or player - Changing target to self")
+			change_target('<me>')
+		end
+	end
+
+end
 
 function precast(spell)
 	if ((config.showSpellInfo == true) or (showInfo == true)) then
 		add_to_chat(12, "Action: "..spell.english.." | Action Type: "..spell.action_type.."/"..spell.skill.." | MP Cost: "..spell.mp_cost.." | TP Cost: "..spell.tp_cost)
 	end
+
 
 	if sets.precast.JobAbility[spell.english] then
 		equip(sets.precast.JobAbility[spell.english])
@@ -131,11 +144,24 @@ function precast(spell)
 end
 
 function midcast(spell)
+	cancelBuff(spell.english, spell.cast_time, FastCast)
+
 	if sets.midcast[spell.english] then
 		equip(sets.midcast[spell.english])
-	elseif string.find(spell.english,'Cure') or string.find(spell.english,'Cura') then 
+	elseif string.find(spell.english,'Cure') or string.find(spell.english,'Cura') then
         equip(sets.midcast.Cure)
 		add_to_chat(1, "Looks like a cure!")
+	end
+
+	if sets.midcast[spell.skill] then
+		equip(sets.midcast[spell.skill])
+	end
+	if (enspell_list:contains(spell.english)) then
+		equip(sets.midcast.Enspell)
+	end
+
+	if (conserveMP_list:contains(spell.english)) then
+		equip(sets.midcast.ConserveMP)
 	end
 end
 
