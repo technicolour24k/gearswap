@@ -22,7 +22,8 @@ function get_sets()
 	}
 	sets.MAB = set_combine(sets.misc.AllJobsMAB, {
 		head="Wayfarer Circlet",
-		waist = "Aquiline Belt"
+		waist = "Aquiline Belt",
+		legs = "Limbo Trousers"
 	})
 	sets.JobAbility["Perfect Dodge"] = {}
 	sets.JobAbility["Sneak Attack"] = {}
@@ -34,10 +35,22 @@ function get_sets()
 	sets.WeaponSkills["Dancing Edge"] = {}
 	sets.WeaponSkills["Mercy Stroke"] = {}
 	sets.WeaponSkills["Mandalic Stab"] = {}
-	sets.WeaponSkills["Rudra's Storm"] = set_combine(sets.WeaponSkills['Fotia'],{})
-	sets.WeaponSkills["Aeolian Edge"] = set_combine(sets.MAB,{
-
+	sets.WeaponSkills["Rudra's Storm"] = set_combine(sets.WeaponSkills['Fotia'],{
+		ammo = "Floestone",
+		head = "Skulker's Bonnet +1",
+		body = "Pillager's Vest +3",
+		hands = "Pill. Armlets +3",
+		legs = "Skulk. Culottes +1",
+		feet = "Plun. Poulaines +1",
+		neck = "Tlamiztli collar",
+		back = "Canny Cape",
+		waist = "Windbuffet belt +1",
+		left_ear = "Mache Earring +1",
+		right_ear = "Mache Earring +1",
+		left_ring = "Regal Ring",
+		right_ring = "Epona's Ring"
 	})
+	sets.WeaponSkills["Aeolian Edge"] = set_combine(sets.MAB,{})
 	sets.WeaponSkills["Exenterator"] = {}
 
 	sets.midcast.Cure = {}
@@ -47,19 +60,19 @@ function get_sets()
 	sets.aftercast.Engaged = {}
 
 	sets.aftercast.Engaged.Default = set_combine(sets.weapons[mjob]["Daggers"],{
-		ammo = "Yetshila +1",
-		head = "Skulker's Bonnet +1",
-		body = "Pillager's Vest +3",
-		hands = "Pill. Armlets +3",
-		legs = "Skulk. Culottes +1",
-		feet = "Skulk. Poulaines +1",
-		neck = "Tlamiztli collar",
-		back = "Laic Mantle",
-		waist = "Windbuffet belt +1",
-		left_ear = "Mache Earring +1",
-		right_ear = "Mache Earring +1",
-		left_ring = "Regal Ring",
-		right_ring = "Epona's Ring"
+		ammo={ name="Yetshila +1", augments={'"Triple Atk."+2','"Triple Atk."+2','Crit.hit rate+5','Crit.hit rate+5',}},
+		head="Pill. Bonnet +3",
+		body="Skulker's Vest +1",
+		hands="Pill. Armlets +3",
+		legs="Skulk. Culottes +1",
+		feet="Savateur's Gaiters",
+		neck="Loricate Torque +1",
+		waist={ name="Windbuffet Belt +1", augments={'"Triple Atk."+2','"Triple Atk."+2','"Triple Atk."+2','"Triple Atk."+2',}},
+		left_ear={ name="Telos Earring" },
+		right_ear={ name="Tati Earring" },
+		left_ring={ name="Defending Ring", augments={'"Regen"+20','"Regen"+20','"Regen"+20','"Regen"+20',}},
+		right_ring="Patricius Ring",
+		back={ name="Laic Mantle", augments={'"Triple Atk."+2','"Triple Atk."+2','"Triple Atk."+2','"Triple Atk."+2',}},
 	})
 
 	sets.aftercast.Engaged.TH = set_combine(sets.aftercast.Engaged.Default, sets.TH)
@@ -105,8 +118,9 @@ function midcast(spell)
 
 	if sets.midcast[spell.english] then
 		equip(sets.midcast[spell.english])
-	elseif string.find(spell.english, "Cur") and spell.english ~= "Cursna" then
-		equip(sets.midcast.Cure)
+	elseif string.find(spell.english,'Cure') or string.find(spell.english,'Cura') then 
+        equip(sets.midcast.Cure)
+		add_to_chat(1, "Looks like a cure!")
 	end
 
 	if sets.midcast[spell.skill] then
@@ -171,6 +185,7 @@ function self_command(command)
 		send_command("gs enable sub")
 		if TPStyle == "Default" then
 			TPStyle = "TH"
+			equip(sets.aftercast.Engaged[TPStyle])
 			send_command("gs disable sub")
 		elseif TPStyle == "TH" then
 			TPStyle = "Accuracy"
