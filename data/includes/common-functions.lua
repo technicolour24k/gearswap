@@ -30,10 +30,10 @@ function checkForTown()
 	end
 end
 
-function cancelBuff(spell, casttime, FC, buff) --Requires cancel plugin
+function cancelBuff(spell, casttime, FC, buff, skill) --Requires cancel plugin
 
 	--Setup list of buffs to be autocancelled
-	local autoCancelList = S{"Enstone", "Enwater", "Enaero", "Enfire", "Enblizzard", "Enthunder", "Stoneskin", "Blaze Spikes","Ice Spikes", "Shock Spikes"}
+	local autoCancelList = S{"Enstone", "Enwater", "Enaero", "Enfire", "Enblizzard", "Enthunder", "Stoneskin", "Blaze Spikes","Ice Spikes", "Shock Spikes", "Sneak", "Spectral Jig"}
 	
 	--Setup amount of Fast Cast available
 	local FastCastAmount = FC
@@ -52,12 +52,18 @@ function cancelBuff(spell, casttime, FC, buff) --Requires cancel plugin
 			add_to_chat(8, "Base casting time: " ..casttime)
 			add_to_chat(8, "Fast Cast Amount: " ..FastCastAmount.."%. Fast Cast Multiplier is: " ..FastCastMultiplier..". Cancelling spells at "..(FastCastMultiplier*100).."%.")
 		end
-		delay = (casttime * FastCastMultiplier)
+		
+		if (not(skill == "JobAbility") and not(skill == "Jig")) then
+			delay = (casttime * FastCastMultiplier)
+		else
+			delay = 0
+		end
+		
 		if (showCancelInfo) then
 			add_to_chat(8, "Delay to cancel buff: " ..delay)
 		end
 		
-		if buff == nil then
+		if buff == nil then --if we haven't passed a buff down, cancel the spell
 			send_command('@wait '..delay..'; cancel '..spell)
 			if (showCancelInfo) then
 				add_to_chat(10, "Cancelling "..spell.." in "..delay.."s...")
@@ -77,6 +83,14 @@ function switchMacroSet(book, page)
     send_command('input /macro book '..book..';wait .1;input /macro set '..page)
 end
 
+function spellContains(spell, contains)
+	if (string.find(spell,contains)) then
+		return true
+	else
+		return false
+	end
+end
+
 function clearStatuses()	
 	local remedyListLength = table.getn(remedy_list)
 	local remedyOintmentListLength = table.getn(remedyOintment_list)
@@ -87,6 +101,8 @@ function clearStatuses()
 	local panaceaCount = 0
 	local holyWaterCount = 0
 	local hallowedWaterCount = 0
+
+	add_to_chat(8, "Clear Status function called")
 	
 	-- Fail safe in case this accidentally triggers. Should be checked by the calling LUA. 
 	if (config.oneClickRemedies) then

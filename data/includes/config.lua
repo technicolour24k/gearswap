@@ -6,7 +6,7 @@ server = "NocSouls"
 -- Display info in chat settings
 config = {}
 config.showSpellInfo = false --Show various facets of spell info - can be overwritten in individual LUAs
-config.showFastCastInfo = true --Display Fast Cast info
+config.showFastCastInfo = false --Display Fast Cast info
 config.showCancelInfo = true --Display info when cancelling buffs
 config.oneClickRemedies = true --Activate remedies with a single command - defined in individual LUAs
 

@@ -80,7 +80,7 @@ function init_gear_sets(job)
 	sets.weapons.PUP['Hand-to-Hand'] = {main=""}
 
 	sets.weapons.DNC = {}
-	sets.weapons.DNC['Daggers'] = {main="Vajra",sub="Mandau"}
+	sets.weapons.DNC['Daggers'] = {main="Twashtar",sub=""}
 
 	sets.weapons.SCH = {}
 	sets.weapons.SCH['Elemental'] = {main="",sub=""}
