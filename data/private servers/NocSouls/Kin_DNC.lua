@@ -20,7 +20,7 @@ function get_sets()
 		legs = "Limbo Trousers"
 	})
 	sets.JobAbility["Trance"] = {}
-	sets.JobAbility["Sambas"] = {head="Maxixi Tiara +1"}
+	sets.JobAbility["Sambas"] = {head=DNC_AF_HEAD}
 	sets.JobAbility["Drain Samba"] = set_combine(sets.JobAbility['Sambas'], {})
 	sets.JobAbility["Drain Samba II"] = set_combine(sets.JobAbility['Sambas'], {})
 	sets.JobAbility["Drain Samba III"] = set_combine(sets.JobAbility['Sambas'], {})
@@ -29,9 +29,9 @@ function get_sets()
 	sets.JobAbility["Haste Samba"] = set_combine(sets.JobAbility['Sambas'], {})
 
 	sets.JobAbility["Waltzes"] = {
-		head="Horos Tiara +1",
-		body="Maxixi Casaque +1",
-		feet="Maxixi Toe Shoes +1",
+		head=DNC_RELIC_HEAD,
+		body=DNC_AF_BODY,
+		feet=DNC_AF_FEET,
 		neck="Cerulean Pendant",
 		right_ring="Asklepian Ring",
 		left_ring = "Valaseur's Ring"
@@ -45,20 +45,20 @@ function get_sets()
 	sets.JobAbility["Divine Waltz II"] = set_combine(sets.JobAbility['Waltzes'], {})
 	sets.JobAbility["Healing Waltz"] = set_combine(sets.JobAbility['Waltzes'], {})
 
-	sets.JobAbility['Jigs'] = {feet="Maxixi Toe Shoes +1"}
+	sets.JobAbility['Jigs'] = {feet=DNC_AF_FEET}
 	sets.JobAbility["Chocobo Jig"] = set_combine(sets.JobAbility['Jigs'], {})
 	sets.JobAbility["Chocobo Jig II"] = set_combine(sets.JobAbility['Jigs'], {})
 	sets.JobAbility["Spectral Jig"] = set_combine(sets.JobAbility['Jigs'], {})
 
 	sets.JobAbility['Steps'] = {
-		head="Maxixi Tiara +1",
-		hands="Maxixi Bangles +1",
+		head=DNC_AF_HEAD,
+		hands=DNC_AF_HANDS
 	}
 	sets.JobAbility["Quickstep"] = set_combine(sets.JobAbility['Steps'], {})
 	sets.JobAbility["Box Step"] = set_combine(sets.JobAbility['Steps'], {})
 	sets.JobAbility["Stutter Step"] = set_combine(sets.JobAbility['Steps'], {})
 	sets.JobAbility["Feather Step"] = set_combine(sets.JobAbility['Steps'], {
-		feet = "Macu. Toe Shoes +1"
+		feet=DNC_EMPYREAN_FEET
 	})
 
 	sets.JobAbility['Flourishes'] = {}
@@ -66,15 +66,15 @@ function get_sets()
 	sets.JobAbility["Desperate Flourish"] = set_combine(sets.JobAbility['Flourishes'], {})
 	sets.JobAbility["Violent Flourish"] = set_combine(sets.JobAbility['Flourishes'], {})
 	sets.JobAbility["Reverse Flourish"] = set_combine(sets.JobAbility['Flourishes'], {
-		hands="Macu. Bangles +1"
+		hands=DNC_EMPYREAN_HANDS
 	})
 	sets.JobAbility["Building Flourish"] = set_combine(sets.JobAbility['Flourishes'], {})
 	sets.JobAbility["Wild Flourish"] = set_combine(sets.JobAbility['Flourishes'], {})
 	sets.JobAbility["Climactic Flourish"] = set_combine(sets.JobAbility['Flourishes'], {
-		head="Maculele Tiara +1"
+		head=DNC_EMPYREAN_HEAD
 	})
 	sets.JobAbility["Striking Flourish"] = set_combine(sets.JobAbility['Flourishes'], {
-		body="Macu. Casaque +1"
+		body=DNC_EMPYREAN_BODY
 	})
 	sets.JobAbility["Ternary Flourish"] = set_combine(sets.JobAbility['Flourishes'], {})
 
@@ -90,11 +90,11 @@ function get_sets()
 	sets.WeaponSkills["Pyrrhic Kleos"] = {}
 	sets.WeaponSkills["Rudra's Storm"] = set_combine(sets.WeaponSkills['Fotia'],{
 		ammo = "Floestone",
-		head = "Maculele Tiara +1",
-		body = "Maxixi Casaque +1",
-		hands = "Macu. Bangles +1",
-		legs = "Maxixi Tights +1",
-		feet = "Macu. Toe Shoes +1",
+		head=DNC_EMPYREAN_HEAD,
+		body=DNC_EMPYREAN_BODY,
+		hands=DNC_EMPYREAN_HANDS,
+		legs=DNC_AF_LEGS,
+		feet=DNC_EMPYREAN_FEET,
 		neck = "Tlamiztli collar",
 		back = "Laic Mantle",
 		waist = "Windbuffet belt +1",
@@ -114,10 +114,10 @@ function get_sets()
 
 	sets.aftercast.Engaged.Default = set_combine(sets.weapons[mjob]["Daggers"],{
 		ammo={ name="Yetshila +1", augments={'"Triple Atk."+2','"Triple Atk."+2','Crit.hit rate+5','Crit.hit rate+5',}},
-		head = "Maculele Tiara +1",
-		body = "Macu. Casaque +1",
-		hands = "Macu. Bangles +1",
-		legs = "Maculele Tights +1",
+		head=DNC_EMPYREAN_HEAD,
+		body=DNC_EMPYREAN_BODY,
+		hands=DNC_EMPYREAN_HANDS,
+		legs=DNC_EMPYREAN_LEGS,
 		feet="Savateur's Gaiters", -- cap subtle blow with Maculele Casaque +1 - 30 Subtle Blow augment
 		neck="Loricate Torque +1",
 		waist={ name="Windbuffet Belt +1", augments={'"Triple Atk."+2','"Triple Atk."+2','"Triple Atk."+2','"Triple Atk."+2',}},
