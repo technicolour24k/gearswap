@@ -17,8 +17,8 @@ function get_sets()
 	
 	sets.TH = {
 		sub = "Sandung",
-		hands = "Plun. Armlets +1",
-		feet = "Skulk. Poulaines +1"
+		hands = THF_RELIC_HANDS,
+		feet = THF_EMPYREAN_FEET
 	}
 	sets.MAB = set_combine(sets.misc.AllJobsMAB, {
 		head="Wayfarer Circlet",
@@ -28,20 +28,20 @@ function get_sets()
 	sets.JobAbility["Perfect Dodge"] = {}
 	sets.JobAbility["Sneak Attack"] = {}
 	sets.JobAbility["Trick Attack"] = {}
-	sets.JobAbility.Flee = {feet = "Pillager's Poulaines +3"}
-	sets.JobAbility.Accomplice = {head = {name = "Skulker's Bonnet"}}
-	sets.JobAbility.Collaborator = {head = {name = "Skulker's Bonnet"}}
+	sets.JobAbility.Flee = {feet = THF_RELIC_FEET}
+	sets.JobAbility.Accomplice = {head = THF_EMPYREAN_HEAD}
+	sets.JobAbility.Collaborator = {head = THF_EMPYREAN_HEAD}
 
 	sets.WeaponSkills["Dancing Edge"] = set_combine(sets.WeaponSkills['AllJobsWS'], {})
 	sets.WeaponSkills["Mercy Stroke"] = set_combine(sets.WeaponSkills['AllJobsWS'], {})
 	sets.WeaponSkills["Mandalic Stab"] = set_combine(sets.WeaponSkills['AllJobsWS'], {})
 	sets.WeaponSkills["Rudra's Storm"] = set_combine(sets.WeaponSkills['Fotia'], sets.WeaponSkills['AllJobsWS'], {
 		ammo = "Floestone",
-		head = "Skulker's Bonnet +1",
-		body = "Pillager's Vest +3",
-		hands = "Pill. Armlets +3",
-		legs = "Skulk. Culottes +1",
-		feet = "Plun. Poulaines +1",
+		head = THF_EMPYREAN_HEAD,
+		body = THF_AF_BODY,
+		hands = THF_AF_HANDS,
+		legs = THF_EMPYREAN_LEGS,
+		feet = THF_RELIC_FEET,
 		neck = "Tlamiztli collar",
 		back = "Canny Cape",
 		waist = "Windbuffet belt +1",
@@ -59,10 +59,10 @@ function get_sets()
 
 	sets.aftercast.Engaged.Default = set_combine(sets.weapons[mjob]["Daggers"],{
 		ammo={ name="Yetshila +1", augments={'"Triple Atk."+2','"Triple Atk."+2','Crit.hit rate+5','Crit.hit rate+5',}},
-		head="Pill. Bonnet +3",
-		body="Skulker's Vest +1",
-		hands="Pill. Armlets +3",
-		legs="Skulk. Culottes +1",
+		head=THF_RELIC_HEAD,
+		body=THF_EMPYREAN_BODY,
+		hands=THF_AF_HANDS,
+		legs=THF_EMPYREAN_LEGS,
 		feet="Savateur's Gaiters",
 		neck="Loricate Torque +1",
 		waist={ name="Windbuffet Belt +1", augments={'"Triple Atk."+2','"Triple Atk."+2','"Triple Atk."+2','"Triple Atk."+2',}},
@@ -80,7 +80,7 @@ function get_sets()
 	sets.aftercast.Idle = set_combine(sets.aftercast.Engaged[TPStyle],{
 		left_ring = "Defending Ring",
 		right_ring = "Stikini Ring +1",
-		feet = "Pillager's Poulaines +3",
+		feet = THF_RELIC_FEET,
 		neck="Loricate Torque +1",
 		left_ear = "Moonshade Earring"
 	})
