@@ -19,13 +19,13 @@ function weathercheck(spell_element,set)
 end
 
 function checkForTown()
-	if(string.find(world.area,"San d'Oria")) then
+	if(string.find(world.zone,"San d'Oria")) then
 		equip(sets.misc.Sandy)
-	elseif(string.find(world.area,"Windurst")) then
+	elseif(string.find(world.zone,"Windurst")) then
 		equip(sets.misc.Windy)
-	elseif(string.find(world.area,"Bastok") or (string.find(world.area,"Metalworks"))) then
+	elseif(string.find(world.zone,"Bastok") or (string.find(world.zone,"Metalworks"))) then
 		equip(sets.misc.Bastok)
-	elseif(string.find(world.area,"Garden")) then
+	elseif(string.find(world.zone,"Garden")) then
 		equip(sets.misc.Gardening)
 	end
 end

@@ -80,7 +80,7 @@ function init_gear_sets(job)
 	sets.weapons.PUP['Hand-to-Hand'] = {main=""}
 
 	sets.weapons.DNC = {}
-	sets.weapons.DNC['Daggers'] = {main="Twashtar",sub=""}
+	sets.weapons.DNC['Daggers'] = {main="Twashtar",sub="Terpsichore"}
 
 	sets.weapons.SCH = {}
 	sets.weapons.SCH['Elemental'] = {main="",sub=""}
@@ -552,6 +552,10 @@ function init_gear_sets(job)
 		neck = "Fotia Gorget",
 		waist = "Fotia Belt"
 	}
+	sets.WeaponSkills['AllJobsWS'] = {
+		left_ring={ name="Dark Ring", augments={'Accuracy+5 Attack+5','Eva.+5 /Mag. Eva.+5','System: 1 ID: 131 Val: 6','Weapon skill damage +8%',}},
+		right_ring={ name="Dark Ring", augments={'Accuracy+5 Attack+5','Eva.+1 /Mag. Eva.+1','System: 1 ID: 131 Val: 7','Weapon skill damage +8%',}},
+		}
 
 	sets.misc = {}
 	sets.misc.Sandy = {body = "Kingdom Aketon"}
@@ -561,6 +565,7 @@ function init_gear_sets(job)
 
 	sets.misc.AllJobsMAB = {
 		left_ring="Acumen Ring",
+		right_ring={ name="Dark Ring", augments={'Accuracy+5 Attack+5','Eva.+1 /Mag. Eva.+1','System: 1 ID: 131 Val: 7','Weapon skill damage +8%',}},
 		left_ear="Novio Earring",
 		right_ear="Hecate's Earring",
 		back="Izdubar Mantle",

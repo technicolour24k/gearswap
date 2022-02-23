@@ -236,13 +236,13 @@ function self_command(command)
 	end
 
 	if command:lower() == "waltzing" then
-		if (player.last_subtarget.hpp < 50) then
+		if (player.last_subtarget.hpp < 25) then
 			waltzTier = "Curing Waltz V"
-		elseif (player.last_subtarget.hpp < 60) then
+		elseif (player.last_subtarget.hpp < 40) then
 			waltzTier = "Curing Waltz IV"
-		elseif (player.last_subtarget.hpp < 70) then
+		elseif (player.last_subtarget.hpp < 55) then
 			waltzTier = "Curing Waltz III"
-		elseif (player.last_subtarget.hpp < 80) then
+		elseif (player.last_subtarget.hpp < 70) then
 			waltzTier = "Curing Waltz II"
 		else
 			waltzTier = "Curing Waltz"

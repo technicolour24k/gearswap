@@ -32,10 +32,10 @@ function get_sets()
 	sets.JobAbility.Accomplice = {head = {name = "Skulker's Bonnet"}}
 	sets.JobAbility.Collaborator = {head = {name = "Skulker's Bonnet"}}
 
-	sets.WeaponSkills["Dancing Edge"] = {}
-	sets.WeaponSkills["Mercy Stroke"] = {}
-	sets.WeaponSkills["Mandalic Stab"] = {}
-	sets.WeaponSkills["Rudra's Storm"] = set_combine(sets.WeaponSkills['Fotia'],{
+	sets.WeaponSkills["Dancing Edge"] = set_combine(sets.WeaponSkills['AllJobsWS'], {})
+	sets.WeaponSkills["Mercy Stroke"] = set_combine(sets.WeaponSkills['AllJobsWS'], {})
+	sets.WeaponSkills["Mandalic Stab"] = set_combine(sets.WeaponSkills['AllJobsWS'], {})
+	sets.WeaponSkills["Rudra's Storm"] = set_combine(sets.WeaponSkills['Fotia'], sets.WeaponSkills['AllJobsWS'], {
 		ammo = "Floestone",
 		head = "Skulker's Bonnet +1",
 		body = "Pillager's Vest +3",
@@ -47,8 +47,6 @@ function get_sets()
 		waist = "Windbuffet belt +1",
 		left_ear = "Mache Earring +1",
 		right_ear = "Mache Earring +1",
-		left_ring = "Regal Ring",
-		right_ring = "Epona's Ring"
 	})
 	sets.WeaponSkills["Aeolian Edge"] = set_combine(sets.MAB,{})
 	sets.WeaponSkills["Exenterator"] = {}
