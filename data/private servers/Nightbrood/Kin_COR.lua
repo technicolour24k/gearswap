@@ -178,11 +178,6 @@ function doSetup()
     send_command('input /macro book 2;wait .1;input /macro set 1')
 end
 
-function cancelBuff(buff, delay) --Requires cancel plugin
-		send_command('@wait '..delay..'; cancel '..buff)
-		add_to_chat(10, "Cancelling "..buff.." in "..delay.."s...")
-end
-
 function weathercheck(spell_element,set)
     if not set then return end
     if spell_element == world.weather_element or spell_element == world.day_element then

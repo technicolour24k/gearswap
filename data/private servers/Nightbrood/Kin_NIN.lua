@@ -159,10 +159,6 @@ function doSetup()
 
 end
 
-function cancelBuff(buff, delay) --Requires cancel plugin
-		send_command('@wait '..delay..'; cancel "'..buff..'"')
-		add_to_chat(10, "Cancelling "..buff.." in "..delay.."s...")
-end
 
 function weathercheck(spell_element,set, spell)
     if not set then return end
