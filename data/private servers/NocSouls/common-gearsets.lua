@@ -500,10 +500,15 @@ function init_gear_sets(job)
 	
 	-- Generic midcast sets
 	sets.midcast = {}
+    sets.midcast.EnhancingDuration = {}
+	sets.midcast.EnfeeblingDuration = {
+		left_ring={ name="Scintillant Ring", augments={'"Drain" and "Aspir" potency +1','Enfb.mag. skill +4','Mag. Acc+7 /Mag. Dmg.+7','System: 1 ID: 1251 Val: 2',}},
+		right_ring={ name="Scintillant Ring", augments={'"Drain" and "Aspir" potency +2','Enfb.mag. skill +7','Mag. Acc+2 /Mag. Dmg.+2','System: 1 ID: 1251 Val: 8',}},	
+	}
     sets.midcast['Divine Magic'] = {}
 	sets.midcast['Healing Magic'] = {}
-	sets.midcast['Enhancing Magic'] = {}
-	sets.midcast['Enfeebling Magic'] = {}
+	sets.midcast['Enhancing Magic'] = set_combine(sets.midcast.EnhancingDuration,{})
+	sets.midcast['Enfeebling Magic'] = set_combine(sets.midcast.EnfeeblingDuration,{})
 	sets.midcast['Elemental Magic'] = {}
 	sets.midcast['Dark Magic'] = {}
 	sets.midcast['Summoning Magic'] = {}
@@ -514,7 +519,6 @@ function init_gear_sets(job)
 	sets.midcast['Blue Magic'] = {}
 	sets.midcast['Geomancy'] = {}
 	sets.midcast['Handbell'] = {}   
-    sets.midcast.EnhancingDuration = {}
     sets.midcast.Stoneskin = set_combine(sets.midcast.EnhancingDuration,{legs="Haven Hose", waist="Seigel Sash"})
     sets.midcast.Aquaveil = set_combine(sets.midcast.EnhancingDuration,{})
     sets.midcast.Refresh = set_combine(sets.midcast.EnhancingDuration,{})
