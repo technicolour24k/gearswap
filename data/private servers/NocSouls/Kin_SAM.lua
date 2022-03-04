@@ -34,6 +34,8 @@ function get_sets()
 	
 	sets.precast.WeaponSkills = {}
 	sets.precast.WeaponSkills.default = set_combine(sets.aftercast.Engaged,{
+		neck="Ire Torque",
+		waist="Chuq'aba Belt",
 		feet="Sakonji Sune-Ate +1",
 		left_ring="Ifrit Ring"
 	})
@@ -85,8 +87,8 @@ function precast(spell)
 		add_to_chat(12, "Action: "..spell.english.." | Action Type: "..spell.action_type.."/"..spell.skill.." | MP Cost: "..spell.mp_cost.." | TP Cost: "..spell.tp_cost)
 	end
 
-	if sets.precast.JobAbility[spell.english] then
-		equip(sets.precast.JobAbility[spell.english])
+	if sets.JobAbilities[spell.english] then
+		equip(sets.JobAbilities[spell.english])
 	end
 
 	if sets.precast.WeaponSkills[spell.english] then

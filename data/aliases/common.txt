@@ -1,0 +1,25 @@
+alias buffProt5 input /ma "Protect V" <me>
+alias buffShell5 input /ma "Shell V" <me>
+alias buffBlink input /ma "Blink" <me>
+alias buffStoneskin input /ma "Stoneskin" <me>
+alias buffPhalanx input /ma "Phalanx" <me>
+alias buffReprisal input /ma "Reprisal" <me>
+alias buffHaste input /ma "Haste" <me>
+alias buffHaste2 input /ma "Haste II" <me>
+alias buffEnthunder input /ma "Enthunder" <me>
+alias buffTemper input /ma "Temper" <me>
+alias buffRefresh input /ma "Refresh II" <me>
+alias buffBSpikes input /ma "Blaze Spikes" <me>
+alias buffISpikes input /ma "Ice Spikes" <me>
+alias buffGDex input /ma "Gain-Dex" <me>
+alias buffGInt input /ma "Gain-Int" <me>
+alias buffGStr input /ma "Gain-Str" <me>
+alias buffCrusade input /ma "Crusade" <me>
+alias buffAquaveil input /ma "Aquaveil" <me>
+
+alias buffComposure input /ja "Composure" <me>
+alias buffAFavor input /ja "Avatar's Favor" <me>
+
+
+alias min minimize
+alias empy-check exec misc/empy-items

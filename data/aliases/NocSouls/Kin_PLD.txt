@@ -1,0 +1,5 @@
+alias defBuffs buffProt5;wait 3.5;buffShell5;wait 3.5;buffBlink;wait 4;buffStoneskin;wait 4;buffPhalanx;wait 3;buffReprisal;wait 3;buffAquaveil
+alias offBuffs buffHaste;wait 4;buffTemper;wait 4;buffEnthunder;wait 3;buffGStr;
+alias utilityBuffs buffRefresh;wait 4;buffCrusade
+
+alias buffMe buffComposure;wait 2;defBuffs;wait 4;offBuffs;wait 4;utilityBuffs

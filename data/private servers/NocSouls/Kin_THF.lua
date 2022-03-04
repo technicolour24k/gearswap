@@ -28,7 +28,7 @@ function get_sets()
 	sets.JobAbility["Perfect Dodge"] = {}
 	sets.JobAbility["Sneak Attack"] = {}
 	sets.JobAbility["Trick Attack"] = {}
-	sets.JobAbility.Flee = {feet = THF_RELIC_FEET}
+	sets.JobAbility.Flee = {feet = THF_AF_FEET}
 	sets.JobAbility.Accomplice = {head = THF_EMPYREAN_HEAD}
 	sets.JobAbility.Collaborator = {head = THF_EMPYREAN_HEAD}
 
@@ -59,7 +59,7 @@ function get_sets()
 
 	sets.aftercast.Engaged.Default = set_combine(sets.weapons[mjob]["Daggers"],{
 		ammo={ name="Yetshila +1", augments={'"Triple Atk."+2','"Triple Atk."+2','Crit.hit rate+5','Crit.hit rate+5',}},
-		head=THF_RELIC_HEAD,
+		head=THF_AF_HEAD,
 		body=THF_EMPYREAN_BODY,
 		hands=THF_AF_HANDS,
 		legs=THF_EMPYREAN_LEGS,
@@ -90,7 +90,6 @@ function get_sets()
 	send_command("gs equip sets.aftercast.Idle")
 	send_command("input /echo [F9] Bound to Toggle TP Gear;bind F9 gs c togglegear")
 	send_command("input /echo [F12] Bound to status removal;bind F12 gs c status-check")
-	--send_command('input /echo >> Need to finish SA/TA buff rules!! <<)
 
 	disable("main", "sub")
 end
@@ -118,16 +117,13 @@ function midcast(spell)
 		equip(sets.midcast[spell.english])
 	elseif string.find(spell.english,'Cure') or string.find(spell.english,'Cura') then 
         equip(sets.midcast.Cure)
-		add_to_chat(1, "Looks like a cure!")
 	end
-
 	if sets.midcast[spell.skill] then
 		equip(sets.midcast[spell.skill])
 	end
 	if (enspell_list:contains(spell.english)) then
 		equip(sets.midcast.Enspell)
 	end
-
 	if (conserveMP_list:contains(spell.english)) then
 		equip(sets.midcast.ConserveMP)
 	end
