@@ -171,3 +171,11 @@ function clearStatuses()
 		end
 	end
 end
+
+function echoInfo(info,delay)
+	if (delay) then
+			send_command('@wait '..delay..'; input /echo '..info)
+	else
+		send_command('input /echo '..info)
+	end
+end
