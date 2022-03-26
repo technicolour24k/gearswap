@@ -42,10 +42,6 @@ conserveMP_list = --Store spells that get no benefit from Potency or anything ou
     "Blaze Spikes",
     "Ice Spikes",
     "Shock Spikes",
-    "Impact",
-    "Bio",
-    "Bio II",
-    "Bio III",
     "Refresh",
     "Refresh II"
 }

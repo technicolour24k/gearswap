@@ -96,7 +96,7 @@ function get_sets()
 end
 
 function precast(spell)
-	customInfoCheck(spell.name)
+	customInfoCheck(spell.name, spell.tp_cost, spell.mp_cost)
 		
 	if sets.JobAbility[spell.english] then
 		equip(sets.JobAbility[spell.english])
