@@ -12,6 +12,7 @@ TPStyle = "Default"
 
 function get_sets()
 	include('private servers/'..server..'/common-gearsets')
+	include('private servers/'..server..'/custom-info')
 	local mjob = player.main_job
 	init_gear_sets(mjob)
 	
@@ -95,6 +96,8 @@ function get_sets()
 end
 
 function precast(spell)
+	customInfoCheck(spell.name)
+		
 	if sets.JobAbility[spell.english] then
 		equip(sets.JobAbility[spell.english])
 	end

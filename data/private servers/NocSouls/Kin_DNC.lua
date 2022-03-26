@@ -158,7 +158,6 @@ function precast(spell)
 		equip(sets.JobAbility[spell.english])
 	end
 
-
 	if sets.WeaponSkills[spell.english] then
 		equip(sets.WeaponSkills[spell.english])
 	end
