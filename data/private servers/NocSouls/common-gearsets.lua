@@ -46,7 +46,7 @@ function init_gear_sets(job)
 	sets.weapons.BRD = {}
 	sets.weapons.BRD['Dagger'] = {main="", sub=""}
 	sets.weapons.BRD['Sword'] = {main="", sub=""}
-	sets.weapons.BRD['Horn'] = { ranged=""}
+	sets.weapons.BRD['Horn'] = {ranged=""}
 	sets.weapons.BRD['Harp'] = {ranged=""}
 
 	sets.weapons.RNG = {}
@@ -67,7 +67,7 @@ function init_gear_sets(job)
 	sets.weapons.DRG['Polearm'] = {main="",sub=""}
 
 	sets.weapons.SMN = {}
-	sets.weapons.SMN['Staff'] = {main="Nirvana", sub=""}
+	sets.weapons.SMN['Staff'] = {main="Nirvana", sub="Elan Strap"}
 
 	sets.weapons.BLU = {}
 	sets.weapons.BLU['Sword'] = {main="Fettering Blade", sub="Beatific Shield"}
@@ -471,7 +471,22 @@ function init_gear_sets(job)
 	RUN_EMPYREAN_HANDS = "Erilaz Gauntlets +1"
 	RUN_EMPYREAN_LEGS = "Erilaz Leg Guards +1"
 	RUN_EMPYREAN_FEET = "Erilaz Greaves +1"
+	
+	sets.misc = {}
+	sets.misc.Sandy = {body = "Kingdom Aketon"}
+	sets.misc.Windy = {body = "Federation Aketon"}
+	sets.misc.Bastok = {body = "Republic Aketon"}
+	sets.misc.Gardening = {body = "Overalls"}
 
+	sets.misc.AllJobsMAB = {
+		left_ring="Acumen Ring",
+		right_ring={name="Dark Ring", augments={'Accuracy+5 Attack+5','Eva.+1 /Mag. Eva.+1','System: 1 ID: 131 Val: 7','Weapon skill damage +8%',}},
+		left_ear="Novio Earring",
+		right_ear="Hecate's Earring",
+		back="Izdubar Mantle",
+		neck = "Stoicheion Medal"
+	}
+	
 	-- Generic precast sets
     sets.precast = {} 
     sets.precast.FastCast = {}
@@ -486,7 +501,7 @@ function init_gear_sets(job)
     sets.precast.FastCast['Healing Magic'] = set_combine(sets.precast.FastCast.Default,{})
     sets.precast.FastCast['Enhancing Magic'] = set_combine(sets.precast.FastCast.Default,{})
     sets.precast.FastCast['Enfeebling Magic'] = set_combine(sets.precast.FastCast.Default,{})
-    sets.precast.FastCast['Elemental Magic'] = set_combine(sets.precast.FastCast.Default,{   })
+    sets.precast.FastCast['Elemental Magic'] = set_combine(sets.precast.FastCast.Default,{})
     sets.precast.FastCast['Dark Magic'] = set_combine(sets.precast.FastCast.Default,{})
     sets.precast.FastCast['Summoning Magic'] = set_combine(sets.precast.FastCast.Default,{})
     sets.precast.FastCast['Ninjutsu'] = set_combine(sets.precast.FastCast.Default,{})
@@ -502,14 +517,14 @@ function init_gear_sets(job)
 	sets.midcast = {}
     sets.midcast.EnhancingDuration = {}
 	sets.midcast.EnfeeblingDuration = {
-		left_ring={ name="Scintillant Ring", augments={'"Drain" and "Aspir" potency +1','Enfb.mag. skill +4','Mag. Acc+7 /Mag. Dmg.+7','System: 1 ID: 1251 Val: 2',}},
-		right_ring={ name="Scintillant Ring", augments={'"Drain" and "Aspir" potency +2','Enfb.mag. skill +7','Mag. Acc+2 /Mag. Dmg.+2','System: 1 ID: 1251 Val: 8',}},	
+		left_ring={name="Scintillant Ring", augments={'"Drain" and "Aspir" potency +3','Enfb.mag. skill +3','Mag. Acc+7 /Mag. Dmg.+7','System: 1 ID: 1251 Val: 9',}},
+		right_ring={name="Scintillant Ring", augments={'"Drain" and "Aspir" potency +2','Enfb.mag. skill +7','Mag. Acc+2 /Mag. Dmg.+2','System: 1 ID: 1251 Val: 8',}},	
 	}
     sets.midcast['Divine Magic'] = {}
 	sets.midcast['Healing Magic'] = {}
 	sets.midcast['Enhancing Magic'] = set_combine(sets.midcast.EnhancingDuration,{})
 	sets.midcast['Enfeebling Magic'] = set_combine(sets.midcast.EnfeeblingDuration,{})
-	sets.midcast['Elemental Magic'] = {}
+	sets.midcast['Elemental Magic'] = set_combine(sets.misc.AllJobsMAB, {})
 	sets.midcast['Dark Magic'] = {}
 	sets.midcast['Summoning Magic'] = {}
 	sets.midcast['Ninjutsu'] = {}
@@ -557,22 +572,8 @@ function init_gear_sets(job)
 		waist = "Fotia Belt"
 	}
 	sets.WeaponSkills['AllJobsWS'] = {
-		left_ring={ name="Dark Ring", augments={'Accuracy+5 Attack+5','Eva.+5 /Mag. Eva.+5','System: 1 ID: 131 Val: 6','Weapon skill damage +8%',}},
-		right_ring={ name="Dark Ring", augments={'Accuracy+5 Attack+5','Eva.+1 /Mag. Eva.+1','System: 1 ID: 131 Val: 7','Weapon skill damage +8%',}},
+		left_ring={name="Dark Ring", augments={'Accuracy+5 Attack+5','Eva.+5 /Mag. Eva.+5','System: 1 ID: 131 Val: 6','Weapon skill damage +8%',}},
+		right_ring={name="Dark Ring", augments={'Accuracy+5 Attack+5','Eva.+1 /Mag. Eva.+1','System: 1 ID: 131 Val: 7','Weapon skill damage +8%',}},
 		}
 
-	sets.misc = {}
-	sets.misc.Sandy = {body = "Kingdom Aketon"}
-	sets.misc.Windy = {body = "Federation Aketon"}
-	sets.misc.Bastok = {body = "Republic Aketon"}
-	sets.misc.Gardening = {body = "Overalls"}
-
-	sets.misc.AllJobsMAB = {
-		left_ring="Acumen Ring",
-		right_ring={ name="Dark Ring", augments={'Accuracy+5 Attack+5','Eva.+1 /Mag. Eva.+1','System: 1 ID: 131 Val: 7','Weapon skill damage +8%',}},
-		left_ear="Novio Earring",
-		right_ear="Hecate's Earring",
-		back="Izdubar Mantle",
-		neck = "Stoicheion Medal"
-	}
 end
