@@ -1,4 +1,5 @@
 include('includes/config')
+include('includes/player-stats')
 
 --initialise variables to inherit from master config
 local showFCInfo = config.showFastCastInfo
@@ -174,7 +175,7 @@ end
 
 function echoInfo(info,delay)
 	if (delay) then
-			send_command('@wait '..delay..'; input /echo '..info)
+		send_command('@wait '..delay..'; input /echo '..info)
 	else
 		send_command('input /echo '..info)
 	end
