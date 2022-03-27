@@ -96,7 +96,7 @@ function get_sets()
 end
 
 function precast(spell)
-	customInfoCheck(spell.name, spell.tp_cost, spell.mp_cost)
+	customInfoCheckPrecast(spell.name, spell.tp_cost, spell.mp_cost)
 		
 	if sets.JobAbility[spell.english] then
 		equip(sets.JobAbility[spell.english])
@@ -105,6 +105,7 @@ function precast(spell)
 	if sets.WeaponSkills[spell.english] then
 		equip(sets.WeaponSkills[spell.english])
 	end
+
 	if sets.precast[spell.english] then
 		equip(sets.precast[spell.english])
 	end
@@ -130,6 +131,7 @@ function midcast(spell)
 	if (conserveMP_list:contains(spell.english)) then
 		equip(sets.midcast.ConserveMP)
 	end
+	customInfoCheckMidcast(spell.name, spell.tp_cost, spell.mp_cost)
 end
 
 function aftercast(spell)
@@ -149,6 +151,7 @@ function aftercast(spell)
 			equip(sets.aftercast[player.status])
 		end
 	end
+	customInfoCheckAftercast(spell.name, spell.tp_cost, spell.mp_cost)
 end
 
 function status_change(new, old)
