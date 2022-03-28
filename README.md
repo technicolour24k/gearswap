@@ -4,8 +4,10 @@ Collection of gearswap LUAs
 Default.lua:
     - Uses the includes/config file to determine what set of gearswaps to load. <br />
     - Begins by killing ALL binds and aliases and setting them up again<br />
-        - This needs a scripts/binds/%SERVER NAME% folder, with a CHAR_JOB text file (e.g. scripts/binds/retail/Kin_THF.txt) - Same with aliases<br />
-        - It will also try and execute scripts/windower-bindings, and scripts/aliases/common.txt - Would recommend these are both set up initially for best results<br />
+        - This needs a scripts folder in the gearswap/data folder, with a CHAR_JOB text file (e.g. gearswap/data/binds/retail/Kin_THF.txt) - Same with aliases<br />
+        - These scripts will be copied into the scripts folder on the fly, using the copy-scripts.bat
+            - <b>You will need to modify this to point to your Windower directory</b>
+        - It will also try and execute scripts/windower-bindings, and gearswap/data/aliases/common.txt - Would recommend these are both set up initially for best results<br />
     - After setting up the bindings and aliases again, it will proceed to load your Gearswap file in the standard format: CHAR_JOB.lua<br />
         - This will be based on the "server" parameter in includes/config.lua<br />
             - If you want to play on retail servers, the server should be "retail" - Otherwise, it will assume private server<br />
@@ -27,3 +29,13 @@ includes/common-functions.lua:<br />
             - Fairly self explanatory, changes macros around<br />
 <br /><br />
 Each server file should have a common-gearsets LUA also, to make use of any particular "all jobs" style gear. Many private servers have custom augment systems, which allow generic fast cast pieces - this would make a good candidate for that sort of system.
+<br /><br />
+includes/player-stats.lua:<br />
+    - Sets up the player variable "pc"
+        - Anything found in the <a href="https://github.com/Windower/Lua/wiki/FFXI-Functions#windowerffxiget_player" target="_blank">windower.ffxi.get_player() API call</a> should be referencable from here. 
+    - Sets up the player skills variable "skills"
+        - Any skills can be referenced from here, e.g. skills['enfeebling_magic'] (e.g. skills['enfeebling_magic'] < 200, or skills['katana'] > 100)
+    - Sets up player base stats
+        - Uses packet parsing to examine 0x061 (thanks Rubenator & Iryoku)
+        - Can be referenced using stats.STAT.TYPE (e.g. stats.STR.Base, stats.DEX.Added, stats.MND.Total)
+        - Similar stats for Attack/Defence (stats.Attack, stats.Defence, stats.Defense [Defense is duplicate of Defence, but included for ease of spelling differences])
