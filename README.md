@@ -5,7 +5,7 @@ Default.lua:
     - Uses the includes/config file to determine what set of gearswaps to load. <br />
     - Begins by killing ALL binds and aliases and setting them up again<br />
         - This needs a scripts folder in the gearswap/data folder, with a CHAR_JOB text file (e.g. gearswap/data/binds/retail/Kin_THF.txt) - Same with aliases<br />
-        - These scripts will be copied into the scripts folder on the fly, using the copy-scripts.bat
+        - These scripts will be copied into the scripts folder on the fly, using the copy-scripts.bat, using the <b>"run"</b> plugin.
             - <b>You will need to modify this to point to your Windower directory</b>
         - It will also try and execute scripts/windower-bindings, and gearswap/data/aliases/common.txt - Would recommend these are both set up initially for best results<br />
     - After setting up the bindings and aliases again, it will proceed to load your Gearswap file in the standard format: CHAR_JOB.lua<br />
