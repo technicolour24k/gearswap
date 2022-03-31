@@ -25,7 +25,6 @@ include("includes/common-functions")
         
         if (spell == "Rudra's Storm") then
             echoInfo('[Twashtar i119 III] 500HP/Tick Choke effect')
-            echoInfo('DEX Total: '..playerStats.DEX.Total,0.4)
         end
 
         if (spell == "Torcleaver") then
@@ -148,9 +147,9 @@ include("includes/common-functions")
     end
 
     function customInfoCheckMidcast(spell, tpCost, mpCost)
-        if ((string.find(spell,'Cure')) or (string.find(spell,'Cura'))) then
+        if ((spellContains(spell,'Cure')) or (spellContains(spell,'Cura'))) then
             echoInfo('Cure formula updated: MND + VIT/2 + Healing Skill - Rounded down at each step [e.g. 100 MND + 101/2 VIT = 50(.5) + Healing Magic skill]')
-            if ((string.find(spell, "Cura II")) or (spell == "Cura")) then
+            if ((spellContains(spell, "Cura II")) or (spell == "Cura")) then
                 echoInfo("Cura line spells will now wake players up when slept", 0.5)
                 echoInfo("Cura line spells will now properly return MP to players with the “Cure To MP %” item modifier.", 1.0)
             end

@@ -37,8 +37,8 @@ function init_gear_sets(job)
 	sets.weapons.PLD['Great Sword'] = {main="Ragnarok", sub="Uther's Grip"}
 	
 	sets.weapons.DRK = {}
-	sets.weapons.DRK['Scythe'] = {main="",sub=""}
-	sets.weapons.DRK['Great Sword'] = {main="Ragnarok", sub="Uther's Grip"}
+	sets.weapons.DRK['Scythe'] = {main="Apocalypse",sub="Utu Grip"}
+	sets.weapons.DRK['Great Sword'] = {main="Ragnarok",sub="Utu Grip"}
 	
 	sets.weapons.BST = {}
 	sets.weapons.BST['Axe'] = {}
@@ -218,21 +218,21 @@ function init_gear_sets(job)
 	PLD_EMPYREAN_FEET = "Chevalier's Sabatons +1"
 
 	--DRK
-	DRK_AF_HEAD = "Ignominy Burgeonet +1"
-	DRK_AF_BODY = "Ignominy Cuirass +1"
-	DRK_AF_HANDS = "Ignominy Gauntlets +1"
-	DRK_AF_LEGS = "Ignominy Flanchard +1"
-	DRK_AF_FEET = "Ignominy Sollerets +1"
+	DRK_AF_HEAD = "Ignominy Burgeonet +2"
+	DRK_AF_BODY = "Ignominy Cuirass +2"
+	DRK_AF_HANDS = "Ignominy Gauntlets +2"
+	DRK_AF_LEGS = "Ignominy Flanchard +2"
+	DRK_AF_FEET = "Ignominy Sollerets +2"
 	DRK_RELIC_HEAD = "Fallen's Burgeonet +1"
 	DRK_RELIC_BODY = "Fallen's Cuirass +1"
 	DRK_RELIC_HANDS = "Fallen's Finger Gauntlets +1"
 	DRK_RELIC_LEGS = "Fallen's Flanchard +1"
 	DRK_RELIC_FEET = "Fallen's Sollerets +1"
-	DRK_EMPYREAN_HEAD = "Heathen's Burgeonet +1"
-	DRK_EMPYREAN_BODY = "Heathen's Cuirass +1"
-	DRK_EMPYREAN_HANDS = "Heathen's Gauntlets +1"
-	DRK_EMPYREAN_LEGS = "Heathen's Flanchard +1"
-	DRK_EMPYREAN_FEET = "Heathen's Sollerets +1"
+	DRK_EMPYREAN_HEAD = "Heathen's Burgeonet"
+	DRK_EMPYREAN_BODY = "Heathen's Cuirass"
+	DRK_EMPYREAN_HANDS = "Heathen's Gauntlets"
+	DRK_EMPYREAN_LEGS = "Heathen's Flanchard"
+	DRK_EMPYREAN_FEET = "Heathen's Sollerets"
 
 	--BST
 	BST_AF_HEAD = "Totemic Helm +1"
