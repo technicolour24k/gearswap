@@ -7,12 +7,12 @@ local showFCInfo = config.showFastCastInfo
 local showSpellInfo = config.showSpellInfo
 local showCancelInfo = config.showCancelInfo
 local FastCast = 80
+local mjob = player.main_job
 
 TPStyle = "Default"
 WeaponChoice = "Scythe"
 
 function get_sets()
-    mjob = player.main_job
 	include('private servers/'..server..'/common-gearsets')
 	include('private servers/'..server..'/custom-info')
 	init_gear_sets(mjob)
@@ -29,7 +29,7 @@ function get_sets()
     sets.JobAbility['Soul Enslavement'] = {}
     sets.JobAbility['Consume Mana'] = {}
 
-	sets.WeaponSkills[""] = set_combine(sets.WeaponSkills['AllJobsWS'], {})
+	sets.WeaponSkills["Catastrophe"] = set_combine(sets.WeaponSkills['AllJobsWS'], {})
 	sets.WeaponSkills["Mercy Stroke"] = set_combine(sets.WeaponSkills['AllJobsWS'], {})
 	sets.WeaponSkills["Mandalic Stab"] = set_combine(sets.WeaponSkills['AllJobsWS'], {})
 	sets.WeaponSkills["Rudra's Storm"] = set_combine(sets.WeaponSkills['Fotia'], sets.WeaponSkills['AllJobsWS'], {
@@ -122,7 +122,7 @@ function get_sets()
 	switchMacroSet(8, 1)
 	send_command("gs enable all")
 	send_command("gs equip sets.aftercast.Idle")
-	send_command("@input /echo [F10] Bound to Toggle TP Gear;bind F10 gs c toggle-weapons")
+	send_command("@input /echo [F10] Bound to Toggle Weapons;bind F10 gs c toggle-weapons")
 	send_command("@input /echo [F9] Bound to Toggle TP Gear;bind F9 gs c togglegear")
 	send_command("@input /echo [F12] Bound to status removal;bind F12 gs c status-check")
 end
@@ -153,9 +153,9 @@ function precast(spell)
         equip(sets.precast[spell.skill])
     end
 
-	-- if spell.action_type == "Magic" then
-	-- 	equip(sets.precast.FastCast.Default)
-	-- end
+	if spell.action_type == "Magic" then
+	 	equip(sets.precast.FastCast.Default)
+	end
 end
 function midcast(spell)
 	cancelBuff(spell.english, spell.cast_time, FastCast)
@@ -184,20 +184,12 @@ function midcast(spell)
 end
 
 function aftercast(spell)
-    if player.status == "Engaged" then
-        equip(sets.aftercast[player.status][TPStyle])
-    else
-        equip(sets.aftercast[player.status])
-    end
+	equip(set_combine(sets.aftercast[player.status][TPStyle], sets.weapons[mjob][WeaponChoice]))
 	customInfoCheckAftercast(spell.name, spell.tp_cost, spell.mp_cost)
 end
 
 function status_change(new, old)
-	if player.status == "Engaged" then
-		equip(sets.aftercast[player.status][TPStyle])
-	else
-		equip(sets.aftercast[player.status])
-	end
+	equip(set_combine(sets.aftercast[player.status][TPStyle], sets.weapons[mjob][WeaponChoice]))
 end
 
 function buff_change(name, gain)
@@ -222,13 +214,13 @@ function self_command(command)
 	end
 
     if command:lower() == "toggle-weapons" then
-		if WeaponChoice == "Scythe" then
+		if (WeaponChoice == "Scythe") then
 			WeaponChoice = "Great Sword"
 		else
 			WeaponChoice="Scythe"
 		end
-		add_to_chat(8, "Weapon is now: " .. WeaponChoice.. "!")
-        equip(sets.weapons[mjob][WeaponChoice])
+		add_to_chat(28, "Weapon is now: " .. WeaponChoice.. "!")
+		equip(set_combine(sets.aftercast[player.status][TPStyle], sets.weapons[mjob][WeaponChoice]))
 	end
 
 	if command:lower() == "status-check" then
