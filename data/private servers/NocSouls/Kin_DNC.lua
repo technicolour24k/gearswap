@@ -237,15 +237,31 @@ function self_command(command)
 	if command:lower() == "waltzing" then
 		if (player.last_subtarget.hpp < 25) then
 			waltzTier = "Curing Waltz V"
+			if (player.main_job_level < 87) then
+				waltzTier = "Curing Waltz IV"
+			elseif (player.main_job_level < 70) then
+				waltzTier = "Curing Waltz III"
+			end
 		elseif (player.last_subtarget.hpp < 40) then
 			waltzTier = "Curing Waltz IV"
+			if (player.main_job_level < 70) then
+				waltzTier = "Curing Waltz III"
+			elseif (player.main_job_level < 45) then
+				waltzTier = "Curing Waltz II"
+			end
 		elseif (player.last_subtarget.hpp < 55) then
 			waltzTier = "Curing Waltz III"
+			if (player.main_job_level < 45) then
+				waltzTier = "Curing Waltz II"
+			elseif (player.main_job_level < 30) then
+				waltzTier = "Curing Waltz"
+			end
 		elseif (player.last_subtarget.hpp < 70) then
 			waltzTier = "Curing Waltz II"
 		else
 			waltzTier = "Curing Waltz"
 		end
+
 		--add_to_chat(12, "HP: "..player.last_subtarget.hpp.." - Using "..waltzTier.." on "..player.last_subtarget.name)
 		send_command('input /ja "'..waltzTier..'" '..player.last_subtarget.name..'')
 		--add_to_chat(39,'input /ja "'..waltzTier..'" '..player.last_subtarget.name..'')

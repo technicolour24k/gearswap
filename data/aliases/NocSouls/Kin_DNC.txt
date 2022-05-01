@@ -1,5 +1,14 @@
 alias defBuffs buffProt5;wait 3.5;buffShell5;wait 3.5;buffBlink;wait 4;buffStoneskin;wait 4;buffPhalanx;wait 3;buffAquaveil;
-alias offBuffs buffHaste;wait 4;buffTemper;wait 4;buffEnthunder;wait 3;buffGDex;
+alias offBuffs buffHaste2;wait 4;buffTemper;wait 4;buffEnthunder;wait 3;buffGDex;
 alias utilityBuffs buffRefresh;wait 4;buffBSpikes;
 
 alias buffMe buffComposure;wait 2;defBuffs;wait 4;offBuffs;wait 4;utilityBuffs
+
+alias defBuffs80 buffProt5;wait 3.5;buffShell4;wait 3.5;buffBlink;wait 4;buffStoneskin;wait 4;buffPhalanx;wait 3;buffAquaveil;
+alias offBuffs80 buffHaste;wait 4;buffEnthunder;
+alias utilityBuffs80 buffBSpikes;
+
+alias buffMe80 buffComposure;wait 2;defBuffs80;wait 4;offBuffs80;wait 4;utilityBuffs80
+
+alias nfr input /ja "No Foot Rise" <me>
+alias rf input /ja "Reverse Flourish" <me>
