@@ -148,6 +148,10 @@ function get_sets()
 	disable("main", "sub")
 end
 
+function pretarget (spell)
+	confirmTarget(spell.skill,spell.target.type)
+end
+
 function precast(spell)
 	--JA buff cancelling
 	if (spellContains(spell.english, "Spectral Jig")) then

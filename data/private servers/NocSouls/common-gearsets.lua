@@ -539,12 +539,13 @@ function init_gear_sets(job)
     sets.midcast.Refresh = set_combine(sets.midcast.EnhancingDuration,{})
     sets.midcast.Phalanx = set_combine(sets.midcast.EnhancingDuration,{})
 	sets.midcast.Enspell = set_combine(sets.midcast.EnhancingDuration,{
-		head="Copper Hairpin",
-		sub="Warlock's Shield",
-		neck="Justice Badge",
-		left_ring = "Copper Ring",
-		right_ring = "Copper Ring",
-		back = "Shaper's Shawl"
+		head={ name="Copper Hairpin", augments={'Sword enhancement spell damage +10','Sword enhancement spell damage +10','Sword enhancement spell damage +10','Sword enhancement spell damage +10',}},
+		neck={ name="Justice Badge", augments={'Sword enhancement spell damage +10','Sword enhancement spell damage +10','Sword enhancement spell damage +10','Sword enhancement spell damage +10',}},
+		left_ear={ name="Silver Earring", augments={'Sword enhancement spell damage +10','Sword enhancement spell damage +10','Sword enhancement spell damage +10','Sword enhancement spell damage +10',}},
+		right_ear={ name="Silver Earring", augments={'Sword enhancement spell damage +10','Sword enhancement spell damage +10','Sword enhancement spell damage +10','Sword enhancement spell damage +10',}},
+		left_ring={ name="Copper Ring", augments={'Sword enhancement spell damage +10','Sword enhancement spell damage +10','Sword enhancement spell damage +10','Sword enhancement spell damage +10',}},
+		right_ring={ name="Copper Ring", augments={'Sword enhancement spell damage +10','Sword enhancement spell damage +10','Sword enhancement spell damage +10','Sword enhancement spell damage +10',}},
+		back={ name="Shaper's Shawl", augments={'Sword enhancement spell damage +10','Sword enhancement spell damage +10','Sword enhancement spell damage +10','Sword enhancement spell damage +10',}},		
 	})
 	sets.midcast.ConserveMP = set_combine(sets.precast.FastCast.Default, {
 		hands = "Vagabond's Gloves",

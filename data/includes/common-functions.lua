@@ -180,3 +180,10 @@ function echoInfo(info,delay)
 		send_command('input /echo '..info)
 	end
 end
+
+function confirmTarget(skill,targetType)
+	if (((skill == "Healing Magic") or (skill == "Enhancing Magic")) and (targetType == "MONSTER")) then
+		change_target("<me>")
+		add_to_chat(11, skill.." against a "..targetType.."! Changing targets to self")
+	end
+end
