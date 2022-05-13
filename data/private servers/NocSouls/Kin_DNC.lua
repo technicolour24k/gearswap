@@ -8,6 +8,8 @@ local showSpellInfo = config.showSpellInfo
 local showCancelInfo = config.showCancelInfo
 local FastCast = 80
 local waltzTier = ""
+local step = "Box Step"
+local stepDesc = ""
 TPStyle = "Default"
 
 function get_sets()
@@ -103,7 +105,7 @@ function get_sets()
 		left_ring = "Regal Ring",
 		right_ring = "Epona's Ring"
 	})
-	sets.WeaponSkills["Aeolian Edge"] = set_combine(sets.MAB,{})
+	sets.WeaponSkills["Aeolian Edge"] = set_combine(sets.AllJobsMAB,{})
 	sets.WeaponSkills["Exenterator"] = {}
 
 	sets.midcast.Cure = {}
@@ -113,12 +115,12 @@ function get_sets()
 	sets.aftercast.Engaged = {}
 
 	sets.aftercast.Engaged.Default = set_combine(sets.weapons[mjob]["Daggers"],{
-		ammo={ name="Yetshila +1", augments={'"Triple Atk."+2','"Triple Atk."+2','Crit.hit rate+5','Crit.hit rate+5',}},
+		ammo = "Floestone",
 		head=DNC_EMPYREAN_HEAD,
 		body=DNC_EMPYREAN_BODY,
 		hands=DNC_EMPYREAN_HANDS,
 		legs=DNC_EMPYREAN_LEGS,
-		feet="Savateur's Gaiters", -- cap subtle blow with Maculele Casaque +1 - 30 Subtle Blow augment
+		feet="Savateur's Gaiters",
 		neck="Loricate Torque +1",
 		waist={ name="Windbuffet Belt +1", augments={'"Triple Atk."+2','"Triple Atk."+2','"Triple Atk."+2','"Triple Atk."+2',}},
 		left_ear={ name="Telos Earring" },
@@ -143,6 +145,7 @@ function get_sets()
 	send_command("gs enable all")
 	send_command("gs equip sets.aftercast.Idle")
 	send_command("input /echo [F9] Bound to Toggle TP Gear;bind F9 gs c togglegear")
+	send_command("input /echo [F10] Bound to Toggle Steps in use;bind F10 gs c toggle-step")
 	send_command("input /echo [F12] Bound to status removal;bind F12 gs c status-check")
 
 	disable("main", "sub")
@@ -265,10 +268,29 @@ function self_command(command)
 		else
 			waltzTier = "Curing Waltz"
 		end
-
-		--add_to_chat(12, "HP: "..player.last_subtarget.hpp.." - Using "..waltzTier.." on "..player.last_subtarget.name)
 		send_command('input /ja "'..waltzTier..'" '..player.last_subtarget.name..'')
-		--add_to_chat(39,'input /ja "'..waltzTier..'" '..player.last_subtarget.name..'')
+	end
+
+	if command:lower() == "toggle-step" then
+		if step == "Box Step" then
+			step = "Feather Step"
+			stepDesc = "Lowers a target's critical hit evasion"
+		elseif step == "Feather Step" then
+			step = "Quickstep"
+			stepDesc = "Lowers target's evasion"
+		elseif step == "Quickstep" then
+			step = "Stutter Step"
+			stepDesc = "Lower target's magic resistance"
+		else
+			step = "Box Step"
+			stepDesc = "Lowers target's defense"
+		end
+		add_to_chat(9, "[New Step] " ..step.. ": " ..stepDesc)
+	end
+
+	if command:lower() == "use-step" then
+		send_command('input /ja "'..step..'" <t>')
+		add_to_chat(9, "[Step] " ..step.. ": " ..stepDesc)
 	end
 
 	if player.status == "Engaged" then
