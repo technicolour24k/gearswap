@@ -556,6 +556,7 @@ function init_gear_sets(job)
 	sets.aftercast = {}
 	
 	sets.Obis = {}
+	sets.Obis.AIO = {waist = "Hachirin-no-Obi"}
     sets.Obis.Fire = set_combine(sets.Obis.AIO, {waist="Karin Obi"})
     sets.Obis.Earth = set_combine(sets.Obis.AIO, {waist = "Dorin Obi"})
     sets.Obis.Water = set_combine(sets.Obis.AIO, {waist="Suirin Obi"})
@@ -564,7 +565,6 @@ function init_gear_sets(job)
     sets.Obis.Lightning = set_combine(sets.Obis.AIO, {waist="Rairin Obi"})
     sets.Obis.Light = set_combine(sets.Obis.AIO, {waist="Korin Obi"})
     sets.Obis.Dark = set_combine(sets.Obis.AIO, {waist="Anrin Obi"})
-	sets.Obis.AIO = {waist = "Hachirin-no-Obi"}
 
 	sets.JobAbility = {}
 	sets.WeaponSkills = {}
@@ -573,7 +573,7 @@ function init_gear_sets(job)
 		waist = "Fotia Belt"
 	}
 	sets.WeaponSkills['AllJobsWS'] = {
-		left_ring={name="Dark Ring", augments={'Accuracy+5 Attack+5','Eva.+5 /Mag. Eva.+5','System: 1 ID: 131 Val: 6','Weapon skill damage +8%',}},
+		left_ring={name="Dark Ring", augments={'Accuracy+7 Attack+7','Eva.+3 /Mag. Eva.+3','System: 1 ID: 131 Val: 5','Weapon skill damage +10%',}},
 		right_ring={name="Dark Ring", augments={'Accuracy+5 Attack+5','Eva.+1 /Mag. Eva.+1','System: 1 ID: 131 Val: 7','Weapon skill damage +8%',}},
 		}
 
