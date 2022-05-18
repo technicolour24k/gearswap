@@ -107,18 +107,12 @@ function get_sets()
 end
 
 function pretarget(spell)
-	if string.find(spell.english,'Cure') or string.find(spell.english,'Cura') then
-		if not ((spell.target.type == "SELF") or (spell.target.type == "PLAYER")) then
-			add_to_chat(12, "Target is not self or player - Changing target to self")
-			change_target('<me>')
-		end
-	end
-
+	confirmTarget(spell.skill,spell.target.type)
 end
 
 function precast(spell)
 	if ((config.showSpellInfo == true) or (showInfo == true)) then
-		add_to_chat(12, "Action: "..spell.english.." | Action Type: "..spell.action_type.."/"..spell.skill.." | MP Cost: "..spell.mp_cost.." | TP Cost: "..spell.tp_cost)
+		infoLog("Action: "..spell.english.." | Action Type: "..spell.action_type.."/"..spell.skill.." | MP Cost: "..spell.mp_cost.." | TP Cost: "..spell.tp_cost)
 	end
 
 
@@ -150,7 +144,6 @@ function midcast(spell)
 		equip(sets.midcast[spell.english])
 	elseif string.find(spell.english,'Cure') or string.find(spell.english,'Cura') then
         equip(sets.midcast.Cure)
-		add_to_chat(1, "Looks like a cure!")
 	end
 
 	if sets.midcast[spell.skill] then
@@ -180,7 +173,7 @@ function self_command(command)
 		else
 			TPStyle = "Sword"
 		end
-		add_to_chat(28,"TP Style is now: " ..TPStyle)
+		infoLog("TP Style is now: " ..TPStyle)
 		equip(set_combine(sets.aftercast[player.status], sets.weapons[mjob][TPStyle]))
 	end
 

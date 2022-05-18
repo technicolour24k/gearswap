@@ -209,7 +209,7 @@ function self_command(command)
 		else
 			TPStyle="Default"
 		end
-		add_to_chat(8, "TP Style is now: " .. TPStyle.. "!")
+		infoLog("TP Style is now: " .. TPStyle.. "!")
 		equip(sets.aftercast.Engaged[TPStyle])
 	end
 
@@ -219,7 +219,7 @@ function self_command(command)
 		else
 			WeaponChoice="Scythe"
 		end
-		add_to_chat(28, "Weapon is now: " .. WeaponChoice.. "!")
+		infoLog("Weapon is now: " .. WeaponChoice.. "!")
 		equip(set_combine(sets.aftercast[player.status][TPStyle], sets.weapons[mjob][WeaponChoice]))
 	end
 

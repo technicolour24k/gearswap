@@ -225,10 +225,10 @@ end
 function pet_midcast(spell)
     if magicalRagePacts:contains(spell.english) then
 		equip(sets.BloodPact.MagicRage)
-		add_to_chat(8, "Found Magic Rage: " ..spell.english)
+		infoLog("Found Magic Rage: " ..spell.english)
 	else
 		equip(sets.BloodPact.PhysicalRage)
-		add_to_chat(8, "Found Physical Rage: "..spell.english)
+		infoLog("Found Physical Rage: "..spell.english)
 	end
 end
 

@@ -205,10 +205,10 @@ end
 function pet_midcast(spell)
     if magicalRagePacts:contains(spell.english) then
 		equip(sets.BloodPact.MagicRage)
-		add_to_chat(8, "Found Magic Rage: " ..spell.english)
+		infoLog("Found Magic Rage: " ..spell.english)
 	else
 		equip(sets.BloodPact.PhysicalRage)
-		add_to_chat(8, "Found Physical Rage: "..spell.english)
+		infoLog("Found Physical Rage: "..spell.english)
 	end
 end
 
@@ -244,13 +244,13 @@ function self_command(command)
 		if (player.target.type == "MONSTER") then
 			if (pet.name == "Carbuncle") then
 				send_command('input /ja "Holy Mist" <t>')
-				add_to_chat(8, "Target already selected. Executing BP for: "..pet.name)
+				infoLog("Target already selected. Executing BP for: "..pet.name)
 			elseif (pet.name == "Shiva") then
 				send_command('input /ja "Heavenly Strike" <t>')
 			elseif (pet.name == "Garuda") then
 				send_command('input /ja "Wind Blade" <t>')
 			end
-			add_to_chat(8, "Target already selected. Executing BP for: "..pet.name)
+			infoLog("Target already selected. Executing BP for: "..pet.name)
 		else
 			if (pet.name == "Carbuncle") then
 				send_command('input /ta <bt>; wait 0.1;input /ja "Holy Mist" <t>')
@@ -259,7 +259,7 @@ function self_command(command)
 			elseif (pet.name == "Garuda") then
 				send_command('input /ta <bt>; wait 0.1;input /ja "Wind Blade" <t>')
 			end
-			add_to_chat(8, "Target not found. Selecting <bt> and executing BP for: "..pet.name)
+			infoLog("Target not found. Selecting <bt> and executing BP for: "..pet.name)
 		end
 	end
 end

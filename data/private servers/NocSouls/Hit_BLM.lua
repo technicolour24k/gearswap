@@ -115,11 +115,11 @@ function midcast(spell)
 	end
 	
 	if showInfo == 1 then
-		add_to_chat(8, "[Sorcerer's Ring Check] Player HPP: " ..player.hpp.. "%")
+		infoLog("[Sorcerer's Ring Check] Player HPP: " ..player.hpp.. "%")
 	end
 	if player.hpp < 75 then
 		equip(sets.midcast.SorcRing)
-		add_to_chat(8, "Sorcerer's Ring: Active")
+		infoLog("Sorcerer's Ring: Active")
 	end
     
 	equip(sets.EleStaves[spell.element])

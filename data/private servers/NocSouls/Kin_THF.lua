@@ -136,13 +136,13 @@ end
 
 function aftercast(spell)
 	if (buffactive['Sneak Attack'] == 1) and (buffactive['Trick Attack'] == 1)  then
-		add_to_chat(8, "<< SATA Active >>")
+		infoLog("<< SATA Active >>")
 		equip(set_combine(sets.precast["Sneak Attack"], sets.precast['Trick Attack']))
 	elseif (buffactive['Sneak Attack'] == 1) then
-		add_to_chat(8, "<< Sneak Attack Active >>")
+		infoLog("<< Sneak Attack Active >>")
 		equip(sets.precast["Sneak Attack"])
 	elseif (buffactive['Trick Attack'] == 1) then
-		add_to_chat(8, "<< Trick Attack Active >>")
+		infoLog("<< Trick Attack Active >>")
 		equip(sets.precast["Trick Attack"])
 	else
 		if player.status == "Engaged" then
@@ -194,7 +194,7 @@ function self_command(command)
 		else
 			TPStyle="Default"
 		end
-		add_to_chat(8, "TP Style is now: " .. TPStyle.. "!")
+		infoLog("TP Style is now: " .. TPStyle.. "!")
 		equip(sets.aftercast.Engaged[TPStyle])
 	end
 

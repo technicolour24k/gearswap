@@ -9,7 +9,8 @@ local showCancelInfo = config.showCancelInfo
 local FastCast = 80
 local waltzTier = ""
 local step = "Box Step"
-local stepDesc = ""
+local stepDesc = "Lowers target's defense"
+
 TPStyle = "Default"
 
 function get_sets()
@@ -231,7 +232,7 @@ function self_command(command)
 		else
 			TPStyle="Default"
 		end
-		add_to_chat(8, "TP Style is now: " .. TPStyle.. "!")
+		infoLog("TP Style is now: " .. TPStyle.. "!")
 		equip(sets.aftercast.Engaged[TPStyle])
 	end
 
@@ -285,12 +286,12 @@ function self_command(command)
 			step = "Box Step"
 			stepDesc = "Lowers target's defense"
 		end
-		add_to_chat(9, "[New Step] " ..step.. ": " ..stepDesc)
+		infoLog("[New Step] " ..step.. ": " ..stepDesc)
 	end
 
 	if command:lower() == "use-step" then
 		send_command('input /ja "'..step..'" <t>')
-		add_to_chat(9, "[Step] " ..step.. ": " ..stepDesc)
+		infoLog("[Step] " ..step.. ": " ..stepDesc)
 	end
 
 	if player.status == "Engaged" then

@@ -1,6 +1,6 @@
 function init_gear_sets(job)
 
-	add_to_chat(25, "Gearsets Initialising...")
+	infoLog("Gearsets Initialising...")
     --------------------------------------
     -- Start defining the sets
     --------------------------------------

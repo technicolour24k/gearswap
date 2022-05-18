@@ -142,10 +142,10 @@ end
 
 function aftercast(spell)
 	if spell.english == "Sneak Attack" then
-		add_to_chat(8, "<<Sneak Attack>>")
+		infoLog("<<Sneak Attack>>")
 		equip (sets.precast['Sneak Attack'])
 	elseif spell.english == "Trick Attack" then
-		add_to_chat(8, "<<Trick Attack>>")
+		infoLog("<<Trick Attack>>")
 		equip (sets.precast['Trick Attack'])
 	else
 		equipGearByState()
@@ -174,15 +174,15 @@ end
 function self_command(command)
 	if command:lower() == "default" then
 		TPStyleIndex = 1
-		add_to_chat(8, 'TP Style is now: '.. TPStyle[TPStyleIndex] .. '!')
+		infoLog('TP Style is now: '.. TPStyle[TPStyleIndex] .. '!')
 		equip(sets.aftercast.Engaged[TPStyle[TPStyleIndex]])
 	elseif command:lower() == "accuracy" then
 		TPStyleIndex = 2
-		add_to_chat(8, 'TP Style is now: '.. TPStyle[TPStyleIndex] .. '!')
+		infoLog('TP Style is now: '.. TPStyle[TPStyleIndex] .. '!')
 		equip(sets.aftercast.Engaged[TPStyle[TPStyleIndex]])
 	elseif command:lower() == "evasion" then
 		TPStyleIndex = 3
-		add_to_chat(8, 'TP Style is now: '.. TPStyle[TPStyleIndex] .. '!')
+		infoLog('TP Style is now: '.. TPStyle[TPStyleIndex] .. '!')
 		equip(sets.aftercast.Engaged[TPStyle[TPStyleIndex]])
 	end
 	

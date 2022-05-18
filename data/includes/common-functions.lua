@@ -187,3 +187,15 @@ function confirmTarget(skill,targetType)
 		add_to_chat(11, skill.." against a "..targetType.."! Changing targets to self")
 	end
 end
+
+function infoLog (log)
+	add_to_chat(12, log)
+end
+
+function errorLog(log)
+	add_to_chat(13, log)
+end
+
+function debugLog(log)
+	add_to_chat(11, log)
+end

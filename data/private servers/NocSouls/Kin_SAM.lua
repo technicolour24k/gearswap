@@ -84,7 +84,7 @@ end
 
 function precast(spell)
 	if ((config.showSpellInfo == true) or (showInfo == true)) then
-		add_to_chat(12, "Action: "..spell.english.." | Action Type: "..spell.action_type.."/"..spell.skill.." | MP Cost: "..spell.mp_cost.." | TP Cost: "..spell.tp_cost)
+		infoLog("Action: "..spell.english.." | Action Type: "..spell.action_type.."/"..spell.skill.." | MP Cost: "..spell.mp_cost.." | TP Cost: "..spell.tp_cost)
 	end
 
 	if sets.JobAbilities[spell.english] then
@@ -139,7 +139,7 @@ function self_command(command)
 		else
 			TPStyle = "Great Katana"
 		end
-		add_to_chat(28,"TP Style is now: " ..TPStyle)
+		infoLog("TP Style is now: " ..TPStyle)
 		equip(set_combine(sets.aftercast[player.status], sets.weapons[mjob][TPStyle]))
 	end
 end
