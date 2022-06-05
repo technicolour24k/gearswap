@@ -80,7 +80,7 @@ end
 
 -- Just a neater macro change option
 function switchMacroSet(book, page)
-	add_to_chat(8, "Switching Macros.. Book: "..book.."/Page: "..page)
+	infoLog("Switching Macros.. Book: "..book.."/Page: "..page)
     send_command('input /macro book '..book..';wait .1;input /macro set '..page)
 end
 

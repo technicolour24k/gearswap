@@ -12,23 +12,23 @@ function get_sets()
 	include('private servers/'..server..'/common-gearsets')
 	init_gear_sets(mjob)
 
-	sets.JobAbilities = {}
-	sets.JobAbilities['Meditate'] = {
+	sets.JobAbility = {}
+	sets.JobAbility['Meditate'] = {
 		head = "Wakido Kabuto +2",
 		hands = "Sakonji Kote +1"
 	}
-	sets.JobAbilities['Sekkanoki'] = {
+	sets.JobAbility['Sekkanoki'] = {
 		hands = "Unkai Kote +2"
 	}
-	sets.JobAbilities['Hasso'] = {
+	sets.JobAbility['Hasso'] = {
 		body = "Wakido Kote +2",
 		legs = "Unkai Haidate +2",
 		feet = "Wakido Sune-Ate +2"
 	}
-	sets.JobAbilities['Seigan'] = {
+	sets.JobAbility['Seigan'] = {
 		head = "Unkai Kabuto +2",
 	}
-	sets.JobAbilities['Third Eye'] = {
+	sets.JobAbility['Third Eye'] = {
 		head = "Sakonji Haidate +1",
 	}
 	
@@ -87,8 +87,8 @@ function precast(spell)
 		infoLog("Action: "..spell.english.." | Action Type: "..spell.action_type.."/"..spell.skill.." | MP Cost: "..spell.mp_cost.." | TP Cost: "..spell.tp_cost)
 	end
 
-	if sets.JobAbilities[spell.english] then
-		equip(sets.JobAbilities[spell.english])
+	if sets.JobAbility[spell.english] then
+		equip(sets.JobAbility[spell.english])
 	end
 
 	if sets.precast.WeaponSkills[spell.english] then

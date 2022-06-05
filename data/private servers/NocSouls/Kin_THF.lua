@@ -89,8 +89,6 @@ function get_sets()
 	switchMacroSet(8, 1)
 	send_command("gs enable all")
 	send_command("gs equip sets.aftercast.Idle")
-	send_command("input /echo [F9] Bound to Toggle TP Gear;bind F9 gs c togglegear")
-	send_command("input /echo [F12] Bound to status removal;bind F12 gs c status-check")
 
 	disable("main", "sub")
 end
