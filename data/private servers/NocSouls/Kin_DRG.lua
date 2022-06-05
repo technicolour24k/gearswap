@@ -36,10 +36,10 @@ function get_sets()
     sets.JobAbility['Dragon Breaker'] = {}
     sets.JobAbility['Fly High'] = {}
 
+	sets.WeaponSkills.DRG = {}
 	sets.WeaponSkills.DRG['WSD Base'] = {
 		hands=DRG_RELIC_HANDS,
 		legs = DRG_AF_LEGS,
-
 	}
 	sets.WeaponSkills["Camlann's Torment"] = set_combine(sets.WeaponSkills['AllJobsWS'], sets.WeaponSkills.DRG['WSD Base'], {})
 	sets.WeaponSkills['Drakesbane'] = set_combine(sets.WeaponSkills['AllJobsWS'], sets.WeaponSkills.DRG['WSD Base'], {})
