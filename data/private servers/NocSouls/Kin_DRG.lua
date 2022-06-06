@@ -19,7 +19,7 @@ function get_sets()
 	
 	sets.MAB = set_combine(sets.misc.AllJobsMAB, {})
 	sets.JobAbility["Spirit Surge"] = {}
-	sets.JobAbility["Call Wyvern"] = {head=DRK_AF_HEAD}
+	sets.JobAbility["Call Wyvern"] = {}
 	sets.JobAbility["Ancient Circle"] = {legs=DRG_AF_LEGS}
     sets.JobAbility['All Jumps'] = {
 		hands=DRG_AF_HANDS,
@@ -65,9 +65,9 @@ function get_sets()
         feet = DRG_AF_FEET,
         neck = "Loricate Torque +1",
         waist = "Nierenschutz",
-        ear1 = "Moonshade Earring",
-        ear2 = "Cryptic Earring",
-        ring1 = "Defending Ring",
+		ear1 = "Tati Earring",
+        ear2 = "Telos Earring",
+		ring1 = "Defending Ring",
         ring2 = "Stikini Ring +1",
         back = "Metallon Mantle",
     }
