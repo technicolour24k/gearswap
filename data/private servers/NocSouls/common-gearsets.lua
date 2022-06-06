@@ -34,11 +34,11 @@ function init_gear_sets(job)
 	
 	sets.weapons.PLD = {}
 	sets.weapons.PLD['Sword'] = {main="Burtgang", sub="Aegis"}
-	sets.weapons.PLD['Great Sword'] = {main="Ragnarok", sub="Uther's Grip"}
+	sets.weapons.PLD['Great Sword'] = {main="Ragnarok", sub="Immolation Grip"}
 	
 	sets.weapons.DRK = {}
-	sets.weapons.DRK['Scythe'] = {main="Apocalypse",sub="Utu Grip"}
-	sets.weapons.DRK['Great Sword'] = {main="Ragnarok",sub="Utu Grip"}
+	sets.weapons.DRK['Scythe'] = {main="Apocalypse",sub="Immolation Grip"}
+	sets.weapons.DRK['Great Sword'] = {main="Ragnarok",sub="Immolation Grip"}
 	
 	sets.weapons.BST = {}
 	sets.weapons.BST['Axe'] = {}
@@ -94,7 +94,7 @@ function init_gear_sets(job)
 
 	sets.weapons.RUN = {}
 	sets.weapons.RUN['Sword'] = {main="Fettering Blade", sub="Beatific Shield"}
-	sets.weapons.RUN['Great Sword'] = {main="Ragnarok", sub="Uther's Grip"}
+	sets.weapons.RUN['Great Sword'] = {main="Ragnarok", sub="Immolation Grip"}
 
 
 	--AF/Relic/Empy set piece variables to be usable as references in other LUA files
@@ -480,7 +480,7 @@ function init_gear_sets(job)
 
 	sets.misc.AllJobsMAB = {
 		left_ring="Acumen Ring",
-		right_ring={name="Dark Ring", augments={'Accuracy+5 Attack+5','Eva.+1 /Mag. Eva.+1','System: 1 ID: 131 Val: 7','Weapon skill damage +8%',}},
+		right_ring={ name="Dark Ring", augments={'Accuracy+5 Attack+5','Eva.+1 /Mag. Eva.+1','System: 1 ID: 131 Val: 7','Weapon skill damage +8%',}},
 		left_ear="Novio Earring",
 		right_ear="Hecate's Earring",
 		back="Izdubar Mantle",
@@ -534,7 +534,7 @@ function init_gear_sets(job)
 	sets.midcast['Blue Magic'] = {}
 	sets.midcast['Geomancy'] = {}
 	sets.midcast['Handbell'] = {}   
-    sets.midcast.Stoneskin = set_combine(sets.midcast.EnhancingDuration,{legs="Haven Hose", waist="Seigel Sash"})
+    sets.midcast.Stoneskin = set_combine(sets.midcast.EnhancingDuration,{})
     sets.midcast.Aquaveil = set_combine(sets.midcast.EnhancingDuration,{})
     sets.midcast.Refresh = set_combine(sets.midcast.EnhancingDuration,{})
     sets.midcast.Phalanx = set_combine(sets.midcast.EnhancingDuration,{})
@@ -575,8 +575,8 @@ function init_gear_sets(job)
 		waist = "Fotia Belt"
 	}
 	sets.WeaponSkills['AllJobsWS'] = {
-		left_ring={name="Dark Ring", augments={'Accuracy+7 Attack+7','Eva.+3 /Mag. Eva.+3','System: 1 ID: 131 Val: 5','Weapon skill damage +10%',}},
-		right_ring={name="Dark Ring", augments={'Accuracy+5 Attack+5','Eva.+1 /Mag. Eva.+1','System: 1 ID: 131 Val: 7','Weapon skill damage +8%',}},
-		}
+		left_ring={ name="Dark Ring", augments={'Accuracy+5 Attack+5','Eva.+1 /Mag. Eva.+1','System: 1 ID: 131 Val: 7','Weapon skill damage +8%',}},
+		right_ring={ name="Dark Ring", augments={'Accuracy+7 Attack+7','Eva.+5 /Mag. Eva.+5','System: 1 ID: 131 Val: 2','Weapon skill damage +10%',}},
+	}
 
 end

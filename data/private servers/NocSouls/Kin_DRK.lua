@@ -19,7 +19,7 @@ function get_sets()
 	
 	sets.MAB = set_combine(sets.misc.AllJobsMAB, {})
 	sets.JobAbility["Blood Weapon"] = {}
-	sets.JobAbility["Souleater"] = {head=DRK_AF_HEAD}
+	sets.JobAbility["Souleater"] = {head=DRK_AF_HEAD, left_ear="Moonshade Earring"}
 	sets.JobAbility["Arcane Circle"] = {feet=DRK_AF_FEET}
 	sets.JobAbility['Last Resort'] = {feet=DRK_RELIC_FEET}
 	sets.JobAbility['Weapon Bash'] = {hands=DRK_AF_HANDS}
@@ -101,10 +101,10 @@ function get_sets()
         feet = DRK_AF_FEET,
         neck = "Loricate Torque +1",
         waist = "Nierenschutz",
-        ear1 = "Moonshade Earring",
-        ear2 = "Cryptic Earring",
+        ear1 = "Tati Earring",
+        ear2 = "Telos Earring",
         ring1 = "Defending Ring",
-        ring2 = "Stikini Ring +1",
+        ring2 = "Patricius Ring",
         back = "Metallon Mantle",
     }
 
