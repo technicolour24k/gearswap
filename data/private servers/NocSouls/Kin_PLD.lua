@@ -33,8 +33,8 @@ function get_sets()
 	sets.precast.WeaponSkills['Swift Blade'] = set_combine(sets.WeaponSkills['Fotia'], {})
 	sets.precast.WeaponSkills['Vorpal Blade'] = set_combine(sets.WeaponSkills['Fotia'], {})
 	-- MAB modded WS
-	sets.precast.WeaponSkills['Sanguine Blade'] = set_combine(sets.misc.AllJobsMAB, {})
-	sets.precast.WeaponSkills['Uriel Blade'] = set_combine(sets.misc.AllJobsMAB, {})
+	sets.precast.WeaponSkills['Sanguine Blade'] = set_combine(sets.misc.AllJobs.MAB, {})
+	sets.precast.WeaponSkills['Uriel Blade'] = set_combine(sets.misc.AllJobs.MAB, {})
 	-- Standard mods
 	sets.precast.WeaponSkills['Savage Blade'] = set_combine(sets.WeaponSkills.default,{ --50% STR, 50% MND - Equal footing for both
 		head="Rev. Coronet +3",
@@ -53,9 +53,9 @@ function get_sets()
 	sets.precast.WeaponSkills['Knights of Round'] = {}
 	sets.precast.WeaponSkills['Resolution'] = set_combine(sets.WeaponSkills['Fotia'], {})
 	sets.precast.WeaponSkills['Torcleaver'] = set_combine(sets.WeaponSkills['Fotia'], {})
-	sets.precast.WeaponSkills['Herculean Slash'] = set_combine(sets.misc.AllJobsMAB, {})
+	sets.precast.WeaponSkills['Herculean Slash'] = set_combine(sets.misc.AllJobs.MAB, {})
 	
-    sets.midcast.magic_base = set_combine(sets.misc.AllJobsMAB, {})
+    sets.midcast.magic_base = set_combine(sets.misc.AllJobs.MAB, {})
 	sets.midcast['Healing Magic'] = {}
     sets.midcast.Cure = set_combine(sets.midcast['Healing Magic'], {
 		left_ear="Oneiros Earring",

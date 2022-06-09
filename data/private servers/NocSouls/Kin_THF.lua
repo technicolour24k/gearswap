@@ -21,7 +21,7 @@ function get_sets()
 		hands = THF_RELIC_HANDS,
 		feet = THF_EMPYREAN_FEET
 	}
-	sets.MAB = set_combine(sets.misc.AllJobsMAB, {
+	sets.MAB = set_combine(sets.misc.AllJobs.MAB, {
 		head="Wayfarer Circlet",
 		waist = "Aquiline Belt",
 		legs = "Limbo Trousers"

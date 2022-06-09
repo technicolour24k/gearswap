@@ -17,7 +17,7 @@ function get_sets()
 	include('private servers/'..server..'/custom-info')
 	init_gear_sets(mjob)
 	
-	sets.MAB = set_combine(sets.misc.AllJobsMAB, {})
+	sets.MAB = set_combine(sets.misc.AllJobs.MAB, {})
 	sets.JobAbility["Blood Weapon"] = {}
 	sets.JobAbility["Souleater"] = {head=DRK_AF_HEAD, left_ear="Moonshade Earring"}
 	sets.JobAbility["Arcane Circle"] = {feet=DRK_AF_FEET}

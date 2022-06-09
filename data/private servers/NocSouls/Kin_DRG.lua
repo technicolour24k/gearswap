@@ -17,7 +17,7 @@ function get_sets()
 	include('private servers/'..server..'/custom-info')
 	init_gear_sets(mjob)
 	
-	sets.MAB = set_combine(sets.misc.AllJobsMAB, {})
+	sets.MAB = set_combine(sets.misc.AllJobs.MAB, {})
 	sets.JobAbility["Spirit Surge"] = {}
 	sets.JobAbility["Call Wyvern"] = {}
 	sets.JobAbility["Ancient Circle"] = {legs=DRG_AF_LEGS}

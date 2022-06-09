@@ -18,7 +18,7 @@ function get_sets()
 	local mjob = player.main_job
 	init_gear_sets(mjob)
 	
-	sets.MAB = set_combine(sets.misc.AllJobsMAB, {
+	sets.MAB = set_combine(sets.misc.AllJobs.MAB, {
 		head="Wayfarer Circlet",
 		legs = "Limbo Trousers"
 	})
@@ -37,7 +37,7 @@ function get_sets()
 		feet=DNC_AF_FEET,
 		neck="Cerulean Pendant",
 		right_ring="Asklepian Ring",
-		left_ring = "Valaseur's Ring"
+		left_ring = "Valseur's Ring"
 	}
 	sets.JobAbility["Curing Waltz"] = set_combine(sets.JobAbility['Waltzes'], {})
 	sets.JobAbility["Curing Waltz II"] = set_combine(sets.JobAbility['Waltzes'], {})
@@ -106,7 +106,7 @@ function get_sets()
 		left_ring = "Regal Ring",
 		right_ring = "Epona's Ring"
 	})
-	sets.WeaponSkills["Aeolian Edge"] = set_combine(sets.AllJobsMAB,{})
+	sets.WeaponSkills["Aeolian Edge"] = set_combine(sets.MAB,{})
 	sets.WeaponSkills["Exenterator"] = {}
 
 	sets.midcast.Cure = {}
