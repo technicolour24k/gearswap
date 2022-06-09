@@ -478,13 +478,42 @@ function init_gear_sets(job)
 	sets.misc.Bastok = {body = "Republic Aketon"}
 	sets.misc.Gardening = {body = "Overalls"}
 
-	sets.misc.AllJobsMAB = {
+	sets.misc.AllJobs = {}
+	sets.misc.AllJobs.MAB = {
+		ammo="Erlene's Notebook",
 		left_ring="Acumen Ring",
 		right_ring={ name="Dark Ring", augments={'Accuracy+5 Attack+5','Eva.+1 /Mag. Eva.+1','System: 1 ID: 131 Val: 7','Weapon skill damage +8%',}},
 		left_ear="Novio Earring",
 		right_ear="Hecate's Earring",
 		back="Izdubar Mantle",
 		neck = "Stoicheion Medal"
+	}
+
+	sets.misc.AllJobs['Level 30']['MAB'] = {
+		head={name="Kosshin", augments={}},
+		body={name="Savage Separates", augments={}},
+		hands={name="Savage Gauntlets", augments={}},
+		legs={name="Savage Loincloth", augments={}},
+		feet={name="Savage Gaiters", augments={}},
+		waist={name="Friar's Rope", augments={}},
+		right_ear={ name="Moldavite Earring", augments={'System: 1 ID: 131 Val: 7','System: 1 ID: 131 Val: 7','System: 1 ID: 131 Val: 7','System: 1 ID: 131 Val: 7',}},
+		left_ring={ name="Eremite's Ring +1", augments={'System: 1 ID: 131 Val: 7','System: 1 ID: 131 Val: 7','System: 1 ID: 131 Val: 7','System: 1 ID: 131 Val: 7',}},
+		right_ring={ name="Eremite's Ring +1", augments={'System: 1 ID: 131 Val: 7','System: 1 ID: 131 Val: 7','System: 1 ID: 131 Val: 7','System: 1 ID: 131 Val: 7',}},
+		back={name="Wizard's Mantle", augments={}}
+	}
+	sets.misc.AllJobs['Level 30']['Melee'] = {
+		head={ name="Emperor Hairpin", augments={'"Store TP"+5','"Store TP"+5','"Store TP"+5','"Store TP"+5',}},
+		body={name="Savage Separates",augments={}},
+		hands={name="Savage Gauntlets",augments={}},
+		legs={name="Savage Loincloth",augments={}},
+		feet={name="Savage Gaiters",augments={}},
+		neck={ name="Focus Collar", augments={'"Store TP"+2 "Subtle Blow"+2','Crit.hit rate+2','"Dbl.Atk."+2','"Triple Atk."+2',}},
+		waist={name="Lizard Belt", augments={}},
+		left_ear={ name="Dodge Earring", augments={'Attack+10','Attack+10','Attack+10','Attack+10',}},
+		right_ear={ name="Dodge Earring", augments={'Attack+10','Attack+10','Attack+10','Attack+10',}},
+		left_ring={ name="Rajas Ring", augments={'Attack+10','Attack+10','Attack+10','Attack+10',}},
+		right_ring={ name="Ulthalam's Ring", augments={'Attack+10','Attack+10','Attack+10','Attack+10',}},
+		back={name="Beater's Mantle", augments={}}
 	}
 	
 	-- Generic precast sets
@@ -524,7 +553,7 @@ function init_gear_sets(job)
 	sets.midcast['Healing Magic'] = {}
 	sets.midcast['Enhancing Magic'] = set_combine(sets.midcast.EnhancingDuration,{})
 	sets.midcast['Enfeebling Magic'] = set_combine(sets.midcast.EnfeeblingDuration,{})
-	sets.midcast['Elemental Magic'] = set_combine(sets.misc.AllJobsMAB, {})
+	sets.midcast['Elemental Magic'] = set_combine(sets.misc.AllJobs.MAB, {})
 	sets.midcast['Dark Magic'] = {}
 	sets.midcast['Summoning Magic'] = {}
 	sets.midcast['Ninjutsu'] = {}
@@ -579,4 +608,5 @@ function init_gear_sets(job)
 		right_ring={ name="Dark Ring", augments={'Accuracy+7 Attack+7','Eva.+5 /Mag. Eva.+5','System: 1 ID: 131 Val: 2','Weapon skill damage +10%',}},
 	}
 
+	send_command('gs-validate')
 end
