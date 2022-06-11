@@ -93,6 +93,10 @@ function get_sets()
 	disable("main", "sub")
 end
 
+function pretarget (spell)
+	confirmTarget(spell.skill,spell.target.type)
+end
+
 function precast(spell)
 	customInfoCheckPrecast(spell.name, spell.tp_cost, spell.mp_cost)
 		
