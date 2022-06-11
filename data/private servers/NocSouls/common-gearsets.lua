@@ -489,6 +489,7 @@ function init_gear_sets(job)
 		neck = "Stoicheion Medal"
 	}
 
+	sets.misc.AllJobs['Level 30'] = {}
 	sets.misc.AllJobs['Level 30']['MAB'] = {
 		head={name="Kosshin", augments={}},
 		body={name="Savage Separates", augments={}},
@@ -500,6 +501,7 @@ function init_gear_sets(job)
 		right_ring={ name="Eremite's Ring +1", augments={'System: 1 ID: 131 Val: 7','System: 1 ID: 131 Val: 7','System: 1 ID: 131 Val: 7','System: 1 ID: 131 Val: 7',}},
 		back={name="Wizard's Mantle", augments={}}
 	}
+
 	sets.misc.AllJobs['Level 30']['Melee'] = {
 		head={ name="Emperor Hairpin", augments={'"Store TP"+5','"Store TP"+5','"Store TP"+5','"Store TP"+5',}},
 		body={name="Savage Separates",augments={}},
@@ -515,6 +517,7 @@ function init_gear_sets(job)
 		back={name="Beater's Mantle", augments={}}
 	}
 
+	sets.misc.AllJobs['Level 50'] = {}
 	sets.misc.AllJobs['Level 50']['MAB'] = {
 		head={name="Kosshin", augments={}},
 		body={name="Savage Separates", augments={}},
@@ -543,6 +546,7 @@ function init_gear_sets(job)
 		back={ name="Jaguar Mantle", augments={'Attack+10','Attack+10','Attack+10','Attack+10',}},
 	}
 
+	sets.misc.AllJobs['Level 75'] = {}
 	sets.misc.AllJobs['Level 75']['MAB'] = {
 		head= { name="Kosshin", augments={}},
 		body= { name="Savage Separates", augments={}},
