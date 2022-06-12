@@ -1,160 +1,199 @@
-include('organizer-lib')
+include("organizer-lib")
+include("includes/common-functions")
+include("includes/config")
 
-skillup = 0
-showInfo = false
+--initialise local variables to inherit from master config
+local showFCInfo = config.showFastCastInfo
+local showSpellInfo = config.showSpellInfo
+local showCancelInfo = config.showCancelInfo
+local FastCast = 80
+
+TPStyle = "Default"
 
 function get_sets()
-	sets.EleStaves = {}
-	sets.EleStaves.Fire = {	main="Blurred Staff"}
-	sets.EleStaves.Lightning = {main = "Blurred Staff"}
-	sets.EleStaves.Ice = {main = "Blurred Staff"}
-	sets.EleStaves.Wind = {main = "Blurred Staff"}
-	sets.EleStaves.Earth = {main = "Blurred Staff"}
-	sets.EleStaves.Water = {main = "Blurred Staff"}
-	sets.EleStaves.Dark = {main = "Blurred Staff"}
-	sets.EleStaves.Light = {main = "Blurred Staff"}
+	include('private servers/'..server..'/common-gearsets')
+	include('private servers/'..server..'/custom-info')
+	local mjob = player.main_job
+	init_gear_sets(mjob)
 	
-	sets.precast = {}
-	sets.precast.FastCast = {}
-	sets.precast.FastCast.Default = {
-		left_ear = "Tranquility Earring +1",
-		right_ear = "Stamina Earring +1"
+	sets.TH = {
 	}
-	sets.precast.FastCast['Elemental Magic'] = set_combine(sets.precast.FastCast.Default, {})
-	sets.precast.FastCast['Enfeebling Magic'] = set_combine(sets.precast.FastCast.Default, {})
-	sets.precast.FastCast['Dark Magic'] = set_combine(sets.precast.FastCast.Default, {})
-	sets.precast.FastCast['Healing Magic'] = set_combine(sets.precast.FastCast.Default, {})
-	
-	
-	sets.midcast = {}
-	sets.midcast['Elemental Magic'] = {
-		ammo="Witchstone",
-		head="Spae. Petasos +2",
-		body="Wicce Coat",
-		hands="Wicce Gloves",
-		legs="Spae. Tonban +2",
-		feet="Spae. Sabots +2",
-		waist="Searing Sash",
-		left_ring="Stikini Ring +1",
-		right_ring={ name="Safeguard Ring", augments={'HP recovered while healing +4','MP recovered while healing +4','Spell interruption rate down -6%','Occ. inc. resist. to stat. ailments +4',}},
-		back="Hecate's Cape"
+
+	sets.JobAbility['Manafont'] = {}
+	sets.JobAbility['Elemental Seal'] = {}
+	sets.JobAbility['Mana Wall'] = {feet=BLM_EMPYREAN_FEET}
+	sets.JobAbility['Enmity Douse'] = {}
+	sets.JobAbility['Manawell'] = {}
+	sets.JobAbility['Subtle Sorcery'] = {}
+	sets.JobAbility['Cascade'] = {}
+	sets.JobAbility['Spontaneity'] = {}
+	sets.JobAbility['Convert'] = {}
+
+	sets.WeaponSkills['Gate of Tartarus'] = set_combine(sets.WeaponSkills['AllJobsWS'], {})
+	sets.WeaponSkills['Shattersoul'] = set_combine(sets.WeaponSkills['AllJobsWS'], {})
+	sets.WeaponSkills['Myrkr'] = set_combine(sets.WeaponSkills['AllJobsWS'], {})
+	sets.WeaponSkills['Vidohunir'] = set_combine(sets.misc.AllJobs.MAB, sets.WeaponSkills['Fotia'], sets.WeaponSkills['AllJobsWS'], {
+		head = BLM_AF_HEAD,
+		body = "Gyve Doublet",
+		hands = BLM_AF_HANDS,
+		legs = BLM_RELIC_LEGS,
+		feet = BLM_RELIC_FEET,
+		back = "Goetia Mantle",
+	})
+	sets.WeaponSkills['Tartarus Topor'] = set_combine(sets.WeaponSkills['AllJobsWS'], {})
+
+	sets.midcast.Cure = {}
+	sets.midcast['Elemental Magic'] = set_combine(sets.misc.AllJobs.MAB, sets.weapons.BLM['Elemental'], {
+		right_ring={ name="Strendu Ring", augments={}},
+		legs= {name="Gyve Trousers", augments={}},
+		waist= {name="Searing Sash", augments={}},
+		body = {name="Gyve Doublet", augments={}},
+		hands = {name=BLM_EMPYREAN_HANDS, augments={}},
+		head = {name=BLM_AF_HEAD, augments={}},
+		neck = {name="Eddy Necklace", augments={}},
+		feet = {name=BLM_AF_FEET, augments={}},
+		left_ear= {name="Moldavite Earring", augments={}}
+	})
+
+	sets.midcast.DrainAspir = {
+		legs=BLM_AF_LEGS
 	}
-	sets.midcast['Enfeebling Magic'] = {
-		head = "Wizard's Petasos",
-		neck = "Uggalepih Pendant",
-		left_ear = "Moldavite Earring",
-		right_ear = "Stamina Earring +1",
-		body = "Igqira Weskit",
-		hands = "Seer's Mitts +1",
-		left_ring = "Genius Ring",
-		right_ring = "Genius Ring",
-		back="Hecate's Cape",
-		waist = "Witch Sash",
-		legs = "Mage's Slacks",
-		feet="Mountain Gaiters"		
-	}
-	sets.midcast['Dark Magic'] = {
-		head = "Wizard's Petasos",
-		neck = "Uggalepih Pendant",
-		left_ear = "Moldavite Earring",
-		right_ear = "Stamina Earring +1",
-		body = "Igqira Weskit",
-		hands = "Seer's Mitts +1",
-		left_ring = "Genius Ring",
-		right_ring = "Genius Ring",
-		back="Hecate's Cape",
-		waist = "Witch Sash",
-		legs = "Mage's Slacks",
-		feet="Mountain Gaiters"		
-	}
-	
-	sets.midcast['Healing Magic'] = {
-		head = "Wizard's Petasos",
-		neck = "Uggalepih Pendant",
-		left_ear = "Moldavite Earring",
-		right_ear = "Stamina Earring +1",
-		body = "Igqira Weskit",
-		hands = "Seer's Mitts +1",
-		left_ring = "Genius Ring",
-		right_ring = "Genius Ring",
-		back="Hecate's Cape",
-		waist = "Witch Sash",
-		legs = "Mage's Slacks",
-		feet="Mountain Gaiters"		
-	}
-	
-	sets.midcast.SorcRing = { left_ring = "Sorcerer's Ring" }
+
+    sets.midcast['Drain'] = set_combine(sets.midcast.DrainAspir, {})
+    sets.midcast['Aspir'] = set_combine(sets.midcast.DrainAspir, {})
 	
 	sets.aftercast = {}
-	sets.aftercast.Idle = {
-		main = "Earth Staff",
-		body="Wicce Coat",
-		feet="Herald's Gaiters"
-	}
-	sets.aftercast.Resting = {
-		main = "Dark Staff",
-		body="Errant Houppelande",
-		right_ring = "Safeguard Ring"
-	}
+	sets.aftercast.Resting = {}
+	sets.aftercast.Engaged = {}
 	
-	doSetup()
+	sets.aftercast.Engaged.Default = set_combine(sets.weapons[mjob]["Elemental"], sets.misc.AllJobs['DTCombo'],{
+		head=BLM_AF_HEAD,
+		body=BLM_AF_BODY,
+		hands=BLM_AF_HANDS,
+		legs=BLM_EMPYREAN_LEGS,
+		feet=BLM_AF_FEET,
+		waist={ name="Paewr Belt", augments={}},
+		right_ring= {name = "Varar Ring", augments={}}
+	})
+
+	sets.aftercast.Engaged.TH = set_combine(sets.aftercast.Engaged.Default, sets.TH)
+	sets.aftercast.Engaged.Accuracy = set_combine(sets.aftercast.Engaged.Default, {})
+	sets.aftercast.Engaged.Evasion = set_combine(sets.aftercast.Engaged.Default, {})
 	
+	sets.aftercast.Idle = set_combine(sets.misc.AllJobs['DTCombo'], {
+		right_ring={name = "Stikini Ring +1", augments={}},
+		right_ear={name = "Moonshade Earring", augments={}},
+		body={name = "Sorcerer's Coat +1", augments={}},
+		feet={name = "Sorcerer's Sabots +1", augments={}},
+		waist={name = "Sorcerer's Belt", augments={}},
+		main={name = "Musketeer's Pole", augments={}},
+	})
+
+	switchMacroSet(1, 1)
+	send_command("gs enable all")
+	send_command("gs equip sets.aftercast.Idle")
+
+	disable("main", "sub")
 end
 
+function pretarget (spell)
+	confirmTarget(spell.skill,spell.target.type)
+end
 
 function precast(spell)
-  
-  equip(sets.precast.FastCast.Default)
+	customInfoCheckPrecast(spell.name, spell.tp_cost, spell.mp_cost)
+		
+	if sets.JobAbility[spell.english] then
+		equip(sets.JobAbility[spell.english])
+	end
 
+	if sets.WeaponSkills[spell.english] then
+		equip(sets.WeaponSkills[spell.english])
+	end
+
+	if sets.precast[spell.english] then
+		equip(sets.precast[spell.english])
+	end
+
+	if spell.action_type == "Magic" then
+		equip(sets.precast.FastCast.Default)
+	end
 end
+function midcast(spell)
+	cancelBuff(spell.english, spell.cast_time, FastCast)
 
-function midcast(spell)  
-
+	if sets.midcast[spell.english] then
+		equip(sets.midcast[spell.english])
+	elseif string.find(spell.english,'Cure') or string.find(spell.english,'Cura') then 
+        equip(sets.midcast.Cure)
+	end
 	if sets.midcast[spell.skill] then
 		equip(sets.midcast[spell.skill])
 	end
-	
-	if showInfo == 1 then
-		infoLog("[Sorcerer's Ring Check] Player HPP: " ..player.hpp.. "%")
+	if (enspell_list:contains(spell.english)) then
+		equip(sets.midcast.Enspell)
 	end
-	if player.hpp < 75 then
-		equip(sets.midcast.SorcRing)
-		infoLog("Sorcerer's Ring: Active")
+	if (conserveMP_list:contains(spell.english)) then
+		equip(sets.midcast.ConserveMP)
 	end
-    
-	equip(sets.EleStaves[spell.element])
+	customInfoCheckMidcast(spell.name, spell.tp_cost, spell.mp_cost)
 end
 
 function aftercast(spell)
-	if player.status == 'Idle' then
-		equip(sets.aftercast.Idle)
-    end
+	if player.status == "Engaged" then
+		equip(sets.aftercast[player.status][TPStyle])
+	else
+		equip(sets.aftercast[player.status])
+	end
+
+	customInfoCheckAftercast(spell.name, spell.tp_cost, spell.mp_cost)
 end
 
-function status_change(new,old)
-	if new == 'Resting' then
-        equip(sets.aftercast.Resting)
-	end
-	if new == 'Idle' then
-		equip(sets.aftercast.Idle)
+function status_change(new, old)
+	if player.status == "Engaged" then
+		equip(sets.aftercast[player.status][TPStyle])
+	else
+		equip(sets.aftercast[player.status])
 	end
 end
 
-function buff_change(name,gol,tab)
+function buff_change(name, gain)
+
+end
+
+function area_change(new,old)
 
 end
 
 function self_command(command)
-	if command:lower() == "cmd" then
 
+	if command:lower() == "togglegear" then
+		send_command("gs enable")
+		if TPStyle == "Default" then
+			TPStyle = "TH"
+			equip(sets.aftercast.Engaged[TPStyle])
+			send_command("gs disable sub")
+		elseif TPStyle == "TH" then
+			TPStyle = "Accuracy"
+		elseif TPStyle == "Accuracy" then
+			TPStyle = "Evasion"
+		else
+			TPStyle="Default"
+		end
+		infoLog("TP Style is now: " .. TPStyle.. "!")
+		equip(sets.aftercast.Engaged[TPStyle])
 	end
-end
 
-function doSetup()
+	if command:lower() == "status-check" then
+		if (config.oneClickRemedies) then
+			clearStatuses()
+		end
+	end
 
-	send_command('gs equip sets.aftercast.Idle')
-    send_command('input /macro book 3;wait .1;input /macro set 1')
+	if player.status == "Engaged" then
+		equip(sets.aftercast[player.status][TPStyle])
+	else
+		equip(sets.aftercast[player.status])
+	end
 
-
-	send_command('alias buffMe input /ma "Stoneskin" <me>; wait 8; input /ma "Blink" <me>; wait 6; input /ma "Aquaveil" <me>; wait 6; input /ma "Haste" <me>; wait 6; input /ma "Ice Spikes" <me>')	
 end

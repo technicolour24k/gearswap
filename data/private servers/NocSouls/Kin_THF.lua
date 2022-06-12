@@ -78,12 +78,10 @@ function get_sets()
 	sets.aftercast.Engaged.Accuracy = set_combine(sets.aftercast.Engaged.Default, {})
 	sets.aftercast.Engaged.Evasion = set_combine(sets.aftercast.Engaged.Default, {})
 
-	sets.aftercast.Idle = set_combine(sets.aftercast.Engaged[TPStyle],{
-		left_ring = "Defending Ring",
+	sets.aftercast.Idle = set_combine(sets.aftercast.Engaged[TPStyle], sets.misc.AllJobs['DTCombo'],{
 		right_ring = "Stikini Ring +1",
 		feet = THF_RELIC_FEET,
-		neck="Loricate Torque +1",
-		left_ear = "Moonshade Earring"
+		right_ear = "Moonshade Earring"
 	})
 
 	switchMacroSet(8, 1)
@@ -183,6 +181,7 @@ function area_change(new,old)
 end
 
 function self_command(command)
+
 	if command:lower() == "togglegear" then
 		send_command("gs enable sub")
 		if TPStyle == "Default" then

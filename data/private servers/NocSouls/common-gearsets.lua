@@ -27,7 +27,7 @@ function init_gear_sets(job)
 	sets.weapons.RDM['Elemental'] = {main="",sub=""}
 
 	sets.weapons.BLM = {}
-	sets.weapons.BLM['Elemental'] = {main="",sub=""}
+	sets.weapons.BLM['Elemental'] = {main="Laevateinn",sub="Elan Strap"}
 	
 	sets.weapons.THF = {}
 	sets.weapons.THF['Daggers'] = {main="Twashtar",sub="Mandau"}
@@ -150,21 +150,21 @@ function init_gear_sets(job)
 	WHM_EMPYREAN_FEET = "Ebers Duckbills +1"
 
 	--BLM
-	BLM_AF_HEAD = "Spaekona's Petasos +1"
-	BLM_AF_BODY = "Spaekona's Coat +1"
-	BLM_AF_HANDS = "Spaekona's Gloves +1"
-	BLM_AF_LEGS = "Spaekona's Chausses +1"
-	BLM_AF_FEET = "Spaekona's Sabots +1"
+	BLM_AF_HEAD = "Spaekona's Petasos +2"
+	BLM_AF_BODY = "Spaekona's Coat +2"
+	BLM_AF_HANDS = "Spaekona's Gloves +2"
+	BLM_AF_LEGS = "Spaekona's Chausses +2"
+	BLM_AF_FEET = "Spaekona's Sabots +2"
 	BLM_RELIC_HEAD = "Archmage's Petasos +1"
 	BLM_RELIC_BODY = "Archmage's Coat +1"
 	BLM_RELIC_HANDS = "Archmage's Gloves +1"
 	BLM_RELIC_LEGS = "Archmage's Chausses +1"
 	BLM_RELIC_FEET = "Archmage's Sabots +1"
-	BLM_EMPYREAN_HEAD = "Wicce Petasos +1"
-	BLM_EMPYREAN_BODY = "Wicce Coat +1"
-	BLM_EMPYREAN_HANDS = "Wicce Gloves +1"
-	BLM_EMPYREAN_LEGS = "Wicce Chausses +1"
-	BLM_EMPYREAN_FEET = "Wicce Sabots +1"
+	BLM_EMPYREAN_HEAD = "Wicce Petasos"
+	BLM_EMPYREAN_BODY = "Wicce Coat"
+	BLM_EMPYREAN_HANDS = "Wicce Gloves"
+	BLM_EMPYREAN_LEGS = "Wicce Chausses"
+	BLM_EMPYREAN_FEET = "Wicce Sabots"
 
 	--RDM
 	RDM_AF_HEAD = "Atrophy Chapeau +2"
@@ -489,6 +489,20 @@ function init_gear_sets(job)
 		neck = "Stoicheion Medal"
 	}
 
+	sets.misc.AllJobs['DTDown'] = {
+		neck="Loricate Torque +1",
+		left_ring="Defending Ring",
+		
+	}
+	sets.misc.AllJobs['PDTDown'] = set_combine(sets.misc.AllJobs['DTDown'], {
+		right_ring="Patricius Ring",
+	})
+	sets.misc.AllJobs['MDTDown'] = set_combine(sets.misc.AllJobs['DTDown'],{
+		left_earring="Etiolation Earring",
+
+	})
+	sets.misc.AllJobs['DTCombo'] = set_combine(sets.misc.AllJobs['PDTDown'], sets.misc.AllJobs['MDTDown'],{}
+)
 	sets.misc.AllJobs['Level 30'] = {}
 	sets.misc.AllJobs['Level 30']['MAB'] = {
 		head={name="Kosshin", augments={}},
