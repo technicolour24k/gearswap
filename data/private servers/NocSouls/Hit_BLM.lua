@@ -40,20 +40,20 @@ function get_sets()
 		feet = BLM_RELIC_FEET,
 		back = "Goetia Mantle",
 	})
-	sets.WeaponSkills['Tartarus Topor'] = set_combine(sets.WeaponSkills['AllJobsWS'], {})
-
-	sets.midcast.Cure = {}
 	sets.midcast['Elemental Magic'] = set_combine(sets.misc.AllJobs.MAB, sets.weapons.BLM['Elemental'], {
-		right_ring={ name="Strendu Ring", augments={}},
-		legs= {name="Gyve Trousers", augments={}},
-		waist= {name="Searing Sash", augments={}},
-		body = {name="Gyve Doublet", augments={}},
-		hands = {name=BLM_EMPYREAN_HANDS, augments={}},
-		head = {name=BLM_AF_HEAD, augments={}},
-		neck = {name="Eddy Necklace", augments={}},
-		feet = {name=BLM_AF_FEET, augments={}},
-		left_ear= {name="Moldavite Earring", augments={}}
+		right_ring={ name="Strendu Ring"},
+		legs= {name="Gyve Trousers"},
+		waist= {name="Searing Sash"},
+		body = {name="Gyve Doublet"},
+		hands = {name=BLM_EMPYREAN_HANDS},
+		head = {name=BLM_AF_HEAD},
+		neck = {name="Eddy Necklace"},
+		feet = {name=BLM_AF_FEET},
+		left_ear= {name="Moldavite Earring"}
 	})
+	sets.WeaponSkills['Tartarus Torpor'] = set_combine(sets.WeaponSkills['AllJobsWS'], sets.midcast['Elemental Magic'],	{})
+	
+	sets.midcast.Cure = {}
 
 	sets.midcast.DrainAspir = {
 		legs=BLM_AF_LEGS
