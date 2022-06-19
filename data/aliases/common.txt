@@ -2,3 +2,4 @@ alias min minimize
 alias empy-check exec misc/empy-items
 alias gs-validate gs validate sets -obi -aketon
 alias log-hit run ./scripts/misc/server-logins/NocSoulsHit.bat
+alias log-zoku run ./scripts/misc/server-logins/NocSoulsZoku.bat

@@ -84,9 +84,8 @@ function get_sets()
 		right_ring={name = "Stikini Ring +1", augments={}},
 		right_ear={name = "Moonshade Earring", augments={}},
 		body={name = "Sorcerer's Coat +1", augments={}},
-		feet={name = "Sorcerer's Sabots +1", augments={}},
+		feet={name = "Herald's Gaiters", augments={}},
 		waist={name = "Sorcerer's Belt", augments={}},
-		main={name = "Musketeer's Pole", augments={}},
 	})
 
 	switchMacroSet(1, 1)

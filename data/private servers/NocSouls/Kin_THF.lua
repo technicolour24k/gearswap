@@ -80,7 +80,7 @@ function get_sets()
 
 	sets.aftercast.Idle = set_combine(sets.aftercast.Engaged[TPStyle], sets.misc.AllJobs['DTCombo'],{
 		right_ring = "Stikini Ring +1",
-		feet = THF_RELIC_FEET,
+		feet = THF_AF_FEET,
 		right_ear = "Moonshade Earring"
 	})
 
