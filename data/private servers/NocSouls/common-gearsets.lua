@@ -479,6 +479,14 @@ function init_gear_sets(job)
 	sets.misc.Gardening = {body = "Overalls"}
 
 	sets.misc.AllJobs = {}
+	sets.misc.AllJobs['Lv1'] = {
+		main="Hoe",
+		head="Cache-Nez",
+		body="Chocobo Shirt",
+		hands="Vagabond's Gloves",
+		legs="Vagabond's Hose",
+		feet="Vagabond's Boots"
+	}
 	sets.misc.AllJobs.MAB = {
 		ammo="Erlene's Notebook",
 		left_ring="Acumen Ring",

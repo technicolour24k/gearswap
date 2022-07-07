@@ -33,6 +33,7 @@ function get_sets()
 	sets.JobAbility.Accomplice = {head = THF_EMPYREAN_HEAD}
 	sets.JobAbility.Collaborator = {head = THF_EMPYREAN_HEAD}
 
+	sets.WeaponSkills["Evisceration"] = set_combine(sets.WeaponSkills['AllJobsWS'], {})
 	sets.WeaponSkills["Dancing Edge"] = set_combine(sets.WeaponSkills['AllJobsWS'], {})
 	sets.WeaponSkills["Mercy Stroke"] = set_combine(sets.WeaponSkills['AllJobsWS'], {})
 	sets.WeaponSkills["Mandalic Stab"] = set_combine(sets.WeaponSkills['AllJobsWS'], {})
@@ -50,7 +51,7 @@ function get_sets()
 		right_ear = "Mache Earring +1",
 	})
 	sets.WeaponSkills["Aeolian Edge"] = set_combine(sets.MAB,{})
-	sets.WeaponSkills["Exenterator"] = {}
+	sets.WeaponSkills["Exenterator"] = set_combine(sets.WeaponSkills['AllJobsWS'], {})
 
 	sets.midcast.Cure = {}
 

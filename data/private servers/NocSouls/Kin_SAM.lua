@@ -2,7 +2,7 @@ include("organizer-lib")
 include("includes/common-functions")
 include("includes/config")
 
-showInfo = true
+showInfo = false
 TPStyle = "Great Katana" -- Amanomurakumo: 481TP/swing as base 99 SAM
 local mjob = player.main_job
 wsList = S{"Great Katana"}
@@ -111,6 +111,10 @@ function precast(spell)
 
 	if spell.action_type == "Magic" then
 		equip(sets.precast.FastCast.Default)
+	end
+
+	if spell.action_type == "Ability" then
+		cancelBuff(spell.english, 0,0)
 	end
 end
 

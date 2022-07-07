@@ -1,0 +1,7 @@
+bind ^F1 send @others input /targetnpc; input /targetnpc; wait 0.1; send @others firaga3 <t>; firaga3;
+bind ^F2 send @others input /targetnpc; input /targetnpc; wait 0.1; send @others blizzaga3 <t>; blizzaga3;
+bind ^F3 send @others input /targetnpc; input /targetnpc; wait 0.1; send @others thundaga3 <t>; thundaga3;
+bind ^F4 send @others input /targetnpc; input /targetnpc; wait 0.1; send @others aeroga3 <t>; aeroga3;
+bind ^F5 send @others input /targetnpc; input /targetnpc; wait 0.1; send @others waterga3 <t>; waterga3;
+bind ^F6 send @others input /targetnpc; input /targetnpc; wait 0.1; send @others stoneja <t>; stoneja;
+bind ^F12 send @others input /follow Kin;
