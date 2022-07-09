@@ -19,10 +19,15 @@ function get_sets()
 	send_command('exec "aliases/'..server..'/'..player.name..'_'..player.main_job..'"')
 	
 	if server ~= "retail" then
-		-- send_command('exec '..windower.windower_path..'/addons/gearswap/data/private servers/'..server..'/binds/'..player.name..'_'..player.main_job..'.txt')
-		send_command('wait 1;gs load "private servers/'..server..'/'..player.name..'_'..player.main_job..'"')
+		if (player.main_job_level < 99) then
+			send_command('wait 1;gs load "private servers/'..server..'/generic"')
+		else
+			send_command('wait 1;gs load "private servers/'..server..'/'..player.name..'_'..player.main_job..'"')
+		end
 	else
-		-- send_command('exec "../addons/gearswap/retail/binds/'..player.name..'_'..player.main_job..'.txt"')
-		send_command('wait 1;gs load "retail/'..player.name..'_'..player.main_job..'"')
-	end
+		if (player.main_job_level < 99) then
+			send_command('wait 1;gs load "retail/generic"')
+		else
+			send_command('wait 1;gs load "retail/'..player.name..'_'..player.main_job..'"')
+		end	end
 end

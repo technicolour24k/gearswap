@@ -30,7 +30,7 @@ function init_gear_sets(job)
 	sets.weapons.BLM['Elemental'] = {main="Laevateinn",sub="Elan Strap"}
 	
 	sets.weapons.THF = {}
-	sets.weapons.THF['Daggers'] = {main="Twashtar",sub="Mandau"}
+	sets.weapons.THF['Daggers'] = {main="Twashtar",sub="Sandung"}
 	
 	sets.weapons.PLD = {}
 	sets.weapons.PLD['Sword'] = {main="Burtgang", sub="Aegis"}
@@ -521,7 +521,7 @@ function init_gear_sets(job)
 		waist={name="Friar's Rope", augments={}},
 		left_ring={ name="Eremite's Ring +1", augments={'System: 1 ID: 131 Val: 7','System: 1 ID: 131 Val: 7','System: 1 ID: 131 Val: 7','System: 1 ID: 131 Val: 7',}},
 		right_ring={ name="Eremite's Ring +1", augments={'System: 1 ID: 131 Val: 7','System: 1 ID: 131 Val: 7','System: 1 ID: 131 Val: 7','System: 1 ID: 131 Val: 7',}},
-		back={name="Wizard's Mantle", augments={}}
+		back={name="Wizard's Mantle"}
 	}
 
 	sets.misc.AllJobs['Level 30']['Melee'] = {
@@ -532,9 +532,9 @@ function init_gear_sets(job)
 		feet={name="Savage Gaiters",augments={}},
 		neck={ name="Focus Collar", augments={'"Store TP"+2 "Subtle Blow"+2','Crit.hit rate+2','"Dbl.Atk."+2','"Triple Atk."+2',}},
 		waist={name="Lizard Belt", augments={}},
-		left_ear={ name="Dodge Earring", augments={'Attack+10','Attack+10','Attack+10','Attack+10',}},
-		right_ear={ name="Dodge Earring", augments={'Attack+10','Attack+10','Attack+10','Attack+10',}},
-		left_ring={ name="Rajas Ring", augments={'Attack+10','Attack+10','Attack+10','Attack+10',}},
+		left_ear={ name="Dodge Earring", augments={'"Store TP"+5','"Store TP"+5','"Store TP"+5','"Store TP"+5',}},
+		right_ear={ name="Dodge Earring", augments={'"Store TP"+5','"Store TP"+5','"Store TP"+5','"Store TP"+5',}},
+		left_ring={ name="Rajas Ring", augments={'"Store TP"+5','"Store TP"+5','"Store TP"+5','"Store TP"+5',}},
 		right_ring={ name="Castor's Ring", augments={'"Refresh"+10','"Fast Cast"+5','"Regen"+10','"Store TP"+5',}},
 		back={name="Beater's Mantle", augments={}}
 	}
@@ -550,7 +550,7 @@ function init_gear_sets(job)
 		right_ear={ name="Moldavite Earring", augments={'System: 1 ID: 131 Val: 7','System: 1 ID: 131 Val: 7','System: 1 ID: 131 Val: 7','System: 1 ID: 131 Val: 7',}},
 		left_ring={ name="Eremite's Ring +1", augments={'System: 1 ID: 131 Val: 7','System: 1 ID: 131 Val: 7','System: 1 ID: 131 Val: 7','System: 1 ID: 131 Val: 7',}},
 		right_ring={ name="Eremite's Ring +1", augments={'System: 1 ID: 131 Val: 7','System: 1 ID: 131 Val: 7','System: 1 ID: 131 Val: 7','System: 1 ID: 131 Val: 7',}},
-		back={name="Wizard's Mantle", augments={}}
+		back={name="Wizard's Mantle"}
 	}
 	sets.misc.AllJobs['Level 50']['Melee'] = {
 		ammo = {name="Optical Needle", augments={'Attack+10','Attack+10','Attack+10','Attack+10'}},
@@ -561,9 +561,9 @@ function init_gear_sets(job)
 		feet={ name="Raven Gaiters", augments={'"Store TP"+5','"Store TP"+5','"Store TP"+5','"Store TP"+5',}},
 		neck={ name="Peacock Charm", augments={'"Store TP"+5','"Store TP"+5','"Store TP"+5','"Store TP"+5',}},
 		waist={ name="Ryl.Kgt. Belt", augments={'"Store TP"+5','"Store TP"+5','"Store TP"+5','"Store TP"+5',}},
-		left_ear={ name="Dodge Earring", augments={'Attack+10','Attack+10','Attack+10','Attack+10',}},
-		right_ear={ name="Dodge Earring", augments={'Attack+10','Attack+10','Attack+10','Attack+10',}},
-		left_ring={ name="Rajas Ring", augments={'Attack+10','Attack+10','Attack+10','Attack+10',}},
+		left_ear={ name="Dodge Earring", augments={'"Store TP"+5','"Store TP"+5','"Store TP"+5','"Store TP"+5',}},
+		right_ear={ name="Dodge Earring", augments={'"Store TP"+5','"Store TP"+5','"Store TP"+5','"Store TP"+5',}},
+		left_ring={ name="Rajas Ring", augments={'"Store TP"+5','"Store TP"+5','"Store TP"+5','"Store TP"+5',}},
 		right_ring={ name="Ulthalam's Ring", augments={'Attack+10','Attack+10','Attack+10','Attack+10',}},
 		back={ name="Jaguar Mantle", augments={'Attack+10','Attack+10','Attack+10','Attack+10',}},
 	}
@@ -581,7 +581,7 @@ function init_gear_sets(job)
 		right_ear={ name="Novio Earring", augments={'System: 1 ID: 131 Val: 7','System: 1 ID: 131 Val: 7','System: 1 ID: 131 Val: 7','System: 1 ID: 131 Val: 7',}},
 		left_ring={ name="Eremite's Ring +1", augments={'System: 1 ID: 131 Val: 7','System: 1 ID: 131 Val: 7','System: 1 ID: 131 Val: 7','System: 1 ID: 131 Val: 7',}},
 		right_ring={ name="Eremite's Ring +1", augments={'System: 1 ID: 131 Val: 7','System: 1 ID: 131 Val: 7','System: 1 ID: 131 Val: 7','System: 1 ID: 131 Val: 7',}},
-		back={name="Merciful Cape", augments={}}
+		back={name="Merciful Cape"}
 	}
 	sets.misc.AllJobs['Level 75']['Melee'] = {
 		ammo = {name="Optical Needle", augments={'Attack+10','Attack+10','Attack+10','Attack+10'}},
@@ -592,9 +592,9 @@ function init_gear_sets(job)
 		feet={ name="Raven Gaiters", augments={'"Store TP"+5','"Store TP"+5','"Store TP"+5','"Store TP"+5',}},
 		neck={ name="Peacock Charm", augments={'"Store TP"+5','"Store TP"+5','"Store TP"+5','"Store TP"+5',}},
 		waist={ name="Ryl.Kgt. Belt", augments={'"Store TP"+5','"Store TP"+5','"Store TP"+5','"Store TP"+5',}},
-		left_ear={ name="Dodge Earring", augments={'Attack+10','Attack+10','Attack+10','Attack+10',}},
-		right_ear={ name="Dodge Earring", augments={'Attack+10','Attack+10','Attack+10','Attack+10',}},
-		left_ring={ name="Rajas Ring", augments={'Attack+10','Attack+10','Attack+10','Attack+10',}},
+		left_ear={ name="Dodge Earring", augments={'"Store TP"+5','"Store TP"+5','"Store TP"+5','"Store TP"+5',}},
+		right_ear={ name="Dodge Earring", augments={'"Store TP"+5','"Store TP"+5','"Store TP"+5','"Store TP"+5',}},
+		left_ring={ name="Rajas Ring", augments={'"Store TP"+5','"Store TP"+5','"Store TP"+5','"Store TP"+5',}},
 		right_ring={ name="Ulthalam's Ring", augments={'Attack+10','Attack+10','Attack+10','Attack+10',}},
 		back={ name="Jaguar Mantle", augments={'Attack+10','Attack+10','Attack+10','Attack+10',}},
 	}
