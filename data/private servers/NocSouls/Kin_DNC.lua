@@ -142,7 +142,6 @@ function get_sets()
 		left_ear = "Moonshade Earring"
 	})
 
-	switchMacroSet(14, 1)
 	send_command("gs enable all")
 	send_command("gs equip sets.aftercast.Idle")
 	send_command("input /echo [F9] Bound to Toggle TP Gear;bind F9 gs c togglegear")
