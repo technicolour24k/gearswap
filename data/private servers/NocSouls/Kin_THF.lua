@@ -135,6 +135,7 @@ function midcast(spell)
 end
 
 function aftercast(spell)
+
 	if (buffactive['Sneak Attack'] == 1) and (buffactive['Trick Attack'] == 1)  then
 		infoLog("<< SATA Active >>")
 		equip(set_combine(sets.precast["Sneak Attack"], sets.precast['Trick Attack']))
@@ -152,6 +153,7 @@ function aftercast(spell)
 		end
 	end
 	customInfoCheckAftercast(spell.name, spell.tp_cost, spell.mp_cost)
+	announceSpell(spell.name, spell.target.name, "p")
 end
 
 function status_change(new, old)
