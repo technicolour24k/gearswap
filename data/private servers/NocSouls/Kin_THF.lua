@@ -85,7 +85,6 @@ function get_sets()
 		right_ear = "Moonshade Earring"
 	})
 
-	switchMacroSet(8, 1)
 	send_command("gs enable all")
 	send_command("gs equip sets.aftercast.Idle")
 
