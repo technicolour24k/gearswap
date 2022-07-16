@@ -1,10 +1,10 @@
-THF = {
+return {
     ['Ctrl+1'] = 'input /ja "Sneak Attack" <me>',
     ['Ctrl+2'] = 'input /ja "Trick Attack" <me>',
     ['Ctrl+3'] = '',
-    ['Ctrl+4'] = 'input /ja "Collaborator" <stpc>; input /p Collaborator => <lastst>',
-    ['Ctrl+5'] = 'input /ja "Accomplice" <stpc>; input /p Accomplice => <lastst>',
-    ['Ctrl+6'] = 'input /ja "Conspirator" <stpc>',
+    ['Ctrl+4'] = 'input /ja "Collaborator" <stpc>',
+    ['Ctrl+5'] = 'input /ja "Accomplice" <stpc>',
+    ['Ctrl+6'] = 'input /ja "Conspirator" <me>',
     ['Ctrl+7'] = '',
     ['Ctrl+8'] = '',
     ['Ctrl+9'] = '',
