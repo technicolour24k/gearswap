@@ -199,3 +199,10 @@ end
 function debugLog(log)
 	add_to_chat(11, log)
 end
+
+function announceSpell(spell,target, chatmode)
+	local announcementList = S{"Accomplice","Collaborator","Stun"}
+	if (announcementList:contains(spell)) then
+		send_command('input /'..chatmode..' '..spell..' => '..target)
+	end
+end
