@@ -10,16 +10,8 @@ del /Q /S "*.lua"
 echo Hello Vanadiel!
 xcopy "C:\Program Files (x86)\Windower\addons\GearSwap\data\binds\" "C:\Program Files (x86)\Windower\scripts\binds\" /E /H /C /I
 xcopy "C:\Program Files (x86)\Windower\addons\GearSwap\data\aliases\" "C:\Program Files (x86)\Windower\scripts\aliases\" /E /H /C /I
-xcopy "C:\Program Files (x86)\Windower\addons\GearSwap\data\macros\*.lua" "C:\Program Files (x86)\Windower\addons\Yush\data\" /E /H /C /I
+copy "C:\Program Files (x86)\Windower\addons\GearSwap\data\macros\*.lua" "C:\Program Files (x86)\Windower\addons\Yush\data\" /Y
 @REM Copy the various aliases, binds, and macros into their respective directories.
-
-cd "C:\Program Files (x86)\Windower\scripts\"
-attrib +r "binds\*" /s /d
-attrib +r "aliases\*" /s /d
-
-cd "C:\Program Files (x86)\Windower\addons\Yush\data\"
-attrib +r *.lua
-@REM Stop people from editing the files directly - for audit control, these should be edited via Gearswap folders
 
 echo Goodbye Vanadiel!
 @REM pause
