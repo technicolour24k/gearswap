@@ -126,6 +126,53 @@ function get_sets()
 	
 	sets.JobAbility = {}
 	sets.JobAbility.Release = sets.aftercast.Idle
+
+	bloodpacts = {}
+	bloodpacts.Carbuncle = {}
+	bloodpacts.Carbuncle['bp-rage-1']="Holy Mist"
+	bloodpacts.Carbuncle['bp-rage-2']="Meteorite"
+	bloodpacts.Carbuncle['bp-ward']="Healing Ruby II"
+	bloodpacts.Shiva = {}
+	bloodpacts.Shiva['rage-1']="Rush"
+	bloodpacts.Shiva['rage-2']="Heavenly Strike"
+	bloodpacts.Shiva['bp-ward']="Sleepga"
+	bloodpacts.Ifrit = {}
+	bloodpacts.Ifrit['rage-1']="Holy Mist"
+	bloodpacts.Ifrit['rage-2']="Meteorite"
+	bloodpacts.Ifrit['bp-ward']="Healing Ruby II"
+	bloodpacts.Garuda = {}
+	bloodpacts.Garuda['rage-1']="Holy Mist"
+	bloodpacts.Garuda['rage-2']="Meteorite"
+	bloodpacts.Garuda['bp-ward']="Healing Ruby II"
+	bloodpacts.Leviathan = {}
+	bloodpacts.Leviathan['rage-1']="Holy Mist"
+	bloodpacts.Leviathan['rage-2']="Meteorite"
+	bloodpacts.Leviathan['bp-ward']="Healing Ruby II"
+	bloodpacts.Titan = {}
+	bloodpacts.Titan['rage-1']="Holy Mist"
+	bloodpacts.Titan['rage-2']="Meteorite"
+	bloodpacts.Titan['bp-ward']="Healing Ruby II"
+	bloodpacts.Ramuh = {}
+	bloodpacts.Ramuh['rage-1']="Holy Mist"
+	bloodpacts.Ramuh['rage-2']="Meteorite"
+	bloodpacts.Ramuh['bp-ward']="Healing Ruby II"
+	bloodpacts.Fenrir = {}
+	bloodpacts.Fenrir['rage-1']="Holy Mist"
+	bloodpacts.Fenrir['rage-2']="Meteorite"
+	bloodpacts.Fenrir['bp-ward']="Healing Ruby II"
+	bloodpacts.Diabolos = {}
+	bloodpacts.Diabolos['rage-1']="Holy Mist"
+	bloodpacts.Diabolos['rage-2']="Meteorite"
+	bloodpacts.Diabolos['bp-ward']="Healing Ruby II"
+	bloodpacts['Cait Sith'] = {}
+	bloodpacts['Cait Sith']['rage-1']="Holy Mist"
+	bloodpacts['Cait Sith']['rage-2']="Meteorite"
+	bloodpacts['Cait Sith']['bp-ward']="Healing Ruby II"
+	bloodpacts.Siren = {}
+	bloodpacts.Siren['rage-1']="Holy Mist"
+	bloodpacts.Siren['rage-2']="Meteorite"
+	bloodpacts.Siren['bp-ward']="Healing Ruby II"
+
 	doSetup()
 	
 end
@@ -260,7 +307,18 @@ function buff_change(name,gol,tab)
 end
 
 function self_command(command)
-	if command:lower() == "cmd" then
+	if command:lower() == "bp-rage-1" then
+		send_command('input /ja "'..bloodpacts[pet.name]['bp-rage-1']..'" <t>')
+		debugLog('Getting '..pet.name..' to use '..bloodpacts[pet.name]['rage-1'])
+	end
+	if command:lower() == "bp-rage-2" then
+		send_command('input /ja "'..bloodpacts[pet.name]['bp-rage-2']..'" <t>')
+		debugLog('Getting '..pet.name..' to use '..bloodpacts[pet.name]['rage-2'])
+
+	end
+	if command:lower() == "bp-ward" then
+		send_command('input /ja "'..bloodpacts[pet.name]['bp-ward']..'" <me>')
+		debugLog('Getting '..pet.name..' to use '..bloodpacts[pet.name]['bp-ward'])
 
 	end
 end
