@@ -44,7 +44,6 @@ function get_sets()
 		hands = THF_AF_HANDS,
 		legs = THF_EMPYREAN_LEGS,
 		feet = THF_RELIC_FEET,
-		neck = "Tlamiztli collar",
 		back = "Canny Cape",
 		waist = "Windbuffet belt +1",
 		left_ear = "Mache Earring +1",
@@ -189,7 +188,6 @@ function self_command(command)
 		if TPStyle == "Default" then
 			TPStyle = "TH"
 			equip(sets.aftercast.Engaged[TPStyle])
-			send_command("gs disable sub")
 		elseif TPStyle == "TH" then
 			TPStyle = "Accuracy"
 		elseif TPStyle == "Accuracy" then

@@ -3,3 +3,5 @@ alias empy-check exec misc/empy-items
 alias gs-validate gs validate sets -obi -aketon
 alias log-hit run ./scripts/misc/server-logins/NocSoulsHit.bat
 alias log-zoku run ./scripts/misc/server-logins/NocSoulsZoku.bat
+alias 5min-timer timers create "5 Minutes" 310 down
+alias 10min-timer timers create "10 Minutes" 610 down
