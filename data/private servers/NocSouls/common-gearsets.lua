@@ -177,11 +177,11 @@ function init_gear_sets(job)
 	RDM_RELIC_HANDS = "Vitiation Gloves +1"
 	RDM_RELIC_LEGS = "Vitiation Tights +1"
 	RDM_RELIC_FEET = "Vitiation Boots +1"
-	RDM_EMPYREAN_HEAD = "Lethargy Chapeau +1"
-	RDM_EMPYREAN_BODY = "Lethargy Tabard +1"
-	RDM_EMPYREAN_HANDS = "Lethargy Gloves +1"
-	RDM_EMPYREAN_LEGS = "Lethargy Tights +1"
-	RDM_EMPYREAN_FEET = "Lethargy Boots +1"
+	RDM_EMPYREAN_HEAD = "Lethargy Chappel +1"
+	RDM_EMPYREAN_BODY = "Lethargy Sayon +1"
+	RDM_EMPYREAN_HANDS = "Lethargy Gantherots +1"
+	RDM_EMPYREAN_LEGS = "Lethargy Fuseau +1"
+	RDM_EMPYREAN_FEET = "Lethargy Houseaux +1"
 
 	--THF
 	THF_AF_HEAD = "Pillager's Bonnet +3"
@@ -488,13 +488,13 @@ function init_gear_sets(job)
 		feet="Vagabond's Boots"
 	}
 	sets.misc.AllJobs.MAB = {
-		ammo="Erlene's Notebook",
-		left_ring="Acumen Ring",
+		ammo={ name="Erlene's Notebook", augments={'System: 1 ID: 131 Val: 7','System: 1 ID: 131 Val: 7','System: 1 ID: 131 Val: 7','System: 1 ID: 131 Val: 7',}},
+		left_ring={ name="Acumen Ring", augments={'System: 1 ID: 131 Val: 7','System: 1 ID: 131 Val: 7','System: 1 ID: 131 Val: 7','System: 1 ID: 131 Val: 7',}},
 		right_ring={ name="Dark Ring", augments={'Accuracy+5 Attack+5','Eva.+1 /Mag. Eva.+1','System: 1 ID: 131 Val: 7','Weapon skill damage +8%',}},
-		left_ear="Novio Earring",
-		right_ear="Hecate's Earring",
-		back="Izdubar Mantle",
-		neck = "Stoicheion Medal"
+		left_ear={ name="Hecate's Earring", augments={'System: 1 ID: 131 Val: 7','System: 1 ID: 131 Val: 7','System: 1 ID: 131 Val: 7','System: 1 ID: 131 Val: 7',}},
+		right_ear={ name="Novio Earring", augments={'System: 1 ID: 131 Val: 7','System: 1 ID: 131 Val: 7','System: 1 ID: 131 Val: 7','System: 1 ID: 131 Val: 7',}},
+		back={ name="Izdubar Mantle", augments={'System: 1 ID: 131 Val: 7','System: 1 ID: 131 Val: 7','System: 1 ID: 131 Val: 7','System: 1 ID: 131 Val: 7',}},
+		neck={ name="Stoicheion Medal", augments={'System: 1 ID: 131 Val: 7','System: 1 ID: 131 Val: 7','System: 1 ID: 131 Val: 7','System: 1 ID: 131 Val: 7',}},
 	}
 
 	sets.misc.AllJobs['DTDown'] = {
