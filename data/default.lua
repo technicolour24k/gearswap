@@ -19,6 +19,8 @@ function get_sets()
 	debugLog("Executing alias setup..") 
 	send_command('exec "aliases/common"')
 	send_command('exec "aliases/'..server..'/'..player.name..'_'..player.main_job..'"')
+	debugLog("Reloading Yush macros..")
+	send_command('lua r yush')
 	
 	if server ~= "retail" then
 			send_command('wait 1;gs load "private servers/'..server..'/'..player.name..'_'..player.main_job..'"')
