@@ -152,6 +152,11 @@ function midcast(spell)
 end
 
 function aftercast(spell)
+	if player.status == "Engaged" then
+		equip(sets.aftercast[player.status][TPStyle])
+	else
+		equip(sets.aftercast[player.status])
+	end
 	
 	customInfoCheckAftercast(spell.name, spell.tp_cost, spell.mp_cost)
 	announceSpell(spell.name, spell.target.name, "p")
