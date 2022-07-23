@@ -38,7 +38,7 @@ function get_sets()
 	sets.WeaponSkills["Mercy Stroke"] = set_combine(sets.WeaponSkills['AllJobsWS'], {})
 	sets.WeaponSkills["Mandalic Stab"] = set_combine(sets.WeaponSkills['AllJobsWS'], {})
 	sets.WeaponSkills["Rudra's Storm"] = set_combine(sets.WeaponSkills['Fotia'], sets.WeaponSkills['AllJobsWS'], {
-		ammo = "Floestone",
+		ammo = "Fire Bomblet",
 		head = THF_EMPYREAN_HEAD,
 		body = THF_AF_BODY,
 		hands = THF_AF_HANDS,
