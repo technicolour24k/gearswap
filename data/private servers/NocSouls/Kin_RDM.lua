@@ -8,7 +8,7 @@ local showSpellInfo = config.showSpellInfo
 local showCancelInfo = config.showCancelInfo
 local FastCast = 80
 
-TPStyle = "Default"
+RDMStyle = "Melee"
 
 function get_sets()
 	include('private servers/'..server..'/common-gearsets')
@@ -64,7 +64,8 @@ function get_sets()
 
 	sets.midcast.Cure = {}
 	sets.midcast['Refresh'] = set_combine(sets.midcast.EnhancingDuration, sets.midcast.RDM.EnhancingDuration, {
-		legs=RDM_EMPYREAN_LEGS
+		legs=RDM_EMPYREAN_LEGS,
+		body=RDM_AF_BODY
 	})
 	sets.midcast['Refresh II'] = set_combine(sets.midcast['Refresh'], {})
 
@@ -85,17 +86,48 @@ function get_sets()
 
 	sets.midcast.RDM['Divine Magic'] = {}
 	sets.midcast.RDM['Healing Magic'] = {}
-	sets.midcast.RDM['Enhancing Magic'] = set_combine(sets.midcast.RDM['EnhancingDuration'],{})
-	sets.midcast.RDM['Enfeebling Magic'] = set_combine(sets.midcast.RDM['EnfeeblingDuration'],{})
-	sets.midcast.RDM['Elemental Magic'] = set_combine(sets.misc.AllJobs.MAB, {})
+	sets.midcast.RDM['Enhancing Magic'] = set_combine(sets.midcast.RDM['EnhancingDuration'],{
+		body=RDM_RELIC_BODY,
+		legs=RDM_AF_LEGS,
+		feet=RDM_EMPYREAN_FEET,
+		left_ear="Andoaa Earring",
+		left_ring={ name="Stikini Ring +1", augments={'"Refresh"+20','"Refresh"+20','"Refresh"+20','"Refresh"+20',}},
+	
+	})
+	sets.midcast.RDM['Enfeebling Magic'] = set_combine(sets.midcast.RDM['EnfeeblingDuration'],{
+		ammo={ name="Erlene's Notebook", augments={'System: 1 ID: 131 Val: 7','System: 1 ID: 131 Val: 7','System: 1 ID: 131 Val: 7','System: 1 ID: 131 Val: 7',}},
+		head=RDM_AF_HEAD,
+		body=RDM_EMPYREAN_BODY,
+		hands=RDM_EMPYREAN_HANDS,
+		legs=RDM_AF_LEGS,
+		feet=RDM_RELIC_FEET,
+		neck={ name="Stoicheion Medal", augments={'System: 1 ID: 131 Val: 7','System: 1 ID: 131 Val: 7','System: 1 ID: 131 Val: 7','System: 1 ID: 131 Val: 7',}},
+		left_ear="Regal Earring",
+		right_ear={ name="Moonshade Earring", augments={'"Refresh"+10','"Fast Cast"+5','"Regen"+10','"Store TP"+5',}},
+		back={ name="Izdubar Mantle", augments={'System: 1 ID: 131 Val: 7','System: 1 ID: 131 Val: 7','System: 1 ID: 131 Val: 7','System: 1 ID: 131 Val: 7',}},
+	
+	})
+	sets.midcast.RDM['Elemental Magic'] = set_combine(sets.midcast.RDM['MAB'], {})
 	sets.midcast.RDM['Dark Magic'] = {}
 	sets.aftercast.Resting = {}
-	sets.aftercast.Engaged = {}
+	sets.aftercast.Engaged = {
+		ammo={ name="Yetshila +1", augments={'"Triple Atk."+2','"Triple Atk."+2','Crit.hit rate+5','Crit.hit rate+5',}},
+		head=RDM_AF_HEAD,
+		body=RDM_AF_BODY,
+		hands=RDM_AF_HANDS,
+		legs=RDM_AF_LEGS,
+		feet=RDM_AF_FEET,
+		neck={ name="Loricate Torque +1", augments={'"Regen"+20','"Regen"+20','"Regen"+20','"Regen"+20',}},
+		waist={ name="Windbuffet Belt +1", augments={'"Triple Atk."+2','"Triple Atk."+2','"Triple Atk."+2','"Triple Atk."+2',}},
+		left_ear="Andoaa Earring",
+		right_ear="Cessance Earring",
+		left_ring={ name="Defending Ring", augments={'"Regen"+20','"Regen"+20','"Regen"+20','"Regen"+20',}},
+		right_ring="Patricius Ring",
+		back={ name="Laic Mantle", augments={'"Triple Atk."+2','"Triple Atk."+2','"Triple Atk."+2','"Triple Atk."+2',}},
+	
+	}
 
-	sets.aftercast.Engaged.Default = set_combine(sets.weapons[mjob]["Daggers"],{
-	})
-
-	sets.aftercast.Idle = set_combine(sets.aftercast.Engaged[TPStyle], sets.misc.AllJobs['DTCombo'],{
+	sets.aftercast.Idle = set_combine(sets.aftercast.Engaged, sets.misc.AllJobs['DTCombo'],{
 		head=RDM_RELIC_HEAD,
 		body=RDM_EMPYREAN_BODY,
 		legs="Crimson Cuisses"
@@ -148,12 +180,22 @@ function midcast(spell)
 	if (enspell_list:contains(spell.english)) then
 		equip(sets.midcast.Enspell)
 	end
+
+	if (sets.midcast.RDM[spell.english]) then
+		equip(sets.midcast.RDM[spell.english])
+	end
+	if (sets.midcast.RDM[spell.skill]) then
+		equip(sets.midcast.RDM[spell.skill])
+	end
+
+	weathercheck(spell.element)
 	customInfoCheckMidcast(spell.name, spell.tp_cost, spell.mp_cost)
 end
 
 function aftercast(spell)
+	equip(sets.weapons.RDM[RDMStyle])
 	if player.status == "Engaged" then
-		equip(sets.aftercast[player.status][TPStyle])
+		equip(sets.aftercast[player.status])
 	else
 		equip(sets.aftercast[player.status])
 	end
@@ -164,24 +206,14 @@ end
 
 function status_change(new, old)
 	if player.status == "Engaged" then
-		equip(sets.aftercast[player.status][TPStyle])
+		equip(sets.aftercast[player.status][RDMStyle])
 	else
 		equip(sets.aftercast[player.status])
 	end
 end
 
 function buff_change(name, gain)
-	if name == "Trick Attack" and gain == "false" then
-		equip(sets.aftercast.Idle)
-	elseif name == "Sneak Attack" and gain == "false" then
-		if player.status == "Idle" then
-			equip_idle_set()
-		elseif sets.aftercast[player.status][TPStyle] then
-			equip(sets.aftercast[player.status][TPStyle], sets.aftercast)
-		else
-			equip(sets.aftercast.Idle, sets.aftercast)
-		end
-	end
+
 end
 
 function area_change(new,old)
@@ -192,18 +224,16 @@ function self_command(command)
 
 	if command:lower() == "togglegear" then
 		send_command("gs enable sub")
-		if TPStyle == "Default" then
-			TPStyle = "TH"
-			equip(sets.aftercast.Engaged[TPStyle])
-		elseif TPStyle == "TH" then
-			TPStyle = "Accuracy"
-		elseif TPStyle == "Accuracy" then
-			TPStyle = "Evasion"
+		if RDMStyle == "Melee" then
+			RDMStyle = "Mage"
 		else
-			TPStyle="Default"
+			RDMStyle="Melee"
 		end
-		infoLog("TP Style is now: " .. TPStyle.. "!")
-		equip(sets.aftercast.Engaged[TPStyle])
+		infoLog("RDM Style is now: " .. RDMStyle.. "!")
+		equip(sets.weapons.RDM[RDMStyle])
+		if (sets.aftercast[player.status]) then
+			equip(sets.aftercast[player.status])
+		end
 	end
 
 	if command:lower() == "status-check" then
@@ -213,7 +243,7 @@ function self_command(command)
 	end
 
 	if player.status == "Engaged" then
-		equip(sets.aftercast[player.status][TPStyle])
+		equip(sets.aftercast[player.status][RDMStyle])
 	else
 		equip(sets.aftercast[player.status])
 	end

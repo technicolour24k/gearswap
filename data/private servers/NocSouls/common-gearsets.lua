@@ -21,10 +21,8 @@ function init_gear_sets(job)
 	sets.weapons.WHM['Healing'] = {main="",sub=""}
 
 	sets.weapons.RDM = {}
-	sets.weapons.RDM['Dual Wield'] = {main="",sub=""}
-	sets.weapons.RDM['Healing'] = {main="",sub=""}
-	sets.weapons.RDM['SwordShield'] = {main="",sub=""}
-	sets.weapons.RDM['Elemental'] = {main="",sub=""}
+	sets.weapons.RDM['Melee'] = {main="Murgleis",sub="Beatific Shield"}
+	sets.weapons.RDM['Mage'] = {main="",sub=""}
 
 	sets.weapons.BLM = {}
 	sets.weapons.BLM['Elemental'] = {main="Laevateinn",sub="Elan Strap"}

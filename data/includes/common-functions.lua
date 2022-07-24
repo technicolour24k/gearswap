@@ -7,16 +7,12 @@ local showSpellInfo = config.showSpellInfo
 local showCancelInfo = config.showCancelInfo
 
 
-function weathercheck(spell_element,set)
-    if not set then return end
+function weathercheck(spell_element)
     if spell_element == world.weather_element or spell_element == world.day_element then
 		send_command('@input /echo >> Weather or Day element matches spell element <<')
-        equip(set,sets.Obis[spell_element]) --Equip standard obi, force fallback below
-        equip(set,sets.Obis.AIO) --Force fallback onto Hachirin-no-Obi, just in case individual obis no longer exist
-    else
-        equip(set)
+        equip(sets.Obis[spell_element]) --Equip standard obi, force fallback below
+        equip(sets.Obis.AIO) --Force fallback onto Hachirin-no-Obi, just in case individual obis no longer exist
     end
-    if set[spell_element] then equip(set[spell_element]) end
 end
 
 function checkForTown()
