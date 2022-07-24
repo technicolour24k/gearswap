@@ -2,4 +2,4 @@ alias defBuffs protect5;wait 3.5;shell5;wait 3.5;blink;wait 4;Stoneskin;wait 4;P
 alias offBuffs Haste2;wait 4;gainint;
 alias utilityBuffs Refresh2;wait 4;blazespikes;wait 3;avatarsfavor
 
-alias Me Composure;wait 2;defBuffs;wait 4;offBuffs;wait 4;utilityBuffs
+alias buffMe Composure;wait 2;defBuffs;wait 4;offBuffs;wait 4;utilityBuffs
