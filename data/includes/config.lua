@@ -2,6 +2,7 @@
 
 -- Server details - Used by default.lua to find proper server LUAs
 server = "NocSouls"
+serverStage = "beta"
 
 -- Display info in chat settings
 config = {}
@@ -46,8 +47,9 @@ conserveMP_list = --Store spells that get no benefit from Potency or anything ou
     "Refresh II"
 }
 
+
 --Below 4 lists are used by oneClickRemedies to know which statuses get assigned to which medicine
-remedy_list = {"Blind","Paralysis","Silence","Poison"}
-remedyOintment_list = {"Blind","Paralysis","Silence","Poison", "Disease", "Plague"}
-panacea_list = {"Bind", "Bio", "Burn", "Choke", "Dia", "Flash", "Frost", "Gravity", "Rasp", "Slow", "Stun", "Weight", "Attack Down", "Defense Down"}
-holyWater_list = {"Curse","Doom"}
+remedy_list = S{"Blind","Paralysis","Silence","Poison"}
+remedyOintment_list = S{"Disease", "Plague"}
+panacea_list = S{"Bind", "Bio", "Burn", "Choke", "Dia", "Flash", "Frost", "Gravity", "Rasp", "Slow", "Stun", "Weight", "Attack Down", "Defense Down"}
+holyWater_list = S{"Curse","Doom"}
