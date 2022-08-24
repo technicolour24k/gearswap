@@ -33,10 +33,10 @@ function get_sets()
 	sets.precast.WeaponSkills['Swift Blade'] = set_combine(sets.WeaponSkills['Fotia'], {})
 	sets.precast.WeaponSkills['Vorpal Blade'] = set_combine(sets.WeaponSkills['Fotia'], {})
 	-- MAB modded WS
-	sets.precast.WeaponSkills['Sanguine Blade'] = set_combine(sets.misc.AllJobs.MAB, {})
+	sets.precast.WeaponSkills['Sanguine Blade'] = set_combine( {})
 	sets.precast.WeaponSkills['Uriel Blade'] = set_combine(sets.misc.AllJobs.MAB, {})
 	-- Standard mods
-	sets.precast.WeaponSkills['Savage Blade'] = set_combine(sets.WeaponSkills.default,{ --50% STR, 50% MND - Equal footing for both
+	sets.precast.WeaponSkills['Savage Blade'] = set_combine(sets.WeaponSkills['AllJobsWS'],{ --50% STR, 50% MND - Equal footing for both
 		head="Rev. Coronet +3",
 		body="Rev. Surcoat +3",
 		hands="Rev. Gauntlets +3",
@@ -46,8 +46,6 @@ function get_sets()
 		waist="Chuq'aba Belt",
 		left_ear="Aqua Pearl",
 		right_ear="Aqua Pearl",
-		left_ring="Regal Ring",
-		right_ring="Stikini Ring +1",
 		back="Laic Mantle",
 	})
 	sets.precast.WeaponSkills['Knights of Round'] = {}

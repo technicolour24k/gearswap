@@ -1,10 +1,10 @@
 return {
     ['Ctrl+1'] = '',
     ['Ctrl+2'] = '',
-    ['Ctrl+3'] = '',
-    ['Ctrl+4'] = '',
-    ['Ctrl+5'] = '',
-    ['Ctrl+6'] = '',
+    ['Ctrl+3'] = 'input /ja "Fealty" <me>',
+    ['Ctrl+4'] = 'input /ja "Sentinel" <me>',
+    ['Ctrl+5'] = 'input /ja "Palisade" <me>',
+    ['Ctrl+6'] = 'input /ja "Rampart" <me>',
     ['Ctrl+7'] = '',
     ['Ctrl+8'] = '',
     ['Ctrl+9'] = '',
@@ -17,6 +17,6 @@ return {
     ['Alt+6'] = '',
     ['Alt+7'] = '',
     ['Alt+8'] = '',
-    ['Alt+9'] = '',
-    ['Alt+0'] = 'input /ws "Swift Blade" <t>',
+    ['Alt+9'] = 'input /ws "Sanguine Blade" <t>',
+    ['Alt+0'] = 'input /ws "Savage Blade" <t>',
 }
