@@ -22,10 +22,13 @@ function get_sets()
 	})
 	sets.JobAbility["Hundred Fists"] = {}
 	sets.JobAbility["Boost"] = {}
-	sets.JobAbility["Focus"] = {}
+	sets.JobAbility["Focus"] = {head=MNK_AF_HEAD}
 	sets.JobAbility['Dodge'] = {}
-	sets.JobAbility['Chakra'] = {}
-	sets.JobAbility['Counterstance'] = {}
+	sets.JobAbility['Chakra'] = {
+		body=MNK_AF_BODY,
+		hand=MNK_RELIC_HANDS,
+	}
+	sets.JobAbility['Counterstance'] = {feet=MNK_RELIC_FEET}
 	sets.JobAbility['Jump'] = {}
 	sets.JobAbility['Chi Blast'] = {}
 	sets.JobAbility['Formless Strikes'] = {}
@@ -42,8 +45,6 @@ function get_sets()
 		left_ear = "Mache Earring +1",
 		right_ear = "Mache Earring +1",
 	})
-	sets.WeaponSkills["Aeolian Edge"] = set_combine(sets.MAB,{})
-	sets.WeaponSkills["Exenterator"] = set_combine(sets.WeaponSkills['AllJobsWS'], {})
 
 	sets.midcast.Cure = {}
 
