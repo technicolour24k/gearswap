@@ -128,50 +128,50 @@ function get_sets()
 	sets.JobAbility.Release = sets.aftercast.Idle
 
 	bloodpacts = {}
-	bloodpacts.Carbuncle = {}
-	bloodpacts.Carbuncle['bp-rage-1']="Holy Mist"
-	bloodpacts.Carbuncle['bp-rage-2']="Meteorite"
-	bloodpacts.Carbuncle['bp-ward']="Healing Ruby II"
-	bloodpacts.Shiva = {}
-	bloodpacts.Shiva['rage-1']="Rush"
-	bloodpacts.Shiva['rage-2']="Heavenly Strike"
-	bloodpacts.Shiva['bp-ward']="Sleepga"
-	bloodpacts.Ifrit = {}
-	bloodpacts.Ifrit['rage-1']="Holy Mist"
-	bloodpacts.Ifrit['rage-2']="Meteorite"
-	bloodpacts.Ifrit['bp-ward']="Healing Ruby II"
-	bloodpacts.Garuda = {}
-	bloodpacts.Garuda['rage-1']="Holy Mist"
-	bloodpacts.Garuda['rage-2']="Meteorite"
-	bloodpacts.Garuda['bp-ward']="Healing Ruby II"
-	bloodpacts.Leviathan = {}
-	bloodpacts.Leviathan['rage-1']="Holy Mist"
-	bloodpacts.Leviathan['rage-2']="Meteorite"
-	bloodpacts.Leviathan['bp-ward']="Healing Ruby II"
-	bloodpacts.Titan = {}
-	bloodpacts.Titan['rage-1']="Holy Mist"
-	bloodpacts.Titan['rage-2']="Meteorite"
-	bloodpacts.Titan['bp-ward']="Healing Ruby II"
-	bloodpacts.Ramuh = {}
-	bloodpacts.Ramuh['rage-1']="Holy Mist"
-	bloodpacts.Ramuh['rage-2']="Meteorite"
-	bloodpacts.Ramuh['bp-ward']="Healing Ruby II"
-	bloodpacts.Fenrir = {}
-	bloodpacts.Fenrir['rage-1']="Holy Mist"
-	bloodpacts.Fenrir['rage-2']="Meteorite"
-	bloodpacts.Fenrir['bp-ward']="Healing Ruby II"
-	bloodpacts.Diabolos = {}
-	bloodpacts.Diabolos['rage-1']="Holy Mist"
-	bloodpacts.Diabolos['rage-2']="Meteorite"
-	bloodpacts.Diabolos['bp-ward']="Healing Ruby II"
+	bloodpacts['Carbuncle'] = {}
+	bloodpacts['Carbuncle']['bp-rage-1']="Holy Mist"
+	bloodpacts['Carbuncle']['bp-rage-2']="Meteorite"
+	bloodpacts['Carbuncle']['bp-ward']="Healing Ruby II"
+	bloodpacts['Shiva'] = {}
+	bloodpacts['Shiva']['bp-rage-1']="Rush"
+	bloodpacts['Shiva']['bp-rage-2']="Heavenly Strike"
+	bloodpacts['Shiva']['bp-ward']="Sleepga"
+	bloodpacts['Ifrit'] = {}
+	bloodpacts['Ifrit']['bp-rage-1']="Conflag Strike"
+	bloodpacts['Ifrit']['bp-rage-2']="Meteor Strike"
+	bloodpacts['Ifrit']['bp-ward']="Crimson Howl"
+	bloodpacts['Garuda'] = {}
+	bloodpacts['Garuda']['bp-rage-1']="Predator Claws"
+	bloodpacts['Garuda']['bp-rage-2']="Wind Blade"
+	bloodpacts['Garuda']['bp-ward']="Whispering Wind"
+	bloodpacts['Leviathan'] = {}
+	bloodpacts['Leviathan']['bp-rage-1']="Grand Fall"
+	bloodpacts['Leviathan']['bp-rage-2']="Spinning Dive"
+	bloodpacts['Leviathan']['bp-ward']="Spring Water"
+	bloodpacts['Titan'] = {}
+	bloodpacts['Titan']['bp-rage-1']="Crag Throw"
+	bloodpacts['Titan']['bp-rage-2']="Geocrush"
+	bloodpacts['Titan']['bp-ward']="Earthen Ward"
+	bloodpacts['Ramuh'] = {}
+	bloodpacts['Ramuh']['bp-rage-1']="Volt Strike"
+	bloodpacts['Ramuh']['bp-rage-2']="Thunderspark"
+	bloodpacts['Ramuh']['bp-ward']="Shock Squall"
+	bloodpacts['Fenrir'] = {}
+	bloodpacts['Fenrir']['bp-rage-1']="Lunar Bay"
+	bloodpacts['Fenrir']['bp-rage-2']="Impact"
+	bloodpacts['Fenrir']['bp-ward']="Heavenward Howl"
+	bloodpacts['Diabolos'] = {}
+	bloodpacts['Diabolos']['bp-rage-1']="Blindside"
+	bloodpacts['Diabolos']['bp-rage-2']="Night Terror"
+	bloodpacts['Diabolos']['bp-ward']="Nightmare"
 	bloodpacts['Cait Sith'] = {}
-	bloodpacts['Cait Sith']['rage-1']="Holy Mist"
-	bloodpacts['Cait Sith']['rage-2']="Meteorite"
-	bloodpacts['Cait Sith']['bp-ward']="Healing Ruby II"
-	bloodpacts.Siren = {}
-	bloodpacts.Siren['rage-1']="Holy Mist"
-	bloodpacts.Siren['rage-2']="Meteorite"
-	bloodpacts.Siren['bp-ward']="Healing Ruby II"
+	bloodpacts['Cait Sith']['bp-rage-1']="Regal Gash"
+	bloodpacts['Cait Sith']['bp-rage-2']="Mewing Lullaby"
+	bloodpacts['Cait Sith']['bp-ward']="Eerie Eye"
+	bloodpacts['Siren'] = {}
+	bloodpacts['Siren']['bp-rage-1']="Hysteric Assault"
+	bloodpacts['Siren']['bp-rage-2']="Tornado II"
+	bloodpacts['Siren']['bp-ward']="Wind's Blessing"
 
 	doSetup()
 	
@@ -309,17 +309,16 @@ end
 function self_command(command)
 	if command:lower() == "bp-rage-1" then
 		send_command('input /ja "'..bloodpacts[pet.name]['bp-rage-1']..'" <t>')
-		debugLog('Getting '..pet.name..' to use '..bloodpacts[pet.name]['rage-1'])
+		debugLog('Getting '..pet.name..' to use '..bloodpacts[pet.name]['bp-rage-1'])
 	end
 	if command:lower() == "bp-rage-2" then
 		send_command('input /ja "'..bloodpacts[pet.name]['bp-rage-2']..'" <t>')
-		debugLog('Getting '..pet.name..' to use '..bloodpacts[pet.name]['rage-2'])
+		debugLog('Getting '..pet.name..' to use '..bloodpacts[pet.name]['bp-rage-2'])
 
 	end
 	if command:lower() == "bp-ward" then
-		send_command('input /ja "'..bloodpacts[pet.name]['bp-ward']..'" <me>')
-		debugLog('Getting '..pet.name..' to use '..bloodpacts[pet.name]['bp-ward'])
-
+		send_command('input /ja "'..bloodpacts[pet.name]['bp-ward']..'" <st>')
+		debugLog('Getting '..pet.name..' to use '..bloodpacts[pet.name]['bp-ward']..'on <lastst>')
 	end
 end
 
