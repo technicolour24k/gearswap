@@ -1,5 +1,5 @@
-*.lua
-*.txt
+./*.lua
+./*.txt
 desktop.ini
 */desktop.ini
 */*/desktop.ini
@@ -11,3 +11,16 @@ export
 
 data/private servers/NocSouls/*_BETA.lua
 data/private servers/NocSouls/BETA/*
+equip_processing.lua
+export.lua
+flow.lua
+gearswap.lua
+helper_functions.lua
+packet_parsing.lua
+refresh.lua
+statics.lua
+targets.lua
+triggers.lua
+user_functions.lua
+validate.lua
+version_history.txt

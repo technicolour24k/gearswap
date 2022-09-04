@@ -11,9 +11,6 @@ local FastCast = 80
 
 function get_sets()
 
-	sets.WeaponSkills = {}
-	
-	
 	sets.precast = {}
 	sets.precast.FastCast = {}
 	sets.precast.FastCast.Default = {

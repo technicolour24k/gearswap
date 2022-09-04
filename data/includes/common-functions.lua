@@ -100,11 +100,7 @@ end
  	local remedyListLength = #remedy_list
  	local remedyOintmentListLength = #remedyOintment_list
  	local panaceaListLength = #panacea_list
- 	local holyWaterListLength = #holyWater_list
-	
-
- 	infoLog("Clear Status function called")
-		
+ 	local holyWaterListLength = #holyWater_list		
 		-- Fail safe in case this accidentally triggers. Should be checked by the calling LUA. 
 		if (config.oneClickRemedies) then
 		for i=1, holyWaterListLength do
@@ -180,4 +176,5 @@ end
 
 windower.register_event('gain buff', function(id)
    clearStatuses()
+   infoLog(id ..' gained')
 end)
