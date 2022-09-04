@@ -2,7 +2,7 @@
 
 -- Server details - Used by default.lua to find proper server LUAs
 server = "NocSouls"
-serverStage = "beta"
+serverStage = "1"
 
 -- Display info in chat settings
 config = {}
