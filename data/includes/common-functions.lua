@@ -8,7 +8,7 @@ local showFCInfo = config.showFastCastInfo
 local showSpellInfo = config.showSpellInfo
 local showCancelInfo = config.showCancelInfo
 
-
+--@param spell_element: Element of the spell you're using
 function weathercheck(spell_element)
     if spell_element == world.weather_element or spell_element == world.day_element then
 		send_command('@input /echo >> Weather or Day element matches spell element <<')
@@ -29,6 +29,12 @@ function checkForTown()
 	end
 end
 
+--- CancelBuff documentation
+-- @param spell: The name of the spell you're using. Recommendation: spell.name
+-- @param casttime: The base cast time of the spell you're using. Recommendation: spell.cast_time
+-- @param FC: The amount of FastCast you will have
+-- @param buff: The buff name you're targeting (e.g. "Sneak")
+-- @param skill: The type of skill you're using, e.g. JobAbility, EnhancingMagic, etc.
 function cancelBuff(spell, casttime, FC, buff, skill) --Requires cancel plugin
 
 	--Setup list of buffs to be autocancelled
@@ -91,29 +97,51 @@ function spellContains(spell, contains)
 end
 
  function clearStatuses()	
- 	local remedyListLength = table.getn(remedy_list)
- 	local remedyOintmentListLength = table.getn(remedyOintment_list)
- 	local panaceaListLength = table.getn(panacea_list)
- 	local holyWaterListLength = table.getn(holyWater_list)
+ 	local remedyListLength = #remedy_list
+ 	local remedyOintmentListLength = #remedyOintment_list
+ 	local panaceaListLength = #panacea_list
+ 	local holyWaterListLength = #holyWater_list
 	
 
- 	add_to_chat(8, "Clear Status function called")
+ 	infoLog("Clear Status function called")
 		
- 	-- Fail safe in case this accidentally triggers. Should be checked by the calling LUA. 
- 	if (config.oneClickRemedies) then
-		if buffactive['silence']  then
-			windower.send_command('input /item "Echo Drops" '..windower.ffxi.get_player()["name"])
-		elseif (buffactive:contains(remedy_list)) then
-			windower.send_command('input /item "Remedy" '..windower.ffxi.get_player()["name"])
-		elseif (buffactive:contains(remedyOintment_list)) then
-			windower.send_command('input /item "Remedy Ointment" '..windower.ffxi.get_player()["name"])
-		elseif (buffactive:contains(panacea_list)) then
-			windower.send_command('input /item "Panacea" '..windower.ffxi.get_player()["name"])
-		elseif (buffactive:contains(holyWater_list)) then
-			windower.send_command('input /item "Hallowed Water" '..windower.ffxi.get_player()["name"])
+		-- Fail safe in case this accidentally triggers. Should be checked by the calling LUA. 
+		if (config.oneClickRemedies) then
+		for i=1, holyWaterListLength do
+		   if (buffactive[holyWater_list[i]]) then
+			   send_command('input /item "Hallowed Water" <me>')
+			   send_command('input /item "Holy Water" <me>')
+			   break
+		   end
+	   end
+	   for i=1, remedyListLength do
+			if (buffactive[remedy_list[i]]) then
+				send_command('input /item "Remedy" <me>')
+				send_command('input /item "Remedy Ointment" <me>')
+				break
+			end
+		end	
+		for i=1, remedyOintmentListLength do
+			if (buffactive[remedyOintment_list[i]]) then
+				send_command('input /item "Remedy Ointment" <me>')
+				break
+			end
+		end	
+		for i=1, panaceaListLength do
+			if (buffactive[panacea_list[i]]) then
+				send_command('input /item "Panacea" <me>')
+				break
+			end
 		end
+	
+		
  	end
  end
+
+
+
+
+
 
 function echoInfo(info,delay)
 	if (delay) then
@@ -142,7 +170,7 @@ function debugLog(log)
 	add_to_chat(11, log)
 end
 
-function announceSpell(spell,target, chatmode)
+function announceSpell(spell,target,chatmode)
 	local announcementList = S{"Accomplice","Collaborator","Stun"}
 	if (announcementList:contains(spell)) then
 		send_command('input /'..chatmode..' '..spell..' => '..target)
@@ -151,21 +179,5 @@ end
 
 
 windower.register_event('gain buff', function(id)
-    local name = res.buffs[id].english
-	local combinedWatchList = {"Blind","Paralysis","Silence","Poison", "Disease", "Plague", "Bind", "Bio", "Burn", "Choke", "Dia", "Flash", "Frost", "Gravity", "Rasp", "Slow", "Stun", "Weight", "Attack Down", "Defense Down", "Curse","Doom"}
-    for key,val in pairs(combinedWatchList) do
-        if val:lower() == name:lower() then
-            if name:lower() == 'silence'  then
-                windower.send_command('input /item "Echo Drops" '..windower.ffxi.get_player()["name"])
-            elseif (remedy_list:contains(name:lower())) then
-                windower.send_command('input /item "Remedy" '..windower.ffxi.get_player()["name"])
-            elseif (remedyOintment_list:contains(name:lower())) then
-                windower.send_command('input /item "Remedy Ointment" '..windower.ffxi.get_player()["name"])
-            elseif (panacea_list:contains(name:lower())) then
-                windower.send_command('input /item "Panacea" '..windower.ffxi.get_player()["name"])
-            elseif (holyWater_list:contains(name:lower())) then
-                windower.send_command('input /item "Hallowed Water" '..windower.ffxi.get_player()["name"])
-            end
-        end
-    end
+   clearStatuses()
 end)
