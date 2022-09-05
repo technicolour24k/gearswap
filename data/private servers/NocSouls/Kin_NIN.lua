@@ -15,6 +15,7 @@ TPStyleIndex = 1
 function get_sets()
 	local mjob = player.main_job
 	init_gear_sets(mjob)
+	sets.NIN = {}
 
     sets.JobAbility['Yonin'] = {}
 	sets.JobAbility['Innin'] = {}
@@ -33,8 +34,8 @@ function get_sets()
 		right_ear="Sortiarius Earring",
 	})
 
-    sets.midcast.Cure = {}
-	sets.midcast.Nuke = {
+    sets.NIN.midcast.Cure = {}
+	sets.NIN.midcast.Nuke = {
 		head="Mochi. Hatsuburi +1",
 		body="Gyve Doublet",
 		hands="Hattori Tekko +1",
@@ -120,23 +121,31 @@ function precast(spell)
 end
 function midcast(spell)
 	cancelBuff(spell.english, spell.cast_time, FastCast)
-	
-	if sets.midcast[spell.english] then
-		equip(sets.midcast[spell.english])
-	elseif string.find(spell.english,'Cur') and spell.english ~='Cursna' then 
-        equip(sets.midcast.Cure)
+
+	if sets.NIN.midcast[spell.english] then
+		equip(sets.NIN.midcast[spell.english])
+	elseif sets.common.midcast[spell.english] then
+		equip(sets.common.midcast[spell.english])
+	elseif string.find(spell.english,'Cure') or string.find(spell.english,'Cura') then 
+        equip(sets.NIN.midcast.Cure)
 	end
-	if sets.midcast[spell.skill] then
-		equip(sets.midcast[spell.skill])
+
+	if sets.NIN.midcast[spell.skill] then
+		equip(sets.NIN.midcast[spell.skill])
+	elseif sets.common.midcast[spell.skill] then
+		equip(sets.common.midcast[spell.skill])
+
 	end
 	if (enspell_list:contains(spell.english)) then
-		equip(sets.midcast.Enspell)
-	end
-	if (eleWheel_list:contains(spell.english)) then
-		equip(sets.midcast.Nuke)
+		equip(sets.common.midcast.Enspell)
 	end
 	if (conserveMP_list:contains(spell.english)) then
-		equip (sets.midcast.ConserveMP)
+		equip(sets.common.midcast.ConserveMP)
+	end
+	customInfoCheckMidcast(spell.name, spell.tp_cost, spell.mp_cost)
+
+	if (eleWheel_list:contains(spell.english)) then
+		equip(sets.NIN.midcast.Nuke)
 	end
 end
 

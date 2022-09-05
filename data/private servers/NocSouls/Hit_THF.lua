@@ -15,8 +15,9 @@ function get_sets()
 	include('private servers/'..server..'/custom-info')
 	local mjob = player.main_job
 	init_gear_sets(mjob)
+	sets.THF={}
 	
-	sets.TH = {
+	sets.THF.TH = {
 		sub = "Sandung",
 		hands = THF_RELIC_HANDS,
 		feet = THF_EMPYREAN_FEET
@@ -52,7 +53,7 @@ function get_sets()
 	sets.WeaponSkills["Aeolian Edge"] = set_combine(sets.MAB,{})
 	sets.WeaponSkills["Exenterator"] = set_combine(sets.WeaponSkills['AllJobsWS'], {})
 
-	sets.midcast.Cure = {}
+	sets.THF.midcast.Cure = {}
 
 	sets.aftercast = {}
 	sets.aftercast.Resting = {}
@@ -74,7 +75,7 @@ function get_sets()
 		back={ name="Laic Mantle", augments={'"Triple Atk."+2','"Triple Atk."+2','"Triple Atk."+2','"Triple Atk."+2',}},
 	})
 
-	sets.aftercast.Engaged.TH = set_combine(sets.aftercast.Engaged.Default, sets.TH)
+	sets.aftercast.Engaged.TH = set_combine(sets.aftercast.Engaged.Default, sets.THF.TH)
 	sets.aftercast.Engaged.Accuracy = set_combine(sets.aftercast.Engaged.Default, {})
 	sets.aftercast.Engaged.Evasion = set_combine(sets.aftercast.Engaged.Default, {})
 
@@ -116,19 +117,25 @@ end
 function midcast(spell)
 	cancelBuff(spell.english, spell.cast_time, FastCast)
 
-	if sets.midcast[spell.english] then
-		equip(sets.midcast[spell.english])
+	if sets.THF.midcast[spell.english] then
+		equip(sets.THF.midcast[spell.english])
+	elseif sets.common.midcast[spell.english] then
+		equip(sets.common.midcast[spell.english])
 	elseif string.find(spell.english,'Cure') or string.find(spell.english,'Cura') then 
-        equip(sets.midcast.Cure)
+        equip(sets.THF.midcast.Cure)
 	end
-	if sets.midcast[spell.skill] then
-		equip(sets.midcast[spell.skill])
+
+	if sets.THF.midcast[spell.skill] then
+		equip(sets.THF.midcast[spell.skill])
+	elseif sets.common.midcast[spell.skill] then
+		equip(sets.common.midcast[spell.skill])
+
 	end
 	if (enspell_list:contains(spell.english)) then
-		equip(sets.midcast.Enspell)
+		equip(sets.common.midcast.Enspell)
 	end
 	if (conserveMP_list:contains(spell.english)) then
-		equip(sets.midcast.ConserveMP)
+		equip(sets.common.midcast.ConserveMP)
 	end
 	customInfoCheckMidcast(spell.name, spell.tp_cost, spell.mp_cost)
 end

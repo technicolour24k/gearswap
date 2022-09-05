@@ -15,7 +15,7 @@ function get_sets()
 	include('private servers/'..server..'/custom-info')
 	local mjob = player.main_job
 	init_gear_sets(mjob)
-	
+	sets.MNK={}
 	
 	sets.MAB = set_combine(sets.misc.AllJobs.MAB, {
 		
@@ -46,9 +46,6 @@ function get_sets()
 		right_ear = "Mache Earring +1",
 	})
 
-	sets.midcast.Cure = {}
-
-	sets.aftercast = {}
 	sets.aftercast.Resting = {}
 	sets.aftercast.Engaged = {}
 
@@ -108,19 +105,25 @@ end
 function midcast(spell)
 	cancelBuff(spell.english, spell.cast_time, FastCast)
 
-	if sets.midcast[spell.english] then
-		equip(sets.midcast[spell.english])
+	if sets.MNK.midcast[spell.english] then
+		equip(sets.MNK.midcast[spell.english])
+	elseif sets.common.midcast[spell.english] then
+		equip(sets.common.midcast[spell.english])
 	elseif string.find(spell.english,'Cure') or string.find(spell.english,'Cura') then 
-        equip(sets.midcast.Cure)
+        equip(sets.MNK.midcast.Cure)
 	end
-	if sets.midcast[spell.skill] then
-		equip(sets.midcast[spell.skill])
+
+	if sets.MNK.midcast[spell.skill] then
+		equip(sets.MNK.midcast[spell.skill])
+	elseif sets.common.midcast[spell.skill] then
+		equip(sets.common.midcast[spell.skill])
 	end
+	
 	if (enspell_list:contains(spell.english)) then
-		equip(sets.midcast.Enspell)
+		equip(sets.common.midcast.Enspell)
 	end
 	if (conserveMP_list:contains(spell.english)) then
-		equip(sets.midcast.ConserveMP)
+		equip(sets.common.midcast.ConserveMP)
 	end
 	customInfoCheckMidcast(spell.name, spell.tp_cost, spell.mp_cost)
 end

@@ -16,8 +16,7 @@ function get_sets()
 	local mjob = player.main_job
 	init_gear_sets(mjob)
 	
-	sets.TH = {
-	}
+	sets.RDM = {}
 
 	sets.JobAbility['Manafont'] = {}
 	sets.JobAbility['Elemental Seal'] = {}
@@ -40,7 +39,7 @@ function get_sets()
 		feet = BLM_RELIC_FEET,
 		back = "Goetia Mantle",
 	})
-	sets.midcast['Elemental Magic'] = set_combine(sets.misc.AllJobs.MAB, {
+	sets.RDM.midcast['Elemental Magic'] = set_combine(sets.misc.AllJobs.MAB, {
         main="Chatoyant Staff",
         sub="Elan Strap",
         ammo="Erlene's Notebook",
@@ -57,16 +56,15 @@ function get_sets()
         right_ring="Strendu Ring",
         back="Izdubar Mantle",
 	})
-	sets.WeaponSkills['Tartarus Torpor'] = set_combine(sets.WeaponSkills['AllJobsWS'], sets.midcast['Elemental Magic'],	{})
+	sets.WeaponSkills['Tartarus Torpor'] = set_combine(sets.WeaponSkills['AllJobsWS'], sets.RDM.midcast['Elemental Magic'],	{})
 	
-	sets.midcast.Cure = {}
+	sets.RDM.midcast.Cure = {}
 
-	sets.midcast.DrainAspir = {
-		legs=BLM_AF_LEGS
+	sets.RDM.midcast.DrainAspir = {
 	}
 
-    sets.midcast['Drain'] = set_combine(sets.midcast.DrainAspir, {})
-    sets.midcast['Aspir'] = set_combine(sets.midcast.DrainAspir, {})
+    sets.RDM.midcast['Drain'] = set_combine(sets.RDM.midcast.DrainAspir, {})
+    sets.RDM.midcast['Aspir'] = set_combine(sets.RDM.midcast.DrainAspir, {})
 	
 	sets.aftercast = {}
 	sets.aftercast.Resting = {}
@@ -127,19 +125,25 @@ end
 function midcast(spell)
 	cancelBuff(spell.english, spell.cast_time, FastCast)
 
-	if sets.midcast[spell.english] then
-		equip(sets.midcast[spell.english])
+	if sets.RDM.midcast[spell.english] then
+		equip(sets.RDM.midcast[spell.english])
+	elseif sets.common.midcast[spell.english] then
+		equip(sets.common.midcast[spell.english])
 	elseif string.find(spell.english,'Cure') or string.find(spell.english,'Cura') then 
-        equip(sets.midcast.Cure)
+        equip(sets.RDM.midcast.Cure)
 	end
-	if sets.midcast[spell.skill] then
-		equip(sets.midcast[spell.skill])
+
+	if sets.RDM.midcast[spell.skill] then
+		equip(sets.RDM.midcast[spell.skill])
+	elseif sets.common.midcast[spell.skill] then
+		equip(sets.common.midcast[spell.skill])
 	end
+	
 	if (enspell_list:contains(spell.english)) then
-		equip(sets.midcast.Enspell)
+		equip(sets.common.midcast.Enspell)
 	end
 	if (conserveMP_list:contains(spell.english)) then
-		equip(sets.midcast.ConserveMP)
+		equip(sets.common.midcast.ConserveMP)
 	end
 	customInfoCheckMidcast(spell.name, spell.tp_cost, spell.mp_cost)
 end

@@ -20,7 +20,7 @@ function get_sets()
 		back="Tiresias' Cape", --BP -3
 	}
 	
-	sets.midcast['Summoning Magic'] = {
+	sets.SMN.midcast['Summoning Magic'] = {
 		main = "Nirvana",
 		sub="Elan Strap",
 		ammo = "Sancus Sachet",
@@ -36,21 +36,21 @@ function get_sets()
 		legs = "Beckoner's Spats",
 		feet="Adhara Crackows"		
 	}
-	sets.midcast['Elemental Magic'] = {
+	sets.SMN.midcast['Elemental Magic'] = {
 	
 	}
-	sets.midcast['Enfeebling Magic'] = {
+	sets.SMN.midcast['Enfeebling Magic'] = {
 		legs="Adhara Seraweels"
 	}
-	sets.midcast['Dark Magic'] = {
+	sets.SMN.midcast['Dark Magic'] = {
 
 	}
 	
-	sets.midcast['Healing Magic'] = {
+	sets.SMN.midcast['Healing Magic'] = {
 		legs="Adhara Seraweels"
 	}
 	
-	sets.midcast['Enhancing Magic'] = {
+	sets.SMN.midcast['Enhancing Magic'] = {
 		legs="Shedir Seraweels"
 
 	}
@@ -150,19 +150,31 @@ end
 
 function midcast(spell)  
 	cancelBuff(spell.english, spell.cast_time, FastCast)
-	
-	if sets.midcast[spell.skill] then
-		equip(sets.midcast[spell.skill])
+
+	if sets.SMN.midcast[spell.english] then
+		equip(sets.SMN.midcast[spell.english])
+	elseif sets.common.midcast[spell.english] then
+		equip(sets.common.midcast[spell.english])
+	elseif string.find(spell.english,'Cure') or string.find(spell.english,'Cura') then 
+        equip(sets.SMN.midcast.Cure)
+	end
+
+	if sets.SMN.midcast[spell.skill] then
+		equip(sets.SMN.midcast[spell.skill])
+	elseif sets.common.midcast[spell.skill] then
+		equip(sets.common.midcast[spell.skill])
+
+	end
+	if (enspell_list:contains(spell.english)) then
+		equip(sets.common.midcast.Enspell)
+	end
+	if (conserveMP_list:contains(spell.english)) then
+		equip(sets.common.midcast.ConserveMP)
 	end
 	
 	if sets.AvatarPerp[spell.name] then
 		equip(sets.AvatarPerp[spell.name])
 	end
-    
-	if sets.JobAbility[spell.name] then
-		equip(sets.JobAbility[spell.name])
-	end
-	
 	if spell.type == 'BloodPactRage' then
 		if magicalRagePacts:contains(spell.english) then
 			equip(sets.BloodPact.MagicRage)
@@ -174,6 +186,7 @@ function midcast(spell)
 	else
 		equip(sets.BloodPact.PartyWard)
 	end
+	customInfoCheckMidcast(spell.name, spell.tp_cost, spell.mp_cost)
 end
 
 function aftercast(spell)

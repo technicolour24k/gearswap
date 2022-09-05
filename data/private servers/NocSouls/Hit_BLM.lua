@@ -15,9 +15,7 @@ function get_sets()
 	include('private servers/'..server..'/custom-info')
 	local mjob = player.main_job
 	init_gear_sets(mjob)
-	
-	sets.TH = {
-	}
+	sets.BLM = {}
 
 	sets.JobAbility['Manafont'] = {}
 	sets.JobAbility['Elemental Seal'] = {}
@@ -40,7 +38,7 @@ function get_sets()
 		feet = BLM_RELIC_FEET,
 		back = "Goetia Mantle",
 	})
-	sets.midcast['Elemental Magic'] = set_combine(sets.misc.AllJobs.MAB, sets.weapons.BLM['Elemental'], {
+	sets.BLM.midcast['Elemental Magic'] = set_combine(sets.misc.AllJobs.MAB, sets.weapons.BLM['Elemental'], {
 		right_ring={ name="Strendu Ring"},
 		legs= {name="Gyve Trousers"},
 		waist= {name="Searing Sash"},
@@ -51,21 +49,19 @@ function get_sets()
 		feet = {name=BLM_AF_FEET},
 		left_ear= {name="Moldavite Earring"}
 	})
-	sets.WeaponSkills['Tartarus Torpor'] = set_combine(sets.WeaponSkills['AllJobsWS'], sets.midcast['Elemental Magic'],	{})
+	sets.WeaponSkills['Tartarus Torpor'] = set_combine(sets.WeaponSkills['AllJobsWS'], sets.BLM.midcast['Elemental Magic'],	{})
 	
-	sets.midcast.Cure = {}
+	sets.BLM.midcast.Cure = {}
 
-	sets.midcast.DrainAspir = {
+	sets.BLM.midcast['DrainAspir'] = {
 		legs=BLM_AF_LEGS
 	}
 
-    sets.midcast['Drain'] = set_combine(sets.midcast.DrainAspir, {})
-    sets.midcast['Aspir'] = set_combine(sets.midcast.DrainAspir, {})
+    sets.BLM.midcast['Drain'] = set_combine(sets.BLM.midcast['DrainAspir'], {})
+    sets.BLM.midcast['Aspir'] = set_combine(sets.BLM.midcast['DrainAspir'], {})
 	
-	sets.aftercast = {}
 	sets.aftercast.Resting = {}
 	sets.aftercast.Engaged = {}
-	
 	sets.aftercast.Engaged.Default = set_combine(sets.weapons[mjob]["Elemental"], sets.misc.AllJobs['DTCombo'],{
 		head=BLM_AF_HEAD,
 		body=BLM_AF_BODY,
@@ -76,7 +72,6 @@ function get_sets()
 		right_ring= {name = "Varar Ring", augments={}}
 	})
 
-	sets.aftercast.Engaged.TH = set_combine(sets.aftercast.Engaged.Default, sets.TH)
 	sets.aftercast.Engaged.Accuracy = set_combine(sets.aftercast.Engaged.Default, {})
 	sets.aftercast.Engaged.Evasion = set_combine(sets.aftercast.Engaged.Default, {})
 	
@@ -88,7 +83,6 @@ function get_sets()
 		waist={name = "Sorcerer's Belt", augments={}},
 	})
 
-	switchMacroSet(1, 1)
 	send_command("gs enable all")
 	send_command("gs equip sets.aftercast.Idle")
 
@@ -121,19 +115,25 @@ end
 function midcast(spell)
 	cancelBuff(spell.english, spell.cast_time, FastCast)
 
-	if sets.midcast[spell.english] then
-		equip(sets.midcast[spell.english])
+	if sets.BLM.midcast[spell.english] then
+		equip(sets.BLM.midcast[spell.english])
+	elseif sets.common.midcast[spell.english] then
+		equip(sets.common.midcast[spell.english])
 	elseif string.find(spell.english,'Cure') or string.find(spell.english,'Cura') then 
-        equip(sets.midcast.Cure)
+        equip(sets.BLM.midcast.Cure)
 	end
-	if sets.midcast[spell.skill] then
-		equip(sets.midcast[spell.skill])
+
+	if sets.BLM.midcast[spell.skill] then
+		equip(sets.BLM.midcast[spell.skill])
+	elseif sets.common.midcast[spell.skill] then
+		equip(sets.common.midcast[spell.skill])
 	end
+	
 	if (enspell_list:contains(spell.english)) then
-		equip(sets.midcast.Enspell)
+		equip(sets.common.midcast.Enspell)
 	end
 	if (conserveMP_list:contains(spell.english)) then
-		equip(sets.midcast.ConserveMP)
+		equip(sets.common.midcast.ConserveMP)
 	end
 	customInfoCheckMidcast(spell.name, spell.tp_cost, spell.mp_cost)
 end

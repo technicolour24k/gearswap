@@ -16,7 +16,7 @@ function get_sets()
 	include('private servers/'..server..'/common-gearsets')
 	include('private servers/'..server..'/custom-info')
 	init_gear_sets(mjob)
-	
+	sets.DRK = {}
 	sets.MAB = set_combine(sets.misc.AllJobs.MAB, {})
 	sets.JobAbility["Blood Weapon"] = {}
 	sets.JobAbility["Souleater"] = {head=DRK_AF_HEAD, left_ear="Moonshade Earring"}
@@ -48,28 +48,28 @@ function get_sets()
 	sets.WeaponSkills["Aeolian Edge"] = set_combine(sets.MAB,{})
 	sets.WeaponSkills["Exenterator"] = {}
 
-    sets.precast.DRK = {}
-    sets.precast.DRK['Dark Magic'] = set_combine(sets.midcast['Dark Magic'], {
+    sets.DRK.precast = {}
+    sets.DRK.precast['Dark Magic'] = set_combine(sets.DRK.midcast['Dark Magic'], {
         head = DRK_RELIC_HEAD
     })
 
-    sets.midcast.DRK = {}
-	sets.midcast.Cure = {}
-    sets.midcast.Absorb = {
+    sets.DRK.midcast = {}
+	sets.DRK.midcast.Cure = {}
+    sets.DRK.midcast.Absorb = {
         head = DRK_AF_HEAD,
         hands = DRK_EMPYREAN_HANDS,
         back = "Chuparrosa Mantle"
     }
-    sets.midcast['Absorb-STR'] = set_combine(sets.midcast.Absorb, {})
-    sets.midcast['Absorb-DEX'] = set_combine(sets.midcast.Absorb, {})
-    sets.midcast['Absorb-VIT'] = set_combine(sets.midcast.Absorb, {})
-    sets.midcast['Absorb-AGI'] = set_combine(sets.midcast.Absorb, {})
-    sets.midcast['Absorb-INT'] = set_combine(sets.midcast.Absorb, {})
-    sets.midcast['Absorb-MND'] = set_combine(sets.midcast.Absorb, {})
-    sets.midcast['Absorb-CHR'] = set_combine(sets.midcast.Absorb, {})
-    sets.midcast['Absorb-TP'] = set_combine(sets.midcast.Absorb, {})
+    sets.DRK.midcast['Absorb-STR'] = set_combine(sets.DRK.midcast.Absorb, {})
+    sets.DRK.midcast['Absorb-DEX'] = set_combine(sets.DRK.midcast.Absorb, {})
+    sets.DRK.midcast['Absorb-VIT'] = set_combine(sets.DRK.midcast.Absorb, {})
+    sets.DRK.midcast['Absorb-AGI'] = set_combine(sets.DRK.midcast.Absorb, {})
+    sets.DRK.midcast['Absorb-INT'] = set_combine(sets.DRK.midcast.Absorb, {})
+    sets.DRK.midcast['Absorb-MND'] = set_combine(sets.DRK.midcast.Absorb, {})
+    sets.DRK.midcast['Absorb-CHR'] = set_combine(sets.DRK.midcast.Absorb, {})
+    sets.DRK.midcast['Absorb-TP'] = set_combine(sets.DRK.midcast.Absorb, {})
 
-    sets.midcast['Dread Spikes'] = {
+    sets.DRK.midcast['Dread Spikes'] = {
         head = DRK_RELIC_HEAD,
         body = DRK_RELIC_BODY,
         hands = DRK_AF_HANDS,
@@ -77,16 +77,16 @@ function get_sets()
         feet = DRK_AF_FEET
     }
 
-    sets.midcast.DrainAspir = {
+    sets.DRK.midcast.DrainAspir = {
         hands = DRK_RELIC_HANDS,
         left_ring={name="Scintillant Ring", augments={'"Drain" and "Aspir" potency +3','Enfb.mag. skill +3','Mag. Acc+7 /Mag. Dmg.+7','System: 1 ID: 1251 Val: 9',}},
 		right_ring={name="Scintillant Ring", augments={'"Drain" and "Aspir" potency +2','Enfb.mag. skill +7','Mag. Acc+2 /Mag. Dmg.+2','System: 1 ID: 1251 Val: 8',}}
     }
 
-    sets.midcast['Drain'] = set_combine(sets.midcast.DrainAspir, {})
-    sets.midcast['Aspir'] = set_combine(sets.midcast.DrainAspir, {})
+    sets.DRK.midcast['Drain'] = set_combine(sets.DRK.midcast.DrainAspir, {})
+    sets.DRK.midcast['Aspir'] = set_combine(sets.DRK.midcast.DrainAspir, {})
 
-    sets.midcast.DRK['Dark Magic'] = set_combine(sets.midcast['Dark Magic'], {
+    sets.DRK.midcast['Dark Magic'] = set_combine(sets.common.midcast['Dark Magic'], {
         head = DRK_RELIC_HEAD
     })
 	sets.aftercast = {}
@@ -160,28 +160,27 @@ end
 function midcast(spell)
 	cancelBuff(spell.english, spell.cast_time, FastCast)
 
-	if sets.midcast[spell.english] then
-		equip(sets.midcast[spell.english])
-	elseif spellContains(spell.english,'Cure') or spellContains(spell.english,'Cura') then 
-        equip(sets.midcast.Cure)
+	if sets.DRK.midcast[spell.english] then
+		equip(sets.DRK.midcast[spell.english])
+	elseif sets.common.midcast[spell.english] then
+		equip(sets.common.midcast[spell.english])
+	elseif string.find(spell.english,'Cure') or string.find(spell.english,'Cura') then 
+        equip(sets.DRK.midcast.Cure)
 	end
-	if sets.midcast[spell.skill] then
-		equip(sets.midcast[spell.skill])
+
+	if sets.DRK.midcast[spell.skill] then
+		equip(sets.DRK.midcast[spell.skill])
+	elseif sets.common.midcast[spell.skill] then
+		equip(sets.common.midcast[spell.skill])
+
 	end
-    if sets.midcast[mjob][spell.english] then
-        equip(sets.midcast[spell.english])
-    end
-    if sets.midcast[mjob][spell.skill] then
-        equip(sets.midcast[spell.skill])
-    end
 	if (enspell_list:contains(spell.english)) then
-		equip(sets.midcast.Enspell)
+		equip(sets.common.midcast.Enspell)
 	end
 	if (conserveMP_list:contains(spell.english)) then
-		equip(sets.midcast.ConserveMP)
+		equip(sets.common.midcast.ConserveMP)
 	end
-	customInfoCheckMidcast(spell.name, spell.tp_cost, spell.mp_cost)
-end
+	customInfoCheckMidcast(spell.name, spell.tp_cost, spell.mp_cost)end
 
 function aftercast(spell)
 	equip(set_combine(sets.aftercast[player.status][TPStyle], sets.weapons[mjob][WeaponChoice]))

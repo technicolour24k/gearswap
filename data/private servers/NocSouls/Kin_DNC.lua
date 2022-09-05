@@ -17,8 +17,8 @@ function get_sets()
 	include('private servers/'..server..'/common-gearsets')
 	local mjob = player.main_job
 	init_gear_sets(mjob)
-	
-	sets.MAB = set_combine(sets.misc.AllJobs.MAB, {
+	sets.DNC = {}
+	sets.DNC.MAB = set_combine(sets.misc.AllJobs.MAB, {
 		head="Wayfarer Circlet",
 		legs = "Limbo Trousers"
 	})
@@ -106,12 +106,11 @@ function get_sets()
 		left_ring = "Regal Ring",
 		right_ring = "Epona's Ring"
 	})
-	sets.WeaponSkills["Aeolian Edge"] = set_combine(sets.MAB,{})
+	sets.WeaponSkills["Aeolian Edge"] = set_combine(sets.DNC.MAB,{})
 	sets.WeaponSkills["Exenterator"] = {}
 
-	sets.midcast.Cure = {}
+	sets.DNC.midcast.Cure = {}
 
-	sets.aftercast = {}
 	sets.aftercast.Resting = {}
 	sets.aftercast.Engaged = {}
 
@@ -179,22 +178,27 @@ end
 function midcast(spell)
 	cancelBuff(spell.english, spell.cast_time, FastCast)
 
-	if sets.midcast[spell.english] then
-		equip(sets.midcast[spell.english])
-	elseif spellContains(spell.english,'Cure') or spellContains(spell.english,'Cura') then 
-        equip(sets.midcast.Cure)
+	if sets.DNC.midcast[spell.english] then
+		equip(sets.DNC.midcast[spell.english])
+	elseif sets.common.midcast[spell.english] then
+		equip(sets.common.midcast[spell.english])
+	elseif string.find(spell.english,'Cure') or string.find(spell.english,'Cura') then 
+        equip(sets.DNC.midcast.Cure)
 	end
 
-	if sets.midcast[spell.skill] then
-		equip(sets.midcast[spell.skill])
+	if sets.DNC.midcast[spell.skill] then
+		equip(sets.DNC.midcast[spell.skill])
+	elseif sets.common.midcast[spell.skill] then
+		equip(sets.common.midcast[spell.skill])
+
 	end
 	if (enspell_list:contains(spell.english)) then
-		equip(sets.midcast.Enspell)
+		equip(sets.common.midcast.Enspell)
 	end
-
 	if (conserveMP_list:contains(spell.english)) then
-		equip(sets.midcast.ConserveMP)
+		equip(sets.common.midcast.ConserveMP)
 	end
+	customInfoCheckMidcast(spell.name, spell.tp_cost, spell.mp_cost)
 end
 
 function aftercast(spell)

@@ -15,7 +15,7 @@ function get_sets()
 	include('private servers/'..server..'/custom-info')
 	local mjob = player.main_job
 	init_gear_sets(mjob)
-	
+	sets.RDM={}
 	
 	sets.MAB = set_combine(sets.misc.AllJobs.MAB, {
 		head="Wayfarer Circlet",
@@ -53,28 +53,28 @@ function get_sets()
 	sets.WeaponSkills['Savage Blade'] = set_combine(sets.WeaponSkills.default,{ })
 	sets.WeaponSkills['Knights of Round'] = {}
 
-	sets.midcast.RDM={}
-	sets.midcast.RDM['EnhancingDuration'] = set_combine(sets.midcast.EnhancingDuration, {
+	sets.RDM.midcast={}
+	sets.RDM.midcast['EnhancingDuration'] = set_combine(sets.common.midcast.EnhancingDuration, {
 		hands=RDM_AF_HANDS,
 		feet=RDM_EMPYREAN_FEET
 	})
 
-	sets.midcast.RDM['EnfeeblingDuration'] = set_combine(sets.midcast.EnfeeblingDuration, {
+	sets.RDM.midcast['EnfeeblingDuration'] = set_combine(sets.common.midcast.EnfeeblingDuration, {
 	})
 
-	sets.midcast.Cure = {}
-	sets.midcast['Refresh'] = set_combine(sets.midcast.EnhancingDuration, sets.midcast.RDM.EnhancingDuration, {
+	sets.RDM.midcast.Cure = {}
+	sets.RDM.midcast['Refresh'] = set_combine(sets.common.midcast.EnhancingDuration, sets.RDM.midcast.EnhancingDuration, {
 		legs=RDM_EMPYREAN_LEGS,
 		body=RDM_AF_BODY
 	})
-	sets.midcast['Refresh II'] = set_combine(sets.midcast['Refresh'], {})
+	sets.RDM.midcast['Refresh II'] = set_combine(sets.RDM.midcast['Refresh'], {})
 
-	sets.midcast['Spikes'] = {legs=RDM_RELIC_LEGS}
-	sets.midcast['Blaze Spikes'] = sets.midcast['Spikes']
-	sets.midcast['Ice Spikes'] = sets.midcast['Spikes']
-	sets.midcast['Shock Spikes'] = sets.midcast['Spikes']
+	sets.RDM.midcast['Spikes'] = {legs=RDM_RELIC_LEGS}
+	sets.RDM.midcast['Blaze Spikes'] = sets.RDM.midcast['Spikes']
+	sets.RDM.midcast['Ice Spikes'] = sets.RDM.midcast['Spikes']
+	sets.RDM.midcast['Shock Spikes'] = sets.RDM.midcast['Spikes']
 
-	sets.midcast.RDM['MAB'] = set_combine(sets.misc.AllJobs.MAB, {
+	sets.RDM.midcast['MAB'] = set_combine(sets.misc.AllJobs.MAB, {
 		head="Leth. Chappel +1",
 		body="Gyve Doublet",
 		hands="Quauhpilli Gloves",
@@ -84,9 +84,9 @@ function get_sets()
 		right_ring="Strendu Ring",
 	})
 
-	sets.midcast.RDM['Divine Magic'] = {}
-	sets.midcast.RDM['Healing Magic'] = {}
-	sets.midcast.RDM['Enhancing Magic'] = set_combine(sets.midcast.RDM['EnhancingDuration'],{
+	sets.RDM.midcast['Divine Magic'] = {}
+	sets.RDM.midcast['Healing Magic'] = {}
+	sets.RDM.midcast['Enhancing Magic'] = set_combine(sets.RDM.midcast['EnhancingDuration'],{
 		body=RDM_RELIC_BODY,
 		legs=RDM_AF_LEGS,
 		feet=RDM_EMPYREAN_FEET,
@@ -94,7 +94,7 @@ function get_sets()
 		left_ring={ name="Stikini Ring +1", augments={'"Refresh"+20','"Refresh"+20','"Refresh"+20','"Refresh"+20',}},
 	
 	})
-	sets.midcast.RDM['Enfeebling Magic'] = set_combine(sets.midcast.RDM['EnfeeblingDuration'],{
+	sets.RDM.midcast['Enfeebling Magic'] = set_combine(sets.RDM.midcast['EnfeeblingDuration'],{
 		ammo={ name="Erlene's Notebook", augments={'System: 1 ID: 131 Val: 7','System: 1 ID: 131 Val: 7','System: 1 ID: 131 Val: 7','System: 1 ID: 131 Val: 7',}},
 		head=RDM_AF_HEAD,
 		body=RDM_EMPYREAN_BODY,
@@ -107,8 +107,8 @@ function get_sets()
 		back={ name="Izdubar Mantle", augments={'System: 1 ID: 131 Val: 7','System: 1 ID: 131 Val: 7','System: 1 ID: 131 Val: 7','System: 1 ID: 131 Val: 7',}},
 	
 	})
-	sets.midcast.RDM['Elemental Magic'] = set_combine(sets.midcast.RDM['MAB'], {})
-	sets.midcast.RDM['Dark Magic'] = {}
+	sets.RDM.midcast['Elemental Magic'] = set_combine(sets.RDM.midcast['MAB'], {})
+	sets.RDM.midcast['Dark Magic'] = {}
 	sets.aftercast.Resting = {}
 	sets.aftercast.Engaged = {
 		ammo={ name="Yetshila +1", augments={'"Triple Atk."+2','"Triple Atk."+2','Crit.hit rate+5','Crit.hit rate+5',}},
@@ -165,29 +165,26 @@ end
 function midcast(spell)
 	cancelBuff(spell.english, spell.cast_time, FastCast)
 
-	if (conserveMP_list:contains(spell.english)) then
-		equip(sets.midcast.ConserveMP)
+	if sets.RDM.midcast[spell.english] then
+		equip(sets.RDM.midcast[spell.english])
+	elseif sets.common.midcast[spell.english] then
+		equip(sets.common.midcast[spell.english])
+	elseif string.find(spell.english,'Cure') or string.find(spell.english,'Cura') then 
+        equip(sets.RDM.midcast.Cure)
 	end
 
-	if sets.midcast[spell.english] then
-		equip(sets.midcast[spell.english])
-	elseif string.find(spell.english,'Cure') or string.find(spell.english,'Cura') then 
-        equip(sets.midcast.Cure)
-	end
-	if sets.midcast[spell.skill] then
-		equip(sets.midcast[spell.skill])
+	if sets.RDM.midcast[spell.skill] then
+		equip(sets.RDM.midcast[spell.skill])
+	elseif sets.common.midcast[spell.skill] then
+		equip(sets.common.midcast[spell.skill])
+
 	end
 	if (enspell_list:contains(spell.english)) then
-		equip(sets.midcast.Enspell)
+		equip(sets.common.midcast.Enspell)
 	end
-
-	if (sets.midcast.RDM[spell.english]) then
-		equip(sets.midcast.RDM[spell.english])
+	if (conserveMP_list:contains(spell.english)) then
+		equip(sets.common.midcast.ConserveMP)
 	end
-	if (sets.midcast.RDM[spell.skill]) then
-		equip(sets.midcast.RDM[spell.skill])
-	end
-
 	weathercheck(spell.element)
 	customInfoCheckMidcast(spell.name, spell.tp_cost, spell.mp_cost)
 end

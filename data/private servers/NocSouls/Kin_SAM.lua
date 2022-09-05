@@ -11,7 +11,7 @@ wsList = S{"Great Katana"}
 function get_sets()
 	include('private servers/'..server..'/common-gearsets')
 	init_gear_sets(mjob)
-
+	sets.SAM = {}
 	sets.JobAbility = {}
 	sets.JobAbility['Meditate'] = {
 		head = "Wakido Kabuto +2",
@@ -44,14 +44,14 @@ function get_sets()
 	sets.precast.WeaponSkills['Tachi: Kaiten'] = set_combine(sets.WeaponSkills.default, {})
 	sets.precast.WeaponSkills['Tachi: Ageha'] = set_combine(sets.WeaponSkills.default, {})
 	sets.precast.WeaponSkills['Apex Arrow'] = set_combine(sets.WeaponSkills.default, {})	
-    sets.midcast.magic_base = set_combine(sets.misc.AllJobs.MAB, {})
-	sets.midcast['Healing Magic'] = {}
-    sets.midcast.Cure = set_combine(sets.midcast['Healing Magic'], {})
-    sets.midcast.EnhancingDuration = {}
-    sets.midcast.Stoneskin = set_combine(sets.midcast.EnhancingDuration,{ })
-    sets.midcast.Aquaveil = set_combine(sets.midcast.EnhancingDuration,{ })
-    sets.midcast.Refresh = set_combine(sets.midcast.EnhancingDuration,{ })
-    sets.midcast.Phalanx = set_combine(sets.midcast.EnhancingDuration,{ })
+    sets.SAM.midcast.MAB = set_combine(sets.misc.AllJobs.MAB, {})
+	sets.SAM.midcast['Healing Magic'] = {}
+    sets.SAM.midcast.Cure = set_combine(sets.SAM.midcast['Healing Magic'], {})
+    sets.SAM.midcast.EnhancingDuration = {}
+    sets.SAM.midcast.Stoneskin = set_combine(sets.SAM.midcast.EnhancingDuration,{ })
+    sets.SAM.midcast.Aquaveil = set_combine(sets.SAM.midcast.EnhancingDuration,{ })
+    sets.SAM.midcast.Refresh = set_combine(sets.SAM.midcast.EnhancingDuration,{ })
+    sets.SAM.midcast.Phalanx = set_combine(sets.SAM.midcast.EnhancingDuration,{ })
      
     sets.aftercast.Resting = { }
 	sets.aftercast.Engaged = {
@@ -119,11 +119,29 @@ function precast(spell)
 end
 
 function midcast(spell)
-	if sets.midcast[spell.english] then
-		equip(sets.midcast[spell.english])
+	cancelBuff(spell.english, spell.cast_time, FastCast)
+
+	if sets.SAM.midcast[spell.english] then
+		equip(sets.SAM.midcast[spell.english])
+	elseif sets.common.midcast[spell.english] then
+		equip(sets.common.midcast[spell.english])
 	elseif string.find(spell.english,'Cure') or string.find(spell.english,'Cura') then 
-        equip(sets.midcast.Cure)
+        equip(sets.SAM.midcast.Cure)
 	end
+
+	if sets.SAM.midcast[spell.skill] then
+		equip(sets.SAM.midcast[spell.skill])
+	elseif sets.common.midcast[spell.skill] then
+		equip(sets.common.midcast[spell.skill])
+
+	end
+	if (enspell_list:contains(spell.english)) then
+		equip(sets.common.midcast.Enspell)
+	end
+	if (conserveMP_list:contains(spell.english)) then
+		equip(sets.common.midcast.ConserveMP)
+	end
+	customInfoCheckMidcast(spell.name, spell.tp_cost, spell.mp_cost)
 end
 
 function aftercast(spell)

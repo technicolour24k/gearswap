@@ -4,18 +4,8 @@ skillup = 0
 showInfo = false
 
 function get_sets()
-	sets.EleStaves = {}
-	sets.EleStaves.Fire = {main = "Fire Staff"}
-	sets.EleStaves.Lightning = {main = "Thunder Staff"}
-	sets.EleStaves.Ice = {main = "Ice Staff"}
-	sets.EleStaves.Wind = {main = "Wind Staff"}
-	sets.EleStaves.Earth = {main = "Earth Staff"}
-	sets.EleStaves.Water = {main = "Water Staff"}
-	sets.EleStaves.Dark = {main = "Dark Staff"}
-	sets.EleStaves.Light = {main = "Light Staff"}
-	
-	sets.midcast = {}
-	sets.midcast['Singing'] = {
+	sets.BRD = {}
+	sets.BRD.midcast['Singing'] = {
 		main="Carnwenhan",
 		range="Blurred Harp",
 		head="Aoidos' Calot +2",
@@ -25,51 +15,7 @@ function get_sets()
 		feet="Aoidos' Cothrn. +2",
 		waist="Aoidos' Belt",
 	}
-	sets.midcast['Enfeebling Magic'] = {
-		head = "Wizard's Petasos",
-		neck = "Uggalepih Pendant",
-		left_ear = "Moldavite Earring",
-		right_ear = "Stamina Earring +1",
-		body = "Igqira Weskit",
-		hands = "Seer's Mitts +1",
-		left_ring = "Genius Ring",
-		right_ring = "Genius Ring",
-		back="Hecate's Cape",
-		waist = "Witch Sash",
-		legs = "Mage's Slacks",
-		feet="Mountain Gaiters"		
-	}
-	sets.midcast['Dark Magic'] = {
-		head = "Wizard's Petasos",
-		neck = "Uggalepih Pendant",
-		left_ear = "Moldavite Earring",
-		right_ear = "Stamina Earring +1",
-		body = "Igqira Weskit",
-		hands = "Seer's Mitts +1",
-		left_ring = "Genius Ring",
-		right_ring = "Genius Ring",
-		back="Hecate's Cape",
-		waist = "Witch Sash",
-		legs = "Mage's Slacks",
-		feet="Mountain Gaiters"		
-	}
-	
-	sets.midcast['Healing Magic'] = {
-		head = "Wizard's Petasos",
-		neck = "Uggalepih Pendant",
-		left_ear = "Moldavite Earring",
-		right_ear = "Stamina Earring +1",
-		body = "Igqira Weskit",
-		hands = "Seer's Mitts +1",
-		left_ring = "Genius Ring",
-		right_ring = "Genius Ring",
-		back="Hecate's Cape",
-		waist = "Witch Sash",
-		legs = "Mage's Slacks",
-		feet="Mountain Gaiters"		
-	}
-		
-	sets.aftercast = {}
+
 	sets.aftercast.Idle = {
 		main = "Earth Staff",
 		feet="Aoidos' Cothrn. +2",
@@ -86,18 +32,35 @@ end
 
 
 function precast(spell)
-  
 	equip(sets.common.precast.FastCast.Default)
-
-
 end
 
 function midcast(spell)  
+	cancelBuff(spell.english, spell.cast_time, FastCast)
 
-	if sets.midcast[spell.skill] then
-		equip(sets.midcast[spell.skill])
+	if sets.BRD.midcast[spell.english] then
+		equip(sets.BRD.midcast[spell.english])
+	elseif sets.common.midcast[spell.english] then
+		equip(sets.common.midcast[spell.english])
+	elseif string.find(spell.english,'Cure') or string.find(spell.english,'Cura') then 
+        -- equip(sets.BRD.midcast.Cure)
 	end
 
+	if sets.BRD.midcast[spell.skill] then
+		equip(sets.BRD.midcast[spell.skill])
+	elseif sets.common.midcast[spell.skill] then
+		equip(sets.common.midcast[spell.skill])
+	end
+	
+	if (enspell_list:contains(spell.english)) then
+		equip(sets.common.midcast.Enspell)
+	end
+	
+	if (conserveMP_list:contains(spell.english)) then
+		equip(sets.common.midcast.ConserveMP)
+	end
+
+	customInfoCheckMidcast(spell.name, spell.tp_cost, spell.mp_cost)
 end
 
 function aftercast(spell)

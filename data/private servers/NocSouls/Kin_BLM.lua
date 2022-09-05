@@ -4,8 +4,8 @@ skillup = 0
 showInfo = false
 
 function get_sets()
-
-	sets.midcast['Elemental Magic'] = {
+	sets.BLM ={}
+	sets.BLM.midcast['Elemental Magic'] = {
 		head = "Wizard's Petasos",
 		neck = "Uggalepih Pendant",
 		left_ear = "Moldavite Earring",
@@ -19,7 +19,7 @@ function get_sets()
 		legs = "Mage's Slacks",
 		feet="Mountain Gaiters"		
 	}
-	sets.midcast['Enfeebling Magic'] = {
+	sets.BLM.midcast['Enfeebling Magic'] = {
 		head = "Wizard's Petasos",
 		neck = "Uggalepih Pendant",
 		left_ear = "Moldavite Earring",
@@ -33,22 +33,7 @@ function get_sets()
 		legs = "Mage's Slacks",
 		feet="Mountain Gaiters"		
 	}
-	sets.midcast['Dark Magic'] = {
-		head = "Wizard's Petasos",
-		neck = "Uggalepih Pendant",
-		left_ear = "Moldavite Earring",
-		right_ear = "Stamina Earring +1",
-		body = "Igqira Weskit",
-		hands = "Seer's Mitts +1",
-		left_ring = "Genius Ring",
-		right_ring = "Genius Ring",
-		back="Hecate's Cape",
-		waist = "Witch Sash",
-		legs = "Mage's Slacks",
-		feet="Mountain Gaiters"		
-	}
-	
-	sets.midcast['Healing Magic'] = {
+	sets.BLM.midcast['Dark Magic'] = {
 		head = "Wizard's Petasos",
 		neck = "Uggalepih Pendant",
 		left_ear = "Moldavite Earring",
@@ -63,7 +48,22 @@ function get_sets()
 		feet="Mountain Gaiters"		
 	}
 	
-	sets.midcast.SorcRing = { left_ring = "Sorcerer's Ring" }
+	sets.BLM.midcast['Healing Magic'] = {
+		head = "Wizard's Petasos",
+		neck = "Uggalepih Pendant",
+		left_ear = "Moldavite Earring",
+		right_ear = "Stamina Earring +1",
+		body = "Igqira Weskit",
+		hands = "Seer's Mitts +1",
+		left_ring = "Genius Ring",
+		right_ring = "Genius Ring",
+		back="Hecate's Cape",
+		waist = "Witch Sash",
+		legs = "Mage's Slacks",
+		feet="Mountain Gaiters"		
+	}
+	
+	sets.BLM.midcast.SorcRing = { left_ring = "Sorcerer's Ring" }
 	
 	sets.aftercast = {}
 	sets.aftercast.Idle = {
@@ -89,20 +89,29 @@ function precast(spell)
 end
 
 function midcast(spell)  
+	cancelBuff(spell.english, spell.cast_time, FastCast)
 
-	equip(sets.EleStaves[spell.element])
-	if sets.midcast[spell.skill] then
-		equip(sets.midcast[spell.skill])
+	if sets.BLM.midcast[spell.english] then
+		equip(sets.BLM.midcast[spell.english])
+	elseif sets.common.midcast[spell.english] then
+		equip(sets.common.midcast[spell.english])
+	elseif string.find(spell.english,'Cure') or string.find(spell.english,'Cura') then 
+        equip(sets.BLM.midcast.Cure)
 	end
-	
-	if showInfo == 1 then
-		infoLog("[Sorcerer's Ring Check] Player HPP: " ..player.hpp.. "%")
+
+	if sets.BLM.midcast[spell.skill] then
+		equip(sets.BLM.midcast[spell.skill])
+	elseif sets.common.midcast[spell.skill] then
+		equip(sets.common.midcast[spell.skill])
+
 	end
-	if player.hpp < 75 then
-		equip(sets.midcast.SorcRing)
-		infoLog("Sorcerer's Ring: Active")
+	if (enspell_list:contains(spell.english)) then
+		equip(sets.common.midcast.Enspell)
 	end
-    
+	if (conserveMP_list:contains(spell.english)) then
+		equip(sets.common.midcast.ConserveMP)
+	end
+	customInfoCheckMidcast(spell.name, spell.tp_cost, spell.mp_cost)
 end
 
 function aftercast(spell)

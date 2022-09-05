@@ -14,9 +14,7 @@ local FastCast = 80
 function get_sets()
 	include('private servers/'..server..'/common-gearsets')
 	init_gear_sets(mjob)
-
-	sets.Enmity= {}
-	
+	sets.BLU = {}	
 	sets.precast.JobAbility = {}
 	sets.precast.JobAbility['Azure Lore'] = {}
 	sets.precast.JobAbility['Burst Affinity'] = {}
@@ -43,16 +41,13 @@ function get_sets()
 	})
 	sets.precast.WeaponSkills['Knights of Round'] = {}
 	
-	sets.midcast['Blue Magic'] = {}
-    sets.midcast['Blue Magic']['Physical'] = set_combine(sets.midcast['Blue Magic'],{})
-	sets.midcast['Blue Magic']['Physical']['STR'] = set_combine(sets.midcast['Blue Magic']['Physical'],{})
-	sets.midcast['Blue Magic']['Physical']['DEX'] = set_combine(sets.midcast['Blue Magic']['Physical'],{})
-	sets.midcast['Blue Magic']['Magical'] = set_combine(sets.midcast['Blue Magic'],{})
+	sets.BLU.midcast['Blue Magic'] = {}
+    sets.BLU.midcast['Blue Magic']['Physical'] = set_combine(sets.BLU.midcast['Blue Magic'],{})
+	sets.BLU.midcast['Blue Magic']['Magical'] = set_combine(sets.BLU.midcast['Blue Magic'],{})
 
-	sets.midcast['Elemental Magic'] = set_combine(sets.misc.AllJobs['Level 30']['MAB'],{})
-    sets.aftercast.Resting = { }
-	sets.aftercast.Engaged = set_combine(sets.misc.AllJobs['Level 30']['Melee'],{})
-	 
+	sets.aftercast.Resting = {}
+
+	sets.aftercast.Engaged = set_combine(sets.misc.AllJobs['Level 75']['Melee'],{})
 	sets.aftercast.Idle = set_combine(sets.aftercast.Engaged, {
 		right_ring={ name="Hermit's Ring", augments={'"Regen"+20','"Refresh"+20','Pet: "Regen"+25','Pet: "Regen"+25',}},
 	})
@@ -95,22 +90,27 @@ end
 function midcast(spell)
 	cancelBuff(spell.english, spell.cast_time, FastCast)
 
-	if sets.midcast[spell.english] then
-		equip(sets.midcast[spell.english])
-	elseif string.find(spell.english,'Cure') or string.find(spell.english,'Cura') then
-        equip(sets.midcast.Cure)
+	if sets.BLU.midcast[spell.english] then
+		equip(sets.BLU.midcast[spell.english])
+	elseif sets.common.midcast[spell.english] then
+		equip(sets.common.midcast[spell.english])
+	elseif string.find(spell.english,'Cure') or string.find(spell.english,'Cura') then 
+        equip(sets.BLU.midcast.Cure)
 	end
 
-	if sets.midcast[spell.skill] then
-		equip(sets.midcast[spell.skill])
+	if sets.BLU.midcast[spell.skill] then
+		equip(sets.BLU.midcast[spell.skill])
+	elseif sets.common.midcast[spell.skill] then
+		equip(sets.common.midcast[spell.skill])
+
 	end
 	if (enspell_list:contains(spell.english)) then
-		equip(sets.midcast.Enspell)
+		equip(sets.common.midcast.Enspell)
 	end
-
 	if (conserveMP_list:contains(spell.english)) then
-		equip(sets.midcast.ConserveMP)
+		equip(sets.common.midcast.ConserveMP)
 	end
+	customInfoCheckMidcast(spell.name, spell.tp_cost, spell.mp_cost)
 end
 
 function aftercast(spell)

@@ -4,8 +4,8 @@ skillup = 0
 showInfo = false
 	
 function get_sets()
-
-	sets.midcast['Elemental Magic'] = {
+	sets.WHM= {}
+	sets.WHM.midcast['Elemental Magic'] = {
 		head = "Seer's Crown +1",
 		neck = "Uggalepih Pendant",
 		left_ear = "Moldavite Earring",
@@ -19,7 +19,7 @@ function get_sets()
 		legs = "Mage's Slacks",
 		feet="Mountain Gaiters"		
 	}
-	sets.midcast['Enfeebling Magic'] = {
+	sets.WHM.midcast['Enfeebling Magic'] = {
 		head = "Wizard's Petasos",
 		neck = "Uggalepih Pendant",
 		left_ear = "Moldavite Earring",
@@ -33,7 +33,7 @@ function get_sets()
 		legs = "Mage's Slacks",
 		feet="Mountain Gaiters"		
 	}
-	sets.midcast['Dark Magic'] = {
+	sets.WHM.midcast['Dark Magic'] = {
 		head = "Wizard's Petasos",
 		neck = "Uggalepih Pendant",
 		left_ear = "Moldavite Earring",
@@ -48,7 +48,7 @@ function get_sets()
 		feet="Mountain Gaiters"		
 	}
 	
-	sets.midcast['Healing Magic'] = {
+	sets.WHM.midcast['Healing Magic'] = {
 		head = "Wizard's Petasos",
 		neck = "Uggalepih Pendant",
 		left_ear = "Moldavite Earring",
@@ -98,12 +98,29 @@ function midcast(spell)
 			infoLog('['..player.name..']:- MP: '..player.mp..' - HP: ' ..player.hp.. ' - TP:  ' ..player.tp..'')
 	end
 	
-	
-	equip(sets.EleStaves[spell.element])
-	if sets.midcast[spell.skill] then
-		equip(sets.midcast[spell.skill])
+	cancelBuff(spell.english, spell.cast_time, FastCast)
+
+	if sets.WHM.midcast[spell.english] then
+		equip(sets.WHM.midcast[spell.english])
+	elseif sets.common.midcast[spell.english] then
+		equip(sets.common.midcast[spell.english])
+	elseif string.find(spell.english,'Cure') or string.find(spell.english,'Cura') then 
+        equip(sets.WHM.midcast.Cure)
 	end
-    
+
+	if sets.WHM.midcast[spell.skill] then
+		equip(sets.WHM.midcast[spell.skill])
+	elseif sets.common.midcast[spell.skill] then
+		equip(sets.common.midcast[spell.skill])
+
+	end
+	if (enspell_list:contains(spell.english)) then
+		equip(sets.common.midcast.Enspell)
+	end
+	if (conserveMP_list:contains(spell.english)) then
+		equip(sets.common.midcast.ConserveMP)
+	end
+	customInfoCheckMidcast(spell.name, spell.tp_cost, spell.mp_cost)
 end
 
 function aftercast(spell)

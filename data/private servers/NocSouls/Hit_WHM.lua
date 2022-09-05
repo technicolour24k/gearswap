@@ -4,8 +4,8 @@ skillup = 0
 showInfo = false
 
 function get_sets()
-
-	sets.midcast.Cure = {
+	sets.WHM = {}
+	sets.WHM.midcast.Cure = {
 		main = "Templar Mace", --Cure 10%
 		sub = "Sors Shield", --Cure 3%
 		ammo = "Quartz Tathlum +1",
@@ -21,26 +21,26 @@ function get_sets()
 		legs = "Orison Pantaloons +2", --5% Cure amount -> MP
 		feet = "Theophany Duckbills +2" 
 	}
-	sets.midcast.Cursna = {
+	sets.WHM.midcast.Cursna = {
 		main = "Yagrush",
 		right_ring = "Ephedra Ring",
 		left_ring = "Ephedra Ring"
 	}
-	sets.midcast.StatFix = {
+	sets.WHM.midcast.StatFix = {
 		main = "Yagrush"
 	}
-	sets.midcast['Enhancing Magic'] = {
+	sets.WHM.midcast['Enhancing Magic'] = {
 		legs = "Piety Pantaloons +1"
 	}
-	sets.midcast.Barspells = set_combine(sets.midcast['Enhancing Magic'], { })
-	sets.midcast.Stoneskin = set_combine(sets.midcast['Enhancing Magic'], { })
-	sets.midcast.Aquaveil = set_combine(sets.midcast['Enhancing Magic'], { })
-	sets.midcast.Regen = set_combine(sets.midcast['Enhancing Magic'], { 
+	sets.WHM.midcast.Barspells = set_combine(sets.WHM.midcast['Enhancing Magic'], { })
+	sets.WHM.midcast.Stoneskin = set_combine(sets.WHM.midcast['Enhancing Magic'], { })
+	sets.WHM.midcast.Aquaveil = set_combine(sets.WHM.midcast['Enhancing Magic'], { })
+	sets.WHM.midcast.Regen = set_combine(sets.WHM.midcast['Enhancing Magic'], { 
 		body = "Piety Briault +1",
 		hands = "Orison Mitts +2",
 		legs = "Theophany Pantaloons +2"
 	})
-	sets.midcast['Elemental Magic'] = {
+	sets.WHM.midcast['Elemental Magic'] = {
 		main = "Blurred Staff",
 		sub = "Elementa Grip",
 		neck = "Lemegeton Medallion",
@@ -54,7 +54,7 @@ function get_sets()
 	}
 	
 	sets.aftercast = {}
-	sets.aftercast.Idle = set_combine(sets.midcast.Cure, {
+	sets.aftercast.Idle = set_combine(sets.WHM.midcast.Cure, {
 		--main = "Earth Staff",
 		body = "Theophany Briault +2",
 		feet = "Herald's Gaiters",
@@ -85,23 +85,29 @@ function precast(spell)
 end
 
 function midcast(spell)  
-    
-	if (sets.midcast[spell.english]) then
-		equip(sets.midcast[spell.english])
-	elseif (sets.midcast[spell.skill]) then
-		equip(sets.midcast[spell.skill])
+	cancelBuff(spell.english, spell.cast_time, FastCast)
+
+	if sets.WHM.midcast[spell.english] then
+		equip(sets.WHM.midcast[spell.english])
+	elseif sets.common.midcast[spell.english] then
+		equip(sets.common.midcast[spell.english])
+	elseif string.find(spell.english,'Cure') or string.find(spell.english,'Cura') then 
+        equip(sets.WHM.midcast.Cure)
 	end
-	
-	if CureSpells:contains(spell.english) then
-		equip(sets.midcast.Cure)
-	elseif StatSpells:contains(spell.english) then
-		equip(sets.midcast.StatFix)
-	elseif BarSpells:contains(spell.english) then
-		equip(sets.midcast.Barspells)
-	elseif RegenSpells:contains(spell.english) then
-		equip(sets.midcast.Regen)
+
+	if sets.WHM.midcast[spell.skill] then
+		equip(sets.WHM.midcast[spell.skill])
+	elseif sets.common.midcast[spell.skill] then
+		equip(sets.common.midcast[spell.skill])
+
 	end
-	
+	if (enspell_list:contains(spell.english)) then
+		equip(sets.common.midcast.Enspell)
+	end
+	if (conserveMP_list:contains(spell.english)) then
+		equip(sets.common.midcast.ConserveMP)
+	end
+	customInfoCheckMidcast(spell.name, spell.tp_cost, spell.mp_cost)
 end
 
 function aftercast(spell)
