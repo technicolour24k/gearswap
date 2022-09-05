@@ -477,14 +477,6 @@ function init_gear_sets(job)
 	sets.misc.Gardening = {body = "Overalls"}
 
 	sets.misc.AllJobs = {}
-	sets.misc.AllJobs['Lv1'] = {
-		main="Hoe",
-		head="Cache-Nez",
-		body="Chocobo Shirt",
-		hands="Vagabond's Gloves",
-		legs="Vagabond's Hose",
-		feet="Vagabond's Boots"
-	}
 	sets.misc.AllJobs.MAB = {
 		ammo={ name="Erlene's Notebook", augments={'System: 1 ID: 131 Val: 7','System: 1 ID: 131 Val: 7','System: 1 ID: 131 Val: 7','System: 1 ID: 131 Val: 7',}},
 		left_ring={ name="Acumen Ring", augments={'System: 1 ID: 131 Val: 7','System: 1 ID: 131 Val: 7','System: 1 ID: 131 Val: 7','System: 1 ID: 131 Val: 7',}},
@@ -505,10 +497,18 @@ function init_gear_sets(job)
 	})
 	sets.misc.AllJobs['MDTDown'] = set_combine(sets.misc.AllJobs['DTDown'],{
 		left_earring="Etiolation Earring",
-
+		
 	})
 	sets.misc.AllJobs['DTCombo'] = set_combine(sets.misc.AllJobs['PDTDown'], sets.misc.AllJobs['MDTDown'],{}
 )
+	sets.misc.AllJobs['Lv1'] = {
+		main="Hoe",
+		head="Cache-Nez",
+		body="Chocobo Shirt",
+		hands="Vagabond's Gloves",
+		legs="Vagabond's Hose",
+		feet="Vagabond's Boots"
+	}
 	sets.misc.AllJobs['Level 30'] = {}
 	sets.misc.AllJobs['Level 30']['MAB'] = {
 		head={name="Kosshin", augments={}},
@@ -598,6 +598,7 @@ function init_gear_sets(job)
 	}
 	
 	-- Generic precast sets
+	sets.precast ={}
 	sets.common = {}
     sets.common.precast = {} 
     sets.common.precast.FastCast = {}
@@ -625,6 +626,7 @@ function init_gear_sets(job)
 	
 	
 	-- Generic midcast sets
+	sets.midcast={}
 	sets.common.midcast = {}
     sets.common.midcast.EnhancingDuration = {}
 	sets.common.midcast.EnfeeblingDuration = {
@@ -666,6 +668,7 @@ function init_gear_sets(job)
 		feet = "Vagabond's Boots"
 	})
 	
+	sets.aftercast ={}
 	sets.common.aftercast = {}
 	
 	sets.Obis = {}
