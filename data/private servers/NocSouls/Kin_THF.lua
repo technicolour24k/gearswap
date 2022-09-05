@@ -22,7 +22,7 @@ function get_sets()
 		hands = THF_RELIC_HANDS,
 		feet = THF_EMPYREAN_FEET
 	}
-	sets.MAB = set_combine(sets.misc.AllJobs.MAB, {
+	sets.THF.MAB = set_combine(sets.misc.AllJobs.MAB, {
 		head="Wayfarer Circlet",
 		waist = "Aquiline Belt",
 		legs = "Limbo Trousers"
@@ -30,9 +30,9 @@ function get_sets()
 	sets.JobAbility["Perfect Dodge"] = {}
 	sets.JobAbility["Sneak Attack"] = {}
 	sets.JobAbility["Trick Attack"] = {}
-	sets.JobAbility.Flee = {feet = THF_AF_FEET}
-	sets.JobAbility.Accomplice = {head = THF_EMPYREAN_HEAD}
-	sets.JobAbility.Collaborator = {head = THF_EMPYREAN_HEAD}
+	sets.JobAbility['Flee'] = {feet = THF_AF_FEET}
+	sets.JobAbility['Accomplice'] = {head = THF_EMPYREAN_HEAD}
+	sets.JobAbility['Collaborator'] = {head = THF_EMPYREAN_HEAD}
 
 	sets.WeaponSkills["Evisceration"] = set_combine(sets.WeaponSkills['AllJobsWS'], {})
 	sets.WeaponSkills["Dancing Edge"] = set_combine(sets.WeaponSkills['AllJobsWS'], {})
@@ -50,7 +50,7 @@ function get_sets()
 		left_ear = "Mache Earring +1",
 		right_ear = "Mache Earring +1",
 	})
-	sets.WeaponSkills["Aeolian Edge"] = set_combine(sets.MAB,{})
+	sets.WeaponSkills["Aeolian Edge"] = set_combine(sets.THF.MAB,{})
 	sets.WeaponSkills["Exenterator"] = set_combine(sets.WeaponSkills['AllJobsWS'], {})
 
 	sets.THF.midcast.Cure = {}

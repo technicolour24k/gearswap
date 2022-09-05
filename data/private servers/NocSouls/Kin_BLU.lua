@@ -13,6 +13,8 @@ local FastCast = 80
 
 function get_sets()
 	include('private servers/'..server..'/common-gearsets')
+	include('private servers/'..server..'/custom-info')
+
 	init_gear_sets(mjob)
 	sets.BLU = {}	
 	sets.precast.JobAbility = {}
@@ -41,6 +43,7 @@ function get_sets()
 	})
 	sets.precast.WeaponSkills['Knights of Round'] = {}
 	
+	sets.BLU.midcast = {}
 	sets.BLU.midcast['Blue Magic'] = {}
     sets.BLU.midcast['Blue Magic']['Physical'] = set_combine(sets.BLU.midcast['Blue Magic'],{})
 	sets.BLU.midcast['Blue Magic']['Magical'] = set_combine(sets.BLU.midcast['Blue Magic'],{})

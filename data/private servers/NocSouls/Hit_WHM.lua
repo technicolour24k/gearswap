@@ -1,10 +1,23 @@
-include('organizer-lib')
+include("organizer-lib")
+include("includes/common-functions")
+include("includes/config")
 
 skillup = 0
 showInfo = false
+local mjob = player.main_job
+local showFCInfo = config.showFastCastInfo
+local showSpellInfo = config.showSpellInfo
+local showCancelInfo = config.showCancelInfo
+local FastCast = 80
 
 function get_sets()
+	include('private servers/'..server..'/common-gearsets')
+	include('private servers/'..server..'/custom-info')
+
+	init_gear_sets(mjob)
+
 	sets.WHM = {}
+	sets.WHM.midcast ={}
 	sets.WHM.midcast.Cure = {
 		main = "Templar Mace", --Cure 10%
 		sub = "Sors Shield", --Cure 3%
