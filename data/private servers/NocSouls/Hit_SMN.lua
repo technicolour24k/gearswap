@@ -11,15 +11,6 @@ local FastCast = 80
 
 function get_sets()
 
-	sets.precast = {}
-	sets.precast.FastCast = {}
-	sets.precast.FastCast.Default = {
-		left_ring = "Hermit's Ring",
-		right_ring = "Hermit's Ring",
-		neck="Silver Name Tag",
-		head="Cache-Nez"
-	}
-	
 	sets.precast.BloodPactDelay = {
 		ammo="Sancus Sachet", --BP2 -6
 		head="Glyphic Horn +1", --BP -8
@@ -153,7 +144,7 @@ function precast(spell)
 	end
 	
 	if spell.action_type == 'Magic' then
-        equip(sets.precast.FastCast.Default)
+        equip(sets.common.precast.FastCast.Default)
     end
 
 	send_command('input /follow Kin')

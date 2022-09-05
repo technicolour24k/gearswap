@@ -4,16 +4,6 @@ skillup = 0
 showInfo = false
 
 function get_sets()
-	sets.precast = {}
-	sets.precast.FastCast = {}
-	sets.precast.FastCast.Default = {
-		left_ear = "Tranquility Earring +1",
-		right_ear = "Stamina Earring +1"
-	}
-
-	sets.midcast = {}
-	
-	sets.aftercast = {}
 	sets.aftercast.Idle = {
 		feet="Herald's Gaiters"
 	}

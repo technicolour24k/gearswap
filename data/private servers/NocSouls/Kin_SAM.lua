@@ -110,7 +110,7 @@ function precast(spell)
 	end
 
 	if spell.action_type == "Magic" then
-		equip(sets.precast.FastCast.Default)
+		equip(sets.common.precast.FastCast.Default)
 	end
 
 	if spell.action_type == "Ability" then

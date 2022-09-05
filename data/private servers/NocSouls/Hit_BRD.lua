@@ -14,20 +14,6 @@ function get_sets()
 	sets.EleStaves.Dark = {main = "Dark Staff"}
 	sets.EleStaves.Light = {main = "Light Staff"}
 	
-	sets.precast = {}
-	sets.precast.FastCast = {}
-	sets.precast.FastCast.Default = {
-		left_ring = "Hermit's Ring",
-		right_ring = "Hermit's Ring",
-		neck="Silver Name Tag",
-		head="Cache-Nez"
-	}
-	sets.precast.FastCast['Elemental Magic'] = set_combine(sets.precast.FastCast.Default, {})
-	sets.precast.FastCast['Enfeebling Magic'] = set_combine(sets.precast.FastCast.Default, {})
-	sets.precast.FastCast['Dark Magic'] = set_combine(sets.precast.FastCast.Default, {})
-	sets.precast.FastCast['Healing Magic'] = set_combine(sets.precast.FastCast.Default, {})
-	
-	
 	sets.midcast = {}
 	sets.midcast['Singing'] = {
 		main="Carnwenhan",
@@ -101,7 +87,7 @@ end
 
 function precast(spell)
   
-	equip(sets.precast.FastCast.Default)
+	equip(sets.common.precast.FastCast.Default)
 
 
 end

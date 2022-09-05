@@ -558,7 +558,7 @@ function init_gear_sets(job)
 		legs={ name="Raven Hose", augments={'"Store TP"+5','"Store TP"+5','"Store TP"+5','"Store TP"+5',}},
 		feet={ name="Raven Gaiters", augments={'"Store TP"+5','"Store TP"+5','"Store TP"+5','"Store TP"+5',}},
 		neck={ name="Peacock Charm", augments={'"Store TP"+5','"Store TP"+5','"Store TP"+5','"Store TP"+5',}},
-		waist={ name="Ryl. Kgt. Belt", augments={'"Store TP"+5','"Store TP"+5','"Store TP"+5','"Store TP"+5',}},
+		waist={ name="Ryl.Kgt. Belt", augments={'"Store TP"+5','"Store TP"+5','"Store TP"+5','"Store TP"+5',}},
 		left_ear={ name="Dodge Earring", augments={'"Store TP"+5','"Store TP"+5','"Store TP"+5','"Store TP"+5',}},
 		right_ear={ name="Dodge Earring", augments={'"Store TP"+5','"Store TP"+5','"Store TP"+5','"Store TP"+5',}},
 		left_ring={ name="Rajas Ring", augments={'"Store TP"+5','"Store TP"+5','"Store TP"+5','"Store TP"+5',}},
@@ -589,7 +589,7 @@ function init_gear_sets(job)
 		legs={ name="Raven Hose", augments={'"Store TP"+5','"Store TP"+5','"Store TP"+5','"Store TP"+5',}},
 		feet={ name="Raven Gaiters", augments={'"Store TP"+5','"Store TP"+5','"Store TP"+5','"Store TP"+5',}},
 		neck={ name="Peacock Charm", augments={'"Store TP"+5','"Store TP"+5','"Store TP"+5','"Store TP"+5',}},
-		waist={ name="Ryl. Kgt. Belt", augments={'"Store TP"+5','"Store TP"+5','"Store TP"+5','"Store TP"+5',}},
+		waist={ name="Ryl.Kgt. Belt", augments={'"Store TP"+5','"Store TP"+5','"Store TP"+5','"Store TP"+5',}},
 		left_ear={ name="Dodge Earring", augments={'"Store TP"+5','"Store TP"+5','"Store TP"+5','"Store TP"+5',}},
 		right_ear={ name="Dodge Earring", augments={'"Store TP"+5','"Store TP"+5','"Store TP"+5','"Store TP"+5',}},
 		left_ring={ name="Rajas Ring", augments={'"Store TP"+5','"Store TP"+5','"Store TP"+5','"Store TP"+5',}},
@@ -598,29 +598,30 @@ function init_gear_sets(job)
 	}
 	
 	-- Generic precast sets
-    sets.precast = {} 
-    sets.precast.FastCast = {}
-	sets.precast.FastCast.Default = {
+	sets.common = {}
+    sets.common.precast = {} 
+    sets.common.precast.FastCast = {}
+	sets.common.precast.FastCast.Default = {
 		left_ring = "Hermit's Ring",
 		right_ring = "Hermit's Ring",
 		neck="Silver Name Tag",
 		head="Cache-Nez"
 	}
 	
-	sets.precast.FastCast['Divine Magic'] = set_combine(sets.precast.FastCast.Default,{})
-    sets.precast.FastCast['Healing Magic'] = set_combine(sets.precast.FastCast.Default,{})
-    sets.precast.FastCast['Enhancing Magic'] = set_combine(sets.precast.FastCast.Default,{})
-    sets.precast.FastCast['Enfeebling Magic'] = set_combine(sets.precast.FastCast.Default,{})
-    sets.precast.FastCast['Elemental Magic'] = set_combine(sets.precast.FastCast.Default,{})
-    sets.precast.FastCast['Dark Magic'] = set_combine(sets.precast.FastCast.Default,{})
-    sets.precast.FastCast['Summoning Magic'] = set_combine(sets.precast.FastCast.Default,{})
-    sets.precast.FastCast['Ninjutsu'] = set_combine(sets.precast.FastCast.Default,{})
-    sets.precast.FastCast['Singing'] = set_combine(sets.precast.FastCast.Default,{})
-    sets.precast.FastCast['String'] = set_combine(sets.precast.FastCast.Default,{})
-    sets.precast.FastCast['Wind'] = set_combine(sets.precast.FastCast.Default,{})
-    sets.precast.FastCast['Blue Magic'] = set_combine(sets.precast.FastCast.Default,{})
-    sets.precast.FastCast['Geomancy'] = set_combine(sets.precast.FastCast.Default,{})
-    sets.precast.FastCast['Handbell'] = set_combine(sets.precast.FastCast.Default,{})
+	sets.common.precast.FastCast['Divine Magic'] = set_combine(sets.common.precast.FastCast.Default,{})
+    sets.common.precast.FastCast['Healing Magic'] = set_combine(sets.common.precast.FastCast.Default,{})
+    sets.common.precast.FastCast['Enhancing Magic'] = set_combine(sets.common.precast.FastCast.Default,{})
+    sets.common.precast.FastCast['Enfeebling Magic'] = set_combine(sets.common.precast.FastCast.Default,{})
+    sets.common.precast.FastCast['Elemental Magic'] = set_combine(sets.common.precast.FastCast.Default,{})
+    sets.common.precast.FastCast['Dark Magic'] = set_combine(sets.common.precast.FastCast.Default,{})
+    sets.common.precast.FastCast['Summoning Magic'] = set_combine(sets.common.precast.FastCast.Default,{})
+    sets.common.precast.FastCast['Ninjutsu'] = set_combine(sets.common.precast.FastCast.Default,{})
+    sets.common.precast.FastCast['Singing'] = set_combine(sets.common.precast.FastCast.Default,{})
+    sets.common.precast.FastCast['String'] = set_combine(sets.common.precast.FastCast.Default,{})
+    sets.common.precast.FastCast['Wind'] = set_combine(sets.common.precast.FastCast.Default,{})
+    sets.common.precast.FastCast['Blue Magic'] = set_combine(sets.common.precast.FastCast.Default,{})
+    sets.common.precast.FastCast['Geomancy'] = set_combine(sets.common.precast.FastCast.Default,{})
+    sets.common.precast.FastCast['Handbell'] = set_combine(sets.common.precast.FastCast.Default,{})
 	
 	
 	-- Generic midcast sets
@@ -659,7 +660,7 @@ function init_gear_sets(job)
 		back={ name="Shaper's Shawl", augments={'Sword enhancement spell damage +10','Sword enhancement spell damage +10','Sword enhancement spell damage +10','Sword enhancement spell damage +10',}},		
 		waist={ name="Friar's Rope", augments={'Sword enhancement spell damage +10','Sword enhancement spell damage +10','Sword enhancement spell damage +10','Sword enhancement spell damage +10',}},		
 	})
-	sets.midcast.ConserveMP = set_combine(sets.precast.FastCast.Default, {
+	sets.midcast.ConserveMP = set_combine(sets.common.precast.FastCast.Default, {
 		hands = "Vagabond's Gloves",
 		legs = "Vagabond's Hose",
 		feet = "Vagabond's Boots"

@@ -11,18 +11,6 @@ local FastCast = 80
 
 function get_sets()
 
-	sets.WeaponSkills = {}
-	
-	
-	sets.precast = {}
-	sets.precast.FastCast = {}
-	sets.precast.FastCast.Default = {
-		left_ring = "Hermit's Ring",
-		right_ring = "Hermit's Ring",
-		neck="Silver Name Tag",
-		head="Cache-Nez"
-	}
-	
 	sets.precast.BloodPactDelay = {
 		ammo="Sancus Sachet", --BP2 -6
 		head="Glyphic Horn +1", --BP -8
@@ -33,7 +21,6 @@ function get_sets()
 		back="Tiresias' Cape", --BP -3
 	}
 	
-	sets.midcast = {}
 	sets.midcast['Summoning Magic'] = {
 		main = "Nirvana",
 		sub="Elan Strap",
@@ -214,7 +201,7 @@ function precast(spell)
 	end
 	
 	if spell.action_type == 'Magic' then
-        equip(sets.precast.FastCast.Default)
+        equip(sets.common.precast.FastCast.Default)
 		if spell.skill == "Summoning Magic" then
 			if (spell.english == "Carbuncle") then
 				send_command('send Hit shiva')

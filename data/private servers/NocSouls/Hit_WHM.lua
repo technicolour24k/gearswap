@@ -5,20 +5,6 @@ showInfo = false
 
 function get_sets()
 
-	sets.precast = {}
-	sets.precast.default = {}
-	sets.precast.Cure = set_combine(sets.precast.default, {})
-	
-	sets.precast.FastCast = {}
-	sets.precast.FastCast.Default = {
-		left_ring = "Hermit's Ring",
-		right_ring = "Hermit's Ring",
-		neck="Silver Name Tag",
-		head="Cache-Nez"
-	}
-	
-	
-	sets.midcast = {}
 	sets.midcast.Cure = {
 		main = "Templar Mace", --Cure 10%
 		sub = "Sors Shield", --Cure 3%
@@ -92,7 +78,7 @@ end
 
 function precast(spell)
 	if spell.action_type == 'Magic' then
-        equip(sets.precast.FastCast.Default)
+        equip(sets.common.precast.FastCast.Default)
     end
 	
 	

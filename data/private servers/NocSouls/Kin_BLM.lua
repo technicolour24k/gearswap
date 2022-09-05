@@ -4,29 +4,7 @@ skillup = 0
 showInfo = false
 
 function get_sets()
-	sets.EleStaves = {}
-	sets.EleStaves.Fire = {main = "Fire Staff"}
-	sets.EleStaves.Lightning = {main = "Thunder Staff"}
-	sets.EleStaves.Ice = {main = "Ice Staff"}
-	sets.EleStaves.Wind = {main = "Wind Staff"}
-	sets.EleStaves.Earth = {main = "Earth Staff"}
-	sets.EleStaves.Water = {main = "Water Staff"}
-	sets.EleStaves.Dark = {main = "Dark Staff"}
-	sets.EleStaves.Light = {main = "Light Staff"}
-	
-	sets.precast = {}
-	sets.precast.FastCast = {}
-	sets.precast.FastCast.Default = {
-		left_ear = "Tranquility Earring +1",
-		right_ear = "Stamina Earring +1"
-	}
-	sets.precast.FastCast['Elemental Magic'] = set_combine(sets.precast.FastCast.Default, {})
-	sets.precast.FastCast['Enfeebling Magic'] = set_combine(sets.precast.FastCast.Default, {})
-	sets.precast.FastCast['Dark Magic'] = set_combine(sets.precast.FastCast.Default, {})
-	sets.precast.FastCast['Healing Magic'] = set_combine(sets.precast.FastCast.Default, {})
-	
-	
-	sets.midcast = {}
+
 	sets.midcast['Elemental Magic'] = {
 		head = "Wizard's Petasos",
 		neck = "Uggalepih Pendant",
@@ -106,7 +84,7 @@ end
 
 function precast(spell)
   
-  equip(sets.precast.FastCast.Default)
+  equip(sets.common.precast.FastCast.Default)
 
 end
 
