@@ -176,5 +176,4 @@ end
 
 windower.register_event('gain buff', function(id)
    clearStatuses()
-   infoLog(id ..' gained')
 end)
