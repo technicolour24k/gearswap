@@ -625,31 +625,31 @@ function init_gear_sets(job)
 	
 	
 	-- Generic midcast sets
-	sets.midcast = {}
-    sets.midcast.EnhancingDuration = {}
-	sets.midcast.EnfeeblingDuration = {
+	sets.common.midcast = {}
+    sets.common.midcast.EnhancingDuration = {}
+	sets.common.midcast.EnfeeblingDuration = {
 		left_ring={name="Scintillant Ring", augments={'"Drain" and "Aspir" potency +3','Enfb.mag. skill +3','Mag. Acc+7 /Mag. Dmg.+7','System: 1 ID: 1251 Val: 9',}},
 		right_ring={name="Scintillant Ring", augments={'"Drain" and "Aspir" potency +2','Enfb.mag. skill +7','Mag. Acc+2 /Mag. Dmg.+2','System: 1 ID: 1251 Val: 8',}},	
 	}
-    sets.midcast['Divine Magic'] = {}
-	sets.midcast['Healing Magic'] = {}
-	sets.midcast['Enhancing Magic'] = set_combine(sets.midcast.EnhancingDuration,{})
-	sets.midcast['Enfeebling Magic'] = set_combine(sets.midcast.EnfeeblingDuration,{})
-	sets.midcast['Elemental Magic'] = set_combine(sets.misc.AllJobs.MAB, {})
-	sets.midcast['Dark Magic'] = {}
-	sets.midcast['Summoning Magic'] = {}
-	sets.midcast['Ninjutsu'] = {}
-	sets.midcast['Singing'] = {}
-	sets.midcast['String'] = {}
-	sets.midcast['Wind'] = {}
-	sets.midcast['Blue Magic'] = {}
-	sets.midcast['Geomancy'] = {}
-	sets.midcast['Handbell'] = {}   
-    sets.midcast.Stoneskin = set_combine(sets.midcast.EnhancingDuration,{})
-    sets.midcast.Aquaveil = set_combine(sets.midcast.EnhancingDuration,{})
-    sets.midcast.Refresh = set_combine(sets.midcast.EnhancingDuration,{})
-    sets.midcast.Phalanx = set_combine(sets.midcast.EnhancingDuration,{})
-	sets.midcast.Enspell = set_combine(sets.midcast.EnhancingDuration,{
+    sets.common.midcast['Divine Magic'] = {}
+	sets.common.midcast['Healing Magic'] = {}
+	sets.common.midcast['Enhancing Magic'] = set_combine(sets.common.midcast.EnhancingDuration,{})
+	sets.common.midcast['Enfeebling Magic'] = set_combine(sets.common.midcast.EnfeeblingDuration,{})
+	sets.common.midcast['Elemental Magic'] = set_combine(sets.misc.AllJobs.MAB, {})
+	sets.common.midcast['Dark Magic'] = {}
+	sets.common.midcast['Summoning Magic'] = {}
+	sets.common.midcast['Ninjutsu'] = {}
+	sets.common.midcast['Singing'] = {}
+	sets.common.midcast['String'] = {}
+	sets.common.midcast['Wind'] = {}
+	sets.common.midcast['Blue Magic'] = {}
+	sets.common.midcast['Geomancy'] = {}
+	sets.common.midcast['Handbell'] = {}   
+    sets.common.midcast.Stoneskin = set_combine(sets.common.midcast.EnhancingDuration,{})
+    sets.common.midcast.Aquaveil = set_combine(sets.common.midcast.EnhancingDuration,{})
+    sets.common.midcast.Refresh = set_combine(sets.common.midcast.EnhancingDuration,{})
+    sets.common.midcast.Phalanx = set_combine(sets.common.midcast.EnhancingDuration,{})
+	sets.common.midcast.Enspell = set_combine(sets.common.midcast.EnhancingDuration,{
 		sub={ name="Warlock's Shield", augments={'Sword enhancement spell damage +10','Sword enhancement spell damage +10','Sword enhancement spell damage +10','Sword enhancement spell damage +10',}},
 		head={ name="Copper Hairpin", augments={'Sword enhancement spell damage +10','Sword enhancement spell damage +10','Sword enhancement spell damage +10','Sword enhancement spell damage +10',}},
 		neck={ name="Justice Badge", augments={'Sword enhancement spell damage +10','Sword enhancement spell damage +10','Sword enhancement spell damage +10','Sword enhancement spell damage +10',}},
@@ -660,13 +660,13 @@ function init_gear_sets(job)
 		back={ name="Shaper's Shawl", augments={'Sword enhancement spell damage +10','Sword enhancement spell damage +10','Sword enhancement spell damage +10','Sword enhancement spell damage +10',}},		
 		waist={ name="Friar's Rope", augments={'Sword enhancement spell damage +10','Sword enhancement spell damage +10','Sword enhancement spell damage +10','Sword enhancement spell damage +10',}},		
 	})
-	sets.midcast.ConserveMP = set_combine(sets.common.precast.FastCast.Default, {
+	sets.common.midcast.ConserveMP = set_combine(sets.common.precast.FastCast.Default, {
 		hands = "Vagabond's Gloves",
 		legs = "Vagabond's Hose",
 		feet = "Vagabond's Boots"
 	})
 	
-	sets.aftercast = {}
+	sets.common.aftercast = {}
 	
 	sets.Obis = {}
 	sets.Obis.AIO = {waist = "Hachirin-no-Obi"}
