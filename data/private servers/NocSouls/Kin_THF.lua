@@ -16,6 +16,7 @@ function get_sets()
 	local mjob = player.main_job
 	init_gear_sets(mjob)
 	sets.THF={}
+	sets.THF.midcast = {}
 	
 	sets.THF.TH = {
 		sub = "Sandung",

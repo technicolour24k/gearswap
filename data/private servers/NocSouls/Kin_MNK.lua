@@ -29,7 +29,6 @@ function get_sets()
 
 	send_command("gs enable all")
 	send_command("gs equip sets.aftercast.Idle")
-    infoLog("Under Lv99 - Loading default generic script")
 end
 
 function pretarget (spell)
