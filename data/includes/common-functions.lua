@@ -113,13 +113,13 @@ end
 	   for i=1, remedyListLength do
 			if (buffactive[remedy_list[i]]) then
 				send_command('input /item "Remedy" <me>')
-				send_command('input /item "Remedy Ointment" <me>')
+				send_command('input /item "Rmdy. Ointment" <me>')
 				break
 			end
 		end	
 		for i=1, remedyOintmentListLength do
 			if (buffactive[remedyOintment_list[i]]) then
-				send_command('input /item "Remedy Ointment" <me>')
+				send_command('input /item "Rmdy. Ointment" <me>')
 				break
 			end
 		end	
