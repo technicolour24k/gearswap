@@ -21,11 +21,13 @@ function get_sets()
 	sets.aftercast.Resting = {}
 	sets.aftercast.Engaged = {}
 
-	sets.aftercast.Engaged.Default = {}
-
-	sets.aftercast.Idle = set_combine(sets.misc.AllJobs['DTCombo'],{
-        
+	sets.aftercast.Engaged.Default = set_combine(sets.misc.AllJobs['Level 75']['Melee'], {
+		main="Savate Fists",
+		back="Beater's Mantle",
+		waist="Lizard Belt"
 	})
+
+	sets.aftercast.Idle = set_combine(sets.misc.AllJobs['DTCombo'], sets.aftercast.Engaged.Default,{})
 
 	send_command("gs enable all")
 	send_command("gs equip sets.aftercast.Idle")
@@ -81,39 +83,20 @@ function midcast(spell)
 end
 
 function aftercast(spell)
-
-    local lvl = player.main_job_level
-
     if player.status == "Engaged" then
-        if (lvl < 30) then
-            equip(sets.misc.AllJobs['Lv1'])
-        elseif (lvl < 50) then
-            equip(sets.misc.AllJobs['Level 30']['Melee'])
-        elseif (lvl < 75) then
-            equip(sets.misc.AllJobs['Level 50']['Melee'])
-        elseif (lvl < 90) then
-            equip(sets.misc.AllJobs['Level 75']['Melee'])
-        end
+		equip(sets.aftercast.Engaged.Default)
+	else
+		equip(sets.aftercast[player.status])
     end
     customInfoCheckAftercast(spell.name, spell.tp_cost, spell.mp_cost)
 end
 
 function status_change(new, old)
-    local lvl = player.main_job_level
-
     if player.status == "Engaged" then
-        if (lvl < 30) then
-            equip(sets.misc.AllJobs['Lv1'])
-        elseif (lvl < 50) then
-            equip(sets.misc.AllJobs['Level 30']['Melee'])
-        elseif (lvl < 75) then
-            equip(sets.misc.AllJobs['Level 50']['Melee'])
-        elseif (lvl < 90) then
-            equip(sets.misc.AllJobs['Level 75']['Melee'])
-        end
-    else
-        equip(sets.aftercast[player.status])
-	end
+		equip(sets.aftercast.Engaged.Default)
+	else
+		equip(sets.aftercast[player.status])
+    end
 end
 
 function buff_change(name, gain)
