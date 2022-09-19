@@ -9,7 +9,7 @@ local showFCInfo = config.showFastCastInfo
 local showSpellInfo = config.showSpellInfo
 local showCancelInfo = config.showCancelInfo
 local FastCast = 80
-local activeArts = ""
+activeArts = "default"
 
 function get_sets()
     infoLog(mjob)
@@ -25,20 +25,49 @@ function get_sets()
     sets.SCH.precast['Helixes'] = {}
     sets.SCH.precast['Helixes']['Light Arts'] = set_combine(sets.SCH.precast['Helixes'], {})
     sets.SCH.precast['Helixes']['Dark Arts'] = set_combine(sets.SCH.precast['Helixes'], {})
-	sets.SCH.midcast ={}
+	sets.SCH.midcast = {}
     sets.SCH.midcast['Light Arts'] ={}
     sets.SCH.midcast['Dark Arts'] ={}
-	sets.SCH.midcast.Cure = {}
+	sets.SCH.midcast.Cure = {
+        sub="Curatio Grip",
+        ammo="Quartz Tathlum +1",
+        head="Iaso Mitra",
+        body="Heka's Kalasiris",
+        hands="Revealer's Mitts",
+        legs="Gyve Trousers",
+        feet="Umbani Boots",
+        waist="Paewr Belt",
+        left_ring="Ephedra Ring",
+        right_ring="Ephedra Ring",
+        back="Izdubar Mantle",
+    }
     sets.SCH.midcast.Cure['Light Arts'] = set_combine(sets.SCH.midcast.Cure, {})
     sets.SCH.midcast.Cure['Dark Arts'] = set_combine(sets.SCH.midcast.Cure, {})
     sets.SCH.midcast.Cursna = {}
 	sets.SCH.midcast.StatFix = {}
 	sets.SCH.midcast['Enhancing Magic'] = {}
+	sets.SCH.midcast['Enhancing Magic']['Light Arts'] = set_combine(sets.SCH.midcast['Enhancing Magic'], sets.common.midcast.EnhancingDuration, {})
+	sets.SCH.midcast['Enhancing Magic']['Dark Arts'] = set_combine(sets.SCH.midcast['Enhancing Magic'], {})
 	sets.SCH.midcast.Barspells = set_combine(sets.SCH.midcast['Enhancing Magic'], {})
 	sets.SCH.midcast.Stoneskin = set_combine(sets.SCH.midcast['Enhancing Magic'], {})
 	sets.SCH.midcast.Aquaveil = set_combine(sets.SCH.midcast['Enhancing Magic'], {})
 	sets.SCH.midcast.Regen = set_combine(sets.SCH.midcast['Enhancing Magic'], {})
-	sets.SCH.midcast['Elemental Magic'] = set_combine(sets.common.midcast['Elemental Magic'], {})
+	sets.SCH.midcast['Elemental Magic'] = set_combine(sets.common.midcast['Elemental Magic'], {
+        sub="Elan Strap",
+        ammo="Erlene's Notebook",
+        head="Wayfarer Circlet",
+        body="Gyve Doublet",
+        hands="Quauhpilli Gloves",
+        legs="Gyve Trousers",
+        feet="Umbani Boots",
+        neck="Eddy Necklace",
+        waist="Othila Sash",
+        left_ear="Hecate's Earring",
+        right_ear="Moldavite Earring",
+        left_ring="Acumen Ring",
+        right_ring="Strendu Ring",
+        back="Izdubar Mantle",
+    })
     sets.SCH.midcast['Elemental Magic']['Light Arts'] = set_combine(sets.SCH.midcast['Elemental Magic'], {})
     sets.SCH.midcast['Elemental Magic']['Dark Arts'] = set_combine(sets.SCH.midcast['Elemental Magic'], {})
 	sets.SCH.midcast['Dark Magic'] = set_combine(sets.common.midcast['Dark Magic'], {})
@@ -90,7 +119,16 @@ function get_sets()
     sets.WeaponSkills['Spirit Taker'] = set_combine(sets.WeaponSkills['AllJobsWS'], {})
 
     sets.aftercast = {}
-	sets.aftercast.Idle = set_combine(sets.aftercast.Engaged, {})
+	sets.aftercast.Idle = set_combine(sets.aftercast.Engaged, {
+        sub={ name="Mensch Strap", augments={'"Store TP"+5','"Store TP"+5','"Store TP"+5','"Store TP"+5',}},
+        ammo="Erlene's Notebook",
+        legs="Spurrina Slops",
+        feet="Iaso Boots",
+        neck="Loricate Torque +1",
+        waist="Paewr Belt",
+        left_ear={ name="Moonshade Earring", augments={'"Refresh"+10','"Fast Cast"+5','"Regen"+10','"Store TP"+5',}},
+        right_ring={ name="Castor's Ring", augments={'"Refresh"+10','"Fast Cast"+5','"Regen"+10','"Store TP"+5',}},
+    })
 	sets.aftercast.Engaged = {}
 
 end
@@ -120,18 +158,30 @@ end
 function midcast(spell)
 	cancelBuff(spell.english, spell.cast_time, FastCast)
     
-	if sets.SCH.midcast[spell.english][activeArts] then
+	if sets.SCH.midcast[spell.english] then
         debugLog("Midcast Debug: Trying to equip sets.SCH.midcast["..spell.english.."]["..activeArts.."]")
-		equip(sets.SCH.midcast[spell.english][activeArts])
-	elseif sets.common.midcast[spell.english] then
+		if activeArts == "default" then
+            equip(sets.SCH.midcast[spell.english])            
+        else
+            equip(sets.SCH.midcast[spell.english][activeArts])
+        end
+    elseif sets.common.midcast[spell.english] then
 		equip(sets.common.midcast[spell.english])
 	elseif spellContains(spell.english,'Cure') or spellContains(spell.english,'Cura') then 
-        equip(sets.SCH.midcast.Cure[activeArts])
+        if activeArts == "default" then
+            equip(sets.SCH.midcast.Cure)            
+        else
+            equip(sets.SCH.midcast.Cure[activeArts])
+        end
 	end
 
-	if sets.SCH.midcast[spell.skill][activeArts] then
+	if (sets.SCH.midcast[spell.skill]) then
         debugLog("Midcast Debug: Trying to equip sets.SCH.midcast["..spell.skill.."]["..activeArts.."]")
-        equip(sets.SCH.midcast[spell.skill][activeArts])
+        if activeArts == "default" then
+            equip(sets.SCH.midcast[spell.skill])            
+        else
+            equip(sets.SCH.midcast[spell.skill][activeArts])
+        end
 	elseif sets.common.midcast[spell.skill] then
 		equip(sets.common.midcast[spell.skill])
 
@@ -143,11 +193,18 @@ function midcast(spell)
 		equip(sets.SCH.midcast.Regen)
 	end
     if (Helixes:contains(spell.english)) then
-		equip(sets.SCH.midcast['Helixes'][activeArts])
-	end
+        if activeArts == "default" then
+            equip(sets.SCH.midcast['Helixes'])
+        else
+		    equip(sets.SCH.midcast['Helixes'][activeArts])
+        end
+    end
     if (Storms:contains(spell.english)) then
-		equip(sets.SCH.midcast['Storms'][activeArts])
-	end
+        if activeArts == "default" then
+            equip(sets.SCH.midcast['Storms'])
+        else
+		    equip(sets.SCH.midcast['Storms'][activeArts])
+        end	end
 	if (conserveMP_list:contains(spell.english)) then
 		equip(sets.common.midcast.ConserveMP)
 	end

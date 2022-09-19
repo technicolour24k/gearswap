@@ -30,7 +30,7 @@ function checkForTown()
 end
 
 --- CancelBuff documentation
--- @param spell: The name of the spell you're using. Recommendation: spell.name
+-- @param spell: The name of the spell you're using. Recommendation: spell.english
 -- @param casttime: The base cast time of the spell you're using. Recommendation: spell.cast_time
 -- @param FC: The amount of FastCast you will have
 -- @param buff: The buff name you're targeting (e.g. "Sneak")
@@ -133,11 +133,6 @@ end
  	end
  end
 
-
-
-
-
-
 function echoInfo(info,delay)
 	if (delay) then
 		send_command('@wait '..delay..'; input /echo '..info)
@@ -171,7 +166,6 @@ function announceSpell(spell,target,chatmode)
 		send_command('input /'..chatmode..' '..spell..' => '..target)
 	end
 end
-
 
 windower.register_event('gain buff', function(id)
    clearStatuses()
