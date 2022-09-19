@@ -47,13 +47,47 @@ function get_sets()
 	sets.SCH.midcast['Enfeebling Magic'] = set_combine(sets.common.midcast['Enfeebling Magic'], {})
     sets.SCH.midcast['Enfeebling Magic']['Light Arts'] = set_combine(sets.SCH.midcast['Enfeebling Magic'], {})
     sets.SCH.midcast['Enfeebling Magic']['Dark Arts'] = set_combine(sets.SCH.midcast['Enfeebling Magic'], {})
-    sets.SCH.midcast['Helixes'] = {}
+    sets.SCH.midcast['Helixes'] = set_combine(sets.SCH.midcast['Elemental Magic'], {})
     sets.SCH.midcast['Helixes']['Light Arts'] = set_combine(sets.SCH.midcast['Helixes'], {})
     sets.SCH.midcast['Helixes']['Dark Arts'] = set_combine(sets.SCH.midcast['Helixes'], {})
     sets.SCH.midcast['Storms'] = {}
     sets.SCH.midcast['Storms']['Light Arts'] = set_combine(sets.SCH.midcast['Storms'], {})
     sets.SCH.midcast['Storms']['Dark Arts'] = set_combine(sets.SCH.midcast['Storms'], {})
     sets.SCH.midcast['Kaustra'] = set_combine(sets.SCH.midcast['Elemental Magic'], {})
+
+    sets.JobAbility['Tabula Rasa'] = {}
+    sets.JobAbility['Light Arts'] = {}
+    sets.JobAbility['Dark Arts'] = {}
+    sets.JobAbility['Sublimation'] = {}
+    sets.JobAbility['Modus Veritas'] = {}
+    sets.JobAbility['Enlightenment'] = {}
+    sets.JobAbility['Libra'] = {}
+    sets.JobAbility['Caper Emissarius'] = {}
+    sets.JobAbility['Penury'] = {}
+    sets.JobAbility['Addendum: White']= {}
+    sets.JobAbility['Celerity'] = {}
+    sets.JobAbility['Accession'] = {}
+    sets.JobAbility['Rapture'] = {}
+    sets.JobAbility['Altruism'] = {}
+    sets.JobAbility['Tranquility'] = {}
+    sets.JobAbility['Perpetuance'] = {}
+    sets.JobAbility['Parsimony'] = {}
+    sets.JobAbility['Alacrity'] = {}
+    sets.JobAbility['Addendum: Black'] = {}
+    sets.JobAbility['Manifestation'] = {}
+    sets.JobAbility['Ebullience'] = {}
+    sets.JobAbility['Focalization'] = {}
+    sets.JobAbility['Equanmity'] = {}
+    sets.JobAbility['Immanence'] = {}
+
+    sets.WeaponSkills['Tartarus Torpor'] = set_combine(sets.WeaponSkills['AllJobsWS'], {})
+    sets.WeaponSkills['Omniscience'] = set_combine(sets.WeaponSkills['AllJobsWS'], {})
+    sets.WeaponSkills['Garland of Bliss'] = set_combine(sets.WeaponSkills['AllJobsWS'], {})
+    sets.WeaponSkills['Vidohunir'] = set_combine(sets.WeaponSkills['AllJobsWS'], {})
+    sets.WeaponSkills['Gate of Tartarus'] = set_combine(sets.WeaponSkills['AllJobsWS'], {})
+    sets.WeaponSkills['Shattersoul'] = set_combine(sets.WeaponSkills['AllJobsWS'], {})
+    sets.WeaponSkills['Cataclysm'] = set_combine(sets.WeaponSkills['AllJobsWS'], {})
+    sets.WeaponSkills['Spirit Taker'] = set_combine(sets.WeaponSkills['AllJobsWS'], {})
 
     sets.aftercast = {}
 	sets.aftercast.Idle = set_combine(sets.aftercast.Engaged, {})
@@ -83,11 +117,11 @@ function precast(spell)
 	
 end
 
-function midcast(spell)  
+function midcast(spell)
 	cancelBuff(spell.english, spell.cast_time, FastCast)
-
+    
 	if sets.SCH.midcast[spell.english][activeArts] then
-        -- equip(sets.SCH.midcast[spell.english])
+        debugLog("Midcast Debug: Trying to equip sets.SCH.midcast["..spell.english.."]["..activeArts.."]")
 		equip(sets.SCH.midcast[spell.english][activeArts])
 	elseif sets.common.midcast[spell.english] then
 		equip(sets.common.midcast[spell.english])
@@ -96,7 +130,8 @@ function midcast(spell)
 	end
 
 	if sets.SCH.midcast[spell.skill][activeArts] then
-		equip(sets.SCH.midcast[spell.skill][activeArts])
+        debugLog("Midcast Debug: Trying to equip sets.SCH.midcast["..spell.skill.."]["..activeArts.."]")
+        equip(sets.SCH.midcast[spell.skill][activeArts])
 	elseif sets.common.midcast[spell.skill] then
 		equip(sets.common.midcast[spell.skill])
 
@@ -116,6 +151,7 @@ function midcast(spell)
 	if (conserveMP_list:contains(spell.english)) then
 		equip(sets.common.midcast.ConserveMP)
 	end
+    weathercheck(spell.element)
 	customInfoCheckMidcast(spell.name, spell.tp_cost, spell.mp_cost)
 end
 
