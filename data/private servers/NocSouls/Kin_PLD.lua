@@ -13,10 +13,12 @@ local FastCast = 80
 
 function get_sets()
 	include('private servers/'..server..'/common-gearsets')
+	include('private servers/'..server..'/custom-info')
 	init_gear_sets(mjob)
 
 	sets.PLD={}
 	sets.Enmity= {}
+	sets.PLD.midcast = {}
 	
 	sets.precast.JobAbility = {}
 	sets.precast.JobAbility.Invincible = {}
