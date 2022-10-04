@@ -222,12 +222,6 @@ function self_command(command)
 		equip(set_combine(sets.aftercast[player.status][TPStyle], sets.weapons[mjob][WeaponChoice]))
 	end
 
-	if command:lower() == "status-check" then
-		if (config.oneClickRemedies) then
-			clearStatuses()
-		end
-	end
-
 	if player.status == "Engaged" then
 		equip(sets.aftercast[player.status][TPStyle])
 	else

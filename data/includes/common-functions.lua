@@ -170,3 +170,13 @@ end
 windower.register_event('gain buff', function(id)
    clearStatuses()
 end)
+
+function self_command(command)
+	if command:lower() == "status-check" then
+		if (config.oneClickRemedies) then
+			clearStatuses()
+		end
+	end
+end
+
+

@@ -183,12 +183,6 @@ function self_command(command)
 		equip(sets.aftercast.Engaged[TPStyle])
 	end
 
-	if command:lower() == "status-check" then
-		if (config.oneClickRemedies) then
-			clearStatuses()
-		end
-	end
-
 	if player.status == "Engaged" then
 		equip(sets.aftercast[player.status][TPStyle])
 	else

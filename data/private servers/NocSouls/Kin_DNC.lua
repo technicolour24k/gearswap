@@ -239,12 +239,6 @@ function self_command(command)
 		equip(sets.aftercast.Engaged[TPStyle])
 	end
 
-	if command:lower() == "status-check" then
-		if (config.oneClickRemedies) then
-			clearStatuses()
-		end
-	end
-
 	if command:lower() == "waltzing" then
 		if (player.last_subtarget.hpp < 25) then
 			waltzTier = "Curing Waltz V"

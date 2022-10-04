@@ -122,9 +122,5 @@ function area_change(new,old)
 end
 
 function self_command(command)
-	if command:lower() == "status-check" then
-		if (config.oneClickRemedies) then
-			clearStatuses()
-		end
-	end
+
 end

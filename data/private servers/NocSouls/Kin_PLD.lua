@@ -182,9 +182,4 @@ function self_command(command)
 		equip(set_combine(sets.aftercast[player.status], sets.weapons[mjob][TPStyle]))
 	end
 
-	if command:lower() == "status-check" then
-		if (config.oneClickRemedies) then
-			clearStatuses()
-		end
-	end
 end
