@@ -141,7 +141,7 @@ end
 
 function doSetup()
 
-	send_command('gs equip sets.aftercast.Idle')
+	equip(sets.aftercast.Idle)
     send_command('input /macro book 1;wait .1;input /macro set 1')
 
 end

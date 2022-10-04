@@ -76,7 +76,7 @@ function get_sets()
 		left_ear = "Moonshade Earring"
 	})
     
-	send_command('gs equip sets.aftercast['..player.status..']')
+	equip(sets.aftercast[player.status])
 	infoLog('[F9] to toggle weapon types')
 end
 

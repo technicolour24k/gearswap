@@ -150,7 +150,7 @@ end
 
 function doSetup()
 
-	send_command('gs equip sets.aftercast.Idle')
+	equip(sets.aftercast.Idle)
 
 end
 

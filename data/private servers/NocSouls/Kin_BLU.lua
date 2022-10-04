@@ -55,7 +55,7 @@ function get_sets()
 		right_ring={ name="Hermit's Ring", augments={'"Regen"+20','"Refresh"+20','Pet: "Regen"+25','Pet: "Regen"+25',}},
 	})
     
-	send_command('gs equip sets.aftercast['..player.status..']')
+	equip(sets.aftercast[player.status])
 	send_command("[F12] Bound to status removal")
 end
 

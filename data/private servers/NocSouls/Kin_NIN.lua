@@ -93,7 +93,7 @@ function get_sets()
 
     
 	send_command('gs enable all') 
-	send_command('gs equip sets.aftercast.Idle')
+	equip(sets.aftercast.Idle)
 	infoLog('[F9] Bound to Default TP Gear')
 	infoLog('[F10] Bound to Set Accuracy heavy TP Gear')
 	infoLog('[F11] Bound to Set Evasion heavy TP Gear')
