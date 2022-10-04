@@ -1,0 +1,3 @@
+bind F9 gs c default
+bind F10 gs c accuracy
+bind F11 gs c evasion

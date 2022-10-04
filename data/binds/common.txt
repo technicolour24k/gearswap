@@ -5,3 +5,4 @@ bind ^F4 send @others input /targetnpc; input /targetnpc; wait 0.1; send @others
 bind ^F5 send @others input /targetnpc; input /targetnpc; wait 0.1; send @others waterga3 <t>; waterga3;
 bind ^F6 send @others input /targetnpc; input /targetnpc; wait 0.1; send @others stoneja <t>; stoneja;
 bind ^F12 send @others input /follow Kin;
+bind F12 gs c status-check

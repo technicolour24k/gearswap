@@ -233,12 +233,6 @@ function self_command(command)
 		end
 	end
 
-	if command:lower() == "status-check" then
-		if (config.oneClickRemedies) then
-			clearStatuses()
-		end
-	end
-
 	if player.status == "Engaged" then
 		equip(sets.aftercast[player.status][RDMStyle])
 	else

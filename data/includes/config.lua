@@ -14,37 +14,12 @@ config.oneClickRemedies = true --Activate remedies with a single command - defin
 enspell_list = S{"Enstone", "Enwater", "Enaero", "Enfire", "Enblizzard", "Enthunder", "Enlight","Endark"} --Store enspells for easily cancelling
 conserveMP_list = --Store spells that get no benefit from Potency or anything outside ConserveMP
     S {
-    "Protect",
-    "Protect II",
-    "Protect III",
-    "Protect IV",
-    "Protect V",
-    "Protectra",
-    "Protectra II",
-    "Protectra III",
-    "Protectra IV",
-    "Protectra V",
-    "Shell",
-    "Shell II",
-    "Shell III",
-    "Shell IV",
-    "Shell V",
-    "Shellra",
-    "Shellra II",
-    "Shellra III",
-    "Shellra IV",
-    "Shellra V",
-    "Haste",
-    "Haste II",
-    "Dia",
-    "Dia II",
-    "Dia III",
-    "Diaga",
-    "Blaze Spikes",
-    "Ice Spikes",
-    "Shock Spikes",
-    "Refresh",
-    "Refresh II"
+    "Protect","Protect II","Protect III","Protect IV","Protect V","Protectra","Protectra II","Protectra III","Protectra IV","Protectra V",
+    "Shell","Shell II","Shell III","Shell IV","Shell V","Shellra","Shellra II","Shellra III","Shellra IV","Shellra V",
+    "Haste","Haste II",
+    "Dia","Dia II","Dia III","Diaga",
+    "Blaze Spikes","Ice Spikes","Shock Spikes",
+    "Refresh","Refresh II"
 }
 
 

@@ -143,9 +143,9 @@ function get_sets()
 
 	send_command("gs enable all")
 	send_command("gs equip sets.aftercast.Idle")
-	send_command("input /echo [F9] Bound to Toggle TP Gear;bind F9 gs c togglegear")
-	send_command("input /echo [F10] Bound to Toggle Steps in use;bind F10 gs c toggle-step")
-	send_command("input /echo [F12] Bound to status removal;bind F12 gs c status-check")
+	infoLog("[F9] Bound to Toggle TP Gear")
+	infoLog("[F10] Bound to Toggle Steps in use;")
+	infoLog("[F12] Bound to status removal")
 
 	disable("main", "sub")
 end

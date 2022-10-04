@@ -1,0 +1,2 @@
+bind F9 gs c togglegear
+bind F10 gs c toggle-step

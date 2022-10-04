@@ -92,12 +92,11 @@ function get_sets()
 						"Refresh", "Refresh II"}
 
     
-	switchMacroSet(11,1)
 	send_command('gs enable all') 
 	send_command('gs equip sets.aftercast.Idle')
-	send_command('input /echo [F9] Bound to Default TP Gear;bind F9 gs c default')
-	send_command('input /echo [F11] Bound to Set Accuracy heavy TP Gear;bind F11 gs c accuracy')
-	send_command('input /echo [F12] Bound to Set Evasion heavy TP Gear;bind F12 gs c evasion')
+	infoLog('[F9] Bound to Default TP Gear')
+	infoLog('[F10] Bound to Set Accuracy heavy TP Gear')
+	infoLog('[F11] Bound to Set Evasion heavy TP Gear')
 
 	
 end

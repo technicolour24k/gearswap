@@ -76,9 +76,8 @@ function get_sets()
 		left_ear = "Moonshade Earring"
 	})
     
-    switchMacroSet(7,1)
 	send_command('gs equip sets.aftercast['..player.status..']')
-	send_command('input /echo [F9] to toggle weapon types;bind F9 gs c weapon-toggle')
+	infoLog('[F9] to toggle weapon types')
 end
 
 

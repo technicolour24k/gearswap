@@ -119,12 +119,11 @@ function get_sets()
 		left_ear = "Moonshade Earring"
 	})
 
-	switchMacroSet(8, 1)
 	send_command("gs enable all")
 	send_command("gs equip sets.aftercast.Idle")
-	send_command("@input /echo [F10] Bound to Toggle Weapons;bind F10 gs c toggle-weapons")
-	send_command("@input /echo [F9] Bound to Toggle TP Gear;bind F9 gs c togglegear")
-	send_command("@input /echo [F12] Bound to status removal;bind F12 gs c status-check")
+	infoLog("[F10] Bound to Toggle Weapons")
+	infoLog("[F9] Bound to Toggle TP Gear")
+	infoLog("[F12] Bound to status removal")
 end
 
 function precast(spell)

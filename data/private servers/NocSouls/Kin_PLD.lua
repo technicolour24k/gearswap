@@ -102,8 +102,8 @@ function get_sets()
     
     switchMacroSet(7,1)
 	send_command('gs equip sets.aftercast['..player.status..']')
-	send_command('input /echo [F9] to toggle weapon types;bind F9 gs c weapon-toggle')
-	send_command("input /echo [F12] Bound to status removal;bind F12 gs c status-check")
+	infoLog('[F9] to toggle weapon types')
+	infoLog("[F12] Bound to status removal")
 end
 
 function pretarget(spell)

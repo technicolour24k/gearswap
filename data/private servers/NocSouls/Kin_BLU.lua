@@ -56,7 +56,7 @@ function get_sets()
 	})
     
 	send_command('gs equip sets.aftercast['..player.status..']')
-	send_command("input /echo [F12] Bound to status removal;bind F12 gs c status-check")
+	send_command("[F12] Bound to status removal")
 end
 
 function pretarget(spell)
