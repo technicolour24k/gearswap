@@ -1,2 +1,2 @@
-input /echo [F9] Bound to Toggle TP Gear;bind F9 gs c togglegear
+input /echo [F9] Bound to Toggle TP Gear;bind F9 gs c toggle-gear
 input /echo [F12] Bound to status removal;bind F12 gs c status-check

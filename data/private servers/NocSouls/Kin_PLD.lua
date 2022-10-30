@@ -172,6 +172,8 @@ function status_change(new,old)
 end
 
 function self_command(command)
+	common_self_command(command)
+
 	if command:lower() == "weapon-toggle" then
 		if (TPStyle == "Sword") then
 			TPStyle = "Great Sword"

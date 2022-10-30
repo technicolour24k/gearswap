@@ -165,7 +165,7 @@ function area_change(new,old)
 end
 
 function self_command(command)
-
+	common_self_command(command)
 	if command:lower() == "togglegear" then
 		send_command("gs enable")
 		if TPStyle == "Default" then

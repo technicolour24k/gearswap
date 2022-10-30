@@ -238,6 +238,8 @@ function buff_change(name,gol,tab)
 end
 
 function self_command(command)
+	common_self_command(command)
+
 	if command:lower() == "bpgo" then
 		if (player.target.type == "MONSTER") then
 			if (pet.name == "Carbuncle") then

@@ -180,6 +180,8 @@ function buff_change(name,gain)
 end
 
 function self_command(command)
+	common_self_command(command)
+
 	if command:lower() == "default" then
 		TPStyleIndex = 1
 		infoLog('TP Style is now: '.. TPStyle[TPStyleIndex] .. '!')

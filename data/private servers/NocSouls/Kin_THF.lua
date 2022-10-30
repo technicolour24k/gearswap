@@ -88,8 +88,6 @@ function get_sets()
 
 	send_command("gs enable all")
 	send_command("gs equip sets.aftercast.Idle")
-
-	disable("main", "sub")
 end
 
 function pretarget (spell)
@@ -190,9 +188,8 @@ function area_change(new,old)
 end
 
 function self_command(command)
-
-	if command:lower() == "togglegear" then
-		send_command("gs enable sub")
+	common_self_command(command)
+	if command:lower() == "toggle-gear" then
 		if TPStyle == "Default" then
 			TPStyle = "TH"
 			equip(sets.aftercast.Engaged[TPStyle])

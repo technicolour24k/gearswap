@@ -311,6 +311,8 @@ function buff_change(name,gol,tab)
 end
 
 function self_command(command)
+	common_self_command(command)
+
 	if command:lower() == "bp-rage-1" then
 		send_command('input /ja "'..bloodpacts[pet.name]['bp-rage-1']..'" <t>')
 		debugLog('Getting '..pet.name..' to use '..bloodpacts[pet.name]['bp-rage-1'])
