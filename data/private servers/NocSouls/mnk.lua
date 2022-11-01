@@ -76,11 +76,10 @@ function buff_change(name,gol,tab)
 end
 
 function self_command(command)
-	common_self_command(command)
-
 	if command:lower() == "cmd" then
-
+		
 	end
+	common_self_command(command)
 end
 
 function doSetup()

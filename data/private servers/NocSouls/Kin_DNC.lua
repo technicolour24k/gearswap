@@ -226,8 +226,6 @@ function area_change(new,old)
 end
 
 function self_command(command)
-	common_self_command(command)
-
 	if command:lower() == "togglegear" then
 		send_command("gs enable sub")
 		if TPStyle == "Default" then
@@ -240,7 +238,7 @@ function self_command(command)
 		infoLog("TP Style is now: " .. TPStyle.. "!")
 		equip(sets.aftercast.Engaged[TPStyle])
 	end
-
+	
 	if command:lower() == "waltzing" then
 		if (player.last_subtarget.hpp < 25) then
 			waltzTier = "Curing Waltz V"
@@ -287,7 +285,7 @@ function self_command(command)
 		end
 		infoLog("[New Step] " ..step.. ": " ..stepDesc)
 	end
-
+	
 	if command:lower() == "use-step" then
 		send_command('input /ja "'..step..'" <t>')
 		infoLog("[Step] " ..step.. ": " ..stepDesc)
@@ -298,5 +296,5 @@ function self_command(command)
 	else
 		equip(sets.aftercast[player.status])
 	end
-
+	common_self_command(command)
 end

@@ -19,25 +19,27 @@ function get_sets()
 	sets.WHM = {}
 	sets.WHM.midcast ={}
 	sets.WHM.midcast.Cure = {
-		main = "Templar Mace", --Cure 10%
-		sub = "Sors Shield", --Cure 3%
+		main = "Templar Mace", --Cure 10% [10% + 0%]
+		sub = "Sors Shield", --Cure 3% [13% + 0%]
 		ammo = "Quartz Tathlum +1",
-		head = "Theophany Cap +2", --Cure +11% [11% + 0%]
-		neck = "Ajari Bead Necklace",
-		left_ear = "Roundel Earring", --Cure +5% [16% + 0%]
-		body = "Theophany Briault +2", --Cure II +3% [16% + 3%]
-		hands = "Theophany Mitts +2", --Cure II +2% [16% + 5%]
+		head = "Theophany Cap +3", --Cure +12% [25% + 0%]
+		neck = "Fylgja Torque", --Cure +2% [27% + 0%]
+		left_ear = "Roundel Earring", --Cure +5% [32% + 0%]
+		right_ear = "Orison Earring", --Cure +2% [34% + 0%]
+		body = "Theophany Briault +3", --Cure II +3% [34% + 6%]
+		hands = "Theophany Mitts +2", --Cure II +2% [34% + 10%]
 		left_ring = "Ephedra Ring",
-		right_ring = "Stikini Ring +1",
-		back = "Ixion Cape",
+		right_ring = "Lebeche Ring", --Cure +3% [37% + 10%]
+		back = "Dew Silk Cape +1", --Cure 3% [40% + 10%]
 		waist = "Witch Sash",
-		legs = "Orison Pantaloons +2", --5% Cure amount -> MP
-		feet = "Theophany Duckbills +2" 
+		legs = "Ebers Pantaloons +1", --6% Cure amount > MP
+		feet = "Piety Duckbills +1" --Cure 10% [50% + 10%] 
 	}
 	sets.WHM.midcast.Cursna = {
 		main = "Yagrush",
-		right_ring = "Ephedra Ring",
-		left_ring = "Ephedra Ring"
+		right_ring = "Ephedra Ring", --10%
+		left_ring = "Ephedra Ring", --10%
+		legs="Theophany Pantaloons +3", --21%
 	}
 	sets.WHM.midcast.StatFix = {
 		main = "Yagrush"
@@ -140,9 +142,8 @@ function buff_change(name,gol,tab)
 end
 
 function self_command(command)
-	common_self_command(command)
-
 	if command:lower() == "cmd" then
-
+		
 	end
+	common_self_command(command)
 end

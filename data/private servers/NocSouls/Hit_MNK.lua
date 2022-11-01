@@ -157,6 +157,6 @@ function area_change(new,old)
 end
 
 function self_command(command)
-	common_self_command(command)
 	equip(sets.aftercast[player.status])
+	common_self_command(command)
 end

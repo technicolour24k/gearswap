@@ -218,8 +218,6 @@ function area_change(new,old)
 end
 
 function self_command(command)
-	common_self_command(command)
-
 	if command:lower() == "togglegear" then
 		send_command("gs enable sub")
 		if RDMStyle == "Melee" then
@@ -239,5 +237,5 @@ function self_command(command)
 	else
 		equip(sets.aftercast[player.status])
 	end
-
+	common_self_command(command)
 end

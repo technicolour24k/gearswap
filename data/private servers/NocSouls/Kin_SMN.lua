@@ -311,8 +311,6 @@ function buff_change(name,gol,tab)
 end
 
 function self_command(command)
-	common_self_command(command)
-
 	if command:lower() == "bp-rage-1" then
 		send_command('input /ja "'..bloodpacts[pet.name]['bp-rage-1']..'" <t>')
 		debugLog('Getting '..pet.name..' to use '..bloodpacts[pet.name]['bp-rage-1'])
@@ -320,12 +318,13 @@ function self_command(command)
 	if command:lower() == "bp-rage-2" then
 		send_command('input /ja "'..bloodpacts[pet.name]['bp-rage-2']..'" <t>')
 		debugLog('Getting '..pet.name..' to use '..bloodpacts[pet.name]['bp-rage-2'])
-
+		
 	end
 	if command:lower() == "bp-ward" then
 		send_command('input /ja "'..bloodpacts[pet.name]['bp-ward']..'" <st>')
 		debugLog('Getting '..pet.name..' to use '..bloodpacts[pet.name]['bp-ward']..'on <lastst>')
 	end
+	common_self_command(command)
 end
 
 function doSetup()

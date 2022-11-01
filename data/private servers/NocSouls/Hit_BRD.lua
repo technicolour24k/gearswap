@@ -84,7 +84,6 @@ end
 
 function self_command(command)
 	common_self_command(command)
-
 end
 
 function doSetup()

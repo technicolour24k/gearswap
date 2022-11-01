@@ -488,19 +488,17 @@ function init_gear_sets(job)
 	}
 
 	sets.misc.AllJobs['DTDown'] = {
-		neck="Loricate Torque +1",
-		left_ring="Defending Ring",
-		
+		neck="Loricate Torque +1", --6% DT
+		left_ring="Defending Ring", --10% DT (16% total)
 	}
 	sets.misc.AllJobs['PDTDown'] = set_combine(sets.misc.AllJobs['DTDown'], {
-		right_ring="Patricius Ring",
+		 right_ring="Patricius Ring", --5% PDT (21% total)
 	})
 	sets.misc.AllJobs['MDTDown'] = set_combine(sets.misc.AllJobs['DTDown'],{
-		left_earring="Etiolation Earring",
-		
+		left_ear="Etiolation Earring", --3% MDT (19% total + Shell5 @29% MDT > 48% total)
+		right_ring="Purity Ring" --4% MDT (23% total  + Shell5 @29% MDT > 52% total)
 	})
-	sets.misc.AllJobs['DTCombo'] = set_combine(sets.misc.AllJobs['PDTDown'], sets.misc.AllJobs['MDTDown'],{}
-)
+	sets.misc.AllJobs['DTCombo'] = set_combine(sets.misc.AllJobs['PDTDown'], sets.misc.AllJobs['MDTDown'],{})
 	sets.misc.AllJobs['Lv1'] = {
 		main="Hoe",
 		head="Cache-Nez",

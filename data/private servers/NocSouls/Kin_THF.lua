@@ -1,6 +1,7 @@
 include("organizer-lib")
-include("includes/common-functions")
 include("includes/config")
+include('private servers/'..server..'/common-gearsets')
+include("includes/common-functions")
 
 --initialise local variables to inherit from master config
 local showFCInfo = config.showFastCastInfo
@@ -11,7 +12,6 @@ local FastCast = 80
 TPStyle = "Default"
 
 function get_sets()
-	include('private servers/'..server..'/common-gearsets')
 	include('private servers/'..server..'/custom-info')
 	local mjob = player.main_job
 	init_gear_sets(mjob)
@@ -188,7 +188,6 @@ function area_change(new,old)
 end
 
 function self_command(command)
-	common_self_command(command)
 	if command:lower() == "toggle-gear" then
 		if TPStyle == "Default" then
 			TPStyle = "TH"
@@ -203,11 +202,10 @@ function self_command(command)
 		infoLog("TP Style is now: " .. TPStyle.. "!")
 		equip(sets.aftercast.Engaged[TPStyle])
 	end
-
 	if player.status == "Engaged" then
 		equip(sets.aftercast[player.status][TPStyle])
 	else
 		equip(sets.aftercast[player.status])
 	end
-
+	common_self_command(command)
 end

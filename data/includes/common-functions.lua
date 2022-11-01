@@ -171,12 +171,14 @@ windower.register_event('gain buff', function(id)
    clearStatuses()
 end)
 
-function common_self_command(command)
-	if command:lower() == "status-check" then
+function common_self_command(cmd)
+	if cmd:lower() == "status-check" then
 		if (config.oneClickRemedies) then
 			clearStatuses()
 		end
 	end
+	if cmd:lower() == "mdtdown" then
+		infoLog("Trying to use "..cmd)
+		equip(sets.misc.AllJobs["MDTDown"])
+	end
 end
-
-

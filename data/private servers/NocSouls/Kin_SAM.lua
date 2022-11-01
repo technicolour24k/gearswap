@@ -152,8 +152,6 @@ function status_change(new,old)
 end
 
 function self_command(command)
-	common_self_command(command)
-
 	if command:lower() == "weapon-toggle" then
 		if (TPStyle == "Great Katana") then
 			TPStyle = "Polearm"
@@ -165,4 +163,5 @@ function self_command(command)
 		infoLog("TP Style is now: " ..TPStyle)
 		equip(set_combine(sets.aftercast[player.status], sets.weapons[mjob][TPStyle]))
 	end
+	common_self_command(command)
 end

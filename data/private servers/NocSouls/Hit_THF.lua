@@ -189,8 +189,6 @@ function area_change(new,old)
 end
 
 function self_command(command)
-	common_self_command(command)
-
 	if command:lower() == "togglegear" then
 		send_command("gs enable sub")
 		if TPStyle == "Default" then
@@ -206,11 +204,11 @@ function self_command(command)
 		infoLog("TP Style is now: " .. TPStyle.. "!")
 		equip(sets.aftercast.Engaged[TPStyle])
 	end
-
+	
 	if player.status == "Engaged" then
 		equip(sets.aftercast[player.status][TPStyle])
 	else
 		equip(sets.aftercast[player.status])
 	end
-
+	common_self_command(command)
 end
