@@ -137,6 +137,7 @@ function midcast(spell)
 		equip(sets.common.midcast.ConserveMP)
 	end
 	customInfoCheckMidcast(spell.name, spell.tp_cost, spell.mp_cost)
+	if (spell.skill == "Elemental Magic" or spell.skill=="Healing Magic") then weathercheck(spell.element) end
 end
 
 function aftercast(spell)

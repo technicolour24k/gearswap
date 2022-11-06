@@ -178,7 +178,12 @@ function common_self_command(cmd)
 		end
 	end
 	if cmd:lower() == "mdtdown" then
-		infoLog("Trying to use "..cmd)
 		equip(sets.misc.AllJobs["MDTDown"])
+		infoLog("Equipping MDT Gear")
+	end
+	if cmd:lower() == "pdtdown" then
+		equip(sets.misc.AllJobs["PDTDown"])
+		infoLog("Equipping PDT Gear")
+
 	end
 end
