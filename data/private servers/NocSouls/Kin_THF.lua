@@ -60,8 +60,7 @@ function get_sets()
 	sets.aftercast.Resting = {}
 	sets.aftercast.Engaged = {}
 
-	sets.aftercast.Engaged.Default = set_combine(sets.weapons[mjob]["Daggers"],{
-		ammo={ name="Yetshila +1", augments={'"Triple Atk."+2','"Triple Atk."+2','Crit.hit rate+5','Crit.hit rate+5',}},
+	sets.aftercast.Engaged.Default = set_combine(sets.weapons[mjob]["Daggers"], sets.misc.AllJobs.TP,{
 		head=THF_AF_HEAD,
 		body=THF_EMPYREAN_BODY,
 		hands=THF_AF_HANDS,
@@ -69,11 +68,8 @@ function get_sets()
 		feet="Savateur's Gaiters",
 		neck="Loricate Torque +1",
 		waist={ name="Windbuffet Belt +1", augments={'"Triple Atk."+2','"Triple Atk."+2','"Triple Atk."+2','"Triple Atk."+2',}},
-		left_ear={ name="Telos Earring" },
-		right_ear={ name="Tati Earring" },
 		left_ring={ name="Defending Ring", augments={'"Regen"+20','"Regen"+20','"Regen"+20','"Regen"+20',}},
 		right_ring="Patricius Ring",
-		back={ name="Laic Mantle", augments={'"Triple Atk."+2','"Triple Atk."+2','"Triple Atk."+2','"Triple Atk."+2',}},
 	})
 
 	sets.aftercast.Engaged.TH = set_combine(sets.aftercast.Engaged.Default, sets.THF.TH)

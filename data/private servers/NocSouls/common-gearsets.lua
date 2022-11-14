@@ -594,6 +594,13 @@ function init_gear_sets(job)
 		right_ring={ name="Ulthalam's Ring", augments={'Attack+10','Attack+10','Attack+10','Attack+10',}},
 		back={ name="Jaguar Mantle", augments={'Attack+10','Attack+10','Attack+10','Attack+10',}},
 	}
+
+	sets.misc.AllJobs['TP'] = {
+		left_ear={ name="Telos Earring", augments={'"Counter"+5','"Counter"+5','"Counter"+5','"Counter"+5',}},
+		right_ear={ name="Tati Earring", augments={'"Counter"+5','"Counter"+5','"Counter"+5','"Counter"+5',}},
+		back={ name="Moonbeam Cape", augments={'"Counter"+5','"Counter"+5','"Counter"+5','"Counter"+5',}},
+		ammo={ name="Staunch Tathlum", augments={'"Counter"+5','"Counter"+5','"Counter"+5','"Counter"+5',}},	
+	}
 	
 	-- Generic precast sets
 	sets.precast ={}
