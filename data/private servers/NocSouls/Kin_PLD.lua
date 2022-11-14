@@ -115,7 +115,6 @@ function precast(spell)
 		infoLog("Action: "..spell.english.." | Action Type: "..spell.action_type.."/"..spell.skill.." | MP Cost: "..spell.mp_cost.." | TP Cost: "..spell.tp_cost)
 	end
 
-
 	if sets.precast.JobAbility[spell.english] then
 		equip(sets.precast.JobAbility[spell.english])
 	end
