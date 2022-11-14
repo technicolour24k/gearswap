@@ -490,6 +490,7 @@ function init_gear_sets(job)
 	sets.misc.AllJobs['DTDown'] = {
 		neck="Loricate Torque +1", --6% DT
 		left_ring="Defending Ring", --10% DT (16% total)
+		back="Moonbeam Cape"
 	}
 	sets.misc.AllJobs['PDTDown'] = set_combine(sets.misc.AllJobs['DTDown'], {
 		 right_ring="Patricius Ring", --5% PDT (21% total)
