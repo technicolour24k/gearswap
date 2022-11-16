@@ -77,18 +77,17 @@ function get_sets()
         feet = DRK_AF_FEET
     }
 
-    sets.DRK.midcast.DrainAspir = {
+
+	sets.DRK.midcast['Dark Magic'] = set_combine(sets.common.midcast['Dark Magic'], {
+		head = DRK_RELIC_HEAD
+	})
+	
+    sets.DRK.midcast.DrainAspir = set_combine(sets.common.midcast.DrainAspir, sets.DRK.midcast['Dark Magic'], {
         hands = DRK_RELIC_HANDS,
-        left_ring={name="Scintillant Ring", augments={'"Drain" and "Aspir" potency +3','Enfb.mag. skill +3','Mag. Acc+7 /Mag. Dmg.+7','System: 1 ID: 1251 Val: 9',}},
-		right_ring={name="Scintillant Ring", augments={'"Drain" and "Aspir" potency +2','Enfb.mag. skill +7','Mag. Acc+2 /Mag. Dmg.+2','System: 1 ID: 1251 Val: 8',}}
-    }
+    })
 
     sets.DRK.midcast['Drain'] = set_combine(sets.DRK.midcast.DrainAspir, {})
     sets.DRK.midcast['Aspir'] = set_combine(sets.DRK.midcast.DrainAspir, {})
-
-    sets.DRK.midcast['Dark Magic'] = set_combine(sets.common.midcast['Dark Magic'], {
-        head = DRK_RELIC_HEAD
-    })
 	sets.aftercast = {}
 	sets.aftercast.Resting = {}
 	sets.aftercast.Engaged = {}

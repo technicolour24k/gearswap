@@ -673,6 +673,10 @@ function init_gear_sets(job)
 		legs = "Vagabond's Hose",
 		feet = "Vagabond's Boots"
 	})
+	sets.common.midcast.DrainAspir = {
+		left_ring={name="Scintillant Ring", augments={'"Drain" and "Aspir" potency +3','Enfb.mag. skill +3','Mag. Acc+7 /Mag. Dmg.+7','System: 1 ID: 1251 Val: 9',}},
+		right_ring={name="Scintillant Ring", augments={'"Drain" and "Aspir" potency +2','Enfb.mag. skill +7','Mag. Acc+2 /Mag. Dmg.+2','System: 1 ID: 1251 Val: 8',}}
+	}
 	
 	sets.aftercast ={}
 	sets.common.aftercast = {}
