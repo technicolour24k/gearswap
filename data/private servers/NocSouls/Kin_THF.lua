@@ -132,6 +132,8 @@ function midcast(spell)
 	if (conserveMP_list:contains(spell.english)) then
 		equip(sets.common.midcast.ConserveMP)
 	end
+
+	if (spell.skill=="Blue Magic") then equip(sets.THF.MAB) end
 	customInfoCheckMidcast(spell.name, spell.tp_cost, spell.mp_cost)
 	if (spell.skill == "Elemental Magic" or spell.skill=="Healing Magic") then weathercheck(spell.element) end
 end
