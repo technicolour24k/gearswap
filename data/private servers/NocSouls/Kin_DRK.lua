@@ -30,30 +30,21 @@ function get_sets()
     sets.JobAbility['Consume Mana'] = {}
 
 	sets.WeaponSkills["Catastrophe"] = set_combine(sets.WeaponSkills['AllJobsWS'], {})
-	sets.WeaponSkills["Mercy Stroke"] = set_combine(sets.WeaponSkills['AllJobsWS'], {})
-	sets.WeaponSkills["Mandalic Stab"] = set_combine(sets.WeaponSkills['AllJobsWS'], {})
-	sets.WeaponSkills["Rudra's Storm"] = set_combine(sets.WeaponSkills['Fotia'], sets.WeaponSkills['AllJobsWS'], {
-		ammo = "Floestone",
-		head = THF_EMPYREAN_HEAD,
-		body = THF_AF_BODY,
-		hands = THF_AF_HANDS,
-		legs = THF_EMPYREAN_LEGS,
-		feet = THF_RELIC_FEET,
-		neck = "Tlamiztli collar",
-		back = "Canny Cape",
-		waist = "Windbuffet belt +1",
-		left_ear = "Mache Earring +1",
-		right_ear = "Mache Earring +1",
-	})
-	sets.WeaponSkills["Aeolian Edge"] = set_combine(sets.MAB,{})
-	sets.WeaponSkills["Exenterator"] = {}
+	sets.WeaponSkills["Quietus"] = set_combine(sets.WeaponSkills['AllJobsWS'], {})
+	sets.WeaponSkills["Entropy"] = set_combine(sets.WeaponSkills['AllJobsWS'], {})
+	sets.WeaponSkills["Dimidiation"] = set_combine(sets.WeaponSkills['AllJobsWS'], {})
+	sets.WeaponSkills["Resolution"] = set_combine(sets.WeaponSkills['AllJobsWS'], {})
+	sets.WeaponSkills["Torcleaver"] = set_combine(sets.WeaponSkills['AllJobsWS'], {})
+	sets.WeaponSkills["Herculean Slash"] = set_combine(sets.WeaponSkills['AllJobsWS'], sets.MAB, {})
+	sets.WeaponSkills["Scourge"] = set_combine(sets.WeaponSkills['AllJobsWS'], {})
+
 
     sets.DRK.precast = {}
+	sets.DRK.midcast = {}
     sets.DRK.precast['Dark Magic'] = set_combine(sets.DRK.midcast['Dark Magic'], {
         head = DRK_RELIC_HEAD
     })
 
-    sets.DRK.midcast = {}
 	sets.DRK.midcast.Cure = {}
     sets.DRK.midcast.Absorb = {
         head = DRK_AF_HEAD,
@@ -92,26 +83,20 @@ function get_sets()
 	sets.aftercast.Resting = {}
 	sets.aftercast.Engaged = {}
 
-	sets.aftercast.Engaged.Default = {
+	sets.aftercast.Engaged.Default = set_combine(sets.misc.AllJobs.TP,{
         body = DRK_AF_BODY,
         legs = DRK_AF_LEGS,
         hands = DRK_AF_HANDS,
         head = DRK_AF_HEAD,
         feet = DRK_AF_FEET,
-        neck = "Loricate Torque +1",
         waist = "Nierenschutz",
-        ear1 = "Tati Earring",
-        ear2 = "Telos Earring",
-        ring1 = "Defending Ring",
-        ring2 = "Patricius Ring",
-        back = "Metallon Mantle",
-    }
+    })
 
 	sets.aftercast.Engaged.TH = set_combine(sets.aftercast.Engaged.Default, sets.TH)
 	sets.aftercast.Engaged.Accuracy = set_combine(sets.aftercast.Engaged.Default, {})
 	sets.aftercast.Engaged.Evasion = set_combine(sets.aftercast.Engaged.Default, {})
 
-	sets.aftercast.Idle = set_combine(sets.weapons[mjob][WeaponChoice], sets.aftercast.Engaged[TPStyle],{
+	sets.aftercast.Idle = set_combine(sets.weapons.DRK[WeaponChoice], sets.aftercast.Engaged[TPStyle],{
 		left_ring = "Defending Ring",
 		right_ring = "Stikini Ring +1",
 		neck="Loricate Torque +1",
@@ -144,10 +129,10 @@ function precast(spell)
         equip(sets.precast[sets.skill])
     end
 
-    if sets.precast[mjob][spell.english] then
+    if sets.DRK.precast[spell.english] then
         equip(sets.precast[spell.english])
     end
-    if sets.precast[mjob][spell.skill] then
+    if sets.DRK.precast[spell.skill] then
         equip(sets.precast[spell.skill])
     end
 
@@ -181,12 +166,17 @@ function midcast(spell)
 	customInfoCheckMidcast(spell.name, spell.tp_cost, spell.mp_cost)end
 
 function aftercast(spell)
-	equip(set_combine(sets.aftercast[player.status][TPStyle], sets.weapons[mjob][WeaponChoice]))
+	if player.status == "Engaged" then
+		equip(set_combine(sets.aftercast[player.status][TPStyle], sets.weapons.DRK[WeaponChoice]))
+	else
+		equip(set_combine(sets.aftercast[player.status], sets.weapons.DRK[WeaponChoice]))
+	end
+	
 	customInfoCheckAftercast(spell.name, spell.tp_cost, spell.mp_cost)
 end
 
 function status_change(new, old)
-	equip(set_combine(sets.aftercast[player.status][TPStyle], sets.weapons[mjob][WeaponChoice]))
+	equip(set_combine(sets.aftercast[player.status][TPStyle], sets.weapons.DRK[WeaponChoice]))
 end
 
 function buff_change(name, gain)
@@ -217,7 +207,7 @@ function self_command(command)
 			WeaponChoice="Scythe"
 		end
 		infoLog("Weapon is now: " .. WeaponChoice.. "!")
-		equip(set_combine(sets.aftercast[player.status][TPStyle], sets.weapons[mjob][WeaponChoice]))
+		equip(set_combine(sets.aftercast[player.status][TPStyle], sets.weapons.DRK[WeaponChoice]))
 	end
 	
 	if player.status == "Engaged" then
