@@ -8,6 +8,7 @@ local showSpellInfo = config.showSpellInfo
 local showCancelInfo = config.showCancelInfo
 local FastCast = 80
 
+
 RDMStyle = "Melee"
 
 function get_sets()
@@ -50,7 +51,13 @@ function get_sets()
 	sets.WeaponSkills['Sanguine Blade'] = set_combine(sets.misc.AllJobs.MAB, {})
 	sets.WeaponSkills['Uriel Blade'] = set_combine(sets.misc.AllJobs.MAB, {})
 	-- Standard mods
-	sets.WeaponSkills['Savage Blade'] = set_combine(sets.WeaponSkills.default,{ })
+	sets.WeaponSkills['Savage Blade'] = set_combine(sets.WeaponSkills['Fotia'], sets.WeaponSkills['AllJobsWS'],{--50% STR, 50% MND - Equal footing for both
+		neck="Imbodla Necklace",
+		waist="Chuq'aba Belt",
+		left_ear="Regal Earring",
+		right_ear="Aqua Pearl",
+		back="Laic Mantle",
+	}) 
 	sets.WeaponSkills['Knights of Round'] = {}
 
 	sets.RDM.midcast={}
@@ -62,7 +69,16 @@ function get_sets()
 	sets.RDM.midcast['EnfeeblingDuration'] = set_combine(sets.common.midcast.EnfeeblingDuration, {
 	})
 
-	sets.RDM.midcast.Cure = {}
+	sets.RDM.midcast.Cure = {
+		head="Iaso Mitra", --11%
+		hands="Bokwus Gloves", --13% => 24%
+		legs=RDM_AF_LEGS, --11% => 35%
+		back="Ghostfyre cape", --6% => 41%
+		neck="Phalaina locket", --4% => 45%
+		left_ear="Roundel Earring", --5% => 50%
+		left_ring="Lebeche Ring",
+		right_ring="Sirona's ring"
+	}
 	sets.RDM.midcast['Refresh'] = set_combine(sets.common.midcast.EnhancingDuration, sets.RDM.midcast.EnhancingDuration, {
 		legs=RDM_EMPYREAN_LEGS,
 		body=RDM_AF_BODY
@@ -110,22 +126,15 @@ function get_sets()
 	sets.RDM.midcast['Elemental Magic'] = set_combine(sets.RDM.midcast['MAB'], {})
 	sets.RDM.midcast['Dark Magic'] = {}
 	sets.aftercast.Resting = {}
-	sets.aftercast.Engaged = {
-		ammo={ name="Yetshila +1", augments={'"Triple Atk."+2','"Triple Atk."+2','Crit.hit rate+5','Crit.hit rate+5',}},
+	sets.aftercast.Engaged = {}
+	sets.aftercast.Engaged.Melee = set_combine(sets.weapons[mjob]["Melee"], sets.misc.AllJobs.TP,{
 		head=RDM_AF_HEAD,
 		body=RDM_AF_BODY,
 		hands=RDM_AF_HANDS,
-		legs=RDM_AF_LEGS,
-		feet=RDM_AF_FEET,
-		neck={ name="Loricate Torque +1", augments={'"Regen"+20','"Regen"+20','"Regen"+20','"Regen"+20',}},
-		waist={ name="Windbuffet Belt +1", augments={'"Triple Atk."+2','"Triple Atk."+2','"Triple Atk."+2','"Triple Atk."+2',}},
-		left_ear="Andoaa Earring",
-		right_ear="Cessance Earring",
-		left_ring={ name="Defending Ring", augments={'"Regen"+20','"Regen"+20','"Regen"+20','"Regen"+20',}},
-		right_ring="Patricius Ring",
-		back={ name="Laic Mantle", augments={'"Triple Atk."+2','"Triple Atk."+2','"Triple Atk."+2','"Triple Atk."+2',}},
-	
-	}
+		legs=RDM_RELIC_LEGS,
+		feet="Savateur's Gaiters",
+		waist={ name="Windbuffet Belt +1", augments={'"Triple Atk."+2','"Triple Atk."+2','"Triple Atk."+2','"Triple Atk."+2',}},	
+	})
 
 	sets.aftercast.Idle = set_combine(sets.aftercast.Engaged, sets.misc.AllJobs['DTCombo'],{
 		head=RDM_RELIC_HEAD,
@@ -135,8 +144,6 @@ function get_sets()
 
 	send_command("gs enable all")
 	send_command("gs equip sets.aftercast.Idle")
-
-	disable("main", "sub")
 end
 
 function pretarget (spell)
@@ -185,6 +192,11 @@ function midcast(spell)
 	if (conserveMP_list:contains(spell.english)) then
 		equip(sets.common.midcast.ConserveMP)
 	end
+
+	if (Helixes:contains(spell.english)) then
+        equip(sets.RDM.midcast.MAB)
+    end
+
 	weathercheck(spell.element)
 	customInfoCheckMidcast(spell.name, spell.tp_cost, spell.mp_cost)
 end
@@ -192,7 +204,7 @@ end
 function aftercast(spell)
 	equip(sets.weapons.RDM[RDMStyle])
 	if player.status == "Engaged" then
-		equip(sets.aftercast[player.status])
+		equip(sets.aftercast[player.status][RDMStyle])
 	else
 		equip(sets.aftercast[player.status])
 	end
