@@ -21,7 +21,7 @@ function init_gear_sets(job)
 	sets.weapons.WHM['Healing'] = {main="",sub=""}
 
 	sets.weapons.RDM = {}
-	sets.weapons.RDM['Melee'] = {main="Murgleis",sub="Beatific Shield"}
+	sets.weapons.RDM['Melee'] = {main="Murgleis",sub="Genbu's Shield"}
 	sets.weapons.RDM['Mage'] = {main="",sub=""}
 
 	sets.weapons.BLM = {}
@@ -600,7 +600,10 @@ function init_gear_sets(job)
 		left_ear={ name="Telos Earring", augments={'"Counter"+5','"Counter"+5','"Counter"+5','"Counter"+5',}},
 		right_ear={ name="Tati Earring", augments={'"Counter"+5','"Counter"+5','"Counter"+5','"Counter"+5',}},
 		back={ name="Moonbeam Cape", augments={'"Counter"+5','"Counter"+5','"Counter"+5','"Counter"+5',}},
-		ammo={ name="Staunch Tathlum", augments={'"Counter"+5','"Counter"+5','"Counter"+5','"Counter"+5',}},	
+		ammo={ name="Staunch Tathlum", augments={'"Counter"+5','"Counter"+5','"Counter"+5','"Counter"+5',}},
+		neck="Loricate Torque +1",
+		left_ring={ name="Defending Ring", augments={'"Regen"+20','"Regen"+20','"Regen"+20','"Regen"+20',}},
+		right_ring="Patricius Ring",
 	}
 	
 	-- Generic precast sets
