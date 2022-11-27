@@ -22,6 +22,15 @@ conserveMP_list = --Store spells that get no benefit from Potency or anything ou
     "Refresh","Refresh II"
 }
 
+CureSpells = S{	'Cure', 'Cure II', 'Cure III', 'Cure IV', 'Cure V', 'Cure VI',
+'Curaga', 'Curaga II', 'Curaga III', 'Curaga IV', 'Curaga V',
+'Cura', 'Cura II', 'Cura III'}
+
+StatSpells = S{	'Poisona', 'Paralyna', 'Blindna', 'Silena', 'Stona', 'Viruna', 'Erase'}
+RegenSpells = S{'Regen', 'Regen II', 'Regen III', 'Regen IV', 'Regen V'}
+Helixes = S{'Geohelix','Hydrohelix','Anemohelix','Pyrohelix','Cryohelix','Ionohelix','Noctohelix','Luminohelix'}
+Storms = S{'Sandstorm','Rainstorm','Windstorm','Firestorm','Hailstorm','Thunderstorm','Voidstorm','Aurorastorm'}
+
 
 --Below 4 lists are used by oneClickRemedies to know which statuses get assigned to which medicine
 remedy_list = {"Blind","Paralysis","Silence","Poison"}
