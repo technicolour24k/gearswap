@@ -204,7 +204,8 @@ function midcast(spell)
             equip(sets.SCH.midcast['Storms'])
         else
 		    equip(sets.SCH.midcast['Storms'][activeArts])
-        end	end
+        end
+    end
 	if (conserveMP_list:contains(spell.english)) then
 		equip(sets.common.midcast.ConserveMP)
 	end
