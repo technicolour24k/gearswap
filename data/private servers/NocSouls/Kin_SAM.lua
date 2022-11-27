@@ -44,6 +44,8 @@ function get_sets()
 	sets.precast.WeaponSkills['Tachi: Kaiten'] = set_combine(sets.WeaponSkills.default, {})
 	sets.precast.WeaponSkills['Tachi: Ageha'] = set_combine(sets.WeaponSkills.default, {})
 	sets.precast.WeaponSkills['Apex Arrow'] = set_combine(sets.WeaponSkills.default, {})	
+
+	sets.SAM.midcast = {}
     sets.SAM.midcast.MAB = set_combine(sets.misc.AllJobs.MAB, {})
 	sets.SAM.midcast['Healing Magic'] = {}
     sets.SAM.midcast.Cure = set_combine(sets.SAM.midcast['Healing Magic'], {})
