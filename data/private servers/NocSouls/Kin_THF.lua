@@ -66,10 +66,7 @@ function get_sets()
 		hands=THF_AF_HANDS,
 		legs=THF_EMPYREAN_LEGS,
 		feet="Savateur's Gaiters",
-		neck="Loricate Torque +1",
 		waist={ name="Windbuffet Belt +1", augments={'"Triple Atk."+2','"Triple Atk."+2','"Triple Atk."+2','"Triple Atk."+2',}},
-		left_ring={ name="Defending Ring", augments={'"Regen"+20','"Regen"+20','"Regen"+20','"Regen"+20',}},
-		right_ring="Patricius Ring",
 	})
 
 	sets.aftercast.Engaged.TH = set_combine(sets.aftercast.Engaged.Default, sets.THF.TH)
