@@ -129,14 +129,14 @@ function get_sets()
 	sets.aftercast.Engaged = {}
 	sets.aftercast.Engaged.Melee = set_combine(sets.weapons[mjob]["Melee"], sets.misc.AllJobs.TP,{
 		head=RDM_AF_HEAD,
-		body=RDM_AF_BODY,
+		body="Ayanmo Corazza +1",
 		hands=RDM_AF_HANDS,
 		legs=RDM_RELIC_LEGS,
 		feet="Savateur's Gaiters",
 		waist={ name="Windbuffet Belt +1", augments={'"Triple Atk."+2','"Triple Atk."+2','"Triple Atk."+2','"Triple Atk."+2',}},	
 	})
 
-	sets.aftercast.Idle = set_combine(sets.aftercast.Engaged, sets.misc.AllJobs['DTCombo'],{
+	sets.aftercast.Idle = set_combine(sets.aftercast.Engaged.Melee, sets.misc.AllJobs['DTCombo'],{
 		head=RDM_RELIC_HEAD,
 		body=RDM_EMPYREAN_BODY,
 		legs="Crimson Cuisses"
