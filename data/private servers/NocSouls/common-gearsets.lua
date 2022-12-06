@@ -21,7 +21,7 @@ function init_gear_sets(job)
 	sets.weapons.WHM['Healing'] = {main="",sub=""}
 
 	sets.weapons.RDM = {}
-	sets.weapons.RDM['Melee'] = {main="Murgleis",sub="Genbu's Shield"}
+	sets.weapons.RDM['Melee'] = {main="Almace",sub="Genbu's Shield"}
 	sets.weapons.RDM['Mage'] = {main="",sub=""}
 
 	sets.weapons.BLM = {}
