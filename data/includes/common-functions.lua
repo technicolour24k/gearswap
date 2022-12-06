@@ -168,7 +168,14 @@ function announceSpell(spell,target,chatmode)
 end
 
 windower.register_event('gain buff', function(id)
+	-- Status ID list: https://github.com/Windower/Resources/blob/master/resources_data/buffs.lua
    clearStatuses()
+
+   if (id == 28) then --Terror
+	infoLog("Hit with Terror - Equipping common DTCombo set")
+	equip(sets.misc.AllJobs['DTCombo'])
+   end
+
 end)
 
 function common_self_command(cmd)
