@@ -49,8 +49,7 @@ function get_sets()
 	sets.WeaponSkills['Sonic Thrust'] = set_combine(sets.WeaponSkills['AllJobsWS'], sets.WeaponSkills.DRG['WSD Base'], {})
 	sets.WeaponSkills['Impulse Thrust'] = set_combine(sets.WeaponSkills['AllJobsWS'], sets.WeaponSkills.DRG['WSD Base'], {})
 
-    sets.DRG.Precast = {}
-
+    sets.DRG.precast = {}
     sets.DRG.midcast = {}
 	sets.DRG.midcast.Cure = {}
 
@@ -77,7 +76,7 @@ function get_sets()
 	sets.aftercast.Engaged.Accuracy = set_combine(sets.aftercast.Engaged.Default, {})
 	sets.aftercast.Engaged.Evasion = set_combine(sets.aftercast.Engaged.Default, {})
 
-	sets.aftercast.Idle = set_combine(sets.weapons[mjob][WeaponChoice], sets.aftercast.Engaged[TPStyle],{
+	sets.aftercast.Idle = set_combine(sets.weapons.DRG[WeaponChoice], sets.aftercast.Engaged[TPStyle],{
 		left_ring = "Defending Ring",
 		right_ring = "Stikini Ring +1",
 		neck="Loricate Torque +1",
@@ -108,10 +107,10 @@ function precast(spell)
 		equip(sets.precast[spell.english])
 	end
 
-    if sets.precast[mjob][spell.english] then
+    if sets.DRG.precast[spell.english] then
         equip(sets.precast[spell.english])
     end
-    if sets.precast[mjob][spell.skill] then
+    if sets.DRG.precast[spell.skill] then
         equip(sets.precast[spell.skill])
     end
 
@@ -146,12 +145,12 @@ function midcast(spell)
 end
 
 function aftercast(spell)
-	equip(set_combine(sets.aftercast[player.status][TPStyle], sets.weapons[mjob][WeaponChoice]))
+	equip(set_combine(sets.aftercast[player.status][TPStyle], sets.weapons.DRG[WeaponChoice]))
 	customInfoCheckAftercast(spell.name, spell.tp_cost, spell.mp_cost)
 end
 
 function status_change(new, old)
-	equip(set_combine(sets.aftercast[player.status][TPStyle], sets.weapons[mjob][WeaponChoice]))
+	equip(set_combine(sets.aftercast[player.status][TPStyle], sets.weapons.DRG[WeaponChoice]))
 end
 
 function buff_change(name, gain)
