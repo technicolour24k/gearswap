@@ -17,12 +17,6 @@ function get_sets()
 	local mjob = player.main_job
 	init_gear_sets(mjob)
 	sets.RDM={}
-	
-	sets.MAB = set_combine(sets.misc.AllJobs.MAB, {
-		head="Wayfarer Circlet",
-		waist = "Aquiline Belt",
-		legs = "Limbo Trousers"
-	})
 	sets.JobAbility={}
 	sets.JobAbility["Chainspell"] = {}
 	sets.JobAbility["Convert"] = {}
@@ -36,29 +30,6 @@ function get_sets()
 	sets.JobAbility["Spontaneity"] = {}
 	sets.JobAbility['Saboteur']= {hands=RDM_EMPYREAN_HANDS}
 	sets.JobAbility['Stymie'] = {}
-
-	sets.WeaponSkills["Evisceration"] = set_combine(sets.WeaponSkills['AllJobsWS'], {})
-	sets.WeaponSkills["Mercy Stroke"] = set_combine(sets.WeaponSkills['AllJobsWS'], {})
-	sets.WeaponSkills["Aeolian Edge"] = set_combine(sets.MAB,{})
-	sets.WeaponSkills["Exenterator"] = set_combine(sets.WeaponSkills['AllJobsWS'], {})
-
-	--FTP Replicating WS
-	sets.WeaponSkills['Requiescat'] = set_combine(sets.WeaponSkills['Fotia'],sets.WeaponSkills['AllJobsWS'], {})
-	sets.WeaponSkills['Chant du Cygne'] = set_combine(sets.WeaponSkills['Fotia'], sets.WeaponSkills['AllJobsWS'], {})
-	sets.WeaponSkills['Swift Blade'] = set_combine(sets.WeaponSkills['Fotia'], sets.WeaponSkills['AllJobsWS'], {})
-	sets.WeaponSkills['Vorpal Blade'] = set_combine(sets.WeaponSkills['Fotia'], sets.WeaponSkills['AllJobsWS'], {})
-	-- MAB modded WS
-	sets.WeaponSkills['Sanguine Blade'] = set_combine(sets.misc.AllJobs.MAB, {})
-	sets.WeaponSkills['Uriel Blade'] = set_combine(sets.misc.AllJobs.MAB, {})
-	-- Standard mods
-	sets.WeaponSkills['Savage Blade'] = set_combine(sets.WeaponSkills['Fotia'], sets.WeaponSkills['AllJobsWS'],{--50% STR, 50% MND - Equal footing for both
-		neck="Imbodla Necklace",
-		waist="Chuq'aba Belt",
-		left_ear="Regal Earring",
-		right_ear="Aqua Pearl",
-		back="Laic Mantle",
-	}) 
-	sets.WeaponSkills['Knights of Round'] = {}
 
 	sets.RDM.midcast={}
 	sets.RDM.midcast['EnhancingDuration'] = set_combine(sets.common.midcast.EnhancingDuration, {
@@ -132,7 +103,7 @@ function get_sets()
 		body="Ayanmo Corazza +2",
 		hands=RDM_AF_HANDS,
 		legs="Ayanmo Cosciales +2",
-		feet="Savateur's Gaiters",
+		feet="Ayanmo Gambieras +2",
 		waist={ name="Windbuffet Belt +1", augments={'"Triple Atk."+2','"Triple Atk."+2','"Triple Atk."+2','"Triple Atk."+2',}},	
 	})
 
@@ -142,6 +113,27 @@ function get_sets()
 		legs="Crimson Cuisses"
 	})
 
+	sets.WeaponSkills["Evisceration"] = set_combine(sets.WeaponSkills['AllJobsWS'], {})
+	sets.WeaponSkills["Mercy Stroke"] = set_combine(sets.WeaponSkills['AllJobsWS'], {})
+	sets.WeaponSkills["Aeolian Edge"] = set_combine(sets.RDM.midcast['MAB'],{})
+	sets.WeaponSkills["Exenterator"] = set_combine(sets.WeaponSkills['AllJobsWS'], {})
+
+	--FTP Replicating WS
+	sets.WeaponSkills['Requiescat'] = set_combine(sets.WeaponSkills['Fotia'],sets.WeaponSkills['AllJobsWS'], {})
+	sets.WeaponSkills['Chant du Cygne'] = set_combine(sets.WeaponSkills['Fotia'], sets.WeaponSkills['AllJobsWS'], {})
+	sets.WeaponSkills['Swift Blade'] = set_combine(sets.WeaponSkills['Fotia'], sets.WeaponSkills['AllJobsWS'], {})
+	sets.WeaponSkills['Vorpal Blade'] = set_combine(sets.WeaponSkills['Fotia'], sets.WeaponSkills['AllJobsWS'], {})
+	-- MAB modded WS
+	sets.WeaponSkills['Sanguine Blade'] = set_combine(sets.misc.AllJobs.MAB, {})
+	sets.WeaponSkills['Uriel Blade'] = set_combine(sets.misc.AllJobs.MAB, {})
+	-- Standard mods
+	sets.WeaponSkills['Savage Blade'] = set_combine(sets.WeaponSkills['Fotia'], sets.WeaponSkills['AllJobsWS'],{--50% STR, 50% MND - Equal footing for both
+		neck="Imbodla Necklace",
+		left_ear="Regal Earring",
+		right_ear="Aqua Pearl",
+		back="Laic Mantle",
+	}) 
+	sets.WeaponSkills['Knights of Round'] = {}
 	send_command("gs enable all")
 	send_command("gs equip sets.aftercast.Idle")
 end
@@ -197,7 +189,7 @@ function midcast(spell)
         equip(sets.RDM.midcast.MAB)
     end
 
-	weathercheck(spell.element)
+	weathercheck(spell.element, spell.skill)
 	customInfoCheckMidcast(spell.name, spell.tp_cost, spell.mp_cost)
 end
 
