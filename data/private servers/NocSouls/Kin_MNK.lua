@@ -17,6 +17,8 @@ function get_sets()
 	init_gear_sets(mjob)
 	
 	sets.MNK={}
+	sets.MNK.precast ={}
+	sets.MNK.midcast = {}
 	sets.aftercast = {}
 	sets.aftercast.Resting = {}
 	sets.aftercast.Engaged = {}
