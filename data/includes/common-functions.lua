@@ -9,13 +9,18 @@ local showSpellInfo = config.showSpellInfo
 local showCancelInfo = config.showCancelInfo
 
 --@param spell_element: Element of the spell you're using
-function weathercheck(spell_element)
-    if spell_element == world.weather_element or spell_element == world.day_element then
-		send_command('@input /echo >> Weather or Day element matches spell element <<')
-        equip(sets.Obis[spell_element]) --Equip standard obi, force fallback below
-        equip(sets.Obis.AIO) --Force fallback onto Hachirin-no-Obi, just in case individual obis no longer exist
-    end
+--@param spell_skill: Skill of the spell you're using. Recommended spell.skill
+function weathercheck(spell_element, spell_skill)
+	if not (spell_skill) then spell_skill = null end
+	if ((spell_skill=="Elemental Magic") or (spell_skill=="Healing Magic") or (spell_skill=="Enfeebling Magic") or spell_skill=="Blue Magic" or (spell_skill==null)) then
+		if spell_element == world.weather_element or spell_element == world.day_element then
+			infoLog('>> Weather or Day element matches spell element <<')
+			equip(sets.Obis[spell_element]) --Equip standard obi, force fallback below
+			equip(sets.Obis.AIO) --Force fallback onto Hachirin-no-Obi, just in case individual obis no longer exist
+		end
+	end
 end
+
 
 function checkForTown()
 	if(string.find(world.zone,"San d'Oria")) then
@@ -36,7 +41,6 @@ end
 -- @param buff: The buff name you're targeting (e.g. "Sneak")
 -- @param skill: The type of skill you're using, e.g. JobAbility, EnhancingMagic, etc.
 function cancelBuff(spell, casttime, FC, buff, skill) --Requires cancel plugin
-
 	--Setup list of buffs to be autocancelled
 	local autoCancelList = S{"Enstone", "Enwater", "Enaero", "Enfire", "Enblizzard", "Enthunder", "Stoneskin", "Blaze Spikes","Ice Spikes", "Shock Spikes", "Sneak", "Spectral Jig"}
 	
@@ -46,16 +50,18 @@ function cancelBuff(spell, casttime, FC, buff, skill) --Requires cancel plugin
 	-- Multiply out Fast Cast - 80% Fast Cast will result in a 0.2 multiplier (20%)
 	-- Setting FastCastAmount properly lets FastCastMultiplier to determine how quickly we need to cancel buffs
 	local FastCastMultiplier = ((100 - FastCastAmount)/100)
-	
+	if (showFCInfo) then infoLog("[FastCastMultiplier] FastCastMultiplier: ((100 - " .. FastCastAmount..") /100 = " .. FastCastMultiplier) end
+
 	--Last responsible moment to cancel is 75% of your total FastCastMultiplier - 80% Fast Cast means 20% total cast time (10s => 2s). Take 75% of this final amount to cancel out, stopping any rogue late cancels
 	FastCastMultiplier = FastCastMultiplier*0.75
-	
+	if (showFCInfo) then infoLog("[FastCastMultiplier] Cancel After: ((FastCastMultiplier * 0.75 = " .. FastCastMultiplier) end
+
 	if (autoCancelList:contains(spell)) then
-		add_to_chat(8, spell.." found in auto-cancel list.")
+		infoLog("[AutoCancel List] "..spell.." found in auto-cancel list.")
 
 		if (showFCInfo) then
-			add_to_chat(8, "Base casting time: " ..casttime)
-			add_to_chat(8, "Fast Cast Amount: " ..FastCastAmount.."%. Fast Cast Multiplier is: " ..FastCastMultiplier..". Cancelling spells at "..(FastCastMultiplier*100).."%.")
+			infoLog("[FCInfo] Base casting time: " ..casttime)
+			infoLog("[FCInfo] Fast Cast Amount: " ..FastCastAmount.."%. Fast Cast Multiplier is: " ..FastCastMultiplier..". Cancelling spells at "..(FastCastMultiplier*100).."%.")
 		end
 		
 		if (not(skill == "JobAbility") and not(skill == "Jig")) then
@@ -65,7 +71,7 @@ function cancelBuff(spell, casttime, FC, buff, skill) --Requires cancel plugin
 		end
 		
 		if (showCancelInfo) then
-			add_to_chat(8, "Delay to cancel buff: " ..delay)
+			infoLog("[CancelInfo] Delay to cancel buff: " ..delay)
 		end
 		
 		if buff == nil then --if we haven't passed a buff down, cancel the spell
@@ -88,6 +94,9 @@ function switchMacroSet(book, page)
     send_command('input /macro book '..book..';wait .1;input /macro set '..page)
 end
 
+-- spellContains documentation
+-- @param spell: The name of the spell you're comparing against. Recommendation: spell.english
+-- @param contains: The string you're looking for
 function spellContains(spell, contains)
 	if (string.find(spell,contains)) then
 		return true
@@ -128,11 +137,12 @@ end
 				break
 			end
 		end
-	
-		
  	end
  end
 
+ -- echoInfo documentation
+ -- @param info: The info you want to output
+ -- @param delay: Any particular delay in putting this info out.
 function echoInfo(info,delay)
 	if (delay) then
 		send_command('@wait '..delay..'; input /echo '..info)
@@ -160,6 +170,10 @@ function debugLog(log)
 	add_to_chat(11, log)
 end
 
+-- announceSpell documentation
+-- @param spell: The name of the spell you're using. Recommendation: spell.english
+-- @param target: The target of the spell you're using. Recommendation: spell.target.name
+-- @param chatmode: The chatmode you want to send info through. Recommendation: p
 function announceSpell(spell,target,chatmode)
 	local announcementList = S{"Accomplice","Collaborator","Stun"}
 	if (announcementList:contains(spell)) then
@@ -191,6 +205,5 @@ function common_self_command(cmd)
 	if cmd:lower() == "pdtdown" then
 		equip(sets.misc.AllJobs["PDTDown"])
 		infoLog("Equipping PDT Gear")
-
 	end
 end
