@@ -704,6 +704,7 @@ function init_gear_sets(job)
 	sets.WeaponSkills['AllJobsWS'] = {
 		left_ring={ name="Dark Ring", augments={'Accuracy+5 Attack+5','Eva.+1 /Mag. Eva.+1','System: 1 ID: 131 Val: 7','Weapon skill damage +8%',}},
 		right_ring={ name="Dark Ring", augments={'Accuracy+7 Attack+7','Eva.+5 /Mag. Eva.+5','System: 1 ID: 131 Val: 2','Weapon skill damage +10%',}},
+		waist={ name="Moblin Cest", augments={'Weapon skill damage +4%','Accuracy+7 Attack+7','"Dbl.Atk."+7','"Triple Atk."+4',}},
 	}
 
 	send_command('gs-validate')
