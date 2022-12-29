@@ -15,9 +15,12 @@ TPStyle = "Default"
 
 function get_sets()
 	include('private servers/'..server..'/common-gearsets')
+	include('private servers/'..server..'/custom-info')
 	local mjob = player.main_job
 	init_gear_sets(mjob)
 	sets.DNC = {}
+	sets.DNC.precast={}
+	sets.DNC.midcast={}
 	sets.DNC.MAB = set_combine(sets.misc.AllJobs.MAB, {
 		head="Wayfarer Circlet",
 		legs = "Limbo Trousers"
