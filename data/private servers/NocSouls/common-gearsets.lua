@@ -681,9 +681,12 @@ function init_gear_sets(job)
 		right_ring={name="Scintillant Ring", augments={'"Drain" and "Aspir" potency +2','Enfb.mag. skill +7','Mag. Acc+2 /Mag. Dmg.+2','System: 1 ID: 1251 Val: 8',}}
 	}
 	sets.common.midcast['Helixes'] = set_combine(sets.misc.AllJobs['MAB'],{
+		ranged="Animator",
 		head="Straw Hat",
 		neck="Miner's Pendant",
 		right_ear="Cassie Earring",
+		left_ear="Shell Earring +1",
+		waist="Gold Moogle Belt"
 	})
 	sets.aftercast ={}
 	sets.common.aftercast = {}

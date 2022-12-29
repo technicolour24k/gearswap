@@ -195,7 +195,7 @@ function midcast(spell)
 		equip(sets.common.midcast.ConserveMP)
 	end
 
-	if (Helixes:contains(spell.english)) then
+	if (Helixes:contains(spell.english) or spellContains(spell.english, "Dia")) then
         if activeArts == "default" then
             equip(sets.RDM.midcast['Helixes'])
         else
