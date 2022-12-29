@@ -1,7 +1,6 @@
 include("organizer-lib")
 include("includes/common-functions")
 include("includes/config")
-include("includes/mob-immunities")
 include('private servers/'..server..'/common-gearsets')
 include('private servers/'..server..'/custom-info')
 --initialise local variables to inherit from master config
@@ -149,14 +148,7 @@ function pretarget (spell)
 end
 
 function precast(spell)
-	if (enemy[spell.target.name]) then
-		for key,value in pairs(enemy[spell.target.name]) do 
-			if (spellContains(spell.english,value)) then
-				infoLog(spell.target.name .. " is immune to " .. value .. ". Cancelling spell")
-				cancel_spell()
-			end
-		end
-	end
+	enemyImmunityCheck(spell.target.name,spell.english)
 	customInfoCheckPrecast(spell.name, spell.tp_cost, spell.mp_cost)
 		
 	if sets.JobAbility[spell.english] then

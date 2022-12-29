@@ -1,2 +1,2 @@
 enemy = {}
-enemy["Wild Rabbit"] = {"Slow", "Paralyze"}
+enemy["Overseers Tombstone"] = {"sleep", "gravity", "bind", "stun", "silence", "paralyze", "blind", "slow", "poison", "elegy"}

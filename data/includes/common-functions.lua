@@ -1,4 +1,5 @@
 include('includes/config')
+include('includes/mob-immunities')
 include('includes/player-stats')
 res = require('resources')
 
@@ -205,5 +206,16 @@ function common_self_command(cmd)
 	if cmd:lower() == "pdtdown" then
 		equip(sets.misc.AllJobs["PDTDown"])
 		infoLog("Equipping PDT Gear")
+	end
+end
+
+function enemyImmunityCheck (mob,spell)
+	if (enemy[mob]) then
+		for key,value in pairs(enemy[mob]) do 
+			if (spellContains(spell,value)) then
+				infoLog(mob .. " is immune to " .. value .. ". Cancelling spell")
+				cancel_spell()
+			end
+		end
 	end
 end
