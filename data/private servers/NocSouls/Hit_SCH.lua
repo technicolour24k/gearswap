@@ -9,7 +9,6 @@ local showFCInfo = config.showFastCastInfo
 local showSpellInfo = config.showSpellInfo
 local showCancelInfo = config.showCancelInfo
 local FastCast = 80
-activeArts = "default"
 
 function get_sets()
     infoLog(mjob)
@@ -76,7 +75,7 @@ function get_sets()
 	sets.SCH.midcast['Enfeebling Magic'] = set_combine(sets.common.midcast['Enfeebling Magic'], {})
     sets.SCH.midcast['Enfeebling Magic']['Light Arts'] = set_combine(sets.SCH.midcast['Enfeebling Magic'], {})
     sets.SCH.midcast['Enfeebling Magic']['Dark Arts'] = set_combine(sets.SCH.midcast['Enfeebling Magic'], {})
-    sets.SCH.midcast['Helixes'] = set_combine(sets.SCH.midcast['Elemental Magic'], {})
+    sets.SCH.midcast['Helixes'] = set_combine(sets.SCH.midcast['Elemental Magic'], sets.common.midcast['Helixes'] {})
     sets.SCH.midcast['Helixes']['Light Arts'] = set_combine(sets.SCH.midcast['Helixes'], {})
     sets.SCH.midcast['Helixes']['Dark Arts'] = set_combine(sets.SCH.midcast['Helixes'], {})
     sets.SCH.midcast['Storms'] = {}
@@ -132,17 +131,6 @@ function get_sets()
 	sets.aftercast.Engaged = {}
 
 end
-
-	CureSpells = S{	'Cure', 'Cure II', 'Cure III', 'Cure IV', 'Cure V', 'Cure VI',
-					'Curaga', 'Curaga II', 'Curaga III', 'Curaga IV', 'Curaga V',
-					'Cura', 'Cura II', 'Cura III'}
-
-	StatSpells = S{	'Poisona', 'Paralyna', 'Blindna', 'Silena', 'Stona', 'Viruna', 'Erase'}
-	RegenSpells = S{'Regen', 'Regen II', 'Regen III', 'Regen IV', 'Regen V'}
-    Helixes = S{'Geohelix','Hydrohelix','Anemohelix','Pyrohelix','Cryohelix','Ionohelix','Noctohelix','Luminohelix'}
-    Storms = S{'Sandstorm','Rainstorm','Windstorm','Firestorm','Hailstorm','Thunderstorm','Voidstorm','Aurorastorm'}
-	
-	
 
 function precast(spell)
 	if spell.action_type == 'Magic' then

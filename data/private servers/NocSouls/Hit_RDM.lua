@@ -7,7 +7,7 @@ local showFCInfo = config.showFastCastInfo
 local showSpellInfo = config.showSpellInfo
 local showCancelInfo = config.showCancelInfo
 local FastCast = 80
-
+activeArts = "default"
 TPStyle = "Default"
 
 function get_sets()
@@ -65,7 +65,11 @@ function get_sets()
 
     sets.RDM.midcast['Drain'] = set_combine(sets.RDM.midcast.DrainAspir, {})
     sets.RDM.midcast['Aspir'] = set_combine(sets.RDM.midcast.DrainAspir, {})
-	
+	sets.RDM.midcast['Helixes'] = set_combine(sets.common.midcast['Helixes'], {})
+	sets.RDM.midcast['Helixes']['Light Arts'] = set_combine(sets.RDM.midcast['Helixes'], {})
+    sets.RDM.midcast['Helixes']['Dark Arts'] = set_combine(sets.RDM.midcast['Helixes'], {})
+
+
 	sets.aftercast = {}
 	sets.aftercast.Resting = {}
 	sets.aftercast.Engaged = {}
@@ -121,6 +125,10 @@ function precast(spell)
 	if spell.action_type == "Magic" then
 		equip(sets.common.precast.FastCast.Default)
 	end
+	
+	if spellContains(spell.english,' Arts') then
+        activeArts = spell.english
+    end
 end
 function midcast(spell)
 	cancelBuff(spell.english, spell.cast_time, FastCast)
@@ -145,6 +153,14 @@ function midcast(spell)
 	if (conserveMP_list:contains(spell.english)) then
 		equip(sets.common.midcast.ConserveMP)
 	end
+
+	if (Helixes:contains(spell.english)) then
+        if activeArts == "default" then
+            equip(sets.RDM.midcast['Helixes'])
+        else
+		    equip(sets.RDM.midcast['Helixes'][activeArts])
+        end
+    end
 	customInfoCheckMidcast(spell.name, spell.tp_cost, spell.mp_cost)
 end
 
