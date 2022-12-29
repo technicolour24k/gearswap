@@ -1,19 +1,18 @@
 include("organizer-lib")
 include("includes/common-functions")
 include("includes/config")
-
+include("includes/mob-immunities")
+include('private servers/'..server..'/common-gearsets')
+include('private servers/'..server..'/custom-info')
 --initialise local variables to inherit from master config
 local showFCInfo = config.showFastCastInfo
 local showSpellInfo = config.showSpellInfo
 local showCancelInfo = config.showCancelInfo
 local FastCast = 80
 
-
 RDMStyle = "Melee"
 
 function get_sets()
-	include('private servers/'..server..'/common-gearsets')
-	include('private servers/'..server..'/custom-info')
 	local mjob = player.main_job
 	init_gear_sets(mjob)
 	sets.RDM={}
@@ -96,10 +95,17 @@ function get_sets()
 	})
 	sets.RDM.midcast['Elemental Magic'] = set_combine(sets.RDM.midcast['MAB'], {})
 	sets.RDM.midcast['Dark Magic'] = {}
+
+	sets.RDM.midcast['Helixes'] = set_combine(sets.RDM.midcast['MAB'], sets.common.midcast['Helixes'], {})
+	sets.RDM.midcast['Helixes']['Light Arts'] = set_combine(sets.RDM.midcast['Helixes'], {})
+    sets.RDM.midcast['Helixes']['Dark Arts'] = set_combine(sets.RDM.midcast['Helixes'], {})
+
+
+
 	sets.aftercast.Resting = {}
 	sets.aftercast.Engaged = {}
 	sets.aftercast.Engaged.Melee = set_combine(sets.weapons[mjob]["Melee"], sets.misc.AllJobs.TP,{
-		head=RDM_AF_HEAD,
+		head="Ayanmo Zucchetto +2",
 		body="Ayanmo Corazza +2",
 		hands=RDM_AF_HANDS,
 		legs="Ayanmo Cosciales +2",
@@ -143,6 +149,14 @@ function pretarget (spell)
 end
 
 function precast(spell)
+	if (enemy[spell.target.name]) then
+		for key,value in pairs(enemy[spell.target.name]) do 
+			if (spellContains(spell.english,value)) then
+				infoLog(spell.target.name .. " is immune to " .. value .. ". Cancelling spell")
+				cancel_spell()
+			end
+		end
+	end
 	customInfoCheckPrecast(spell.name, spell.tp_cost, spell.mp_cost)
 		
 	if sets.JobAbility[spell.english] then
@@ -160,6 +174,10 @@ function precast(spell)
 	if spell.action_type == "Magic" then
 		equip(sets.common.precast.FastCast.Default)
 	end
+
+	if spellContains(spell.english,' Arts') then
+        activeArts = spell.english
+    end
 end
 function midcast(spell)
 	cancelBuff(spell.english, spell.cast_time, FastCast)
@@ -186,7 +204,11 @@ function midcast(spell)
 	end
 
 	if (Helixes:contains(spell.english)) then
-        equip(sets.RDM.midcast.MAB)
+        if activeArts == "default" then
+            equip(sets.RDM.midcast['Helixes'])
+        else
+		    equip(sets.RDM.midcast['Helixes'][activeArts])
+        end
     end
 
 	weathercheck(spell.element, spell.skill)
