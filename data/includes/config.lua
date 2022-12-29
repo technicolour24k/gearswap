@@ -31,9 +31,10 @@ RegenSpells = S{'Regen', 'Regen II', 'Regen III', 'Regen IV', 'Regen V'}
 Helixes = S{'Geohelix','Hydrohelix','Anemohelix','Pyrohelix','Cryohelix','Ionohelix','Noctohelix','Luminohelix'}
 Storms = S{'Sandstorm','Rainstorm','Windstorm','Firestorm','Hailstorm','Thunderstorm','Voidstorm','Aurorastorm'}
 
-
 --Below 4 lists are used by oneClickRemedies to know which statuses get assigned to which medicine
 remedy_list = {"Blind","Paralysis","Silence","Poison"}
 remedyOintment_list = {"Disease", "Plague"}
 panacea_list = {"Bind", "Bio", "Burn", "Choke", "Dia", "Flash", "Frost", "Gravity", "Rasp", "Slow", "Stun", "Weight", "Attack Down", "Defense Down", "STR Down", "AGI Down", "DEX Down", "VIT Down","INT Down", "MND Down"}
 holyWater_list = {"Curse","Doom"}
+
+activeArts = "default"
