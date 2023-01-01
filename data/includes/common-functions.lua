@@ -219,3 +219,27 @@ function enemyImmunityCheck (mob,spell)
 		end
 	end
 end
+
+
+
+function commonPrecastRules (sets, spell, skill, type)
+	if sets.JobAbility[spell] then
+		equip(sets.JobAbility[spell])
+	end
+
+	if sets.WeaponSkills[spell] then
+		equip(sets.WeaponSkills[spell])
+	end
+
+	if sets.precast[spell] then
+		equip(sets.precast[spell])
+	end
+
+	if type == "Magic" then
+		equip(sets.common.precast.FastCast.Default)
+	end
+	
+	if spellContains(spell.english,' Arts') then
+        activeArts = spell.english
+    end
+end

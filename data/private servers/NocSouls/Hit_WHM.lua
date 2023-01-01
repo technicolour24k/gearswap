@@ -92,11 +92,9 @@ end
 	
 
 function precast(spell)
-	if spell.action_type == 'Magic' then
-        equip(sets.common.precast.FastCast.Default)
-    end
-	
-	
+	enemyImmunityCheck(spell.target.name,spell.english)
+	customInfoCheckPrecast(spell.name, spell.tp_cost, spell.mp_cost)
+	commonPrecastRules(sets, spell.english,spell.skill, spell.action_type)	
 end
 
 function midcast(spell)  

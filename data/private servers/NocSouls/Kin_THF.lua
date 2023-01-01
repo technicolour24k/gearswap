@@ -88,24 +88,11 @@ function pretarget (spell)
 end
 
 function precast(spell)
+	enemyImmunityCheck(spell.target.name,spell.english)
 	customInfoCheckPrecast(spell.name, spell.tp_cost, spell.mp_cost)
-		
-	if sets.JobAbility[spell.english] then
-		equip(sets.JobAbility[spell.english])
-	end
-
-	if sets.WeaponSkills[spell.english] then
-		equip(sets.WeaponSkills[spell.english])
-	end
-
-	if sets.precast[spell.english] then
-		equip(sets.precast[spell.english])
-	end
-
-	if spell.action_type == "Magic" then
-		equip(sets.common.precast.FastCast.Default)
-	end
+	commonPrecastRules(sets, spell.english,spell.skill, spell.action_type)
 end
+
 function midcast(spell)
 	cancelBuff(spell.english, spell.cast_time, FastCast)
 

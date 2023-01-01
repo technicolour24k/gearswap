@@ -16,6 +16,8 @@ function get_sets()
 	local mjob = player.main_job
 	init_gear_sets(mjob)
 	sets.BLM = {}
+	sets.BLM.precast = 	{}
+	sets.BLM.midcast ={}
 
 	sets.JobAbility['Manafont'] = {}
 	sets.JobAbility['Elemental Seal'] = {}
@@ -94,24 +96,10 @@ function pretarget (spell)
 end
 
 function precast(spell)
+	enemyImmunityCheck(spell.target.name,spell.english)
 	customInfoCheckPrecast(spell.name, spell.tp_cost, spell.mp_cost)
-		
-	if sets.JobAbility[spell.english] then
-		equip(sets.JobAbility[spell.english])
-	end
+	commonPrecastRules(sets, spell.english,spell.skill, spell.action_type)end
 
-	if sets.WeaponSkills[spell.english] then
-		equip(sets.WeaponSkills[spell.english])
-	end
-
-	if sets.precast[spell.english] then
-		equip(sets.precast[spell.english])
-	end
-
-	if spell.action_type == "Magic" then
-		equip(sets.common.precast.FastCast.Default)
-	end
-end
 function midcast(spell)
 	cancelBuff(spell.english, spell.cast_time, FastCast)
 

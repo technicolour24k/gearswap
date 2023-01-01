@@ -114,26 +114,10 @@ function precast(spell)
 	if ((config.showSpellInfo == true) or (showInfo == true)) then
 		infoLog("Action: "..spell.english.." | Action Type: "..spell.action_type.."/"..spell.skill.." | MP Cost: "..spell.mp_cost.." | TP Cost: "..spell.tp_cost)
 	end
-
-	if sets.precast.JobAbility[spell.english] then
-		equip(sets.precast.JobAbility[spell.english])
-	end
-
-	if sets.precast.WeaponSkills[spell.english] then
-		equip(sets.precast.WeaponSkills[spell.english])
-	else
-		if ((spell.action_type == "Ability" ) and (wsList:contains(spell.skill))) then
-			equip(sets.precast.WeaponSkills.default)
-		end
-	end
-
-	if sets.precast[spell.english] then
-		equip(sets.precast[spell.english])
-	end
-		
-	if spell.action_type == "Magic" then
-		equip(sets.common.precast.FastCast.Default)
-	end
+	
+	enemyImmunityCheck(spell.target.name,spell.english)
+	customInfoCheckPrecast(spell.name, spell.tp_cost, spell.mp_cost)
+	commonPrecastRules(sets, spell.english,spell.skill, spell.action_type)
 end
 
 function midcast(spell)

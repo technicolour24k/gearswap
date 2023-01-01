@@ -127,25 +127,13 @@ magicalRagePacts = S{
         'Holy Mist','Lunar Bay','Night Terror','Level ? Holy'}
 
 function precast(spell)
+	enemyImmunityCheck(spell.target.name,spell.english)
+	customInfoCheckPrecast(spell.name, spell.tp_cost, spell.mp_cost)
+	commonPrecastRules(sets, spell.english,spell.skill, spell.action_type)
 
 	if spell.type == 'BloodPactRage' or spell.type == 'BloodPactWard' then
 		equip(sets.precast.BloodPactDelay)
 	end
-	
-	if sets.JobAbility[spell.english] then
-		equip(sets.JobAbility[spell.english])
-	end
-
-	if sets.WeaponSkills[spell.english] then
-		equip(sets.WeaponSkills[spell.english])
-	end
-	if sets.precast[spell.english] then
-		equip(sets.precast[spell.english])
-	end
-	
-	if spell.action_type == 'Magic' then
-        equip(sets.common.precast.FastCast.Default)
-    end
 
 	send_command('input /follow Kin')
 end

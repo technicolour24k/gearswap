@@ -43,11 +43,11 @@ function get_sets()
 end
 
 function precast(spell)
+    enemyImmunityCheck(spell.target.name,spell.english)
+    customInfoCheckPrecast(spell.name, spell.tp_cost, spell.mp_cost)
+    commonPrecastRules(sets, spell.english,spell.skill, spell.action_type)
+    
     equip(sets.precast['WS'])
-
-    if spell.action_type == "Magic" then
-		equip(sets.precast['Fast Cast'])    
-	end
 end
 
 function aftercast(spell)
