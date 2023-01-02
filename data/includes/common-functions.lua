@@ -220,8 +220,6 @@ function enemyImmunityCheck (mob,spell)
 	end
 end
 
-
-
 function commonPrecastRules (sets, spell, skill, type)
 	if sets.JobAbility[spell] then
 		equip(sets.JobAbility[spell])
@@ -239,7 +237,7 @@ function commonPrecastRules (sets, spell, skill, type)
 		equip(sets.common.precast.FastCast.Default)
 	end
 	
-	if spellContains(spell.english,' Arts') then
-        activeArts = spell.english
+	if spellContains(spell,' Arts') then
+        activeArts = spell
     end
 end
