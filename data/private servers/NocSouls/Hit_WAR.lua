@@ -1,6 +1,8 @@
 include("organizer-lib")
 include("includes/common-functions")
 include("includes/config")
+include('private servers/'..server..'/common-gearsets')
+include('private servers/'..server..'/custom-info')
 
 function get_sets()
 
@@ -40,6 +42,9 @@ function get_sets()
         legs="Dux Cuisses",
         feet="Dux Greaves"
     }
+
+    sets.JobAbility = {}
+    sets.WeaponSkills = { }
 end
 
 function precast(spell)
