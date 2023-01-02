@@ -98,7 +98,8 @@ end
 function precast(spell)
 	enemyImmunityCheck(spell.target.name,spell.english)
 	customInfoCheckPrecast(spell.name, spell.tp_cost, spell.mp_cost)
-	commonPrecastRules(sets, spell.english,spell.skill, spell.action_type)end
+	commonPrecastRules(sets, spell.english,spell.skill, spell.action_type)
+end
 
 function midcast(spell)
 	cancelBuff(spell.english, spell.cast_time, FastCast)
