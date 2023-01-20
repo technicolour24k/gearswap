@@ -1,7 +1,8 @@
-include('organizer-lib')
-include('includes/common-functions')
+include("organizer-lib")
+include("includes/common-functions")
+include("includes/config")
 include('private servers/'..server..'/common-gearsets')
-include('includes/config')
+include('private servers/'..server..'/custom-info')
 
 --initialise local variables to inherit from master config
 local showFCInfo = config.showFastCastInfo
@@ -16,7 +17,8 @@ function get_sets()
 	local mjob = player.main_job
 	init_gear_sets(mjob)
 	sets.NIN = {}
-
+	sets.NIN.precast = {}
+	sets.NIN.midcast = {}
     sets.JobAbility['Yonin'] = {}
 	sets.JobAbility['Innin'] = {}
 	sets.JobAbility['Futae'] = {}
@@ -69,27 +71,8 @@ function get_sets()
 
 	sets.aftercast.Idle = set_combine(sets.aftercast.Engaged[TPStyle[TPStyleIndex]], {
 		left_ring="Defending Ring",
-		feet="Pillager's Poulaines +3",
 	})
 	
-
-	enspell_list = S{"Enstone", "Enwater", "Enaero", "Enfire", "Enblizzard", "Enthunder"}
-
-	eleWheel_list = S{	"Hyoton: Ichi", "Hyoton: Ni", "Hyoton: San",
-						"Katon: Ichi", "Katon: Ni", "Katon: San",
-						"Doton: Ichi", "Doton: Ni", "Doton: San",
-						"Raiton: Ichi", "Raiton: Ni", "Raiton: San",
-						"Suiton: Ichi", "Suiton: Ni", "Suiton: San",
-						"Huton: Ichi", "Huton: Ni", "Huton: San"					
-					}
-	conserveMP_list = S{"Protect", "Protect II", "Protect III", "Protect IV", "Protect V", "Protectra", "Protectra II", "Protectra III", "Protectra IV", "Protectra V", 
-						"Shell", "Shell II", "Shell III", "Shell IV", "Shell V", "Shellra", "Shellra II", "Shellra III", "Shellrq IV", "Shellra V", 
-						"Haste", "Haste II",
-						"Dia", "Dia II", "Dia III", "Diaga",
-						"Blaze Spikes", "Ice Spikes", "Shock Spikes",
-						"Impact",
-						"Bio", "Bio II", "Bio III",
-						"Refresh", "Refresh II"}
 
     
 	send_command('gs enable all') 
@@ -97,8 +80,6 @@ function get_sets()
 	infoLog('[F9] Bound to Default TP Gear')
 	infoLog('[F10] Bound to Set Accuracy heavy TP Gear')
 	infoLog('[F11] Bound to Set Evasion heavy TP Gear')
-
-	
 end
 
 
@@ -141,11 +122,11 @@ function midcast(spell)
 	if (conserveMP_list:contains(spell.english)) then
 		equip(sets.common.midcast.ConserveMP)
 	end
-	customInfoCheckMidcast(spell.name, spell.tp_cost, spell.mp_cost)
-
+	
 	if (eleWheel_list:contains(spell.english)) then
 		equip(sets.NIN.midcast.Nuke)
 	end
+	customInfoCheckMidcast(spell.name, spell.tp_cost, spell.mp_cost)
 end
 
 function aftercast(spell)
@@ -156,12 +137,10 @@ function aftercast(spell)
 		infoLog("<<Trick Attack>>")
 		equip (sets.precast['Trick Attack'])
 	else
-		equipGearByState()
 	end
 end
 
 function status_change(new,old)
-	equipGearByState()
 end
 
 function buff_change(name,gain)

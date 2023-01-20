@@ -22,6 +22,14 @@ conserveMP_list = --Store spells that get no benefit from Potency or anything ou
     "Refresh","Refresh II"
 }
 
+eleWheel_list = S{	"Hyoton: Ichi", "Hyoton: Ni", "Hyoton: San",
+"Katon: Ichi", "Katon: Ni", "Katon: San",
+"Doton: Ichi", "Doton: Ni", "Doton: San",
+"Raiton: Ichi", "Raiton: Ni", "Raiton: San",
+"Suiton: Ichi", "Suiton: Ni", "Suiton: San",
+"Huton: Ichi", "Huton: Ni", "Huton: San"					
+}
+
 CureSpells = S{	'Cure', 'Cure II', 'Cure III', 'Cure IV', 'Cure V', 'Cure VI',
 'Curaga', 'Curaga II', 'Curaga III', 'Curaga IV', 'Curaga V',
 'Cura', 'Cura II', 'Cura III'}
