@@ -10,9 +10,40 @@ function get_sets()
 	sets.midcast = {}
     sets.aftercast = {}
     sets.JobAbility = {}
-	
+    sets.WeaponSkills = {}
     sets.TH = {}
-	sets.MAB = {}
+    sets.MAB = {}
+
+    sets.precast.FastCast = {}
+	sets.precast.FastCast['Divine Magic'] = set_combine(sets.precast.FastCast,{})
+    sets.precast.FastCast['Healing Magic'] = set_combine(sets.precast.FastCast,{})
+    sets.precast.FastCast['Enhancing Magic'] = set_combine(sets.precast.FastCast,{})
+    sets.precast.FastCast['Enfeebling Magic'] = set_combine(sets.precast.FastCast,{})
+    sets.precast.FastCast['Elemental Magic'] = set_combine(sets.precast.FastCast,{})
+    sets.precast.FastCast['Dark Magic'] = set_combine(sets.precast.FastCast,{})
+    sets.precast.FastCast['Summoning Magic'] = set_combine(sets.precast.FastCast,{})
+    sets.precast.FastCast['Ninjutsu'] = set_combine(sets.precast.FastCast,{})
+    sets.precast.FastCast['Singing'] = set_combine(sets.precast.FastCast,{})
+    sets.precast.FastCast['String'] = set_combine(sets.precast.FastCast,{})
+    sets.precast.FastCast['Wind'] = set_combine(sets.precast.FastCast,{})
+    sets.precast.FastCast['Blue Magic'] = set_combine(sets.precast.FastCast,{})
+    sets.precast.FastCast['Geomancy'] = set_combine(sets.precast.FastCast,{})
+    sets.precast.FastCast['Handbell'] = set_combine(sets.precast.FastCast,{})
+    sets.midcast['Divine Magic'] = {}
+	sets.midcast['Healing Magic'] = {}
+	sets.midcast['Enhancing Magic'] = {}
+	sets.midcast['Enfeebling Magic'] = {}
+	sets.midcast['Elemental Magic'] = set_combine(sets.MAB,{})
+	sets.midcast['Dark Magic'] = {}
+	sets.midcast['Summoning Magic'] = {}
+	sets.midcast['Ninjutsu'] = {}
+	sets.midcast['Singing'] = {}
+	sets.midcast['String'] = {}
+	sets.midcast['Wind'] = {}
+	sets.midcast['Blue Magic'] = {}
+	sets.midcast['Geomancy'] = {}
+	sets.midcast['Handbell'] = {}  
+	
 	sets.JobAbility["Mighty Strikes"] = {}
 	sets.JobAbility["Provoke"] = {}
 	sets.JobAbility["Berserk"] = {}
