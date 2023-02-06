@@ -64,14 +64,15 @@ function get_sets()
 		waist = "Fotia Belt"
 	}
     --Common WS gear - apply to all WS.
-	sets.WeaponSkills["Common"] = set_combine(sets.WeaponSkills['Fotia'],{})
-	sets.WeaponSkills["Upheavel"] = set_combine(sets.WeaponSkills['Common'],{})
+	sets.WeaponSkills["Common"] = set_combine(sets.WeaponSkills['Fotia'],{}) --Always equip Fotia gear, then overwrite it
+	sets.WeaponSkills["Upheavel"] = set_combine(sets.WeaponSkills['Common'],{}) --Always equip common gear, then overwrite it
 	sets.WeaponSkills["Ukko\'s Fury"] = set_combine(sets.WeaponSkills['Common'],{})
 	sets.WeaponSkills["Fell Cleave"] = set_combine(sets.WeaponSkills['Common'],{})
 	sets.WeaponSkills["King\'s Justice"] = set_combine(sets.WeaponSkills['Common'],{})
 	sets.WeaponSkills["Metatron Torment"] = set_combine(sets.WeaponSkills['Common'],{})
 	sets.WeaponSkills["Steel Cyclone"] = set_combine(sets.WeaponSkills['Common'],{})
 	sets.WeaponSkills["Full Break"] = set_combine(sets.WeaponSkills['Common'],{})
+    --Need another WS? Add it here with the same setup as above :D
 
 	sets.midcast.Cure = {}
 
