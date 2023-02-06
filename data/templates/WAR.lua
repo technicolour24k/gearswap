@@ -77,14 +77,13 @@ function get_sets()
 
 	sets.aftercast.Resting = {}
     
-    --Recommend Damage Taken gear
+    --Recommend Damage Taken gear for Engaged default
 	sets.aftercast.Engaged = {}
     sets.aftercast.Engaged.default={}
 	sets.aftercast.Engaged.TH = set_combine(sets.aftercast.Engaged.default, sets.TH)
 	sets.aftercast.Engaged.Accuracy = set_combine(sets.aftercast.Engaged.default, {})
-	sets.aftercast.Engaged.Evasion = set_combine(sets.aftercast.Engaged.default, {})
 	
-    --Regen, move speed, etc
+    --Regen, move speed, damage taken, etc
     sets.aftercast.Idle = set_combine(sets.aftercast.Engaged, {})
 
     sets.Obis = {}
@@ -163,18 +162,18 @@ function midcast(spell)
 end
 
 function aftercast(spell)
-    if (player.status=="Engaged") then
-        equip(sets.aftercast[player.status][TPStyle])
+    if (player.status=="Engaged") then --If you're engaged
+        equip(sets.aftercast[player.status][TPStyle]) --Then equip your current TP Style choice (default, TH, etc)
     else
-        equip(sets.aftercast[player.status])
+        equip(sets.aftercast[player.status]) --If you're not engaged, then resort to your current status: Idle, Resting, etc
     end
 end
 
 function status_change(new, old)
-    if (player.status=="Engaged") then
-        equip(sets.aftercast[player.status][TPStyle])
+    if (player.status=="Engaged") then --If you're engaged
+        equip(sets.aftercast[player.status][TPStyle]) --Then equip your current TP Style choice (default, TH, etc)
     else
-        equip(sets.aftercast[player.status])
+        equip(sets.aftercast[player.status]) --If you're not engaged, then resort to your current status: Idle, Resting, etc
     end
 end
 
@@ -183,24 +182,31 @@ function buff_change(name, gain)
 end
 
 function self_command(command)
-    if (command:lower() == "gear-swap") then
-        if (TPStyle == "default") then
+    if (command:lower() == "gear-swap") then --Trigger with "gs c gear-swap" in-game
+        if (TPStyle == "default") then --If we're using our standard gear, then switch to TH
 			TPStyle = "TH"
-		elseif (TPStyle == "TH") then
+		elseif (TPStyle == "TH") then --If we're using TH gear, then swap to Accuracy
 			TPStyle="Accuracy"
-        else
+        else --If it's not default, or TH gear, then switch back to default
 			TPStyle="default"
 		end
+        -- If you want to add more to gear-swap function, then you'll need this code:
+            -- elseif (TPStyle=="Accuracy") then
+                -- TPStyle = new set name
+            -- else
+        -- i.e. Copy lines 188-189 and switch the TPStyle name out with the new set name
+        -- You will also need to add a sets.aftercast.Engaged."set name" - Copy one of lines 82-84
         add_to_chat(8, "Changing TP Gearset to: " ..TPStyle)
 
-        if (player.status=="Engaged") then
-            equip(sets.aftercast[player.status][TPStyle])
+        --After doing the gear change, then switch to the new gear.
+        if (player.status=="Engaged") then --If you're engaged
+            equip(sets.aftercast[player.status][TPStyle]) --Then equip your current TP Style choice (default, TH, etc)
         else
-            equip(sets.aftercast[player.status])
+            equip(sets.aftercast[player.status]) --If you're not engaged, then resort to your current status: Idle, Resting, etc
         end
     end
 
-    --Add more here..    
+    --Add more custom commands here..
 end
 
 --@param spell_element: Element of the spell you're using
