@@ -1,6 +1,8 @@
 include("organizer-lib")
 TPStyle="default"
+StandingStyle="default"
 enspell_list = S{"Enstone", "Enwater", "Enaero", "Enfire", "Enblizzard", "Enthunder", "Enlight","Endark"} --Store enspells for easily cancelling
+eleDebuff_list = S{"Burn","Shock","Choke","Drown","Rasp","Frost"} --Store elemental debuffs for comparison later
 
 
 function get_sets()
@@ -44,16 +46,13 @@ function get_sets()
 	sets.midcast['Geomancy'] = {}
 	sets.midcast['Handbell'] = {}  
 	
-	sets.JobAbility["Benediction"] = {}
-	sets.JobAbility["Divine Seal"] = {}
-	sets.JobAbility["Afflatus Solace"] = {}
-    sets.JobAbility["Afflatus Misery"] = {}
-	sets.JobAbility['Martyr'] = {}
-	sets.JobAbility['Devotion'] = {}
-	sets.JobAbility['Divine Caress'] = {}
-	sets.JobAbility["Sacrosanctity"] = {}
-	sets.JobAbility['Asylum'] = {}
-	sets.JobAbility['Spontaneity'] = {}
+	sets.JobAbility["Manafont"] = {}
+	sets.JobAbility["Elemental Seal"] = {}
+	sets.JobAbility["Mana Wall"] = {}
+    sets.JobAbility["Enmity Douse"] = {}
+	sets.JobAbility['Manawell'] = {}
+	sets.JobAbility['Subtle Sorcery'] = {}
+	sets.JobAbility['Cascade'] = {}
 
     --Fotia set
     sets.WeaponSkills['Fotia'] = {
@@ -62,19 +61,21 @@ function get_sets()
 	}
     --Common WS gear - apply to all WS.
 	sets.WeaponSkills["Common"] = set_combine(sets.WeaponSkills['Fotia'],{}) --Always equip Fotia gear, then overwrite it
-	sets.WeaponSkills["Exudiation"] = set_combine(sets.WeaponSkills['Common'],{}) --Always equip common gear, then overwrite it
 	sets.WeaponSkills["Realmrazer"] = set_combine(sets.WeaponSkills['Common'],{})
 	sets.WeaponSkills["Flash Nova"] = set_combine(sets.WeaponSkills['Common'],{})
-	sets.WeaponSkills["Mystic Boon"] = set_combine(sets.WeaponSkills['Common'],{})
-	sets.WeaponSkills["Randgrith"] = set_combine(sets.WeaponSkills['Common'],{})
 	sets.WeaponSkills["Black Halo"] = set_combine(sets.WeaponSkills['Common'],{})
-	sets.WeaponSkills["Hexa Strike"] = set_combine(sets.WeaponSkills['Common'],{})
+    sets.WeaponSkills["Tartarus Torpor"] = set_combine(sets.WeaponSkills['Common'],{})
+	sets.WeaponSkills["Shattersoul"] = set_combine(sets.WeaponSkills['Common'],{})
+	sets.WeaponSkills["Mykyr"] = set_combine(sets.WeaponSkills['Common'],{})
+	sets.WeaponSkills["Cataclysm"] = set_combine(sets.WeaponSkills['Common'],{})
+	sets.WeaponSkills["Vidohunir"] = set_combine(sets.WeaponSkills['Common'],{})
+    sets.WeaponSkills["Spirit Taker"] = set_combine(sets.WeaponSkills['Common'],{})
     --Need another WS? Add it here with the same setup as above :D
 
 	sets.midcast.Cure = {}
-	sets.midcast.Regen = {}
-	sets.midcast.Barspells = set_combine(sets.midcast['Enhancing Magic'],{})
-    sets.midcast.Cursna = set_combine(sets.midcast['Healing Magic'],{})
+    sets.midcast.EleDebuffs = set_combine(sets.MAB,{})
+
+
 	sets.aftercast.Resting = {}
     
     --Recommend Damage Taken gear for Engaged default
@@ -84,7 +85,9 @@ function get_sets()
 	sets.aftercast.Engaged.Accuracy = set_combine(sets.aftercast.Engaged.default, {})
 	
     --Regen/refresh, move speed, damage taken, etc
-    sets.aftercast.Idle = set_combine(sets.aftercast.Engaged, {})
+    sets.aftercast.Idle={}
+    sets.aftercast.Idle.default = set_combine(sets.aftercast.Engaged, {})
+    sets.aftercast.Idle['Mana Wall'] = set_combine(sets.aftercast.Idle.default,{})
 
     sets.Obis = {}
 	sets.Obis.AIO = {waist = "Hachirin-no-Obi"}
@@ -100,6 +103,7 @@ function get_sets()
 	send_command("gs enable all")
 	send_command("gs equip sets.aftercast.Idle")
     send_command("input /echo [F9] Toggle engaged gear; bind F9 gs c gear-swap")
+    send_command("input /echo [F10] Toggle Standing/Idle gear; bind F10 gs c standing-swap")
 end
 
 function pretarget (spell)
@@ -152,20 +156,10 @@ function midcast(spell)
         equip(sets.midcast.Cure)
 	end
 
-    --Hittin' someone with a regen? BAM.
-    if string.find(spell.english,'Regen') then 
-        equip(sets.midcast.Regen)
+    --Using an elemental debuff? Make it burn!
+	if (eleDebuff_list:contains(spell.english)) then
+		equip(sets.midcast.EleDebuffs)
 	end
-
-    --Let's stop all the elements!
-    if string.startswith(spell.english,'Bar') then 
-        equip(sets.midcast.Barspells)
-    end
-
-    --Curses! Foiled a-golem..
-    if (spell.english=="Cursna") then
-        equip(sets.midcast.Cursna)
-    end
 
     --Using an enspell? Pop on some exciting gear for that!
 	if (enspell_list:contains(spell.english)) then
@@ -179,16 +173,20 @@ end
 function aftercast(spell)
     if (player.status=="Engaged") then --If you're engaged
         equip(sets.aftercast[player.status][TPStyle]) --Then equip your current TP Style choice (default, TH, etc)
+    elseif (buffactive['Mana Wall'] == 1) then
+        equip(sets.aftercast[player.status]["Mana Wall"]) --If Mana Wall is active, then force Mana Wall set active
     else
-        equip(sets.aftercast[player.status]) --If you're not engaged, then resort to your current status: Idle, Resting, etc
+        equip(sets.aftercast[player.status][StandingStyle]) --If you're not engaged, then resort to your current status: Idle, Resting, etc
     end
 end
 
 function status_change(new, old)
     if (player.status=="Engaged") then --If you're engaged
         equip(sets.aftercast[player.status][TPStyle]) --Then equip your current TP Style choice (default, TH, etc)
+    elseif (buffactive['Mana Wall'] == 1) then
+        equip(sets.aftercast[player.status]["Mana Wall"]) --If Mana Wall is active, then force Mana Wall set active
     else
-        equip(sets.aftercast[player.status]) --If you're not engaged, then resort to your current status: Idle, Resting, etc
+        equip(sets.aftercast[player.status][StandingStyle]) --If you're not engaged, then resort to your current status: Idle, Resting, etc
     end
 end
 
@@ -216,11 +214,36 @@ function self_command(command)
         --After doing the gear change, then switch to the new gear.
         if (player.status=="Engaged") then --If you're engaged
             equip(sets.aftercast[player.status][TPStyle]) --Then equip your current TP Style choice (default, TH, etc)
+        elseif (buffactive['Mana Wall'] == 1) then
+            equip(sets.aftercast[player.status]["Mana Wall"]) --If Mana Wall is active, then force Mana Wall set active
         else
-            equip(sets.aftercast[player.status]) --If you're not engaged, then resort to your current status: Idle, Resting, etc
+            equip(sets.aftercast[player.status][StandingStyle]) --If you're not engaged, then resort to your current status: Idle, Resting, etc
         end
     end
 
+    if (command:lower() == "standing-swap") then --Trigger with "gs c standing-swap" in-game
+        if (StandingStyle == "default") then --If we're using our standard gear, then switch to TH
+			StandingStyle = "Mana Wall"
+        else --If it's not default, or Mana Wall gear, then switch back to default
+			StandingStyle="default"
+		end
+        -- If you want to add more to gear-swap function, then you'll need this code:
+            -- elseif (StandingStyle=="Accuracy") then
+                -- StandingStyle = new set name
+            -- else
+        -- i.e. Copy lines 188-189 and switch the StandingStyle name out with the new set name
+        -- You will also need to add a sets.aftercast.Engaged."set name" - Copy one of lines 82-84
+        add_to_chat(8, "Changing Standing/Idle Gearset to: " ..StandingStyle)
+
+        --After doing the gear change, then switch to the new gear.
+        if (player.status=="Engaged") then --If you're engaged
+            equip(sets.aftercast[player.status][TPStyle]) --Then equip your current TP Style choice (default, TH, etc)
+        elseif (buffactive['Mana Wall'] == 1) then
+            equip(sets.aftercast[player.status]["Mana Wall"]) --If Mana Wall is active, then force Mana Wall set active
+        else
+            equip(sets.aftercast[player.status][StandingStyle]) --If you're not engaged, then resort to your current status: Idle, Resting, etc
+        end
+    end
     --Add more custom commands here..
 end
 
