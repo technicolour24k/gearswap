@@ -241,3 +241,59 @@ function commonPrecastRules (sets, spell, skill, type)
         activeArts = spell
     end
 end
+
+
+function commonMidcastRules (sets,spell,skill,type)
+	if sets[mjob].midcast[spell] then
+		equip(sets[mjob].midcast[spell])
+	elseif sets.common.midcast[spell] then
+		equip(sets.common.midcast[spell])
+	elseif string.find(spell,'Cure') or string.find(spell,'Cura') then 
+        equip(sets[mjob].midcast.Cure)
+	end
+
+	if sets[mjob].midcast[skill] then
+		equip(sets[mjob].midcast[skill])
+	elseif sets.common.midcast[skill] then
+		equip(sets.common.midcast[skill])
+	end
+
+	if (enspell_list:contains(spell)) then
+		equip(sets.common.midcast.Enspell)
+	end
+	if (conserveMP_list:contains(spell)) then
+		equip(sets.common.midcast.ConserveMP)
+	end
+
+	if (BLU_Buffs:contains(spell)) then
+		if (sets[mjob].midcast.BLU_Buffs) then
+			equip(sets[mjob].midcast.BLU_Buffs)
+		elseif (sets.common.midcast.BLU_Buffs) then
+			equip(sets.common.midcast.BLU_Buffs)
+		end
+	end
+
+	if (BLU_Nukes:contains(spell)) then
+		if (sets[mjob].midcast.BLU_Nukes) then
+			equip(sets[mjob].midcast.BLU_Nukes)
+		elseif (sets.common.midcast.BLU_Nukes) then
+			equip(sets.common.midcast.BLU_Nukes)
+		end
+	end
+
+	if (BLU_Physical:contains(spell)) then
+		if (sets[mjob].midcast.BLU_Physical) then
+			equip(sets[mjob].midcast.BLU_Physical)
+		elseif (sets.common.midcast.BLU_Physical) then
+			equip(sets.common.midcast.BLU_Physical)
+		end
+	end
+
+	if (Helixes:contains(spell) or spellContains(spell, "Dia")) then
+        if activeArts == "default" then
+            equip(sets[mjob].midcast['Helixes'])
+        else
+		    equip(sets[mjob].midcast['Helixes'][activeArts])
+        end
+    end
+end

@@ -1,18 +1,21 @@
 include("organizer-lib")
-include("includes/common-functions")
-include("includes/config")
-include('private servers/'..server..'/common-gearsets')
-include('private servers/'..server..'/custom-info')
+include("includes/common")
+-- include("includes/config")
+-- include("includes/common-functions")
+-- include('private servers/'..server..'/common-gearsets')
+-- include('private servers/'..server..'/custom-info')
 --initialise local variables to inherit from master config
 local showFCInfo = config.showFastCastInfo
 local showSpellInfo = config.showSpellInfo
 local showCancelInfo = config.showCancelInfo
 local FastCast = 80
-
 RDMStyle = "Melee"
+TPStyle = "Melee"
 
 function get_sets()
-	local mjob = player.main_job
+	if ((sjob=="BLU") or (sjob=="NIN") or (sjob=="DNC") or (sjob=="THF")) then
+		RDMStyle = "DualWield"
+	end
 	init_gear_sets(mjob)
 	sets.RDM={}
 	sets.JobAbility={}
@@ -99,18 +102,28 @@ function get_sets()
 	sets.RDM.midcast['Helixes']['Light Arts'] = set_combine(sets.RDM.midcast['Helixes'], {})
     sets.RDM.midcast['Helixes']['Dark Arts'] = set_combine(sets.RDM.midcast['Helixes'], {})
 
-
+	sets.RDM.midcast.BLU_Physical = set_combine(sets.common.midcast.BLU_Physical,{})
+	sets.RDM.midcast.BLU_Buffs = set_combine(sets.common.midcast.BLU_Buffs,{})
+	sets.RDM.midcast.BLU_Nukes = set_combine(sets.common.midcast.BLU_Nukes, sets[mjob].midcast['MAB'], {})
 
 	sets.aftercast.Resting = {}
 	sets.aftercast.Engaged = {}
-	sets.aftercast.Engaged.Melee = set_combine(sets.weapons[mjob]["Melee"], sets.misc.AllJobs.TP,{
+	sets.aftercast.Engaged.Melee = set_combine(sets.weapons[mjob][RDMStyle], sets.misc.AllJobs.TP,{
 		head="Ayanmo Zucchetto +2",
 		body="Ayanmo Corazza +2",
-		hands=RDM_AF_HANDS,
+		hands="Ayanmo Manopolas +2",
 		legs="Ayanmo Cosciales +2",
 		feet="Ayanmo Gambieras +2",
 		waist={ name="Windbuffet Belt +1", augments={'"Triple Atk."+2','"Triple Atk."+2','"Triple Atk."+2','"Triple Atk."+2',}},	
 	})
+	sets.aftercast.Engaged['MEva'] = set_combine(sets.aftercast.Engaged.Melee, {
+		head="Atro. Chapeau +2",
+		body="Atrophy Tabard +2",
+		legs="Atrophy Tights +2",
+		feet="Atro. Boots +2",
+		right_ring="Purity Ring",
+	})
+
 
 	sets.aftercast.Idle = set_combine(sets.aftercast.Engaged.Melee, sets.misc.AllJobs['DTCombo'],{
 		head=RDM_RELIC_HEAD,
@@ -141,6 +154,7 @@ function get_sets()
 	sets.WeaponSkills['Knights of Round'] = {}
 	send_command("gs enable all")
 	send_command("gs equip sets.aftercast.Idle")
+	infoLog("Subjob: "..sjob.." - RDM Style: "..RDMStyle)
 end
 
 function pretarget (spell)
@@ -152,46 +166,18 @@ function precast(spell)
 	customInfoCheckPrecast(spell.name, spell.tp_cost, spell.mp_cost)
 	commonPrecastRules(sets, spell.english,spell.skill, spell.action_type)
 end
+
 function midcast(spell)
 	cancelBuff(spell.english, spell.cast_time, FastCast)
-
-	if sets.RDM.midcast[spell.english] then
-		equip(sets.RDM.midcast[spell.english])
-	elseif sets.common.midcast[spell.english] then
-		equip(sets.common.midcast[spell.english])
-	elseif string.find(spell.english,'Cure') or string.find(spell.english,'Cura') then 
-        equip(sets.RDM.midcast.Cure)
-	end
-
-	if sets.RDM.midcast[spell.skill] then
-		equip(sets.RDM.midcast[spell.skill])
-	elseif sets.common.midcast[spell.skill] then
-		equip(sets.common.midcast[spell.skill])
-
-	end
-	if (enspell_list:contains(spell.english)) then
-		equip(sets.common.midcast.Enspell)
-	end
-	if (conserveMP_list:contains(spell.english)) then
-		equip(sets.common.midcast.ConserveMP)
-	end
-
-	if (Helixes:contains(spell.english) or spellContains(spell.english, "Dia")) then
-        if activeArts == "default" then
-            equip(sets.RDM.midcast['Helixes'])
-        else
-		    equip(sets.RDM.midcast['Helixes'][activeArts])
-        end
-    end
-
-	weathercheck(spell.element, spell.skill)
 	customInfoCheckMidcast(spell.name, spell.tp_cost, spell.mp_cost)
+	commonMidcastRules(sets, spell.english, spell.skill, spell.action_type)
+	weathercheck(spell.element, spell.skill)
 end
 
 function aftercast(spell)
-	equip(sets.weapons.RDM[RDMStyle])
+	equip(sets.weapons[mjob][RDMStyle])
 	if player.status == "Engaged" then
-		equip(sets.aftercast[player.status][RDMStyle])
+		equip(sets.aftercast[player.status][TPStyle])
 	else
 		equip(sets.aftercast[player.status])
 	end
@@ -202,7 +188,7 @@ end
 
 function status_change(new, old)
 	if player.status == "Engaged" then
-		equip(sets.aftercast[player.status][RDMStyle])
+		equip(sets.aftercast[player.status][TPStyle])
 	else
 		equip(sets.aftercast[player.status])
 	end
@@ -218,21 +204,32 @@ end
 
 function self_command(command)
 	if command:lower() == "togglegear" then
-		send_command("gs enable sub")
 		if RDMStyle == "Melee" then
 			RDMStyle = "Mage"
 		else
 			RDMStyle="Melee"
 		end
 		infoLog("RDM Style is now: " .. RDMStyle.. "!")
-		equip(sets.weapons.RDM[RDMStyle])
+		equip(sets.weapons[mjob][RDMStyle])
 		if (sets.aftercast[player.status]) then
 			equip(sets.aftercast[player.status])
 		end
 	end
 
+	if command:lower() == "toggle-tp" then
+		if TPStyle == "Melee" then
+			TPStyle = "MEva"
+		else
+			TPStyle="Melee"
+		end
+		infoLog("TP Style is now: " .. TPStyle.. "!")
+		if (sets.aftercast[player.status][TPStyle]) then
+			equip(sets.aftercast[player.status][TPStyle])
+		end
+	end
+
 	if player.status == "Engaged" then
-		equip(sets.aftercast[player.status][RDMStyle])
+		equip(sets.aftercast[player.status][TPStyle])
 	else
 		equip(sets.aftercast[player.status])
 	end

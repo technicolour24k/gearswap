@@ -16,6 +16,7 @@ function get_sets()
 	local mjob = player.main_job
 	init_gear_sets(mjob)
 	sets.MNK={}
+	sets.MNK.midcast={}
 	
 	sets.MAB = set_combine(sets.misc.AllJobs.MAB, {
 		
@@ -56,12 +57,12 @@ function get_sets()
 		legs=MNK_RELIC_LEGS,
 		feet=MNK_RELIC_FEET,
 		neck="Loricate Torque +1",
-		waist={ name="Windbuffet Belt +1", augments={'"Triple Atk."+2','"Triple Atk."+2','"Triple Atk."+2','"Triple Atk."+2',}},
-		left_ear={ name="Telos Earring" },
-		right_ear={ name="Tati Earring" },
-		left_ring={ name="Defending Ring", augments={'"Regen"+20','"Regen"+20','"Regen"+20','"Regen"+20',}},
-		right_ring="Patricius Ring",
-		back={ name="Laic Mantle", augments={'"Triple Atk."+2','"Triple Atk."+2','"Triple Atk."+2','"Triple Atk."+2',}},
+		waist={ name="Black Belt" },
+		left_ear={ name="Moonshade Earring" },
+		right_ear={ name="Stamina Earring +1" },
+		left_ring={ name="Rajas Ring" },
+		right_ring="Epona's Ring",
+		back={ name="Moonbeam Cape"},
 	}
 
 	sets.aftercast.Engaged.TH = set_combine(sets.aftercast.Engaged, sets.TH)
@@ -122,24 +123,6 @@ end
 
 function status_change(new, old)
 	equip(sets.aftercast[player.status])
-end
-
-function buff_change(name, gain)
-	if name == "Trick Attack" and gain == "false" then
-		equip(sets.aftercast.Idle)
-	elseif name == "Sneak Attack" and gain == "false" then
-		if player.status == "Idle" then
-			equip_idle_set()
-		elseif sets.aftercast[player.status][TPStyle] then
-			equip(sets.aftercast[player.status][TPStyle], sets.aftercast)
-		else
-			equip(sets.aftercast.Idle, sets.aftercast)
-		end
-	end
-end
-
-function area_change(new,old)
-
 end
 
 function self_command(command)

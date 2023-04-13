@@ -9,7 +9,7 @@ return {
     ['Ctrl+8'] = '',
     ['Ctrl+9'] = '',
     ['Ctrl+0'] = '',
-    ['Alt+1'] = '',
+    ['Alt+1'] = 'input /ja "Sudden Lunge" <t>',
     ['Alt+2'] = 'input /ja "Flee" <me>',
     ['Alt+3'] = 'input /ja "Hide" <me>',
     ['Alt+4'] = 'input /ja "Despoil" <t>',

@@ -1,19 +1,17 @@
 include("organizer-lib")
-include("includes/common-functions")
-include("includes/config")
+include("includes/common")
+-- include("includes/common-functions")
+-- include('private servers/'..server..'/common-gearsets')
+-- include('private servers/'..server..'/custom-info')
 
 --initialise local variables to inherit from master config
 local showFCInfo = config.showFastCastInfo
 local showSpellInfo = config.showSpellInfo
 local showCancelInfo = config.showCancelInfo
 local FastCast = 80
-activeArts = "default"
 TPStyle = "Default"
 
 function get_sets()
-	include('private servers/'..server..'/common-gearsets')
-	include('private servers/'..server..'/custom-info')
-	local mjob = player.main_job
 	init_gear_sets(mjob)
 	
 	sets.RDM = {}

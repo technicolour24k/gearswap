@@ -45,4 +45,12 @@ remedyOintment_list = {"Disease", "Plague"}
 panacea_list = {"Bind", "Bio", "Burn", "Choke", "Dia", "Flash", "Frost", "Gravity", "Rasp", "Slow", "Stun", "Weight", "Attack Down", "Defense Down", "STR Down", "AGI Down", "DEX Down", "VIT Down","INT Down", "MND Down"}
 holyWater_list = {"Curse","Doom"}
 
+BLU_Buffs = S{"Nat. Meditation","Occultation","Erratic Flutter","Diamondhide","Magic Fruit",""}
+BLU_Nukes = S{"Searing Tempest","Spectral Floe","Silent Storm","Entomb","Anvil Lightning","Scouring Spate","Palling Salvo","Atra. Libations"}
+BLU_Physical = S{"Thrashing Assault","Sinker Drill"}
+
 activeArts = "default"
+
+mjob = player.main_job
+sjob = player.sub_job
+

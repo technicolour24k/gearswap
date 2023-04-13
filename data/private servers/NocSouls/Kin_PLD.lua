@@ -24,7 +24,7 @@ function get_sets()
 	sets.precast.JobAbility.Invincible = {}
 	sets.precast.JobAbility.Sentinel = { feet="Cab. Leggings +1" }
 	sets.precast.JobAbility['Shield Bash'] = { hands = "Cab. Gauntlets +1" }
-	sets.precast.JobAbility.Cover = {head="Rev. Coronet +3"}
+	sets.precast.JobAbility.Cover = {head=PLD_AF_HEAD}
 	sets.precast.JobAbility.Provoke = set_combine(sets.Enmity,{})
 	sets.precast.JobAbility.Rampart = { head="Cab. Coronet +1"}
 	
@@ -40,11 +40,11 @@ function get_sets()
 	sets.precast.WeaponSkills['Uriel Blade'] = set_combine(sets.misc.AllJobs.MAB, {})
 	-- Standard mods
 	sets.precast.WeaponSkills['Savage Blade'] = set_combine(sets.WeaponSkills['AllJobsWS'],{ --50% STR, 50% MND - Equal footing for both
-		head="Rev. Coronet +3",
-		body="Rev. Surcoat +3",
-		hands="Rev. Gauntlets +3",
-		legs="Rev. Breeches +3",
-		feet="Rev. Leggings +3",
+		head=PLD_AF_HEAD,
+		body=PLD_AF_BODY,
+		hands=PLD_AF_HANDS,
+		legs=PLD_AF_LEGS,
+		feet=PLD_AF_FEET,
 		neck="Ire Torque",
 		waist="Chuq'aba Belt",
 		left_ear="Aqua Pearl",
@@ -73,31 +73,23 @@ function get_sets()
 	})
      
     sets.aftercast.Resting = { }
-	sets.aftercast.Engaged = {
+	sets.aftercast.Engaged = set_combine(sets.misc.AllJobs.TP, {
+		ammo= empty,
 		ranged="Killer Shortbow",
-		head="Rev. Coronet +3",
-		body="Rev. Surcoat +3",
-		hands="Rev. Gauntlets +3",
-		legs="Ogier's Breeches",
-		feet="Chev. Sabatons",
+		head=PLD_AF_HEAD,
+		body=PLD_AF_BODY,
+		hands=PLD_AF_HANDS,
+		legs=PLD_AF_LEGS,
+		feet=PLD_RELIC_FEET,
 		neck="Loricate Torque +1",
-		left_ear="Telos Earring",
-		right_ear="Mache Earring +1",
-		left_ring = "Defending Ring",
-		right_ring = "Regal Ring",
-		waist="Windbuffet Belt +1",
-		back="Laic Mantle"
-	}
+		waist = "Nierenschutz",
+	})
 	 
 	sets.aftercast.Idle = set_combine(sets.aftercast.Engaged, {
-		body = "Cab. Surcoat +1",
 		legs = "Crimson Cuisses",
-		neck="Loricate Torque +1",
 		left_ring = "Defending Ring",
 		right_ring = "Stikini Ring +1",
 		left_ear = "Moonshade Earring",
-		waist = "Nierenschutz",
-		back = "Weard Mantle"
 	})
     
     switchMacroSet(7,1)

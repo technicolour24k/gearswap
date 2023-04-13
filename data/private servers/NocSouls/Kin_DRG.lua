@@ -38,16 +38,16 @@ function get_sets()
     sets.JobAbility['Fly High'] = {}
 
 	sets.WeaponSkills.DRG = {}
-	sets.WeaponSkills.DRG['WSD Base'] = {
+	sets.WeaponSkills.DRG['WSD Base'] = set_combine(sets.WeaponSkills['AllJobsWS'],{
 		hands=DRG_RELIC_HANDS,
 		legs = DRG_AF_LEGS,
-	}
-	sets.WeaponSkills["Camlann's Torment"] = set_combine(sets.WeaponSkills['AllJobsWS'], sets.WeaponSkills.DRG['WSD Base'], {})
-	sets.WeaponSkills['Drakesbane'] = set_combine(sets.WeaponSkills['AllJobsWS'], sets.WeaponSkills.DRG['WSD Base'], {})
-	sets.WeaponSkills['Geirskogul'] = set_combine(sets.WeaponSkills['AllJobsWS'], sets.WeaponSkills.DRG['WSD Base'], {})
-	sets.WeaponSkills['Stardiver'] = set_combine(sets.WeaponSkills['AllJobsWS'], sets.WeaponSkills.DRG['WSD Base'], {})
-	sets.WeaponSkills['Sonic Thrust'] = set_combine(sets.WeaponSkills['AllJobsWS'], sets.WeaponSkills.DRG['WSD Base'], {})
-	sets.WeaponSkills['Impulse Thrust'] = set_combine(sets.WeaponSkills['AllJobsWS'], sets.WeaponSkills.DRG['WSD Base'], {})
+	})
+	sets.WeaponSkills["Camlann's Torment"] = set_combine(sets.WeaponSkills.DRG['WSD Base'], {})
+	sets.WeaponSkills['Drakesbane'] = set_combine(sets.WeaponSkills.DRG['WSD Base'], {})
+	sets.WeaponSkills['Geirskogul'] = set_combine(sets.WeaponSkills.DRG['WSD Base'], {})
+	sets.WeaponSkills['Stardiver'] = set_combine(sets.WeaponSkills.DRG['WSD Base'], {})
+	sets.WeaponSkills['Sonic Thrust'] = set_combine(sets.WeaponSkills.DRG['WSD Base'], {})
+	sets.WeaponSkills['Impulse Thrust'] = set_combine(sets.WeaponSkills.DRG['WSD Base'], {})
 
     sets.DRG.precast = {}
     sets.DRG.midcast = {}
@@ -57,20 +57,15 @@ function get_sets()
 	sets.aftercast.Resting = {}
 	sets.aftercast.Engaged = {}
 
-	sets.aftercast.Engaged.Default = {
+	sets.aftercast.Engaged.Default = set_combine(sets.misc.AllJobs.TP,{
         body = DRG_AF_BODY,
         legs = DRG_AF_LEGS,
         hands = DRG_AF_HANDS,
         head = DRG_AF_HEAD,
         feet = DRG_AF_FEET,
-        neck = "Loricate Torque +1",
         waist = "Nierenschutz",
-		ear1 = "Tati Earring",
-        ear2 = "Telos Earring",
-		ring1 = "Defending Ring",
-        ring2 = "Stikini Ring +1",
         back = "Metallon Mantle",
-    }
+    })
 
 	sets.aftercast.Engaged.TH = set_combine(sets.aftercast.Engaged.Default, sets.TH)
 	sets.aftercast.Engaged.Accuracy = set_combine(sets.aftercast.Engaged.Default, {})
@@ -80,6 +75,7 @@ function get_sets()
 		left_ring = "Defending Ring",
 		right_ring = "Stikini Ring +1",
 		neck="Loricate Torque +1",
+		legs="Crimson Cuisses",
 		left_ear = "Moonshade Earring"
 	})
 

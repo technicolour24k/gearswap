@@ -1,7 +1,10 @@
 include("organizer-lib")
-include("includes/config")
-include('private servers/'..server..'/common-gearsets')
-include("includes/common-functions")
+-- include("includes/config")
+-- include('private servers/'..server..'/common-gearsets')
+-- include("includes/common-functions")
+-- include('private servers/'..server..'/custom-info')
+
+include("includes/common")
 
 --initialise local variables to inherit from master config
 local showFCInfo = config.showFastCastInfo
@@ -11,9 +14,8 @@ local FastCast = 80
 
 TPStyle = "Default"
 
+
 function get_sets()
-	include('private servers/'..server..'/custom-info')
-	local mjob = player.main_job
 	init_gear_sets(mjob)
 	sets.THF={}
 	sets.THF.midcast = {}
@@ -55,6 +57,10 @@ function get_sets()
 	sets.WeaponSkills["Exenterator"] = set_combine(sets.WeaponSkills['AllJobsWS'], {})
 
 	sets.THF.midcast.Cure = {}
+	sets.THF.midcast.BLU_Physical = set_combine(sets.common.midcast.BLU_Physical,{})
+	sets.THF.midcast.BLU_Buffs = set_combine(sets.common.midcast.BLU_Buffs,{})
+	sets.THF.midcast.BLU_Nukes = set_combine(sets.common.midcast.BLU_Nukes, sets[mjob].midcast['MAB'], {})
+
 
 	sets.aftercast = {}
 	sets.aftercast.Resting = {}
@@ -95,31 +101,9 @@ end
 
 function midcast(spell)
 	cancelBuff(spell.english, spell.cast_time, FastCast)
-
-	if sets.THF.midcast[spell.english] then
-		equip(sets.THF.midcast[spell.english])
-	elseif sets.common.midcast[spell.english] then
-		equip(sets.common.midcast[spell.english])
-	elseif string.find(spell.english,'Cure') or string.find(spell.english,'Cura') then 
-        equip(sets.THF.midcast.Cure)
-	end
-
-	if sets.THF.midcast[spell.skill] then
-		equip(sets.THF.midcast[spell.skill])
-	elseif sets.common.midcast[spell.skill] then
-		equip(sets.common.midcast[spell.skill])
-
-	end
-	if (enspell_list:contains(spell.english)) then
-		equip(sets.common.midcast.Enspell)
-	end
-	if (conserveMP_list:contains(spell.english)) then
-		equip(sets.common.midcast.ConserveMP)
-	end
-
-	if (spell.skill=="Blue Magic") then equip(sets.THF.MAB) end
 	customInfoCheckMidcast(spell.name, spell.tp_cost, spell.mp_cost)
-	if (spell.skill == "Elemental Magic" or spell.skill=="Healing Magic") then weathercheck(spell.element) end
+	commonMidcastRules(sets, spell.english,spell.skill, spell.action_type)
+	weathercheck(spell.element, spell.skill)
 end
 
 function aftercast(spell)

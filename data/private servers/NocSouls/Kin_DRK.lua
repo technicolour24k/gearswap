@@ -84,11 +84,11 @@ function get_sets()
 	sets.aftercast.Engaged = {}
 
 	sets.aftercast.Engaged.Default = set_combine(sets.misc.AllJobs.TP,{
-        body = DRK_AF_BODY,
-        legs = DRK_AF_LEGS,
-        hands = DRK_AF_HANDS,
-        head = DRK_AF_HEAD,
-        feet = DRK_AF_FEET,
+        body = "Agony Jerkin +1",
+        legs = "Flamma Dirs +2",
+        hands = "Macabre Gauntlets +1",
+        head = "Flamma Zucchetto +2",
+        feet = "Flamma Gambieras +1",
         waist = "Nierenschutz",
     })
 

@@ -22,6 +22,7 @@ function init_gear_sets(job)
 
 	sets.weapons.RDM = {}
 	sets.weapons.RDM['Melee'] = {main="Almace",sub="Genbu's Shield"}
+	sets.weapons.RDM['DualWield'] = {main="Almace",sub="Fettering Blade"}
 	sets.weapons.RDM['Mage'] = {main="",sub=""}
 
 	sets.weapons.BLM = {}
@@ -75,7 +76,7 @@ function init_gear_sets(job)
 	sets.weapons.COR['Gun'] = {ranged=""}
 	
 	sets.weapons.PUP = {}
-	sets.weapons.PUP['Hand-to-Hand'] = {main=""}
+	sets.weapons.PUP['Hand-to-Hand'] = {main="Kenkonken"}
 
 	sets.weapons.DNC = {}
 	sets.weapons.DNC['Daggers'] = {main="Twashtar",sub="Terpsichore"}
@@ -202,10 +203,10 @@ function init_gear_sets(job)
 	PLD_AF_HEAD = "Reverence Coronet +3"
 	PLD_AF_BODY = "Reverence Surcoat +3"
 	PLD_AF_HANDS = "Reverence Gauntlets +3"
-	PLD_AF_LEGS = "Reverence Breeches+3"
+	PLD_AF_LEGS = "Reverence Breeches +3"
 	PLD_AF_FEET = "Reverence Leggings +3"
 	PLD_RELIC_HEAD = "Caballarius Coronet +1"
-	PLD_RELIC_BODY = "Caballarius Surcoat+1"
+	PLD_RELIC_BODY = "Caballarius Surcoat +1"
 	PLD_RELIC_HANDS = "Caballarius Gauntlets +1"
 	PLD_RELIC_LEGS = "Caballarius Breeches +1"
 	PLD_RELIC_FEET = "Caballarius Leggings +1"
@@ -617,7 +618,12 @@ function init_gear_sets(job)
 		neck="Silver Name Tag",
 		head="Cache-Nez"
 	}
-	
+
+	sets.common.precast.SpellInterruption = {
+		hands={ name="Vgd. Gloves", augments={'Spell interruption rate down -10%','Spell interruption rate down -10%','Spell interruption rate down -10%','Spell interruption rate down -10%',}},
+		feet={ name="Vagabond's Boots", augments={'Spell interruption rate down -10%','Spell interruption rate down -10%','Spell interruption rate down -10%','Spell interruption rate down -10%',}},
+		left_ring={ name="Hermit's Ring", augments={'"Fast Cast"+8','"Fast Cast"+8','Spell interruption rate down -10%','Spell interruption rate down -10%',}},
+	}
 	sets.common.precast.FastCast['Divine Magic'] = set_combine(sets.common.precast.FastCast.Default,{})
     sets.common.precast.FastCast['Healing Magic'] = set_combine(sets.common.precast.FastCast.Default,{})
     sets.common.precast.FastCast['Enhancing Magic'] = set_combine(sets.common.precast.FastCast.Default,{})
@@ -653,7 +659,9 @@ function init_gear_sets(job)
 	sets.common.midcast['Singing'] = {}
 	sets.common.midcast['String'] = {}
 	sets.common.midcast['Wind'] = {}
-	sets.common.midcast['Blue Magic'] = {}
+	sets.common.midcast['Blue Magic'] = {
+		left_ring="Stikini Ring +1"
+	}
 	sets.common.midcast['Geomancy'] = {}
 	sets.common.midcast['Handbell'] = {}   
     sets.common.midcast.Stoneskin = set_combine(sets.common.midcast.EnhancingDuration,{})
@@ -688,6 +696,11 @@ function init_gear_sets(job)
 		left_ear="Shell Earring +1",
 		waist="Gold Moogle Belt"
 	})
+
+	sets.common.midcast.BLU_Physical = set_combine(sets.common.midcast['Blue Magic'],{})
+	sets.common.midcast.BLU_Buffs = set_combine(sets.common.midcast['Blue Magic'],{})
+	sets.common.midcast.BLU_Nukes = set_combine(sets.common.midcast['Blue Magic'],{})
+
 	sets.aftercast ={}
 	sets.common.aftercast = {}
 	
