@@ -1,7 +1,6 @@
-include('includes/config')
-include('includes/common-functions')
-
 function get_sets()
+	include('includes/config')
+	include('includes/common-functions')
 	
 	send_command('input /echo Dependency: "run" plugin - attempting to load.')
 	send_command('load run')

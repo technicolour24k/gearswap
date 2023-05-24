@@ -14,7 +14,6 @@ TPStyle = {"Default", "Accuracy", "Evasion"}
 TPStyleIndex = 1
 
 function get_sets()
-	local mjob = player.main_job
 	init_gear_sets(mjob)
 	sets.NIN = {}
 	sets.NIN.precast = {}
@@ -51,25 +50,25 @@ function get_sets()
     sets.aftercast.Engaged = {}
 
 	sets.aftercast.Engaged.Default = set_combine(sets.weapons[mjob]['Melee'], {
-		ammo="Yetshila +1",
-		head="Pill. Bonnet +3",
-		body="Pillager's Vest +3",
-		hands="Pill. Armlets +3",
-		legs="Pill. Culottes +3",
-		feet="Plun. Poulaines +1",
-		neck="Tlamiztli collar",
-		back="Laic Mantle",
-		waist="Windbuffet belt +1",
-		left_ear="Mache Earring +1",
-		right_ear="Mache Earring +1",
-		left_ring="Mars's Ring",
-		right_ring="Epona's Ring",
+		range="Killer Shortbow",
+		head=NIN_AF_HEAD,
+		body=NIN_AF_BODY,
+		hands=NIN_AF_HANDS,
+		legs=NIN_AF_LEGS,
+		feet=NIN_AF_FEET,
+		neck={ name="Focus Collar", augments={'"Store TP"+2 "Subtle Blow"+2','Crit.hit rate+2','"Dbl.Atk."+2','"Triple Atk."+2',}},
+		waist={ name="Windbuffet Belt +1", augments={'"Triple Atk."+2','"Triple Atk."+2','"Triple Atk."+2','"Triple Atk."+2',}},
+		left_ear={ name="Dodge Earring", augments={'"Store TP"+5','"Store TP"+5','"Store TP"+5','"Store TP"+5',}},
+		right_ear={ name="Moonshade Earring", augments={'"Refresh"+10','"Fast Cast"+5','"Regen"+10','"Store TP"+5',}},
+		left_ring={ name="Rajas Ring", augments={'"Store TP"+5','"Store TP"+5','"Store TP"+5','"Store TP"+5',}},
+		right_ring={ name="Epona's Ring", augments={'"Triple Atk."+2','"Triple Atk."+2','"Triple Atk."+2','"Triple Atk."+2',}},
+		back="Moonbeam Cape",
 	})
 	
 	sets.aftercast.Engaged.Accuracy = set_combine(sets.aftercast.Engaged.Default, { })
 	sets.aftercast.Engaged.Evasion= set_combine(sets.aftercast.Engaged.Default, { })
 
-	sets.aftercast.Idle = set_combine(sets.aftercast.Engaged[TPStyle[TPStyleIndex]], {
+	sets.aftercast.Idle = set_combine(sets.aftercast.Engaged.Default, {
 		left_ring="Defending Ring",
 	})
 	
@@ -130,13 +129,11 @@ function midcast(spell)
 end
 
 function aftercast(spell)
-	if spell.english == "Sneak Attack" then
-		infoLog("<<Sneak Attack>>")
-		equip (sets.precast['Sneak Attack'])
-	elseif spell.english == "Trick Attack" then
-		infoLog("<<Trick Attack>>")
-		equip (sets.precast['Trick Attack'])
+
+	if player.status == "Engaged" then
+		equip(sets.aftercast[player.status][TPStyle])
 	else
+		equip(sets.aftercast[player.status])
 	end
 end
 
@@ -145,36 +142,23 @@ end
 
 function buff_change(name,gain)
 
-	if name == "Trick Attack" and gain == "false" then
-			equip(sets.aftercast.Idle)
-	elseif name == "Sneak Attack" and gain == "false" then
-		if player.status == 'Idle' then
-			equip_idle_set()
-		elseif sets.aftercast[player.status][TPStyle[TPStyleIndex]] then
-			equip(sets.aftercast[player.status][TPStyle[TPStyleIndex]],sets.aftercast)
-		else
-			equip(sets.aftercast.Idle,sets.aftercast)
-		end
-	end
 end
 
 function self_command(command)
 	if command:lower() == "default" then
-		TPStyleIndex = 1
-		infoLog('TP Style is now: '.. TPStyle[TPStyleIndex] .. '!')
-		equip(sets.aftercast.Engaged[TPStyle[TPStyleIndex]])
+		TPStyle = "Default"
+		equip(sets.aftercast.Engaged[TPStyle])
 	elseif command:lower() == "accuracy" then
-		TPStyleIndex = 2
-		infoLog('TP Style is now: '.. TPStyle[TPStyleIndex] .. '!')
-		equip(sets.aftercast.Engaged[TPStyle[TPStyleIndex]])
+		TPStyle = "Accuracy"
+		equip(sets.aftercast.Engaged[TPStyle])
 	elseif command:lower() == "evasion" then
-		TPStyleIndex = 3
-		infoLog('TP Style is now: '.. TPStyle[TPStyleIndex] .. '!')
-		equip(sets.aftercast.Engaged[TPStyle[TPStyleIndex]])
+		TPStyle = "Evasion"
+		equip(sets.aftercast.Engaged[TPStyle])
 	end
+	infoLog('TP Style is now: '.. TPStyle .. '!')
 	
 	if player.status == "Engaged" then
-		equip(sets.aftercast[player.status][TPStyle[TPStyleIndex]])
+		equip(sets.aftercast[player.status][TPStyle])
 	else
 		equip(sets.aftercast[player.status])
 	end

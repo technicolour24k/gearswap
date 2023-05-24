@@ -23,7 +23,8 @@ function get_sets()
 	sets.THF.TH = {
 		sub = "Sandung",
 		hands = THF_RELIC_HANDS,
-		feet = THF_EMPYREAN_FEET
+		feet = THF_EMPYREAN_FEET,
+		waist = "Chaac Belt"
 	}
 	sets.THF.MAB = set_combine(sets.misc.AllJobs.MAB, {
 		head="Wayfarer Circlet",

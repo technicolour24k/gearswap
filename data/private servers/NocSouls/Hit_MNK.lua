@@ -56,6 +56,7 @@ function get_sets()
 		hands=MNK_RELIC_HANDS,
 		legs=MNK_RELIC_LEGS,
 		feet=MNK_RELIC_FEET,
+		ammo="Cheruski Needle",
 		neck="Loricate Torque +1",
 		waist={ name="Black Belt" },
 		left_ear={ name="Moonshade Earring" },

@@ -240,10 +240,28 @@ function commonPrecastRules (sets, spell, skill, type)
 	if spellContains(spell,' Arts') then
         activeArts = spell
     end
+
+	if ((spellContains(spell,"Step")) and (buffactive['Presto']==false) and (player.main_job=="DNC")) then
+		-- if((buffactive['Finishing Move*']==0) or (buffactive['Finishing Move (2)'] == 1)) then
+			local step = spell
+			infoLog("Current backup step: "..step)
+			cancel_spell()
+			send_command('presto;wait 1;'..step)
+		else
+			infoLog("Skipping Presto")
+		end
+	-- end
+
 end
 
 
 function commonMidcastRules (sets,spell,skill,type)
+	if sets[mjob].midcast[skill] then
+		equip(sets[mjob].midcast[skill])
+	elseif sets.common.midcast[skill] then
+		equip(sets.common.midcast[skill])
+	end
+
 	if sets[mjob].midcast[spell] then
 		equip(sets[mjob].midcast[spell])
 	elseif sets.common.midcast[spell] then
@@ -252,48 +270,47 @@ function commonMidcastRules (sets,spell,skill,type)
         equip(sets[mjob].midcast.Cure)
 	end
 
-	if sets[mjob].midcast[skill] then
-		equip(sets[mjob].midcast[skill])
-	elseif sets.common.midcast[skill] then
-		equip(sets.common.midcast[skill])
-	end
-
 	if (enspell_list:contains(spell)) then
 		equip(sets.common.midcast.Enspell)
 	end
+	
 	if (conserveMP_list:contains(spell)) then
 		equip(sets.common.midcast.ConserveMP)
 	end
 
-	if (BLU_Buffs:contains(spell)) then
-		if (sets[mjob].midcast.BLU_Buffs) then
-			equip(sets[mjob].midcast.BLU_Buffs)
-		elseif (sets.common.midcast.BLU_Buffs) then
-			equip(sets.common.midcast.BLU_Buffs)
+	if ((mjob=="BLU") or (sjob=="BLU")) then
+		if (BLU_Buffs:contains(spell)) then
+			if (sets[mjob].midcast.BLU_Buffs) then
+				equip(sets[mjob].midcast.BLU_Buffs)
+			elseif (sets.common.midcast.BLU_Buffs) then
+				equip(sets.common.midcast.BLU_Buffs)
+			end
+		end
+
+		if (BLU_Nukes:contains(spell)) then
+			if (sets[mjob].midcast.BLU_Nukes) then
+				equip(sets[mjob].midcast.BLU_Nukes)
+			elseif (sets.common.midcast.BLU_Nukes) then
+				equip(sets.common.midcast.BLU_Nukes)
+			end
+		end
+
+		if (BLU_Physical:contains(spell)) then
+			if (sets[mjob].midcast.BLU_Physical) then
+				equip(sets[mjob].midcast.BLU_Physical)
+			elseif (sets.common.midcast.BLU_Physical) then
+				equip(sets.common.midcast.BLU_Physical)
+			end
 		end
 	end
 
-	if (BLU_Nukes:contains(spell)) then
-		if (sets[mjob].midcast.BLU_Nukes) then
-			equip(sets[mjob].midcast.BLU_Nukes)
-		elseif (sets.common.midcast.BLU_Nukes) then
-			equip(sets.common.midcast.BLU_Nukes)
+	if ((mjob=="SCH") or (sjob=="SCH")) then
+		if (Helixes:contains(spell) or spellContains(spell, "Dia")) then
+			if activeArts == "default" then
+				equip(sets[mjob].midcast['Helixes'])
+			else
+				equip(sets[mjob].midcast['Helixes'][activeArts])
+			end
 		end
 	end
-
-	if (BLU_Physical:contains(spell)) then
-		if (sets[mjob].midcast.BLU_Physical) then
-			equip(sets[mjob].midcast.BLU_Physical)
-		elseif (sets.common.midcast.BLU_Physical) then
-			equip(sets.common.midcast.BLU_Physical)
-		end
-	end
-
-	if (Helixes:contains(spell) or spellContains(spell, "Dia")) then
-        if activeArts == "default" then
-            equip(sets[mjob].midcast['Helixes'])
-        else
-		    equip(sets[mjob].midcast['Helixes'][activeArts])
-        end
-    end
 end

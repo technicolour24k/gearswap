@@ -1,9 +1,8 @@
-include("organizer-lib")
-TPStyle="default"
-enspell_list = S{"Enstone", "Enwater", "Enaero", "Enfire", "Enblizzard", "Enthunder", "Enlight","Endark"} --Store enspells for easily cancelling
-
-
 function get_sets()
+    include("organizer-lib")
+    TPStyle="default"
+    weaponMode="h2h"    
+    enspell_list = S{"Enstone", "Enwater", "Enaero", "Enfire", "Enblizzard", "Enthunder", "Enlight","Endark"} --Store enspells for easily cancelling
     --Generic sets setup
 	sets={}
     sets.precast = {}
@@ -13,8 +12,25 @@ function get_sets()
     sets.WeaponSkills = {}
     sets.TH = {}
     sets.MAB = {}
-
-    sets.precast.FastCast = {}
+    sets.staff = {
+        main={ name="Exalted Staff", augments={'DMG:+8','DMG:+8','DMG:+8','DMG:+8',}},
+        sub={ name="Dark Grip", augments={'DMG:+8','DMG:+8','DMG:+8','DMG:+8',}},    
+    }
+    sets.h2h ={
+        main={ name="Em. Baghnakhs", augments={'DMG:+8','DMG:+8','DMG:+8','DMG:+8',}},
+    }
+    sets.slashing={
+        main={ name="Vampiric Claws", augments={'DMG:+8','DMG:+8','DMG:+8','DMG:+8',}},
+    }
+    sets.piercing={
+        main={ name="Birdbanes", augments={'DMG:+8','DMG:+8','DMG:+8','DMG:+8',}},
+    }
+    sets.precast.FastCast = {
+        head={ name="Cache-nez", augments={'"Fast Cast"+5','"Fast Cast"+5','"Fast Cast"+5','"Fast Cast"+5',}},
+        neck={ name="Silver Name Tag", augments={'"Fast Cast"+5','"Fast Cast"+5','"Fast Cast"+5','"Fast Cast"+5',}},
+        left_ring={ name="Hermit's Ring", augments={'"Fast Cast"+5','"Fast Cast"+5','"Fast Cast"+5','"Fast Cast"+5',}},
+        right_ring={ name="Hermit's Ring", augments={'"Fast Cast"+5','"Fast Cast"+5','"Fast Cast"+5','"Fast Cast"+5',}},    
+    }
 	sets.precast.FastCast['Divine Magic'] = set_combine(sets.precast.FastCast,{})
     sets.precast.FastCast['Healing Magic'] = set_combine(sets.precast.FastCast,{})
     sets.precast.FastCast['Enhancing Magic'] = set_combine(sets.precast.FastCast,{})
@@ -80,7 +96,29 @@ function get_sets()
     
     --Recommend Damage Taken gear for Engaged default
 	sets.aftercast.Engaged = {}
-    sets.aftercast.Engaged.default={}
+    sets.aftercast.Engaged.default={
+        ammo={ name="Thew Bomblet", augments={'DMG:+8','DMG:+8','DMG:+8','DMG:+8',}},
+        
+        -- head={ name="Anchorite's Crown +1" },
+        -- body={ name="Anchorite's Cyclas +1"},
+        -- hands={ name="Anchorite's Gloves +1"},
+        -- legs={ name="Anchorite's Hose +1"},
+        -- feet={ name="Anchorite's Gaiters +1"},
+        -- head={ name="Tantra Crown +2", augments={'"Store TP"+5','STR+7','"Dbl.Atk."+3','Attack+10',}},
+        head = "Qaaxo Mask", -- Dropped from Laevvid
+        body={ name="Tantra Cyclas +2", augments={'Evasion+12','STR+7','Attack+10','DEX+6',}},
+        hands={ name="Tantra Gloves +2", augments={'"Store TP"+5','DEX+8','"Regen"+6','Mag. Evasion+6',}},
+        legs={ name="Tantra Hose +2", augments={'DEF+10','STR+7','MND+7','"Mag.Def.Bns."+10',}},
+        feet={ name="Tantra Gaiters +2", augments={'"Store TP"+5','"Counter"+5','Accuracy+10 Attack+10','STR+6',}},
+
+        neck={ name="Temple Torque", augments={'DMG:+5','STR+6','"Martial Arts"+5','DEX+6',}},
+        waist={ name="Crudelis Belt", augments={'"Mag.Def.Bns."+8','"Mag.Def.Bns."+8','"Mag.Def.Bns."+8','"Mag.Def.Bns."+8',}},
+        left_ear={ name="Insomnia Earring", augments={'"Mag.Def.Bns."+10','"Counter"+5','"Subtle Blow"+5','Mag. Evasion+10',}},
+        right_ear={ name="Moonshade Earring", augments={'"Refresh"+10','"Fast Cast"+5','"Regen"+10','"Store TP"+5',}},
+        left_ring={ name="Epona's Ring", augments={'"Triple Atk."+2','"Triple Atk."+2','"Triple Atk."+2','"Triple Atk."+2',}},
+        right_ring={ name="Rajas Ring", augments={'"Store TP"+5','"Store TP"+5','"Store TP"+5','"Store TP"+5',}},
+        back={ name="Forager's Mantle", augments={'"Mag.Def.Bns."+8','"Mag.Def.Bns."+8','"Mag.Def.Bns."+8','"Mag.Def.Bns."+8',}},
+    }
 	sets.aftercast.Engaged.TH = set_combine(sets.aftercast.Engaged.default, sets.TH)
 	sets.aftercast.Engaged.Accuracy = set_combine(sets.aftercast.Engaged.default, {})
 	
@@ -101,6 +139,7 @@ function get_sets()
 	send_command("gs enable all")
 	send_command("gs equip sets.aftercast.Idle")
     send_command("input /echo [F9] Toggle engaged gear; bind F9 gs c gear-swap")
+    send_command("input /echo [F10] Toggle Weapon; bind F10 gs c weapon-swap")
 end
 
 function pretarget (spell)
@@ -168,6 +207,7 @@ function aftercast(spell)
     else
         equip(sets.aftercast[player.status]) --If you're not engaged, then resort to your current status: Idle, Resting, etc
     end
+    equip(sets[weaponMode])
 end
 
 function status_change(new, old)
@@ -176,6 +216,7 @@ function status_change(new, old)
     else
         equip(sets.aftercast[player.status]) --If you're not engaged, then resort to your current status: Idle, Resting, etc
     end
+    equip(sets[weaponMode])
 end
 
 function buff_change(name, gain)
@@ -205,6 +246,21 @@ function self_command(command)
         else
             equip(sets.aftercast[player.status]) --If you're not engaged, then resort to your current status: Idle, Resting, etc
         end
+        equip(sets[weaponMode])
+    end
+
+    if (command:lower() == "weapon-swap") then
+        if (weaponMode=="staff") then
+            weaponMode = "h2h"
+        elseif (weaponMode=="h2h") then
+            weaponMode = "slashing"
+        elseif (weaponMode=="slashing") then
+            weaponMode = "piercing"
+        elseif (weaponMode=="piercing") then
+            weaponMode = "staff"
+        end
+        equip(sets[weaponMode])
+        add_to_chat(8, "Changing weapon style to: " ..weaponMode)
     end
 
     --Add more custom commands here..
@@ -216,7 +272,7 @@ function weathercheck(spell_element, spell_skill)
 	if not (spell_skill) then spell_skill = null end
 	if ((spell_skill=="Elemental Magic") or (spell_skill=="Healing Magic") or (spell_skill=="Enfeebling Magic") or spell_skill=="Blue Magic" or (spell_skill==null)) then
 		if spell_element == world.weather_element or spell_element == world.day_element then
-			infoLog('>> Weather or Day element matches spell element <<')
+			add_to_chat(8,'>> Weather or Day element matches spell element <<')
 			equip(sets.Obis[spell_element]) --Equip standard obi, force fallback below
 			equip(sets.Obis.AIO) --Force fallback onto Hachirin-no-Obi, just in case individual obis no longer exist
 		end

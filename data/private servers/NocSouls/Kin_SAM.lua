@@ -10,6 +10,7 @@ wsList = S{"Great Katana"}
 
 function get_sets()
 	include('private servers/'..server..'/common-gearsets')
+	include('private servers/'..server..'/custom-info')
 	init_gear_sets(mjob)
 	sets.SAM = {}
 	sets.JobAbility = {}

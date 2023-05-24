@@ -59,7 +59,7 @@ function init_gear_sets(job)
 	sets.weapons.SAM['Polearm'] = {}
 	
 	sets.weapons.NIN = {}
-	sets.weapons.NIN['Melee'] = {main="", sub=""}
+	sets.weapons.NIN['Melee'] = {main="Nagi", sub="Kikoku"}
 	sets.weapons.NIN['Nukes'] = {main="", sub=""}
 	
 	sets.weapons.DRG = {}

@@ -1,21 +1,23 @@
 include("organizer-lib")
-include("includes/common")
--- include("includes/config")
--- include("includes/common-functions")
--- include('private servers/'..server..'/common-gearsets')
--- include('private servers/'..server..'/custom-info')
---initialise local variables to inherit from master config
-local showFCInfo = config.showFastCastInfo
-local showSpellInfo = config.showSpellInfo
-local showCancelInfo = config.showCancelInfo
-local FastCast = 80
-RDMStyle = "Melee"
-TPStyle = "Melee"
 
 function get_sets()
+	include("includes/common")
+	-- include("includes/config")
+	-- include("includes/common-functions")
+	-- include('private servers/'..server..'/common-gearsets')
+	-- include('private servers/'..server..'/custom-info')
+	--initialise local variables to inherit from master config
+	showFCInfo = config.showFastCastInfo
+	showSpellInfo = config.showSpellInfo
+	showCancelInfo = config.showCancelInfo
+	FastCast = 80
+	RDMStyle = "Melee"
+	TPStyle = "Melee"
+
 	if ((sjob=="BLU") or (sjob=="NIN") or (sjob=="DNC") or (sjob=="THF")) then
 		RDMStyle = "DualWield"
 	end
+	
 	init_gear_sets(mjob)
 	sets.RDM={}
 	sets.JobAbility={}

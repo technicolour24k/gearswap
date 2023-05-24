@@ -23,7 +23,30 @@ function get_sets()
 	sets.aftercast.Resting = {}
 	sets.aftercast.Engaged = {}
 
-	sets.aftercast.Engaged.Default = {}
+	sets.WeaponSkills["Spinning Attack"] = set_combine(sets.WeaponSkills['Fotia'], sets.WeaponSkills['AllJobsWS'], {})
+	sets.WeaponSkills["Tornado Kick"] = set_combine(sets.WeaponSkills['Fotia'], sets.WeaponSkills['AllJobsWS'], {})
+	sets.WeaponSkills["Victory Smite"] = set_combine(sets.WeaponSkills['Fotia'], sets.WeaponSkills['AllJobsWS'], {})
+	sets.WeaponSkills["Shijin Spiral"] = set_combine(sets.WeaponSkills['Fotia'], sets.WeaponSkills['AllJobsWS'], {
+		waist = "Windbuffet belt +1",
+		left_ear = "Mache Earring +1",
+		right_ear = "Mache Earring +1",
+	})
+	sets.aftercast.Engaged.Default = {
+		main="Blurred Claws",
+		ammo={ name="Staunch Tathlum", augments={'"Counter"+5','"Counter"+5','"Counter"+5','"Counter"+5',}},
+		head="Mummu Bonnet +2",
+		body="Qaaxo Harness",
+		hands={ name="Savage Gauntlets", augments={'"Store TP"+5','"Store TP"+5','"Store TP"+5','"Store TP"+5',}},
+		legs="Mummu Kecks +2",
+		feet="Mummu Gamash. +2",
+		neck={ name="Loricate Torque +1", augments={'"Regen"+20','"Regen"+20','"Regen"+20','"Regen"+20',}},
+		waist={ name="Windbuffet Belt +1", augments={'"Triple Atk."+2','"Triple Atk."+2','"Triple Atk."+2','"Triple Atk."+2',}},
+		left_ear="Etiolation Earring",
+		right_ear={ name="Telos Earring", augments={'"Counter"+5','"Counter"+5','"Counter"+5','"Counter"+5',}},
+		left_ring={ name="Defending Ring", augments={'"Regen"+20','"Regen"+20','"Regen"+20','"Regen"+20',}},
+		right_ring="Purity Ring",
+		back={ name="Moonbeam Cape", augments={'"Counter"+5','"Counter"+5','"Counter"+5','"Counter"+5',}},
+	}
 
 	sets.aftercast.Idle = set_combine(sets.misc.AllJobs['DTCombo'],{
         

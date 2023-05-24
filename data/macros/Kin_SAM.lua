@@ -16,7 +16,7 @@ return {
     ['Alt+5'] = '',
     ['Alt+6'] = '',
     ['Alt+7'] = 'input /ws "Tachi: Kaiten" <t>',
-    ['Alt+8'] = 'input /ws "Tachi: Rana" <t>',
+    ['Alt+8'] = 'input /ws "Tachi: Ageha" <t>',
     ['Alt+9'] = 'input /ws "Tachi: Shoha" <t>',
     ['Alt+0'] = 'input /ws "Tachi: Fudo" <t>',
 }
