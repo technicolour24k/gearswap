@@ -11,6 +11,7 @@ config.showFastCastInfo = false --Display Fast Cast info
 config.showCancelInfo = true --Display info when cancelling buffs
 config.oneClickRemedies = true --Activate remedies with a single command - defined in individual LUAs
 
+MND_Enfeebling = S{"Paralyze","Paralyze II","Silence","Slow","Slow II","Addle"}
 enspell_list = S{"Enstone", "Enwater", "Enaero", "Enfire", "Enblizzard", "Enthunder", "Enlight","Endark"} --Store enspells for easily cancelling
 conserveMP_list = --Store spells that get no benefit from Potency or anything outside ConserveMP
     S {

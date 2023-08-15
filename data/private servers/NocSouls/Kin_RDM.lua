@@ -65,11 +65,11 @@ function get_sets()
 	sets.RDM.midcast['Shock Spikes'] = sets.RDM.midcast['Spikes']
 
 	sets.RDM.midcast['MAB'] = set_combine(sets.misc.AllJobs.MAB, {
-		head="Leth. Chappel +1",
+		head=RDM_EMPYREAN_HEAD,
 		body="Gyve Doublet",
 		hands="Quauhpilli Gloves",
 		legs="Gyve Trousers",
-		feet="Vitiation Boots +1",
+		feet=RDM_RELIC_FEET,
 		waist="Othila Sash",
 		right_ring="Strendu Ring",
 	})
@@ -95,7 +95,6 @@ function get_sets()
 		left_ear="Regal Earring",
 		right_ear={ name="Moonshade Earring", augments={'"Refresh"+10','"Fast Cast"+5','"Regen"+10','"Store TP"+5',}},
 		back={ name="Izdubar Mantle", augments={'System: 1 ID: 131 Val: 7','System: 1 ID: 131 Val: 7','System: 1 ID: 131 Val: 7','System: 1 ID: 131 Val: 7',}},
-	
 	})
 	sets.RDM.midcast['Elemental Magic'] = set_combine(sets.RDM.midcast['MAB'], {})
 	sets.RDM.midcast['Dark Magic'] = {}
@@ -119,10 +118,10 @@ function get_sets()
 		waist={ name="Windbuffet Belt +1", augments={'"Triple Atk."+2','"Triple Atk."+2','"Triple Atk."+2','"Triple Atk."+2',}},	
 	})
 	sets.aftercast.Engaged['MEva'] = set_combine(sets.aftercast.Engaged.Melee, {
-		head="Atro. Chapeau +2",
-		body="Atrophy Tabard +2",
-		legs="Atrophy Tights +2",
-		feet="Atro. Boots +2",
+		head=RDM_AF_HEAD,
+		body=RDM_AF_BODY,
+		legs=RDM_AF_LEGS,
+		feet=RDM_AF_FEET,
 		right_ring="Purity Ring",
 	})
 

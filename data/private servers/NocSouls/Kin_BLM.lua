@@ -5,6 +5,7 @@ showInfo = false
 
 function get_sets()
 	sets.BLM ={}
+	sets.BLM.midcast ={}
 	sets.BLM.midcast['Elemental Magic'] = {
 		head = "Wizard's Petasos",
 		neck = "Uggalepih Pendant",

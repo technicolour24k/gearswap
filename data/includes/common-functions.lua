@@ -184,7 +184,7 @@ end
 
 windower.register_event('gain buff', function(id)
 	-- Status ID list: https://github.com/Windower/Resources/blob/master/resources_data/buffs.lua
-   clearStatuses()
+--    clearStatuses()
 
    if (id == 28) then --Terror
 	infoLog("Hit with Terror - Equipping common DTCombo set")
@@ -221,6 +221,7 @@ function enemyImmunityCheck (mob,spell)
 end
 
 function commonPrecastRules (sets, spell, skill, type)
+
 	if sets.JobAbility[spell] then
 		equip(sets.JobAbility[spell])
 	end
@@ -313,4 +314,56 @@ function commonMidcastRules (sets,spell,skill,type)
 			end
 		end
 	end
+end
+
+function commonAftercastRules (sets,spell,skill,type)
+
+end
+
+function equipPreviousGear(request)
+	local main,sub,ranged,ammo,head,neck,lear,rear,body,hands,lring,rring,back,waist,legs,feet
+	if (request == "set") then
+		-- Assign weapons
+		main = player.equipment.main
+		sub = player.equipment.sub
+		ranged = player.equipment.range
+		ammo = player.equipment.ammo
+		-- Assign armour
+		head = player.equipment.head
+		body = player.equipment.body
+		hands = player.equipment.hands
+		legs = player.equipment.legs
+		feet = player.equipment.feet
+		-- Assign accessories
+		lear = player.equipment.left_ear
+		rear = player.equipment.right_ear
+		lring = player.equipment.left_ring
+		rring = player.equipment.right_ring
+		back = player.equipment.back
+		waist = player.equipment.waist
+		neck = player.equipment.neck
+		
+		sets.previousSet = {
+			main = main,
+			sub = sub,
+			range = ranged,
+			ammo = ammo,
+			head = head,
+			body = body,
+			hands = hands,
+			legs = legs,
+			feet = feet,
+			lear = lear,
+			rear = rear,
+			lring = lring,
+			rring = rring,
+			back = back,
+			waist = waist,
+			neck = neck
+		}
+	else if(request == "equip") then
+		equip(sets.previousSet)
+	end
+	
+end
 end

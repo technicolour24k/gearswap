@@ -22,7 +22,7 @@ function init_gear_sets(job)
 
 	sets.weapons.RDM = {}
 	sets.weapons.RDM['Melee'] = {main="Almace",sub="Genbu's Shield"}
-	sets.weapons.RDM['DualWield'] = {main="Almace",sub="Fettering Blade"}
+	sets.weapons.RDM['DualWield'] = {main="Almace",sub="Mandau"}
 	sets.weapons.RDM['Mage'] = {main="",sub=""}
 
 	sets.weapons.BLM = {}

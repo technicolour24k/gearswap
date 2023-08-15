@@ -1,21 +1,20 @@
-include("organizer-lib")
--- include("includes/config")
--- include('private servers/'..server..'/common-gearsets')
--- include("includes/common-functions")
--- include('private servers/'..server..'/custom-info')
-
-include("includes/common")
-
---initialise local variables to inherit from master config
-local showFCInfo = config.showFastCastInfo
-local showSpellInfo = config.showSpellInfo
-local showCancelInfo = config.showCancelInfo
-local FastCast = 80
-
-TPStyle = "Default"
-
 
 function get_sets()
+	include("organizer-lib")
+	-- include("includes/config")
+	-- include('private servers/'..server..'/common-gearsets')
+	-- include("includes/common-functions")
+	-- include('private servers/'..server..'/custom-info')
+	
+	include("includes/common")
+	showFCInfo = config.showFastCastInfo
+	showSpellInfo = config.showSpellInfo
+	showCancelInfo = config.showCancelInfo
+	-- FastCast = 80
+	
+	--initialise local variables to inherit from master config
+	
+	TPStyle = "Default"
 	init_gear_sets(mjob)
 	sets.THF={}
 	sets.THF.midcast = {}

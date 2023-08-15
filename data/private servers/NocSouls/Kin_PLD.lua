@@ -100,13 +100,15 @@ end
 
 function pretarget(spell)
 	confirmTarget(spell.skill,spell.target.type)
+	equipPreviousGear("set")
+
 end
 
 function precast(spell)
 	if ((config.showSpellInfo == true) or (showInfo == true)) then
 		infoLog("Action: "..spell.english.." | Action Type: "..spell.action_type.."/"..spell.skill.." | MP Cost: "..spell.mp_cost.." | TP Cost: "..spell.tp_cost)
 	end
-	
+		
 	enemyImmunityCheck(spell.target.name,spell.english)
 	customInfoCheckPrecast(spell.name, spell.tp_cost, spell.mp_cost)
 	commonPrecastRules(sets, spell.english,spell.skill, spell.action_type)
@@ -139,7 +141,9 @@ function midcast(spell)
 end
 
 function aftercast(spell)
+	commonAftercastRules(sets, spell.english,spell.skill, spell.action_type)
 	equip(set_combine(sets.aftercast[player.status], sets.weapons[mjob][TPStyle]))
+	equipPreviousGear("equip")
 end
 
 function status_change(new,old)
